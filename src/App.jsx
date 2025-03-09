@@ -8,13 +8,16 @@ function App() {
 
   const router = createBrowserRouter(
     createRoutesFromElements(
-     
-        <Route path="https://princekr969.github.io/Sangillence/" element={<Layout1/>}>
+      <BrowserRouter basename={"https://princekr969.github.io/Sangillence"}>
+  {/* Routes Here */}
+        <Route path="/" element={<Layout1/>}>
           <Route path='' element={<HomePage/>}></Route>
           <Route path='olympiad' element={<OlympiadPage/>}></Route>
           <Route path='contactUs' element={<OlympiadPage/>}></Route>
           <Route path='nep2020' element={<OlympiadPage/>}></Route>
         </Route>
+</BrowserRouter>
+
      
       )
     )
