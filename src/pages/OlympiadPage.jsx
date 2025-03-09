@@ -1,7 +1,7 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
 import { ScrollText, ArrowRight, ArrowUp } from 'lucide-react';
-import img from "./../assets/sangillenceBanner1.svg"
+import img from "./../../assets/sangillenceBanner1.svg"
 import { Link } from 'react-router-dom';
 
 function OlympiadPage() {
