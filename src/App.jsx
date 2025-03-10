@@ -1,6 +1,7 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { Layout1 } from "./layouts";
-import { HomePage, OlympiadPage } from "./pages";
+import { HomePage, OlympiadPage, NEP2020, ContactUs } from "./pages";
+import { OlympiadForm } from './components';
 
 function App() {
   return (
@@ -9,7 +10,9 @@ function App() {
         <Route path="/" element={<Layout1 />}>
           <Route index element={<HomePage />} />
           <Route path="olympiad" element={<OlympiadPage />} />
-          <Route path="contactUs" element={<OlympiadPage />} />
+          <Route path="nep2020" element={<NEP2020/>} />
+          <Route path='olympiadForm' element={<OlympiadForm/>}/>  
+          <Route path="contactUs" element={<ContactUs />} />
           <Route path="nep2020" element={<OlympiadPage />} />
         </Route>
       </Routes>

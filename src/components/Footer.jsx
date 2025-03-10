@@ -1,5 +1,6 @@
 import React from 'react'
-import { Phone, MapPin, Facebook, Instagram, Linkedin } from 'lucide-react';
+import { Phone, MapPin, Facebook, Instagram, Linkedin, Youtube } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 function Footer() {
   return (
@@ -20,15 +21,15 @@ function Footer() {
       <div className="space-y-4 ml-5">
         <h2 className="text-xl font-bold">Follow Us</h2>
         <div className="flex gap-4">
-          <a href="#" className="hover:text-blue-400 transition-colors">
-            <Facebook size={24} />
-          </a>
-          <a href="#" className="hover:text-pink-400 transition-colors">
+          <Link to="https://www.youtube.com/@sangillenceacademy" className="hover:text-red-800 transition-colors">
+            <Youtube size={24} />
+          </Link>
+          <Link to="https://www.instagram.com/p/DDm4CykhfLk/" className="hover:text-pink-400 transition-colors">
             <Instagram size={24} />
-          </a>
-          <a href="#" className="hover:text-blue-500 transition-colors">
+          </Link>
+          <Link to="https://www.linkedin.com/in/sangillence-academy-810258342/" className="hover:text-blue-500 transition-colors">
             <Linkedin size={24} />
-          </a>
+          </Link>
         </div>
       </div>
     </div>

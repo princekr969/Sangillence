@@ -2,10 +2,10 @@ import React from 'react';
 import { useState, useEffect } from 'react';
 import { ScrollText, ArrowRight, ArrowUp } from 'lucide-react';
 import img from "./../../assets/sangillenceBanner1.svg"
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 
 function OlympiadPage() {
-
+  const { pathname } = useLocation();
   const [showScrollTop, setShowScrollTop] = useState(false);
 
   useEffect(() => {
@@ -21,13 +21,17 @@ function OlympiadPage() {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
+
   return (
     <div className="min-h-screen bg-white">
       {/* Hero Banner */}
       <div 
         className="relative h-[30vh] md:h-[60vh] bg-cover bg-center flex pb-2 md:pb-7 lg:pb-4 items-end justify-center"
         style={{
-          backgroundImage: ` url(${img})`,
+          backgroundImage: `url(${img})`,
         }}
       >
         <div className=" text-white max-md:hidden">
@@ -104,7 +108,7 @@ function OlympiadPage() {
         <div id="apply" className="mt-16 text-center">
           <h2 className="text-3xl font-bold mb-6 text-gray-800">Ready to Participate?</h2>
           <Link
-            to=""
+            to="/olympiadForm"
             className="bg-blue-600 hover:bg-blue-700 text-white font-semibold px-12 py-4 rounded-full inline-flex items-center transition-all text-lg"
           >
             Apply Now

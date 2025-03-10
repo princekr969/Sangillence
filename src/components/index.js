@@ -4,6 +4,7 @@ import ContentCard from "./ContentCard";
 import Carousel from "./Carousel";
 import Footer from "./Footer";
 import CourseStructure from "./CourseStructure";
+import OlympiadForm from "./OlympiadForm";
 
 export {
     Navbar,
@@ -11,5 +12,6 @@ export {
     ContentCard,
     Carousel,
     Footer,
-    CourseStructure
+    CourseStructure,
+    OlympiadForm,
 }
