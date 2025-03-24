@@ -89,14 +89,14 @@ const Carousel = () => {
       {/* Navigation Buttons */}
       <button
         onClick={prevSlide}
-        className="absolute left-2 md:left-4 top-1/2 -translate-y-1/2 bg-blue-500/50 hover:bg-blue-500/30 rounded-full p-2 backdrop-blur-sm transition-all"
+        className="absolute left-2 md:left-4 top-1/2 -translate-y-1/2 bg-green-500/50 hover:bg-blue-500/30 rounded-full p-2 backdrop-blur-sm transition-all"
         disabled={isTransitioning}
       >
         <ChevronLeft className="h-3 w-3 md:h-6 md:w-6 text-white" />
       </button>
       <button
         onClick={nextSlide}
-        className="absolute right-2 md:right-4 top-1/2 -translate-y-1/2 bg-blue-500/50 hover:bg-blue-500/30 rounded-full p-2 backdrop-blur-sm transition-all"
+        className="absolute right-2 md:right-4 top-1/2 -translate-y-1/2 bg-green-500/50 hover:bg-blue-500/30 rounded-full p-2 backdrop-blur-sm transition-all"
         disabled={isTransitioning}
       >
         <ChevronRight className="h-3 w-3 md:h-6 md:w-6 text-white" />

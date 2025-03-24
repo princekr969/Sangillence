@@ -5,7 +5,7 @@ import { OlympiadForm } from './components';
 
 function App() {
   return (
-    <BrowserRouter basename="/Sangillence"> {/* 👈 Use basename here */}
+    <BrowserRouter> {/* 👈 Use basename here */}
       <Routes>
         <Route path="/" element={<Layout1 />}>
           <Route index element={<HomePage />} />
