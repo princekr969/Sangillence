@@ -28,8 +28,8 @@ const ContactUs = () => (
 
         <div className="space-y-6">
           <ContactItem icon={MapPin} title="Address" text="361, near Ahirwan police station, Akash Ganga Vihar Colony, Kanpur Nagar, UP-208007" />
-          <ContactItem icon={Phone} title="Mobile" text="+91 9335450933, +91 7359682221" />
-          <ContactItem icon={Mail} title="Email" text="admin@support.com" />
+          <ContactItem icon={Phone} title="Mobile" text="+91 6307616741" />
+          <ContactItem icon={Mail} title="Email" text="sangillence@gmail.com" />
         </div>
 
         {/* Social Media */}

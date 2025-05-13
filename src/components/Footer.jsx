@@ -10,7 +10,7 @@ function Footer() {
         <h2 className="text-xl font-bold">Contact Us</h2>
         <div className="flex items-center gap-2">
           <Phone size={18} className="text-white" />
-          <p>Contact: +91 9335450933, +91 7359682221</p>
+           <p>Contact: +91 6307616741</p>
         </div>
         <div className="flex items-start gap-2">
           <MapPin size={18} className="text-white mt-1" />
