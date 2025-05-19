@@ -1,6 +1,6 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
-import { ScrollText, ArrowRight, ArrowUp } from 'lucide-react';
+import { ScrollText, ArrowRight, ArrowUp, Award } from 'lucide-react';
 import img from "./../../assets/sangillenceBanner1.svg"
 import { Link, useLocation } from 'react-router-dom';
 
@@ -47,13 +47,13 @@ function OlympiadPage() {
       </div>
 
       {/* Rules Section */}
-      <div className="max-w-4xl mx-auto px-4 py-16">
+      <div className="max-w-4xl mx-auto my-6 px-4 py-12 shadow-lg">
         <div className="flex items-center mb-8">
           <ScrollText className="w-8 h-8 text-blue-600 mr-3" />
           <h2 className="text-3xl font-bold text-gray-800">Competition Rules</h2>
         </div>
         
-        <div className="space-y-6">
+        <div className="space-y-2">
           <div className="bg-white rounded-lg p-6 shadow-lg border border-gray-100">
             <h3 className="text-xl font-semibold mb-3 text-gray-800">Eligibility</h3>
             <ul className="list-disc list-inside space-y-2 text-gray-600">
@@ -103,6 +103,24 @@ function OlympiadPage() {
             </ul>
           </div>
         </div>
+
+        
+          <div className="flex items-center my-5">
+          <Award className="w-7 h-7 text-blue-600 mr-3" />
+          <h2 className="text-2xl font-bold text-gray-800">Awards</h2>
+          </div>
+
+          <div className='space-y-2'>
+              <div className="bg-white rounded-lg p-6 shadow-lg border border-gray-100">
+            <h3 className="text-xl font-semibold mb-3 text-gray-800">Winner's</h3>
+            <ul className="list-disc list-inside space-y-2 text-gray-600">
+              <li>Cash prize of up to ₹2000.</li>
+              <li>Merit certificate.</li>
+              <li>Scholarships.</li>
+              <li><b>Top 100 Performers:</b> Certificates of appreciation. </li>
+            </ul>
+            </div>
+          </div>
 
         {/* Apply Section */}
         <div id="apply" className="mt-16 text-center">

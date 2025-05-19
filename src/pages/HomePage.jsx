@@ -6,7 +6,7 @@ function HomePage() {
     <div>
       <Carousel/>
       <VideoSection/>
-      <CourseStructure/>
+      {/* <CourseStructure/> */}
     </div>
   )
 }
