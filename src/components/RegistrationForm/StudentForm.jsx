@@ -26,6 +26,9 @@ const StudentForm = ({ onSubmit }) => {
     email: '',
   });
 
+  const [isLoading, setIsLoading] = useState(false);
+  const [submitError, setSubmitError] = useState('');
+
   const validateForm = () => {
     let isValid = true;
     const newErrors = {
@@ -80,11 +83,38 @@ const StudentForm = ({ onSubmit }) => {
     }
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    setSubmitError('');
+    
     if (validateForm()) {
+      setIsLoading(true);
       console.log('Student form data:', formData);
-      onSubmit();
+      
+      try {
+        const response = await fetch('http://localhost:5001/api/student/submit', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(formData),
+        });
+
+        const result = await response.json();
+
+        if (response.ok) {
+          console.log('Student registration successful:', result);
+          onSubmit();
+        } else {
+          console.error('Student registration failed:', result);
+          setSubmitError(result.message || 'Failed to submit registration. Please try again.');
+        }
+      } catch (error) {
+        console.error('Error submitting student form:', error);
+        setSubmitError('Network error. Please check your connection and try again.');
+      } finally {
+        setIsLoading(false);
+      }
     }
   };
 
@@ -96,6 +126,12 @@ const StudentForm = ({ onSubmit }) => {
           Please provide your personal details below.
         </p>
       </div>
+
+      {submitError && (
+        <div className="mb-4 p-3 bg-red-100 border border-red-400 text-red-700 rounded">
+          {submitError}
+        </div>
+      )}
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         <FormInput
@@ -145,9 +181,14 @@ const StudentForm = ({ onSubmit }) => {
       <div className="mt-8 flex justify-center">
         <button
           type="submit"
-          className="px-6 py-3 bg-blue-600 text-white font-medium rounded-lg shadow-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 transition-all duration-200"
+          disabled={isLoading}
+          className={`px-6 py-3 font-medium rounded-lg shadow-md focus:outline-none focus:ring-2 focus:ring-opacity-50 transition-all duration-200 ${
+            isLoading
+              ? 'bg-gray-400 text-gray-200 cursor-not-allowed'
+              : 'bg-blue-600 text-white hover:bg-blue-700 focus:ring-blue-500'
+          }`}
         >
-          Submit Application
+          {isLoading ? 'Submitting...' : 'Submit Application'}
         </button>
       </div>
     </form>

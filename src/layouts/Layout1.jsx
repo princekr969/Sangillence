@@ -9,9 +9,12 @@ function Layout1() {
       window.scrollTo(0, 0);
     }, [pathname]);
 
+  // Only show Navbar if not on the landing page
+  const isLandingPage = pathname === "/";
+
   return (
     <>
-        <Navbar/>
+        {!isLandingPage && <Navbar/>}
         <Outlet/>
         <Footer/>
     </>
