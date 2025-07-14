@@ -7,7 +7,7 @@ import SuccessPage from './components/RegistrationForm/SuccessPage';
 
 function App() {
   return (
-    <BrowserRouter> {/* 👈 Use basename here */}
+    <BrowserRouter>
       <Routes>
         <Route path="/" element={<Layout1 />}>
           <Route index element={<HomePage />} />
