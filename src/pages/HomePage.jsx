@@ -1,14 +1,27 @@
-import React from 'react'
-import { Carousel, CourseStructure, VideoSection } from '../components'
+import Hero from '../components/Landing/Hero';
+import About from '../components/Landing/About';
+import Benefits from '../components/Landing/Benefits';
+import Skills from '../components/Landing/Skills';
+import Results from '../components/Landing/Results';
+import Awards from '../components/Landing/Awards';
+import Timeline from '../components/Landing/Timeline';
+import CTA from '../components/Landing/CTA';
+import Footer from '../components/Footer';
 
 function HomePage() {
   return (
-    <div>
-      <Carousel/>
-      <VideoSection/>
-      {/* <CourseStructure/> */}
+    <div className="min-h-screen">
+      <Hero />
+      <About />
+      <Benefits />
+      <Skills />
+      <Results />
+      <Awards />
+      <Timeline />
+      <CTA />
+      <Footer />
     </div>
-  )
+  );
 }
 
-export default HomePage
+export default HomePage;
