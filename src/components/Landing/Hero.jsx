@@ -1,6 +1,7 @@
 import React from 'react';
 import { Brain, BookOpen, Target, ArrowRight } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
+import logo from '../../../assets/sangillenceLogo.png'
 
 const Hero = () => {
   const navigate = useNavigate();
@@ -31,6 +32,7 @@ const Hero = () => {
 
         {/* Main Content */}
         <div className="max-w-5xl mx-auto">
+
           <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold bg-gradient-to-r from-blue-400 via-purple-400 to-teal-400 bg-clip-text text-transparent mb-6 leading-tight">
             INDIA'S FIRST AI-POWERED
           </h1>

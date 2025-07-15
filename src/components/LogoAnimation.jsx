@@ -1,5 +1,4 @@
-import React, { useState, useEffect } from 'react';
-import {Loader2, Brain, Lightbulb, Star, Target, Puzzle } from 'lucide-react';
+import {Loader2, Brain, TimerReset, Target, Bot, BotMessageSquare, Trophy, Boxes, Gauge, Lightbulb } from 'lucide-react';
 import LogoGift from '../../assets/SangillenceLogoAnimation.gif';
 
 function GiftAnimation() {
@@ -24,33 +23,38 @@ function LogoAnimation({loading}) {
         {/* Background Animation */}
          <div className="absolute inset-0">
         {/* Floating Mathematical Symbols */}
-        <div className="absolute top-20 left-10 text-5xl text-purple-300 animate-bounce opacity-60">π</div>
-        <div className="absolute top-40 right-20 text-4xl text-blue-300 animate-bounce opacity-60">∑</div>
-        <div className="absolute bottom-40 left-20 text-5xl text-cyan-300 animate-bounce opacity-60">∞</div>
-        <div className="absolute bottom-20 right-10 text-4xl text-yellow-300 animate-bounce opacity-60">√</div>
-        <div className="absolute top-60 left-1/4 text-5xl text-red-300 animate-bounce opacity-60">×</div>
-        <div className="absolute top-80 right-1/3 text-5xl text-green-300 animate-bounce opacity-60">÷</div>
+        <div className="absolute top-10 left-5 md:top-20 md:left-10 text-5xl text-purple-300 animate-bounce opacity-60">π</div>
+        <div className="absolute top-30 right-10 md:top-40 md:right-20 text-4xl text-blue-300 animate-bounce opacity-60">∑</div>
+        <div className="absolute bottom-30 left-10 md:bottom-40 md:left-20 text-5xl text-cyan-300 animate-bounce opacity-60">∞</div>
+        <div className="absolute  right-10 bottom-20 md:right-20 text-4xl text-yellow-300 animate-bounce opacity-60">√</div>
+        <div className="absolute top-80 left-15 md:top-60 md:left-1/4 text-5xl text-red-300 animate-bounce opacity-60">×</div>
+        <div className="absolute top-90 right-10 md:top-80 md:right-1/3 text-5xl text-green-300 animate-bounce opacity-60">÷</div>
+      
+        {/* Brain and Learning Icons */}  
         
-        {/* Floating Geometric Shapes */}   
-        <div className="absolute top-32 right-40 w-4 h-4 bg-purple-400 rounded-full animate-float opacity-70"></div>
-        <div className="absolute bottom-32 left-40 w-6 h-6 bg-blue-400 rounded-full animate-float-delayed opacity-70"></div>
-        <div className="absolute top-1/2 left-10 w-3 h-3 bg-cyan-400 rounded-full animate-float opacity-70"></div>
-        <div className="absolute bottom-60 right-60 w-5 h-5 bg-yellow-400 rounded-full animate-float-delayed opacity-70"></div>
-        <div className="absolute top-80 right-80 w-4 h-4 bg-red-400 rounded-full animate-float opacity-70"></div>
-        <div className="absolute bottom-80 left-80 w-3 h-3 bg-green-400 rounded-full animate-float-delayed opacity-70"></div>
-        
-        {/* Brain and Learning Icons */}
-        <div className="absolute top-24 right-32 text-purple-300 animate-pulse opacity-50">
-          <Brain size={50} />
+        <div className="absolute max-md:hidden top-130 right-110 text-red-400 animate-pulse opacity-50">
+          <Trophy size={30} />
         </div>
-        <div className="absolute bottom-24 left-32 text-blue-300 animate-pulse opacity-50">
+        <div className="absolute max-md:hidden bottom-70 right-60 text-purple-400 animate-pulse opacity-50">
+          <BotMessageSquare size={40} />
+        </div>
+        <div className="absolute max-md:hidden bottom-70 left-70 text-blue-300 animate-pulse opacity-50">
+          <Boxes size={35} />   
+        </div>
+        <div className="absolute max-md:hidden top-30 left-130 text-blue-300 animate-pulse opacity-50">
+          <TimerReset size={35} />   
+        </div>
+        <div className="absolute max-md:hidden top-24 right-40 text-purple-300 animate-pulse opacity-50">
+          <Brain size={40} />
+        </div>
+        <div className="absolute max-md:hidden top-70 left-32 text-cyan-400 animate-pulse opacity-50">
           <Target size={30} />
         </div>
-        <div className="absolute top-1/3 right-1/4 text-cyan-300 animate-pulse opacity-50">
-          <Puzzle size={25} />
+        <div className="absolute max-md:hidden top-1/5 right-1/4 text-yellow-300 animate-pulse opacity-50">
+          <Lightbulb size={35} />
         </div>
-        <div className="absolute bottom-1/3 left-1/4 text-yellow-300 animate-pulse opacity-50">
-          <Star size={25} />
+        <div className="absolute max-md:hidden bottom-1/5 left-1/4 text-green-300 animate-pulse opacity-50">
+          <Gauge size={35} />
         </div>
       </div>
 
@@ -68,16 +72,17 @@ function LogoAnimation({loading}) {
                 Sangillence
               </span>
             </h1>
-            <p className="text-xl text-gray-400 animate-fade-in animation-delay-500">
-              Loading amazing experiences
+            <p className="flex items-center justify-center gap-1 text-lg text-gray-500 animate-fade-in animation-delay-500">
+              <Bot size={20}  className="text-blue-500"/>
+              AI-Powered IQ Assessment
             </p>
           </div>
 
           {/* Loading Dots */}
           <div className="flex justify-center space-x-2 mb-8">
-            <div className="w-3 h-3 bg-purple-400 rounded-full animate-bounce"></div>
-            <div className="w-3 h-3 bg-pink-400 rounded-full animate-bounce animation-delay-500"></div>
-            <div className="w-3 h-3 bg-indigo-400 rounded-full animate-bounce animation-delay-600"></div>
+            <div className="w-2 h-2 rounded-full animate-pulseColor animate-pulseColor-delay-0"></div>
+            <div className="w-2 h-2 rounded-full animate-pulseColor animate-pulseColor-delay-1"></div>
+            <div className="w-2 h-2 rounded-full animate-pulseColor animate-pulseColor-delay-2"></div>
           </div>
 
           {/* Status Text */}
