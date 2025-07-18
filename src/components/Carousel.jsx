@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { ChevronLeft, ChevronRight, ArrowRight} from 'lucide-react';
-import img1 from "./../../assets/sangillenceBanner2.svg"
-import img2 from "./../../assets/sangillenceBanner1.svg"
+import img1 from "./../../assets/svgs/sangillenceBanner2.svg"
+import img2 from "./../../assets/svgs/sangillenceBanner1.svg"
 
 const carouselItems = [
   {

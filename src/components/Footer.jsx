@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 
 function Footer() {
   return (
-    <footer className="bg-blue-950 text-white py-8">
+    <footer className="bg-gradient-to-t from-blue-950 via-blue-900 to-blue-800 text-white py-8">
     <div className="container pr-4 flex flex-col md:flex-row justify-between items-start gap-8">
       <div className="space-y-4 ml-5">
         <h2 className="text-xl font-bold">Contact Us</h2>
