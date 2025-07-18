@@ -5,7 +5,6 @@ import Carousel from "./Carousel";
 import Footer from "./Footer";
 import CourseStructure from "./CourseStructure";
 import FormContainer from "./RegistrationForm/FormContainer";
-import LogoAnimation from "./LogoAnimation";
 import About from "./Landing/About";
 import Awards from "./Landing/Awards";
 import Benefits from "./Landing/Benefits";
@@ -14,6 +13,9 @@ import Hero from "./Landing/Hero";
 import Results from "./Landing/Results";
 import Skills from "./Landing/Skills";
 import Timeline from "./Landing/Timeline";
+import Hero1 from "./Landing/Hero1";
+import Benefits1 from "./Landing/Benefits1";
+import Timeline1 from "./Landing/TimeLine1";
 
 export {
     Navbar,
@@ -31,5 +33,7 @@ export {
     Footer,
     CourseStructure,
     FormContainer,
-    LogoAnimation,
+    Hero1,
+    Benefits1,
+    Timeline1
 }

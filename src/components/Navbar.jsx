@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Menu, X, Sparkles } from 'lucide-react';
 import { NavLink, Link } from 'react-router-dom';
 import { Link as Scroll } from "react-scroll";
-import logo from "./../../assets/navbar_logo.svg"
+import logo from "./../../assets/svgs/navbar_logo.svg"
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);

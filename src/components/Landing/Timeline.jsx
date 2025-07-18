@@ -1,4 +1,4 @@
-import React from 'react';
+import { useEffect, useState, useRef } from 'react';
 import { Calendar, Users, FileText, Award, CheckCircle } from 'lucide-react';
 
 const timelineEvents = [
@@ -33,14 +33,61 @@ const timelineEvents = [
 ];
 
 const Timeline = () => {
+  const [isSectionVisible, setIsSectionVisible] = useState(false);
+    const [isCardSectionVisible, setIsCardSectionVisible] = useState(false);
+    const sectionRef = useRef(null);
+    const sectionCardRef = useRef(null);
+  
+    useEffect(() => {
+      const sectionObserver = new IntersectionObserver(
+        ([entry]) => {
+          if (entry.isIntersecting) {
+            setIsSectionVisible(true);
+          }
+        },
+        {
+          threshold: 0.1,
+          rootMargin: '5px 0px 0px 0px',
+        }
+      );
+  
+      const cardObserver = new IntersectionObserver(
+        ([entry]) => {
+          if (entry.isIntersecting) {
+            setIsCardSectionVisible(true);
+          }
+        },
+        {
+          threshold: 0.1,
+          rootMargin: '10px 0px 0px 0px',
+        }
+      );
+  
+      if (sectionRef.current) sectionObserver.observe(sectionRef.current);
+      if (sectionCardRef.current) cardObserver.observe(sectionCardRef.current);
+  
+      return () => {
+        if (sectionRef.current) sectionObserver.unobserve(sectionRef.current);
+        if (sectionCardRef.current) cardObserver.unobserve(sectionCardRef.current);
+      };
+    }, []);
+
   return (
-    <section className="py-20 bg-gradient-to-b from-slate-50 to-white">
-      <div className="max-w-6xl mx-auto px-4">
+    <section ref={sectionRef} className="bg-gradient-to-t from-blue-100 via-blue-50 to-white py-16 px-4 sm:px-6 md:px-16">
+      <div className="max-w-5xl mx-auto">
         <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-bold text-slate-800 mb-6">
+          <h2 className={`text-4xl md:text-5xl font-family-givonic-bold font-bold text-slate-800 mb-6 transition-all duration-1000 ${
+            isSectionVisible 
+              ? 'opacity-100 translate-y-0' 
+              : 'opacity-0 translate-y-8'
+          }`}>
             Important Timeline
           </h2>
-          <p className="text-xl text-slate-600 max-w-3xl mx-auto">
+          <p className={`text-xl font-family-givonic-regular text-slate-600 max-w-4xl mx-auto transition-all duration-1000 delay-200 ${
+            isSectionVisible 
+              ? 'opacity-100 translate-y-0' 
+              : 'opacity-0 translate-y-8'
+          }`}>
             Stay updated with key dates and milestones for SOBO 25. 
             Mark your calendar and don't miss any important deadlines.
           </p>

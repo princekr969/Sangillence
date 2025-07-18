@@ -1,4 +1,4 @@
-import React from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { 
   Brain, 
   Calculator, 
@@ -11,6 +11,7 @@ import {
   Zap, 
   Heart 
 } from 'lucide-react';
+import Report from './Report';
 
 const skills = [
   { icon: Brain, name: "Critical Thinking", description: "Analyze complex problems systematically" },
@@ -26,76 +27,112 @@ const skills = [
 ];
 
 const Skills = () => {
+  const [isSectionVisible, setIsSectionVisible] = useState(false);
+      const [isCardSectionVisible, setIsCardSectionVisible] = useState(false);
+      const sectionRef = useRef(null);
+      const sectionCardRef = useRef(null);
+    
+      useEffect(() => {
+        
+        const observer = new IntersectionObserver(
+          ([entry]) => {
+            if (entry.isIntersecting) {
+              setIsSectionVisible(true);
+            }
+          },
+          {
+            threshold: 0.1,
+            rootMargin: '5px 0px 0px 0px'
+          }
+        );
+    
+        if (sectionRef.current) {
+          observer.observe(sectionRef.current);
+        }
+    
+        return () => {
+          if (sectionRef.current) {
+            observer.unobserve(sectionRef.current);
+          }
+        };
+      }, []);
+    
+    useEffect(() => {
+        const observer = new IntersectionObserver(
+            ([entry]) => {
+            if (entry.isIntersecting) {
+                setIsCardSectionVisible(true);
+            }
+            },
+            {
+            threshold: 0.1,
+            rootMargin: '10px 0px 0px 0px',
+            }
+        );
+
+        if (sectionCardRef.current) {
+            observer.observe(sectionCardRef.current);
+        }
+
+        return () => {
+            if (sectionCardRef.current) {
+            observer.unobserve(sectionCardRef.current);
+            }
+        };
+    }, []);
+
   return (
-    <section className="py-20 bg-gradient-to-b from-slate-50 to-white">
-      <div className="max-w-7xl mx-auto px-4">
+    <section ref={sectionRef} className="py-20 bg-slate-100 px-4 sm:px-6 md:px-16">
+      <div className="max-w-7xl mx-auto">
         <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-bold text-slate-800 mb-6">
+          <h2 className={`text-4xl md:text-5xl font-family-givonic-bold font-bold text-slate-800 mb-6 transition-all duration-1000 ${
+            isSectionVisible 
+              ? 'opacity-100 translate-y-0' 
+              : 'opacity-0 translate-y-8'
+          }`}>
             Skills We Measure
           </h2>
-          <p className="text-xl text-slate-600 max-w-3xl mx-auto">
+          <p className={`text-xl font-family-givonic-regular text-slate-600 max-w-4xl mx-auto transition-all duration-1000 delay-200 ${
+            isSectionVisible 
+              ? 'opacity-100 translate-y-0' 
+              : 'opacity-0 translate-y-8'
+          }`}>
             Our AI-powered assessment evaluates a comprehensive range of skills that matter 
             in today's dynamic world, going far beyond traditional academic metrics.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6 mb-16">
+        <div ref={sectionCardRef} className={`grid grid-cols-2 lg:grid-cols-3 gap-2 sm:gap-4 mb-16 font-family-givonic-regular`}>
           {skills.map((skill, index) => (
             <div
               key={index}
-              className="group bg-white rounded-xl p-6 shadow-md hover:shadow-xl transition-all duration-300 hover:-translate-y-2 border-2 border-transparent hover:border-blue-200"
+              className={`flex justify-start max-sm:gap-2 bg-transparent group p-2 sm:p-6 transition-all duration-1000 ${
+                isCardSectionVisible 
+                  ? 'opacity-100 translate-y-0' 
+                  : 'opacity-0 translate-y-12'
+              }`}
             >
-              <div className="w-12 h-12 bg-gradient-to-br from-blue-500 to-purple-600 rounded-lg flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
-                <skill.icon className="w-6 h-6 text-white" />
+                <div className={`w-16 h-16 rounded-full bg-blue-950 flex items-center justify-center shadow-xl`}>
+                      <skill.icon className="w-6 h-6 text-slate-100" />
+                  </div>
+
+                <span className={`max-sm:hidden block mt-3 mx-3 border-t-2 w-28 border-slate-600`}></span>
+                  <div className='flex flex-col'>
+                    <h3 className="text-xl font-family-givonic-bold font-bold text-slate-800 mb-2 ">
+                      {skill.name}
+                    </h3>
+                    <p className="text-gray-600 font-normal leading-relaxed">
+                      {skill.description}
+                    </p>
+                  </div>
               </div>
-              <h3 className="text-lg font-bold text-slate-800 mb-2">
-                {skill.name}
-              </h3>
-              <p className="text-sm text-slate-600">
-                {skill.description}
-              </p>
-            </div>
+              
           ))}
         </div>
 
         {/* Sample Skill Report Visualization */}
-        <div className="bg-gradient-to-br from-blue-50 to-purple-50 rounded-3xl p-8">
-          <h3 className="text-2xl font-bold text-slate-800 mb-8 text-center">
-            Sample Skill Assessment Report
-          </h3>
-          
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
-            <div className="space-y-4">
-              {skills.slice(0, 5).map((skill, index) => (
-                <div key={index} className="flex items-center gap-4">
-                  <skill.icon className="w-5 h-5 text-blue-600" />
-                  <div className="flex-1">
-                    <div className="flex justify-between mb-1">
-                      <span className="text-sm font-medium text-slate-700">{skill.name}</span>
-                      <span className="text-sm text-slate-500">{85 + index * 3}%</span>
-                    </div>
-                    <div className="w-full bg-gray-200 rounded-full h-2">
-                      <div 
-                        className="bg-gradient-to-r from-blue-500 to-purple-600 h-2 rounded-full transition-all duration-1000"
-                        style={{ width: `${85 + index * 3}%` }}
-                      ></div>
-                    </div>
-                  </div>
-                </div>
-              ))}
-            </div>
-            
-            <div className="relative">
-              <div className="w-64 h-64 mx-auto bg-white rounded-full shadow-lg flex items-center justify-center">
-                <div className="text-center">
-                  <div className="text-4xl font-bold text-blue-600 mb-2">92</div>
-                  <div className="text-lg font-semibold text-slate-700">Overall Score</div>
-                  <div className="text-sm text-slate-500">Top 5% Nationally</div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+        <Report/>
+      
       </div>
     </section>
   );

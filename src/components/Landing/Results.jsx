@@ -1,23 +1,89 @@
-import React from 'react';
-import { BarChart3, PieChart, TrendingUp, Award } from 'lucide-react';
+import { useState, useRef, useEffect } from 'react';
+import { BarChart3, PieChart, TrendingUp} from 'lucide-react';
 
 const Results = () => {
+  const [isSectionVisible, setIsSectionVisible] = useState(false);
+        const [isCardSectionVisible, setIsCardSectionVisible] = useState(false);
+        const sectionRef = useRef(null);
+        const sectionCardRef = useRef(null);
+      
+        useEffect(() => {
+          
+          const observer = new IntersectionObserver(
+            ([entry]) => {
+              if (entry.isIntersecting) {
+                setIsSectionVisible(true);
+              }
+            },
+            {
+              threshold: 0.1,
+              rootMargin: '5px 0px 0px 0px'
+            }
+          );
+      
+          if (sectionRef.current) {
+            observer.observe(sectionRef.current);
+          }
+      
+          return () => {
+            if (sectionRef.current) {
+              observer.unobserve(sectionRef.current);
+            }
+          };
+        }, []);
+      
+      useEffect(() => {
+          const observer = new IntersectionObserver(
+              ([entry]) => {
+              if (entry.isIntersecting) {
+                  setIsCardSectionVisible(true);
+              }
+              },
+              {
+              threshold: 0.1,
+              rootMargin: '10px 0px 0px 0px',
+              }
+          );
+  
+          if (sectionCardRef.current) {
+              observer.observe(sectionCardRef.current);
+          }
+  
+          return () => {
+              if (sectionCardRef.current) {
+              observer.unobserve(sectionCardRef.current);
+              }
+          };
+      }, []);
+
   return (
-    <section className="py-20 bg-white">
-      <div className="max-w-7xl mx-auto px-4">
+    <section ref={sectionRef} className="bg-gradient-to-t from-blue-100 via-blue-50 to-white py-16 px-4 sm:px-6 md:px-16">
+      <div className="max-w-7xl mx-auto">
         <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-bold text-slate-800 mb-6">
+          <h2 className={`text-4xl md:text-5xl font-family-givonic-bold font-bold text-slate-800 mb-6 transition-all duration-1000 ${
+            isSectionVisible 
+              ? 'opacity-100 translate-y-0' 
+              : 'opacity-0 translate-y-8'
+          }`}>
             AI-Powered Results & Reports
           </h2>
-          <p className="text-xl text-slate-600 max-w-3xl mx-auto">
+          <p className={`text-xl font-family-givonic-regular text-slate-600 max-w-4xl mx-auto transition-all duration-1000 delay-200 ${
+            isSectionVisible 
+              ? 'opacity-100 translate-y-0' 
+              : 'opacity-0 translate-y-8'
+          }`}>
             Experience detailed insights with our advanced AI analysis, featuring comprehensive 
             reports validated through successful pilots at IIIT Gwalior.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center mb-16">
+        <div ref={sectionCardRef} className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center mb-16">
           <div className="space-y-8">
-            <div className="bg-gradient-to-br from-blue-50 to-purple-50 rounded-2xl p-6">
+            <div className={`bg-gradient-to-br from-blue-50 to-purple-50 rounded-2xl p-6 delay-0 transition-all duration-1000 ${
+                isCardSectionVisible 
+                  ? 'opacity-100 translate-y-0' 
+                  : 'opacity-0 translate-y-12'
+              }`}>
               <div className="flex items-center gap-3 mb-4">
                 <BarChart3 className="w-6 h-6 text-blue-600" />
                 <h3 className="text-xl font-bold text-slate-800">Comprehensive Analytics</h3>
@@ -28,7 +94,11 @@ const Results = () => {
               </p>
             </div>
 
-            <div className="bg-gradient-to-br from-green-50 to-blue-50 rounded-2xl p-6">
+            <div className={`bg-gradient-to-br from-green-50 to-blue-50 rounded-2xl p-6 delay-100 transition-all duration-1000 ${
+                isCardSectionVisible 
+                  ? 'opacity-100 translate-y-0' 
+                  : 'opacity-0 translate-y-12'
+              }`}>
               <div className="flex items-center gap-3 mb-4">
                 <PieChart className="w-6 h-6 text-green-600" />
                 <h3 className="text-xl font-bold text-slate-800">Skill Distribution</h3>
@@ -39,7 +109,11 @@ const Results = () => {
               </p>
             </div>
 
-            <div className="bg-gradient-to-br from-purple-50 to-pink-50 rounded-2xl p-6">
+            <div className={`bg-gradient-to-br from-purple-50 to-pink-50 rounded-2xl p-6 transition-all delay-200 duration-1000 ${
+                isCardSectionVisible 
+                  ? 'opacity-100 translate-y-0' 
+                  : 'opacity-0 translate-y-12'
+              }`}>
               <div className="flex items-center gap-3 mb-4">
                 <TrendingUp className="w-6 h-6 text-purple-600" />
                 <h3 className="text-xl font-bold text-slate-800">Growth Tracking</h3>
@@ -51,7 +125,11 @@ const Results = () => {
             </div>
           </div>
 
-          <div className="bg-gradient-to-br from-slate-800 to-slate-900 rounded-3xl p-8 text-white">
+          <div className={`bg-gradient-to-br from-slate-800 to-slate-900 rounded-3xl p-8 text-white transition-all duration-1000 ${
+                isCardSectionVisible 
+                  ? 'opacity-100 translate-y-0' 
+                  : 'opacity-0 translate-y-12'
+              }`}>
             <h3 className="text-2xl font-bold mb-6 text-center">IIIT Gwalior Pilot Results</h3>
             
             <div className="grid grid-cols-2 gap-6 mb-8">

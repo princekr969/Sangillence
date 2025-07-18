@@ -1,40 +1,214 @@
 @import "tailwindcss";
 @tailwind utilities;
-
-@layer utilities {
-
-     @keyframes pulseColor {
-        0%, 100% { background-color: #bfdbfe; }
-        50% { background-color: #60a5fa; }  
-    }
-
-    @keyframes gradient {
-        0% { background-position: 0% 50%; }
-        50% { background-position: 100% 50%; }
-        100% { background-position: 0% 50%; }
-    }
-
-    .animate-pulseColor {
-        animation: pulseColor 1s ease-in-out infinite;
-        -webkit-animation: pulseColor 1s ease-in-out infinite;
+@font-face {
+  font-family: 'Givonic-black';
+  src: url('../assets/font/Givonic-Black.ttf') format('truetype');
 }
-    .animate-pulseColor-delay-0 {
-        animation-delay: 0s;
-    }
-
-    .animate-pulseColor-delay-1 {
-        animation-delay: 0.2s;
-    }
-
-    .animate-pulseColor-delay-2 {
-        animation-delay: 0.4s;
-    }
- 
-    .animate-gradient {
-        background-size: 200% 200%;
-        animation: gradient 4s ease infinite;
-        animation-delay: 1s;
-        -webkit-animation: gradient 4s ease infinite;
+@font-face {
+  font-family: 'Givonic-bold';
+  src: url('../assets/font/Givonic-Bold.ttf') format('truetype');
+}
+@font-face {
+  font-family: 'Givonic-semiBold';
+  src: url('../assets/font/Givonic-SemiBold.ttf') format('truetype');
+}
+@font-face {
+  font-family: 'Givonic-regular';
+  src: url('../assets/font/Givonic-Regular.ttf') format('truetype');
+}
+@font-face {
+  font-family: 'Givonic-light';
+  src: url('../assets/font/Givonic-Light.ttf') format('truetype');
+}
+@font-face {
+  font-family: 'Givonic-thin';
+  src: url('../assets/font/Givonic-Thin.ttf') format('truetype');
 }
 
+.font-family-givonic-bold {
+  font-family: 'Givonic-black';
+}
+.font-family-givonic-bold {
+  font-family: 'Givonic-bold';
+}
+.font-family-givonic-semiBold {
+  font-family: 'Givonic-semiBold';
+}
+.font-family-givonic-regular {
+  font-family: 'Givonic-regular';
+}
+.font-family-givonic-light {
+  font-family: 'Givonic-light';
+}
+.font-family-givonic-thin {
+  font-family: 'Givonic-thin';
+}
+
+
+@keyframes pulseColor {
+  0%, 100% { background-color: #bfdbfe; }
+  50% { background-color: #60a5fa; }  
+}
+
+@keyframes gradient {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.animate-pulseColor {
+    animation: pulseColor 1s ease-in-out infinite;
+    -webkit-animation: pulseColor 1s ease-in-out infinite;
+}
+.animate-pulseColor-delay-0 {
+    animation-delay: 0s;
+}
+
+.animate-pulseColor-delay-1 {
+    animation-delay: 0.2s;
+}
+
+.animate-pulseColor-delay-2 {
+    animation-delay: 0.4s;
+}
+
+.animate-gradient {
+    background-size: 200% 200%;
+    animation: gradient 4s ease infinite;
+    animation-delay: 1s;
+}
+
+/* Page Open Animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes floatMedium {
+  0%, 100% {
+    transform: translateY(0px) translateX(0px);
+  }
+  33% {
+    transform: translateY(-8px) translateX(4px);
+  }
+  66% {
+    transform: translateY(4px) translateX(-6px);
+  }
+}
+
+@keyframes floatFast {
+  0%, 100% {
+    transform: translateY(0px) translateX(0px);
+  }
+  25% {
+    transform: translateY(-6px) translateX(-3px);
+  }
+  50% {
+    transform: translateY(3px) translateX(6px);
+  }
+  75% {
+    transform: translateY(-3px) translateX(3px);
+  }
+}
+
+@keyframes pulseGlow {
+  0%, 100% {
+    box-shadow: 0 0 20px rgba(147, 51, 234, 0.3);
+  }
+  50% {
+    box-shadow: 0 0 30px rgba(147, 51, 234, 0.6);
+  }
+}
+
+/* Animation Classes */
+.animate-fade-in {
+  animation: fadeIn 1s ease-out;
+}
+
+.animate-fade-out {
+  animation: fadeout 1s ease-in;
+}
+
+.animate-slide-up-1 {
+  animation: slideUp 0.8s ease-out 0.2s both;
+}
+
+.animate-slide-up-2 {
+  animation: slideUp 0.8s ease-out 0.4s both;
+}
+
+.animate-slide-up-3 {
+  animation: slideUp 0.8s ease-out 0.6s both;
+}
+
+.animate-slide-up-4 {
+  animation: slideUp 0.8s ease-out 0.8s both;
+}
+
+.animate-slide-up-5 {
+  animation: slideUp 0.8s ease-out 1s both;
+}
+
+.animate-slide-up-6 {
+  animation: slideUp 0.8s ease-out 1.2s both;
+}
+
+.animate-float-slow {
+  animation: float 6s ease-in-out infinite;
+}
+
+.animate-float-medium {
+  animation: floatMedium 4s ease-in-out infinite;
+}
+
+.animate-float-fast {
+  animation: floatFast 3s ease-in-out infinite;
+}
+
+.animate-pulse-glow {
+  animation: pulseGlow 2s ease-in-out infinite;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .animate-slide-up-1,
+  .animate-slide-up-2,
+  .animate-slide-up-3,
+  .animate-slide-up-4,
+  .animate-slide-up-5,
+  .animate-slide-up-6 {
+    animation-duration: 0.6s;
+  }
 }
