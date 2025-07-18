@@ -4,7 +4,7 @@ import { Menu, X, ArrowRight } from 'lucide-react';
 import sangillenceLogo from './../../../assets/sangillenceLogo.png';
 import heroSectionBg from '../../../assets/svgs/herosectionbg.svg';
 import mainSectionBg from '../../../assets/svgs/heromainsectionbg.svg';
-import collegeLogo from "../../../assets/svgs/collegeLogo.svg";
+import collegeLogo from "../../../assets/svgs/collegelogo.svg";
 
 export default function Hero1() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
