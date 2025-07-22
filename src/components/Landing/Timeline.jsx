@@ -1,80 +1,113 @@
-import { useEffect, useState, useRef } from 'react';
+import { useState,useRef,useEffect } from 'react';
 import { Calendar, Users, FileText, Award, CheckCircle } from 'lucide-react';
 
-const timelineEvents = [
+const timelineData = [
   {
-    icon: Calendar,
-    title: "Registration Opens",
     date: "January 15, 2025",
+    month: "January",
+    day: "15",
+    year: "2025",
+    icon: <Calendar className="w-4 h-4" />,
+    title: "Registration Opens",
     description: "Free registration begins for all eligible students",
     status: "completed"
   },
   {
-    icon: FileText,
-    title: "Assessment Period",
     date: "February 1-28, 2025",
+    month: "February",
+    day: "1-28",
+    year: "2025",
+    icon: <FileText className="w-4 h-4" />,
+    title: "Assessment Period",
     description: "AI-powered open-book examination window",
     status: "current"
   },
   {
-    icon: Users,
-    title: "Evaluation Phase",
     date: "March 1-15, 2025",
+    month: "March",
+    day: "1-15",
+    year: "2025",
+    icon: <Users className="w-4 h-4" />,
+    title: "Evaluation Phase",
     description: "AI analysis and comprehensive skill assessment",
-    status: "upcoming"
+    status: "current"
   },
   {
-    icon: Award,
-    title: "Results & Awards",
     date: "March 30, 2025",
+    month: "March",
+    day: "30",
+    year: "2025",
+    icon: <Award className="w-4 h-4" />,
+    title: "Results & Awards",
     description: "Results announcement and award ceremony",
-    status: "upcoming"
+    status: "current"
   }
 ];
 
+
 const Timeline = () => {
-  const [isSectionVisible, setIsSectionVisible] = useState(false);
-    const [isCardSectionVisible, setIsCardSectionVisible] = useState(false);
+    const [isSectionVisible, setIsSectionVisible] = useState(false);
+    const [visibleCards, setVisibleCards] = useState([]);
     const sectionRef = useRef(null);
-    const sectionCardRef = useRef(null);
-  
+    const cardRefs = useRef([]);
+
+
     useEffect(() => {
-      const sectionObserver = new IntersectionObserver(
+    
+    const observer = new IntersectionObserver(
         ([entry]) => {
-          if (entry.isIntersecting) {
+        if (entry.isIntersecting) {
             setIsSectionVisible(true);
-          }
+        }
         },
         {
-          threshold: 0.1,
-          rootMargin: '5px 0px 0px 0px',
+        threshold: 0.1,
+        rootMargin: '5px 0px 0px 0px'
         }
-      );
-  
-      const cardObserver = new IntersectionObserver(
-        ([entry]) => {
-          if (entry.isIntersecting) {
-            setIsCardSectionVisible(true);
-          }
-        },
-        {
-          threshold: 0.1,
-          rootMargin: '10px 0px 0px 0px',
+    );
+
+    if (sectionRef.current) {
+        observer.observe(sectionRef.current);
+    }
+
+    return () => {
+        if (sectionRef.current) {
+        observer.unobserve(sectionRef.current);
         }
-      );
-  
-      if (sectionRef.current) sectionObserver.observe(sectionRef.current);
-      if (sectionCardRef.current) cardObserver.observe(sectionCardRef.current);
-  
-      return () => {
-        if (sectionRef.current) sectionObserver.unobserve(sectionRef.current);
-        if (sectionCardRef.current) cardObserver.unobserve(sectionCardRef.current);
-      };
+    };
     }, []);
 
+
+
+useEffect(() => {
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          const index = parseInt(entry.target.dataset.index);
+          setVisibleCards((prev) =>
+            prev.includes(index) ? prev : [...prev, index]
+          );
+        }
+      });
+    },
+    {
+      threshold: 0.2,
+    }
+  );
+
+
+  cardRefs.current.forEach((ref) => ref && observer.observe(ref));
+  
+  return () => {
+    cardRefs.current.forEach((ref) => ref && observer.unobserve(ref));
+  };
+}, []);
+
   return (
-    <section ref={sectionRef} className="bg-gradient-to-t from-blue-100 via-blue-50 to-white py-16 px-4 sm:px-6 md:px-16">
-      <div className="max-w-5xl mx-auto">
+    <div ref={sectionRef} className="min-h-screen bg-slate-100 py-8 px-4 sm:py-16">
+      <div className="max-w-4xl mx-auto">
+        {/* Header */}
         <div className="text-center mb-16">
           <h2 className={`text-4xl md:text-5xl font-family-givonic-bold font-bold text-slate-800 mb-6 transition-all duration-1000 ${
             isSectionVisible 
@@ -93,60 +126,110 @@ const Timeline = () => {
           </p>
         </div>
 
+        {/* Timeline */}
         <div className="relative">
-          {/* Timeline line */}
-          <div className="absolute left-8 md:left-1/2 transform md:-translate-x-0.5 h-full w-1 bg-gradient-to-b from-blue-500 to-purple-600"></div>
+          {/* Vertical Line - Desktop */}
+          <div className="hidden md:block absolute left-1/2 transform -translate-x-1/2 w-0.5 h-full bg-blue-900"></div>
+          {/* Vertical Line - Mobile */}
+          <div className="md:hidden absolute left-8 top-0 w-0.5 h-full bg-blue-900"></div>
 
-          <div className="space-y-12">
-            {timelineEvents.map((event, index) => (
-              <div
-                key={index}
-                className={`relative flex items-center ${
-                  index % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'
-                }`}
-              >
-                {/* Timeline dot */}
-                <div className="absolute left-8 md:left-1/2 transform -translate-x-1/2 w-4 h-4 rounded-full bg-gradient-to-r from-blue-500 to-purple-600 border-4 border-white shadow-lg z-10"></div>
-
-                {/* Content */}
-                <div className={`w-full md:w-5/12 ml-20 md:ml-0 ${index % 2 === 0 ? 'md:pr-8' : 'md:pl-8'}`}>
-                  <div className={`bg-white rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 group ${
-                    event.status === 'current' ? 'ring-2 ring-blue-500' : ''
-                  }`}>
-                    <div className="flex items-center gap-3 mb-4">
-                      <div className={`w-12 h-12 rounded-xl flex items-center justify-center ${
-                        event.status === 'completed' ? 'bg-green-500' :
-                        event.status === 'current' ? 'bg-blue-500' : 'bg-gray-400'
-                      }`}>
-                        {event.status === 'completed' ? (
-                          <CheckCircle className="w-6 h-6 text-white" />
-                        ) : (
-                          <event.icon className="w-6 h-6 text-white" />
-                        )}
-                      </div>
-                      <div>
-                        <h3 className="text-xl font-bold text-slate-800">{event.title}</h3>
-                        <p className="text-sm font-semibold text-blue-600">{event.date}</p>
-                      </div>
+          {/* Timeline Items */}
+          <div className="space-y-8 font-family-givonic-bold sm:space-y-12">
+            {timelineData.map((item, index) => (
+                <div
+                    data-index={index}
+                    ref={(el) => (cardRefs.current[index] = el)}
+                    key={index} 
+                    className={`relative transition-all duration-1000
+                        ${
+                            visibleCards.includes(index)
+                                ? 'opacity-100 translate-y-0'
+                                : 'opacity-0 translate-y-10'
+                        }
+                     `}
+                >
+                {/* Desktop */}
+                <div className="hidden md:flex items-center">
+                  {/* Dot */}
+                  <div className="absolute left-1/2 transform -translate-x-1/2 w-10 h-10 bg-blue-950 rounded-full flex items-center justify-center z-10 shadow-lg">
+                    <div className="text-white">
+                      {item.icon}
                     </div>
-                    <p className="text-slate-600">{event.description}</p>
-                    {event.status === 'current' && (
-                      <div className="mt-4 px-3 py-1 bg-blue-100 text-blue-700 text-sm font-semibold rounded-full inline-block">
-                        Current Phase
-                      </div>
+                  </div>
+
+                  {/* Content */}
+                  <div className="w-full flex">
+                    {index % 2 === 0 ? (
+                      <>
+                        {/* Left - Date */}
+                        <div className="w-1/2 pr-12 text-right">
+                          <div className="text-gray-500 text-sm font-medium">{item.month}</div>
+                          <div className="text-4xl font-bold text-gray-800">{item.day}</div>
+                          <div className="text-gray-500 text-sm">{item.year}</div>
+                        </div>
+
+                        {/* Right - Details */}
+                        <div className="w-1/2 pl-12">
+                          <div className="bg-white rounded-lg shadow-md p-6 border border-gray-200">
+                            <h3 className="text-xl font-semibold text-gray-900 mb-3">{item.title}</h3>
+                            <p className="text-gray-600 leading-relaxed text-sm">{item.description}</p>
+                          </div>
+                        </div>
+                      </>
+                    ) : (
+                      <>
+                        {/* Left - Details */}
+                        <div className="w-1/2 pr-12">
+                          <div className="bg-white rounded-lg shadow-md p-6 border border-gray-200">
+                            <h3 className="text-xl font-semibold text-gray-900 mb-3">{item.title}</h3>
+                            <p className="text-gray-600 leading-relaxed text-sm">{item.description}</p>
+                          </div>
+                        </div>
+
+                        {/* Right - Date */}
+                        <div className="w-1/2 pl-12 text-left">
+                          <div className="text-gray-500 text-sm font-medium">{item.month}</div>
+                          <div className="text-4xl font-bold text-gray-800">{item.day}</div>
+                          <div className="text-gray-500 text-sm">{item.year}</div>
+                        </div>
+                      </>
                     )}
                   </div>
                 </div>
 
-                {/* Spacer for alternating layout */}
-                <div className="hidden md:block md:w-5/12"></div>
+                {/* Mobile */}
+                <div className="md:hidden flex items-start">
+                  {/* Dot */}
+                  <div className="w-8 h-8 bg-blue-950 rounded-full flex items-center justify-center z-10 shadow-lg mr-6 mt-2 flex-shrink-0">
+                    <div className="text-white">
+                      {item.icon}
+                    </div>
+                  </div>
+
+                  {/* Details */}
+                  <div className="flex-1">
+                    <div className="bg-white rounded-lg shadow-md p-4 sm:p-6 border border-gray-200">
+                      <div className="flex items-start justify-between mb-3">
+                        <div>
+                          <h3 className="text-lg sm:text-xl font-semibold text-gray-900 mb-2">{item.title}</h3>
+                          <p className="text-gray-600 leading-relaxed text-sm">{item.description}</p>
+                        </div>
+                        <div className="text-right ml-4 flex-shrink-0">
+                          <div className="text-gray-500 text-xs font-medium">{item.month}</div>
+                          <div className="text-2xl font-bold text-gray-800">{item.day}</div>
+                          <div className="text-gray-500 text-xs">{item.year}</div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </div>
             ))}
           </div>
         </div>
       </div>
-    </section>
+    </div>
   );
 };
 
-export default Timeline; 
+export default Timeline;

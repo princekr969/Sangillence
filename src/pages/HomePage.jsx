@@ -1,6 +1,5 @@
 import {
-  Hero1,
-  Benefits1,
+  Hero,
   About,
   Benefits,
   Skills,
@@ -9,25 +8,22 @@ import {
   Timeline,
   Footer,
   CTA,
-  Timeline1
+  Navbar
 } from '../components/index.js';
 
 function HomePage() {
 
   return (
     <> 
-
       <div className="relative z-0">
-        {/* <Hero /> */}
-        <Hero1/>
+        <Navbar/>
+        <Hero />
         <About />
-        <Benefits1 />
-        {/* <Benefits /> */}
+        <Benefits />
         <Skills />
         <Results />
         <Awards />
-        {/* <Timeline /> */}
-        <Timeline1/>
+        <Timeline />
         <CTA />
         <Footer />
       </div>

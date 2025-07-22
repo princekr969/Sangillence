@@ -13,9 +13,6 @@ import Hero from "./Landing/Hero";
 import Results from "./Landing/Results";
 import Skills from "./Landing/Skills";
 import Timeline from "./Landing/Timeline";
-import Hero1 from "./Landing/Hero1";
-import Benefits1 from "./Landing/Benefits1";
-import Timeline1 from "./Landing/TimeLine1";
 
 export {
     Navbar,
@@ -32,8 +29,5 @@ export {
     Carousel,
     Footer,
     CourseStructure,
-    FormContainer,
-    Hero1,
-    Benefits1,
-    Timeline1
+    FormContainer
 }

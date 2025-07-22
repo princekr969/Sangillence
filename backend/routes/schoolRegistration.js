@@ -1,11 +1,21 @@
 import express from 'express';
 import multer from 'multer';
-import { appendToSheet, getSheetData, uploadFileToDrive } from '../config/googleSheets.js';
+import { uploadExcelFile } from '../utils/clouldinaryUpload.js';
+import { appendToSheet, getSheetData } from '../config/googleSheets.js';
 
 const router = express.Router();
 
 // Configure multer for file uploads
-const storage = multer.memoryStorage();
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, 'uploads/'); // make sure this directory exists
+  },
+  filename: function (req, file, cb) {
+    const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9);
+    cb(null, uniqueSuffix + '-' + file.originalname);
+  }
+});
+
 const upload = multer({
     storage: storage,
     limits: {
@@ -97,23 +107,14 @@ router.post('/submit', upload.single('excelFile'), async (req, res) => {
         }
 
         // Upload file to Google Drive if provided
-        let driveFileLink = null;
+        let fileLink = null;
         if (excelFile) {
             console.log('Uploading file to Google Drive...');
-            const uploadResult = await uploadFileToDrive(excelFile, formData.schoolName);
-
-            if (uploadResult.success) {
-                driveFileLink = uploadResult.webViewLink;
-                console.log('File uploaded successfully:', uploadResult.fileName);
-                console.log('File link:', driveFileLink);
-            } else {
-                console.error('Failed to upload file to Google Drive:', uploadResult.error);
-                // Continue with registration even if file upload fails
-            }
+            fileLink=await uploadExcelFile(excelFile); 
         }
 
         // Add the file link to form data
-        formData.excelFileLink = driveFileLink;
+        formData.excelFileLink = fileLink;
 
         // Append data to Google Sheets
         const result = await appendToSheet(formData);
@@ -124,8 +125,8 @@ router.post('/submit', upload.single('excelFile'), async (req, res) => {
                 message: 'School registration submitted successfully!',
                 data: {
                     ...result.data,
-                    fileUploaded: !!driveFileLink,
-                    fileLink: driveFileLink
+                    fileUploaded: !!fileLink,
+                    fileLink: fileLink
                 }
             });
         } else {

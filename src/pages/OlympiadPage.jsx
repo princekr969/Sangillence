@@ -38,7 +38,7 @@ function OlympiadPage() {
         
           <a 
             href="#apply"
-            className="bg-blue-600 hover:bg-blue-700 text-white font-semibold px-4 py-2 rounded-full inline-flex items-center transition-all"
+            className="bg-blue-700 hover:bg-blue-800 text-white font-semibold px-4 py-2 rounded-full inline-flex items-center transition-all"
           >
             Register Now
             <ArrowRight className="ml-2 w-5 h-5" />
@@ -47,87 +47,84 @@ function OlympiadPage() {
       </div>
 
       {/* Rules Section */}
-      <div className="max-w-4xl mx-auto my-6 px-4 py-12 shadow-lg">
+      <div className="max-w-4xl mx-auto my-6 px-4 py-12 border-2 shadow-2xl border-slate-800/80 rounded-2xl ">
         <div className="flex items-center mb-8">
-          <ScrollText className="w-8 h-8 text-blue-600 mr-3" />
-          <h2 className="text-3xl font-bold text-gray-800">Competition Rules</h2>
+          <h2 className="text-3xl font-family-givonic-bold font-bold text-gray-800">Rules & Regulations</h2>
         </div>
         
         <div className="space-y-2">
-          <div className="bg-white rounded-lg p-6 shadow-lg border border-gray-100">
-            <h3 className="text-xl font-semibold mb-3 text-gray-800">Eligibility</h3>
-            <ul className="list-disc list-inside space-y-2 text-gray-600">
-              <li>Open to students of classes 3rd to 8th.</li>
+          <div className="border-2 border-slate-900/20 rounded-lg p-6">
+            <h3 className=" text-xl font-family-givonic-semiBold font-semibold mb-3 text-black">Eligibility</h3>
+            <ul className="list-none list-inside font-family-givonic-regular space-y-2 text-black">
+              <li>📝 Open to students from <b>Classes 3 to 10</b> across India.</li>
             </ul>
           </div>
 
-          <div className="bg-white rounded-lg p-6 shadow-lg border border-gray-100">
-            <h3 className="text-xl font-semibold mb-3 text-gray-800">Competition Format</h3>
-            <ul className="list-disc list-inside space-y-2 text-gray-600">
-              <li>A single question paper for all grades contains 10 intelligence based questions.</li>
-              <li>Each question has an integer-type answer worth 7 marks, and a logical explanation (up to 100 words only) worth 3 marks.</li>
-              <li>Marks for the explanation depend on the quality of logic, not the length of the response.</li>
+          <div className="bg-white border-2 border-slate-900/20 text-black rounded-lg p-6">
+            <h3 className="text-xl font-family-givonic-semiBold font-semibold mb-3 ">Competition Format</h3>
+            <ul className="list-none list-inside font-family-givonic-regular space-y-2">
+              <li>🧩 10 Skill Competency based questions</li>
+              <li>💬 100-word reasoning (should explain their solution)</li>
+              <li>🧠 Use of calculators, phones, books allowed</li>
             </ul>
           </div>
 
-          <div className="bg-white rounded-lg p-6 shadow-lg border border-gray-100">
-            <h3 className="text-xl font-semibold mb-3 text-gray-800">Duration</h3>
-            <ul className="list-disc list-inside space-y-2 text-gray-600">
-              <li>Students have one full day to solve and submit the answers.</li>
-              
+          <div className="bg-white border-2 border-slate-900/20 text-black rounded-lg p-6 ">
+            <h3 className="text-xl font-family-givonic-semiBold font-semibold mb-3 ">Duration</h3>
+            <ul className="list-none list-inside font-family-givonic-regular space-y-2 ">
+              <li>🕒 Students have one full day to solve and submit the answers.</li>
             </ul>
           </div>
 
-          <div className="bg-white rounded-lg p-6 shadow-lg border border-gray-100">
-            <h3 className="text-xl font-semibold mb-3 text-gray-800">Submission</h3>
-            <ul className="list-disc list-inside space-y-2 text-gray-600">
-              <li>Answers must be submitted through a Google Form accessible via a QR code in the booklet.</li>        
-              <li>In case of a tie, the student who submits first will rank higher.
+          <div className="bg-white border-2 border-slate-900/20 rounded-lg p-6">
+            <h3 className="text-xl font-family-givonic-semiBold font-semibold mb-3 text-gray-800">Integrity</h3>
+            <ul className="list-none list-inside font-family-givonic-regular space-y-2 text-gray-600">
+              <li>💡 Fair play. Original thinking. Unique logic.</li>      
+              <li>🤖 Plagiarized or AI-only copy-paste answers get rejected. Thinking matters most.</li>      
+            </ul> 
+          </div>
+
+          <div className="bg-white border-2 border-slate-900/20 rounded-lg p-6 ">
+            <h3 className="text-xl font-family-givonic-semiBold font-semibold mb-3 text-gray-800">Submission</h3>
+            <ul className="list-none list-inside font-family-givonic-regular space-y-2 text-gray-600">
+              <li>📥 Answers must be submitted through a Google Form accessible via a QR code in the booklet.</li>        
+              <li>🏃 In case of a tie, the student who submits first will rank higher.
               </li>        
             </ul> 
           </div>
 
-          <div className="bg-white rounded-lg p-6 shadow-lg border border-gray-100">
-            <h3 className="text-xl font-semibold mb-3 text-gray-800">Integrity</h3>
-            <ul className="list-disc list-inside space-y-2 text-gray-600">
-              <li>Students must work independently plagiarism or copying will lead to disqualification.</li>      
-            </ul> 
-          </div>
+          
 
-          <div className="bg-white rounded-lg p-6 shadow-lg border border-gray-100">
-            <h3 className="text-xl font-semibold mb-3 text-gray-800">Important Dates</h3>
-            <ul className="list-disc list-inside space-y-2 text-gray-600">
-              <li>Registration Deadline: March 31, 2025</li>
-              <li>Preliminary Round: April 15, 2025</li>
-              <li>Final Event: June 1-5, 2025</li>
+          <div className="bg-white border-2 border-slate-900/20 rounded-lg p-6">
+            <h3 className="text-xl font-family-givonic-semiBold font-semibold mb-3 text-gray-800">Important Dates</h3>
+            <ul className="list-none list-inside font-family-givonic-regular space-y-2 text-gray-600">
+              <li>📍 Registration Deadline: March 31, 2025</li>
+              <li>📍 Preliminary Round: April 15, 2025</li>
+              <li>📍 Final Event: June 1-5, 2025</li>
             </ul>
           </div>
         </div>
 
         
-          <div className="flex items-center my-5">
-          <Award className="w-7 h-7 text-blue-600 mr-3" />
-          <h2 className="text-2xl font-bold text-gray-800">Awards</h2>
+          <div className="flex items-center mt-10 mb-3">
+          <h2 className="text-2xl font-family-givonic-bold font-bold text-gray-800">Awards</h2>
           </div>
 
-          <div className='space-y-2'>
-              <div className="bg-white rounded-lg p-6 shadow-lg border border-gray-100">
-            <h3 className="text-xl font-semibold mb-3 text-gray-800">Winner's</h3>
-            <ul className="list-disc list-inside space-y-2 text-gray-600">
-              <li>Cash prize of up to ₹2000.</li>
-              <li>Merit certificate.</li>
-              <li>Scholarships.</li>
-              <li><b>Top 100 Performers:</b> Certificates of appreciation. </li>
+          <div className='border-2 bg-white border-slate-900/20 rounded-lg p-6'>
+            <ul className="list-none list-inside font-family-givonic-regular space-y-2 text-gray-600">
+              <li>💵 Cash prize of up to ₹2000.</li>
+              <li>📑 Merit certificate.</li>
+              <li>🎓 Scholarships.</li>
+              <li>📊 <b>Top 100 Performers:</b> Certificates of appreciation. </li>
             </ul>
-            </div>
           </div>
 
         {/* Apply Section */}
         <div id="apply" className="mt-16 text-center">
-          <h2 className="text-3xl font-bold mb-6 text-gray-800">Ready to Participate?</h2>
+          <h2 className="text-3xl font-family-givonic-bold font-bold mb-6 text-gray-800">Ready to Participate?</h2>
           <Link
             to="/olympiadForm"
-            className="bg-blue-600 hover:bg-blue-700 text-white font-semibold px-12 py-4 rounded-full inline-flex items-center transition-all text-lg"
+            className="bg-blue-600 hover:bg-blue-700 text-white font-family-givonic-semiBold font-semibold px-12 py-4 rounded-full inline-flex items-center transition-all text-lg"
           >
             Apply Now
             <ArrowRight className="ml-2 w-6 h-6" />

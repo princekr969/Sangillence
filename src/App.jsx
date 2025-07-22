@@ -20,8 +20,6 @@ function App() {
           <Route path="nep2020" element={<OlympiadPage />} />
         </Route>
         
-        {/* Standalone routes for school registration */}
-        <Route path="/school-registration" element={<SchoolForm />} />
         <Route path="/registration-success" element={<SuccessPage />} />
       </Routes>
     </BrowserRouter>

@@ -95,9 +95,10 @@ const About = () => {
     <section ref={aboutRef} className="bg-slate-100 py-16 px-4 sm:px-6 md:px-16">
       <div className="mx-auto max-w-7xl">
         <div className="text-center mb-16">
-          <h2 className={`text-4xl md:text-5xl font-family-givonic-bold font-bold text-slate-800 mb-6 ${
+          <h2 className={`text-4xl md:text-5xl font-family-givonic-bold font-bold text-slate-800 mb-6 transition-all duration-1000 ${
             isSectionVisible 
-              ? 'animate-slide-up-1':''}`}>
+              ? 'opacity-100 translate-y-0' 
+              :'opacity-0 translate-y-12'}`}>
             About SOBO'25
           </h2> 
           <p className={`text-xl font-family-givonic-regular text-slate-600 max-w-4xl mx-auto  ${

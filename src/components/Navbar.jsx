@@ -1,111 +1,77 @@
-import React, { useState } from 'react';
-import { Menu, X, Sparkles } from 'lucide-react';
+import { useState } from 'react';
+import { Menu, X } from 'lucide-react';
 import { NavLink, Link } from 'react-router-dom';
-import { Link as Scroll } from "react-scroll";
-import logo from "./../../assets/svgs/navbar_logo.svg"
+import sangillenceLogo from './../../assets/sangillenceLogo.png';
 
 const Navbar = () => {
-  const [isOpen, setIsOpen] = useState(false);
+   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const toggleMenu = () => {
-    setIsOpen(!isOpen);
+    setIsMenuOpen(!isMenuOpen);
   };
 
   return (
-    <nav className="bg-white shadow-sm py-4">
-      <div className="mx-auto">
-        <div className="flex justify-between items-center px-2">
+    <nav className="mb-4">
+      
+
+      <header className="relative font-family-givonic-bold z-10 pt-3">
+        <div className="flex justify-between h-16 items-center  px-4 sm:px-6 md:px-16">
           {/* Logo */}
-            <div className="flex items-center ml-5">
-            <div className="flex-shrink-0 flex items-center">
-              <div className="h-15 w-50 lg:w-60 rounded-lg flex items-center justify-center">
-                <Link to={"/"}>
-                  <img src={logo}/>
-                </Link>
-              </div>
-            </div> 
-            </div>
+          <Link to={"/"} className='flex items-center space-x-2'>
+          <div className="h-16 w-12 lg:w-16 rounded-lg flex items-center justify-center">
+              <img src={sangillenceLogo} className="h-full w-full object-contain" />
+          </div>
+              <span className="text-4xl font-family-givonic-bold tracking-wide bg-gradient-to-r from-slate-900 via-[#203A43] to-[#2C5364] bg-clip-text text-transparent font-bold">Sangillence</span>
+          </Link>
+          
 
           {/* Desktop Navigation */}
-            <div className="hidden md:flex items-center ml-2 pr-5 space-x-1 lg:space-x-5">
+          <nav className="hidden  md:flex space-x-2 text-gray-700 font-medium">
+            <NavLink to="/home" className={({isActive}) => `${isActive? "text-white bg-[#1e3366]":"bg-transparent text-gray-700"} hover:text-white hover:bg-[#1e3366] rounded-4xl px-3 py-2 transition-colors`}>
+                  Home
+              </NavLink>
+              <NavLink to="/olympiad" className={({isActive}) => `${isActive? "text-white bg-[#1e3366]":"bg-transparent text-gray-700"} rounded-4xl px-3 py-2 hover:text-white hover:bg-[#1e3366] transition-colors`}>
+                  Olympiad
+              </NavLink>
+              <NavLink to="/nep2020" className={({isActive}) => `${isActive? "text-white bg-[#1e3366]":"bg-transparent text-gray-700"} rounded-4xl px-3 py-2 hover:text-white hover:bg-[#1e3366] transition-colors`}>
+                  NEP2020
+              </NavLink>
+              <NavLink to="/contactUs" className={({isActive}) => `${isActive? "text-white bg-[#1e3366]":"bg-transparent text-gray-700"} rounded-4xl px-3 py-2 hover:text-white hover:bg-[#1e3366] transition-colors`}>
+                  Contact
+              </NavLink>
+              
+          </nav>
+
+          {/* Mobile Menu Button */}
+          <button 
+            onClick={toggleMenu}
+            className="md:hidden p-2 rounded-lg hover:bg-gray-100 transition-colors"
+          >
+            {isMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+          </button>
+        </div>
       
-                <NavLink to="/" className={({isActive}) => `${isActive? "text-blue-800 bg-blue-300":"bg-gray-100 text-gray-700"}  hover:bg-blue-300 hover:text-blue-800 px-4 py-2 rounded-full text-sm font-medium `}>
-                    Home
-                </NavLink>
-                <NavLink to="/olympiad" className={({isActive}) => `${isActive? "text-blue-800 bg-blue-300":"bg-gray-100 text-gray-700"}  hover:bg-blue-300 hover:text-blue-800 px-4 py-2 rounded-full text-sm font-medium `}>
-                Olympiad
-                </NavLink>
-                <NavLink to="/nep2020" className={({isActive}) => `${isActive? "text-blue-800 bg-blue-300":"bg-gray-100 text-gray-700"}  hover:bg-blue-300 hover:text-blue-800 px-4 py-2 rounded-full text-sm font-medium `}>
-                  NEP2020  
-                </NavLink>
-                <NavLink to="/contactUs" className={({isActive}) => `${isActive?"text-blue-800 bg-blue-300": "bg-gray-100 text-gray-700 "} hover:bg-blue-300 hover:text-blue-800 px-4 py-2 rounded-full text-sm font-medium `}>
-                Contact Us
-                </NavLink>
-        </div>
-
-    {/* Mobile menu button */}
-        <div className="flex items-center md:hidden">
-        <button
-            onClick={toggleMenu}
-            className="inline-flex items-center justify-center p-2 rounded-md text-gray-700 hover:text-gray-900 hover:bg-gray-100 focus:outline-none"
-            >
-            {isOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
-        </button>
-        </div>
-    </div>
-    </div>
-
-      {/* Mobile menu - Slide from right */}
-      <div 
-        className={`fixed inset-y-0 right-0 transform ${
-          isOpen ? 'translate-x-0' : 'translate-x-full'
-        } w-64 bg-white shadow-lg z-50 overflow-y-auto transition-transform duration-300 ease-in-out md:hidden`}
-      >
-
-        <div className='flex justify-end mt-7 mr-4'>
-        <button 
-            onClick={toggleMenu}
-            className="text-gray-500 hover:text-gray-700 focus:outline-none"
-        >
-            <X className="h-8 w-8" />
-        </button>
-        </div>
-
-        <div className="p-1">
-          <div className="flex items-center justify-between my-6">
-            <div className="flex items-center">
-              <div className="h-15 rounded-lg flex items-center justify-center">
-                <img src={logo}/>
-              </div>
-            </div>
+        {/* Mobile Menu */}
+        {isMenuOpen && (
+          <div className="md:hidden absolute top-20 left-0 right-0 z-20 border-t-0 border-2 rounded-b-2xl border-white/80 bg-[#1e3366]/60 backdrop-blur-md shadow-lg">
+            <nav className="flex flex-col space-y-1 p-4">
+              <NavLink to="/home" className={({isActive}) => `${isActive?'bg-[#0a2972]':'bg-transparent'} hover:bg-[#0a2972] text-slate-50 rounded-2xl px-4 py-2 font-medium transition-colors`}>
+              Home
+              </NavLink>
+              <NavLink to="/olympiad" className={({isActive}) => `${isActive?'bg-[#0a2972]':'bg-transparent'} hover:bg-[#0a2972] text-slate-50 rounded-2xl px-4 py-2 font-medium transition-colors`}>
+              Olympiad
+              </NavLink>
+              <NavLink to="/nep2020" className={({isActive}) => `${isActive?'bg-[#0a2972]':'bg-transparent'} hover:bg-[#0a2972] text-slate-50 rounded-2xl px-4 py-2 font-medium transition-colors`}>
+              NEP2020
+              </NavLink>
+              <NavLink to="/contactUs" className={({isActive}) => `${isActive?'bg-[#0a2972]':'bg-transparent'} hover:bg-[#0a2972] text-slate-50 rounded-2xl px-4 py-2 font-medium transition-colors`}>
+              Contact
+              </NavLink>
+            </nav>
           </div>
-
-          <div className="space-y-1">
+        )}
             
-            <NavLink to="/" className={({isActive}) => `${isActive? "text-blue-800 bg-blue-300":" text-gray-700"} block hover:bg-gray-200  rounded-md px-2 py-3 mb-1 text-base font-medium `}>
-                    Home
-                </NavLink>
-                <NavLink to="/olympiad" className={({isActive}) => `${isActive? "text-blue-800 bg-blue-300":" text-gray-700"} block hover:bg-gray-200  rounded-md px-2 py-3 mb-1 text-base font-medium `}>
-                Olympiad
-                </NavLink>
-                <NavLink to="/nep2020" className={({isActive}) => `${isActive? "text-blue-800 bg-blue-300":" text-gray-700"} block hover:bg-gray-200  rounded-md px-2 py-3 mb-1 text-base font-medium `}>
-                  NEP2020  
-                </NavLink>
-                <NavLink to="/contactUs" className={({isActive}) => `${isActive? "text-blue-800 bg-blue-300":" text-gray-700"} block hover:bg-gray-200  rounded-md px-2 py-3 mb-1 text-base font-medium `}>
-                Contact Us
-                </NavLink>
-            <hr />
-          </div>
-        </div>
-      </div>
-      
-      {/* Overlay when mobile menu is open */}
-      {isOpen && (
-        <div 
-          className="fixed inset-0 bg-black/20 z-30 md:hidden"
-          onClick={toggleMenu}
-        ></div>
-      )}
+            </header>
 
     </nav>
   );
