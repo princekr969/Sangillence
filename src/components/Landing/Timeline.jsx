@@ -129,9 +129,9 @@ useEffect(() => {
         {/* Timeline */}
         <div className="relative">
           {/* Vertical Line - Desktop */}
-          <div className="hidden md:block absolute left-1/2 transform -translate-x-1/2 w-0.5 h-full bg-blue-900"></div>
+          <div className="hidden md:block absolute left-1/2 transform -translate-x-1/2 w-0.5 h-full bg-gradient-to-br from-blue-800 via-blue-900 to-blue-950"></div>
           {/* Vertical Line - Mobile */}
-          <div className="md:hidden absolute left-8 top-0 w-0.5 h-full bg-blue-900"></div>
+          <div className="md:hidden absolute left-8 top-0 w-0.5 h-full bg-gradient-to-br from-blue-800 via-blue-900 to-blue-950"></div>
 
           {/* Timeline Items */}
           <div className="space-y-8 font-family-givonic-bold sm:space-y-12">
@@ -151,7 +151,7 @@ useEffect(() => {
                 {/* Desktop */}
                 <div className="hidden md:flex items-center">
                   {/* Dot */}
-                  <div className="absolute left-1/2 transform -translate-x-1/2 w-10 h-10 bg-blue-950 rounded-full flex items-center justify-center z-10 shadow-lg">
+                  <div className="absolute left-1/2 transform -translate-x-1/2 w-10 h-10 bg-gradient-to-br from-blue-800 via-blue-900 to-blue-950 rounded-full flex items-center justify-center z-10 shadow-lg">
                     <div className="text-white">
                       {item.icon}
                     </div>

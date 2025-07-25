@@ -12,7 +12,7 @@ import soboMat from "../../../assets/3dModels/SOBOmat.glb"
 import soboStart from "../../../assets/3dModels/SOBOstart.glb"
 import soboRun from "../../../assets/3dModels/SOBOrun.glb"
 
-const ModelViewer = useModelViewer(soboMat)
+const ModelViewer = useModelViewer(soboRun)
 
 export default function Hero() {
 

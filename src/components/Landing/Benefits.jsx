@@ -1,49 +1,48 @@
 import { useEffect, useState, useRef } from 'react';
-import { DollarSign, Award, TrendingUp, Users, Clock, Star } from 'lucide-react';
-
+import { IndianRupee, BookOpenCheck, BrainCircuit, ChartColumnIncreasing, Award, School, TrendingUp, Users, Clock, Star } from 'lucide-react';
 
 const benefits = [
 {
-  icon: DollarSign,
+  icon: IndianRupee,
   title: "Zero Registration Fee",
   description: "Completely free participation for all eligible students",
-  iconBgColor: "bg-green-100",     
+  iconBgColor: "bg-gradient-to-r from-green-200 via-green-300 to-green-400",     
   classes:"bg-blue-100 delay-0",
 
 },
 {
-  icon: Award,
-  title: "Skill Certification",
-  description: "Get certified for your unique talents and abilities",
-  iconBgColor: "bg-yellow-100",     
+  icon: BookOpenCheck,
+  title: "21st Century Skills Assessment",
+  description: "Test your child’s potential in critical modern skills like creativity, communication, and problem-solving.",
+  iconBgColor: "bg-gradient-to-r from-blue-200 via-blue-300 to-blue-400",     
   classes:"bg-blue-100 delay-50",      
 },
 {
-  icon: TrendingUp,
-  title: "Career Insights",
-  description: "Discover your strengths and potential career paths",
-  iconBgColor: "bg-blue-100" ,     
+  icon: ChartColumnIncreasing,
+  title: "Data-Driven Growth for All",
+  description: "Smart recommendations for Students, Parents, and Teachers to support targeted skill development.",
+  iconBgColor: "bg-gradient-to-r from-yellow-200 via-yellow-300 to-yellow-400" ,     
   classes:"bg-blue-100 delay-100",      
 },
 {
-  icon: Users,
-  title: "National Recognition",
-  description: "Stand out among peers across the country",
-  iconBgColor: "bg-purple-100",     
+  icon: Award,
+  title: "Awards & Recognition",
+  description: "Earn exciting awards, certificates, and national-level recognition for top performers",
+  iconBgColor: "bg-gradient-to-r from-orange-200 via-orange-300 to-orange-400",     
   classes:"bg-blue-100 delay-150",     
 },
 {
-  icon: Clock,
-  title: "Flexible Format",
-  description: "Open-book examination at your own pace",
-  iconBgColor: "bg-teal-100",     
+  icon: School,
+  title: "Empowering Schools with Innovation",
+  description: "Enhance your school's assessment practices with cutting-edge EdTech solutions.",
+  iconBgColor: "bg-gradient-to-r from-purple-200 via-purple-300 to-purple-400",     
   classes:"bg-blue-100 delay-200",        
 },
 {
-  icon: Star,
-  title: "AI-Powered Reports",
-  description: "Detailed analysis of your performance and potential",
-  iconBgColor: "bg-indigo-100",     
+  icon: BrainCircuit,
+  title: "AI-Powered Evaluation",
+  description: "Get personalized insights based on your child’s performance using advanced AI analysis.",
+  iconBgColor: "bg-gradient-to-r from-indigo-200 via-indigo-300 to-indigo-400",     
   classes:"bg-blue-100 delay-250",        
 }
 ];

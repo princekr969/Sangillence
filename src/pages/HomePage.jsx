@@ -8,14 +8,14 @@ import {
   Timeline,
   Footer,
   CTA,
-  Navbar
+  Navbar,
 } from '../components/index.js';
 
 function HomePage() {
 
   return (
     <> 
-      <div className="relative z-0">
+      <div className="relative z-0 cursor-default">
         <Navbar/>
         <Hero />
         <About />

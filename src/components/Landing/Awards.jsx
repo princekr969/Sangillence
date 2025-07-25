@@ -82,7 +82,7 @@ const Awards = () => {
               }`}>
             <Trophy className="w-16 h-16 text-yellow-600 mx-auto mb-4" />
             <h3 className="text-xl font-family-givonic-bold font-bold text-slate-800 mb-2">Overall Excellence</h3>
-            <p className="text-3xl font-bold text-yellow-600 mb-2">₹10,000</p>
+            
             <p className="font-family-givonic-regular text-slate-600">Top performer across all skills</p>
           </div>
 
@@ -92,7 +92,6 @@ const Awards = () => {
                   : 'opacity-0 translate-y-12'
               }`}>
             <Medal className="w-16 h-16 text-gray-600 mx-auto mb-4" />
-            <p className="text-3xl font-bold text-gray-600 mb-2">₹8,000</p>
             <p className="font-family-givonic-regular text-slate-600">Best in individual skill categories</p>
           </div>
 
@@ -103,7 +102,7 @@ const Awards = () => {
               }`}>
             <Star className="w-16 h-16 text-orange-600 mx-auto mb-4" />
             <h3 className="text-xl font-bold text-slate-800 mb-2">Rising Stars</h3>
-            <p className="text-3xl font-bold text-orange-600 mb-2">₹5,000</p>
+
             <p className="font-family-givonic-regular text-slate-600">Most improved performance</p>
           </div>
 
@@ -114,13 +113,11 @@ const Awards = () => {
               }`}>
             <Gift className="w-16 h-16 text-purple-600 mx-auto mb-4" />
             <h3 className="text-xl font-bold text-slate-800 mb-2">Special Recognition</h3>
-            <p className="text-3xl font-bold text-purple-600 mb-2">₹2,000</p>
             <p className="font-family-givonic-regular text-slate-600">Innovation and creativity awards</p>
           </div>
         </div>
 
-        <div className="mt-16 bg-white rounded-3xl p-8 shadow-lg">
-          <h3 className="text-2xl font-bold text-slate-800 mb-6 text-center">Recognition Benefits</h3>
+        <div className="mt-8 bg-white rounded-b-3xl p-8 shadow-lg">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             <div className="text-center">
               <div className="w-16 h-16 bg-gradient-to-br from-blue-500 to-purple-600 rounded-full flex items-center justify-center mx-auto mb-4">

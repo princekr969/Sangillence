@@ -1,36 +1,36 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { Brain, Users, Trophy, Lightbulb, Zap } from 'lucide-react';
+import { Rocket, Handshake, Trophy, Lightbulb, Zap, ChartNoAxesCombined, BrainCircuit, BookOpenText, BadgeCheck } from 'lucide-react';
 
 const coreValues = [
   {
-    icon: Brain,
-    title: "AI-Powered Assessment",
-    classes:"bg-blue-100 delay-0",
-    description: "Advanced AI evaluates your problem-solving abilities beyond traditional testing"
+    icon: BrainCircuit,
+    title: "AI-Powered",
+    classes:"	bg-gradient-to-br from-cyan-200 to-blue-300 delay-0",
+    description: "An advanced AI evaluates your core abilities beyond traditional testing methods."
   },
   {
-    icon: Users,
-    title: "Collaborative Learning",
-    classes:"bg-teal-100 delay-100",
-    description: "Open-book format encourages research, analysis, and innovative thinking"
+    icon: BookOpenText,
+    title: "Open-Book",
+    classes:"	bg-gradient-to-br from-orange-200 to-yellow-200 delay-100",
+    description: "Encourages research, innovative thinking, and real-world problem-solving aptitude."
   },
   {
-    icon: Trophy,
-    title: "Merit Recognition",
-    classes:"bg-purple-100 delay-200",
-    description: "Celebrating diverse talents and skills that matter in the real world"
+    icon: BadgeCheck,
+    title: "Skill-First Approach",
+    classes:"bg-gradient-to-br from-rose-200 to-red-300 delay-200",
+    description: "Focuses not on academics, but on the essential skills that drive academic and lifelong success."
   },
   {
-    icon: Lightbulb,
-    title: "Innovation Focus",
-    classes:"bg-yellow-100 delay-300 ",
-    description: "Emphasizing creativity, critical thinking, and practical application"
+    icon: Rocket,
+    title: "Future-Ready",
+    classes:"bg-gradient-to-br from-yellow-200 to-amber-300 delay-300 ",
+    description: "Equips students for tomorrow’s challenges through insights gained today."
   },
   {
-    icon: Zap,
-    title: "Future Ready",
-    classes:"bg-green-100 delay-400 ",
-    description: "Preparing students for tomorrow's challenges with today's insights"
+    icon: Handshake,
+    title: "Nurturing Ecosystem",
+    classes:"bg-gradient-to-br from-teal-200 to-emerald-300 delay-400 ",
+    description: "Engaging educators, parents, and mentors to support a student’s all-round growth."
   }
 ];
 
@@ -101,9 +101,10 @@ const About = () => {
               :'opacity-0 translate-y-12'}`}>
             About SOBO'25
           </h2> 
-          <p className={`text-xl font-family-givonic-regular text-slate-600 max-w-4xl mx-auto  ${
+          <p className={`text-xl font-family-givonic-regular text-slate-800 max-w-4xl mx-auto  ${
             isSectionVisible ? 'animate-slide-up-2' : ''}`}>
-            It is a one-of-a-kind competition designed to test student's essential 21st century skills, a completely Open-Book,  & evaluate and elevated by cutting edge AI technology.
+            It is a one-of-a-kind competition designed to test student's essential 21st century skills, a completely <b>Open-Book</b>,  & evaluate and elevated by cutting edge AI technology. 
+
           </p>
         </div>
 
@@ -117,13 +118,13 @@ const About = () => {
                   : 'opacity-0 translate-y-12'
               }`}
             >
-              <div className=" rounded-2xl flex items-center justify-center mb-4">
-                <value.icon className="h-12 w-12 text-black" />
+              <div className="rounded-2xl text-gray-800 flex items-center justify-center mb-4">
+                <value.icon className="h-12 w-12" />
               </div>
-              <h3 className="text-lg font-bold text-slate-800 mb-3">
+              <h3 className="text-lg text-gray-800 font-bold mb-3">
                 {value.title}
               </h3>
-              <p className="text-slate-600 font-medium leading-relaxed">
+              <p className="font-medium text-gray-700 leading-relaxed">
                 {value.description}
               </p>
             </div>

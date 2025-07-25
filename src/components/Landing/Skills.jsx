@@ -12,6 +12,7 @@ import {
   Heart 
 } from 'lucide-react';
 import Report from './Report';
+import SkillsCarousel from './SkillsCarousal';
 
 const skills = [
   { icon: Brain, name: "Critical Thinking", description: "Analyze complex problems systematically" },
@@ -84,7 +85,7 @@ const Skills = () => {
   return (
     <section ref={sectionRef} className="py-20 bg-slate-100 px-4 sm:px-6 md:px-16">
       <div className="max-w-7xl mx-auto">
-        <div className="text-center mb-16">
+        <div className="text-center mb-8">
           <h2 className={`text-4xl md:text-5xl font-family-givonic-bold font-bold text-slate-800 mb-6 transition-all duration-1000 ${
             isSectionVisible 
               ? 'opacity-100 translate-y-0' 
@@ -102,33 +103,7 @@ const Skills = () => {
           </p>
         </div>
 
-        <div ref={sectionCardRef} className={`grid grid-cols-2 lg:grid-cols-3 gap-2 sm:gap-4 mb-16 font-family-givonic-regular`}>
-          {skills.map((skill, index) => (
-            <div
-              key={index}
-              className={`flex justify-start max-sm:gap-2 bg-transparent group p-2 sm:p-6 transition-all duration-1000 ${
-                isCardSectionVisible 
-                  ? 'opacity-100 translate-y-0' 
-                  : 'opacity-0 translate-y-12'
-              }`}
-            >
-                <div className={`w-16 h-16 rounded-full bg-blue-950 flex items-center justify-center shadow-xl`}>
-                      <skill.icon className="w-6 h-6 text-slate-100" />
-                  </div>
-
-                <span className={`max-sm:hidden block mt-3 mx-3 border-t-2 w-28 border-slate-600`}></span>
-                  <div className='flex flex-col'>
-                    <h3 className="text-xl font-family-givonic-bold font-bold text-slate-800 mb-2 ">
-                      {skill.name}
-                    </h3>
-                    <p className="text-gray-600 font-normal leading-relaxed">
-                      {skill.description}
-                    </p>
-                  </div>
-              </div>
-              
-          ))}
-        </div>
+        <SkillsCarousel/>
 
         {/* Sample Skill Report Visualization */}
         <Report/>

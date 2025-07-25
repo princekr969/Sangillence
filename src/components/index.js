@@ -13,6 +13,7 @@ import Hero from "./Landing/Hero";
 import Results from "./Landing/Results";
 import Skills from "./Landing/Skills";
 import Timeline from "./Landing/Timeline";
+import SkillsCarousel from "./Landing/SkillsCarousal";
 
 export {
     Navbar,
@@ -29,5 +30,6 @@ export {
     Carousel,
     Footer,
     CourseStructure,
-    FormContainer
+    FormContainer,
+    SkillsCarousel
 }
