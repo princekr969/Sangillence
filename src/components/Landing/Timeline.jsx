@@ -1,11 +1,11 @@
 import { useState,useRef,useEffect } from 'react';
-import { Calendar, Users, FileText, Award, CheckCircle } from 'lucide-react';
+import { Calendar, Lock, Users, FileText, Award, CheckCircle } from 'lucide-react';
 
 const timelineData = [
   {
-    date: "January 15, 2025",
-    month: "January",
-    day: "15",
+    date: "August 01, 2025",
+    month: "August",
+    day: "01",
     year: "2025",
     icon: <Calendar className="w-4 h-4" />,
     title: "Registration Opens",
@@ -13,35 +13,35 @@ const timelineData = [
     status: "completed"
   },
   {
-    date: "February 1-28, 2025",
-    month: "February",
-    day: "1-28",
+    date: "September 15, 2025",
+    month: "September",
+    day: "15",
     year: "2025",
-    icon: <FileText className="w-4 h-4" />,
-    title: "Assessment Period",
-    description: "AI-powered open-book examination window",
+    icon: <Lock className="w-4 h-4" />,
+    title: "Registrations Closed",
+    description: "Registration period for the AI-powered open-book exam has ended.",
     status: "current"
   },
-  {
-    date: "March 1-15, 2025",
-    month: "March",
-    day: "1-15",
-    year: "2025",
-    icon: <Users className="w-4 h-4" />,
-    title: "Evaluation Phase",
-    description: "AI analysis and comprehensive skill assessment",
-    status: "current"
-  },
-  {
-    date: "March 30, 2025",
-    month: "March",
-    day: "30",
-    year: "2025",
-    icon: <Award className="w-4 h-4" />,
-    title: "Results & Awards",
-    description: "Results announcement and award ceremony",
-    status: "current"
-  }
+  // {
+  //   date: "March 1-15, 2025",
+  //   month: "March",
+  //   day: "1-15",
+  //   year: "2025",
+  //   icon: <Users className="w-4 h-4" />,
+  //   title: "Evaluation Phase",
+  //   description: "AI analysis and comprehensive skill assessment",
+  //   status: "current"
+  // },
+  // {
+  //   date: "March 30, 2025",
+  //   month: "March",
+  //   day: "30",
+  //   year: "2025",
+  //   icon: <Award className="w-4 h-4" />,
+  //   title: "Results & Awards",
+  //   description: "Results announcement and award ceremony",
+  //   status: "current"
+  // }
 ];
 
 

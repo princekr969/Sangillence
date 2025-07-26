@@ -131,7 +131,7 @@ function Benefits() {
                 {benefits.map((benefit, index) => (
                 <div 
                     key={index}
-                    className={`${benefit.classes} flex items-start h-32 space-x-4 p-6 bg-white rounded-xl shadow-lg transition-all duration-1000 ${
+                    className={`${benefit.classes} flex items-start lg:h-36 space-x-4 p-6 bg-white rounded-xl shadow-lg transition-all duration-1000 ${
                 isCardSectionVisible 
                   ? 'opacity-100 translate-y-0' 
                   : 'opacity-0 translate-y-12'

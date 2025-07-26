@@ -14,7 +14,7 @@ function Footer() {
         </div>
         <div className="flex items-start gap-2">
           <MapPin size={18} className="text-white mt-1" />
-          <p>Address: 361, near Ahirwan police station, Akash Ganga Vihar Colony, Kanpur Nagar, UP-208007</p>
+          <p>Abv-iiitm, Morena Link Road, Gwalior, Madhya Pradesh, India-474015</p>
         </div>
       </div>
       

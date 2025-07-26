@@ -23,9 +23,9 @@ function HomePage() {
         <Benefits />
         <Skills />
         <Results />
+        <Timeline />
         <Testimonial/>
         <Awards />
-        <Timeline />
         <CTA />
         <Footer />
       </div>

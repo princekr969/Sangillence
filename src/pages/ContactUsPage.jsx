@@ -5,7 +5,6 @@ import {
   YoutubeIcon,
   Youtube
 } from "lucide-react";
-import YouTube from "react-youtube";
 import { Link } from "react-router-dom";
 
 const ContactUs = () => (
@@ -27,7 +26,7 @@ const ContactUs = () => (
         </p>
 
         <div className="space-y-6">
-          <ContactItem icon={MapPin} title="Address" text="361, near Ahirwan police station, Akash Ganga Vihar Colony, Kanpur Nagar, UP-208007" />
+          <ContactItem icon={MapPin} title="Address" text="Abv-iiitm, Morena Link Road, Gwalior, Madhya Pradesh, India-474015"/>
           <ContactItem icon={Phone} title="Mobile" text="+91 6307616741" />
           <ContactItem icon={Mail} title="Email" text="sangillence@gmail.com" />
         </div>

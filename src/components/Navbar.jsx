@@ -33,11 +33,11 @@ const Navbar = () => {
               <NavLink to="/olympiad" className={({isActive}) => `${isActive? "text-white bg-[#1e3366]":"bg-transparent text-gray-700"} rounded-4xl px-3 py-2 hover:text-white hover:bg-[#1e3366] transition-colors`}>
                   Olympiad
               </NavLink>
-              <NavLink to="/nep2020" className={({isActive}) => `${isActive? "text-white bg-[#1e3366]":"bg-transparent text-gray-700"} rounded-4xl px-3 py-2 hover:text-white hover:bg-[#1e3366] transition-colors`}>
-                  NEP2020
-              </NavLink>
               <NavLink to="/contactUs" className={({isActive}) => `${isActive? "text-white bg-[#1e3366]":"bg-transparent text-gray-700"} rounded-4xl px-3 py-2 hover:text-white hover:bg-[#1e3366] transition-colors`}>
                   Contact
+              </NavLink>
+              <NavLink to="/nep2020" className={({isActive}) => `${isActive? "text-white bg-[#1e3366]":"bg-transparent text-gray-700"} rounded-4xl px-3 py-2 hover:text-white hover:bg-[#1e3366] transition-colors`}>
+                  About
               </NavLink>
               
           </nav>
@@ -61,17 +61,16 @@ const Navbar = () => {
               <NavLink to="/olympiad" className={({isActive}) => `${isActive?'bg-[#0a2972]':'bg-transparent'} hover:bg-[#0a2972] text-slate-50 rounded-2xl px-4 py-2 font-medium transition-colors`}>
               Olympiad
               </NavLink>
-              <NavLink to="/nep2020" className={({isActive}) => `${isActive?'bg-[#0a2972]':'bg-transparent'} hover:bg-[#0a2972] text-slate-50 rounded-2xl px-4 py-2 font-medium transition-colors`}>
-              NEP2020
-              </NavLink>
               <NavLink to="/contactUs" className={({isActive}) => `${isActive?'bg-[#0a2972]':'bg-transparent'} hover:bg-[#0a2972] text-slate-50 rounded-2xl px-4 py-2 font-medium transition-colors`}>
               Contact
+              </NavLink>
+              <NavLink to="/nep2020" className={({isActive}) => `${isActive?'bg-[#0a2972]':'bg-transparent'} hover:bg-[#0a2972] text-slate-50 rounded-2xl px-4 py-2 font-medium transition-colors`}>
+              About
               </NavLink>
             </nav>
           </div>
         )}
-            
-            </header>
+      </header>
 
     </nav>
   );
