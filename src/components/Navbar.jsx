@@ -12,10 +12,8 @@ const Navbar = () => {
 
   return (
     <nav className="mb-4">
-      
-
       <header className="relative font-family-givonic-bold z-10 pt-3">
-        <div className="flex justify-between h-16 items-center  px-4 sm:px-6 md:px-16">
+        <div className="flex justify-between h-16 items-center px-4 sm:px-6 md:px-16">
           {/* Logo */}
           <Link to={"/"} className='flex items-center space-x-2'>
           <div className="h-16 w-12 lg:w-16 rounded-lg flex items-center justify-center">
@@ -36,7 +34,7 @@ const Navbar = () => {
               <NavLink to="/contactUs" className={({isActive}) => `${isActive? "text-white bg-[#1e3366]":"bg-transparent text-gray-700"} rounded-4xl px-3 py-2 hover:text-white hover:bg-[#1e3366] transition-colors`}>
                   Contact
               </NavLink>
-              <NavLink to="/nep2020" className={({isActive}) => `${isActive? "text-white bg-[#1e3366]":"bg-transparent text-gray-700"} rounded-4xl px-3 py-2 hover:text-white hover:bg-[#1e3366] transition-colors`}>
+              <NavLink to="/about" className={({isActive}) => `${isActive? "text-white bg-[#1e3366]":"bg-transparent text-gray-700"} rounded-4xl px-3 py-2 hover:text-white hover:bg-[#1e3366] transition-colors`}>
                   About
               </NavLink>
               
@@ -64,7 +62,7 @@ const Navbar = () => {
               <NavLink to="/contactUs" className={({isActive}) => `${isActive?'bg-[#0a2972]':'bg-transparent'} hover:bg-[#0a2972] text-slate-50 rounded-2xl px-4 py-2 font-medium transition-colors`}>
               Contact
               </NavLink>
-              <NavLink to="/nep2020" className={({isActive}) => `${isActive?'bg-[#0a2972]':'bg-transparent'} hover:bg-[#0a2972] text-slate-50 rounded-2xl px-4 py-2 font-medium transition-colors`}>
+              <NavLink to="/about" className={({isActive}) => `${isActive?'bg-[#0a2972]':'bg-transparent'} hover:bg-[#0a2972] text-slate-50 rounded-2xl px-4 py-2 font-medium transition-colors`}>
               About
               </NavLink>
             </nav>

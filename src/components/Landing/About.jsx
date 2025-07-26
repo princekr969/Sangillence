@@ -34,23 +34,6 @@ const coreValues = [
   }
 ];
 
-const solutions = [
-    {
-      id: 1,
-      number: "01",
-      description: "The new age education required holistic development of students, knowledge and facts are everywhere, even a small kid can access vast internet."
-    },
-    {
-      id: 2,
-      number: "02",
-      description: " This Olympiad gives every child a stage to explore, express, and excel with digital tools like calculators, internet access, and open resources — exactly how real-world problem-solving works!"
-    },
-    {
-      id: 3,
-      number: "03",
-      description: "Their efforts are perfectly analysed by AI and reliable insights, reports will be issued."
-    }
-  ];
 
 const About = () => {
   const [isSectionVisible, setIsSectionVisible] = useState(false);
@@ -113,32 +96,24 @@ const About = () => {
     <section ref={aboutRef} className="bg-slate-100 py-16 px-4 sm:px-6 md:px-16">
       <div className="mx-auto max-w-7xl">
         <div className="text-center mb-16">
-          <h2 className={`text-4xl md:text-5xl font-family-givonic-bold font-bold text-slate-800 mb-8 transition-all duration-1000 ${
+          <h2 className={`text-4xl md:text-5xl font-family-givonic-bold font-bold text-slate-800 transition-all duration-1000 ${
             isSectionVisible 
               ? 'opacity-100 translate-y-0' 
               :'opacity-0 translate-y-12'}`}>
             About SOBO'25
           </h2> 
-            <div className="max-w-7xl mx-auto">
-        {/* Grid Container */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 lg:gap-8">
-          {solutions.map((solution) => (
-            <div
-              key={solution.id}
-              className="flex justify-center items-start gap-2 md:gap-5"
-            >
-              <span className="text-blue-900 font-family-givonic-bold font-bold text-lg sm:text-3xl">
-                {solution.number}
-              </span>
+          {/* Decorative line */}
+          <div className="flex items-center justify-center mb-6">
+            <div className="w-16 h-1 bg-gradient-to-r from-transparent via-blue-500 to-transparent rounded-full"></div>
+          </div>
+           <p className={`text-xl font-family-givonic-regular text-slate-600 max-w-4xl mx-auto transition-all duration-1000 delay-200 ${
+            isSectionVisible 
+              ? 'opacity-100 translate-y-0' 
+              : 'opacity-0 translate-y-8'
+          }`}>
+              It is a one-of-a-kind competition designed to test student's essential 21st century skills, a completely <strong>Open-Book</strong> ,  & evaluate and elevated by cutting edge AI technology. 
 
-              <p className="text-gray-600 font-family-givonic-regular text-start text-sm sm:text-base leading-relaxed">
-                {solution.description}
-              </p>
-            </div>
-          ))}
-        </div>
-
-      </div>
+            </p>
         </div>
 
         <div ref={aboutCardRef} className="font-family-givonic-regular grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-8">

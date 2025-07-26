@@ -17,17 +17,98 @@ const ModelViewer = useModelViewer(soboRun)
 export default function Hero() {
 
   return (
-    <div className="relative max-md:pb-10 md:h-screen  px-4 sm:px-6 md:px-16">
-
+    <div className="relative max-md:pb-10 md:min-h-[500px] lg:min-h-[calc(100vh-76px)] px-4 sm:px-6 md:px-16">
+      
       <div
       className="absolute inset-0 bg-cover bg-center bg-no-repeat z-0" style={{ backgroundImage: `url(${heroSectionBg})` }}></div>
             
-      {/* Hero Section background */}
-      <div className='relative z-5 h-[80%] mt-5 shadow-xl bg-[#233562] rounded-3xl'>
-          <div
-            className="absolute inset-0 opacity-80 animate-fade-in rounded-3xl bg-cover bg-center bg-no-repeat z-1"
-            style={{ backgroundImage: `url(${mainSectionBg})` }}
+        {/* Hero Section background */}
+        <div className='relative z-5 h-[80%] mt-5 shadow-xl bg-[#233562] rounded-3xl'>
+          <div className="absolute inset-0 rounded-3xl">
+
+          {/* Base dark background */}
+          <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-slate-800 via-slate-900 to-indigo-900"></div>
+          
+          {/* Geometric overlays */}
+          <div className="absolute inset-0 rounded-3xl">
+            {/* Large angular shapes */}
+            <div className="absolute top-0 left-0 w-full h-full rounded-3xl">
+              {/* Blue angular shape - top left */}
+              <div 
+                className="absolute rounded-3xl top-0 left-0 w-1/2 h-1/2 bg-gradient-to-br from-blue-600/30 to-transparent"
+                style={{
+                  clipPath: 'polygon(0 0, 70% 0, 30% 100%, 0 100%)'
+                }}
+              ></div>
+              
+              {/* Orange/amber angular shape - top right */}
+              <div 
+                className="absolute rounded-3xl top-0 right-0 w-1/2 h-1/2 bg-gradient-to-bl from-amber-500/20 to-transparent"
+                style={{
+                  clipPath: 'polygon(30% 0, 100% 0, 100% 100%, 70% 100%)'
+                }}
+              ></div>
+              
+              {/* Teal angular shape - bottom left */}
+              <div 
+                className="absolute rounded-3xl bottom-0 left-0 w-1/2 h-1/2 bg-gradient-to-tr from-teal-500/20 to-transparent"
+                style={{
+                  clipPath: 'polygon(0 0, 60% 0, 0 80%)'
+                }}
+              ></div>
+              
+              {/* Purple angular shape - bottom right */}
+              <div 
+                className="absolute rounded-3xl bottom-0 right-0 w-1/2 h-1/2 bg-gradient-to-tl from-purple-600/25 to-transparent"
+                style={{
+                  clipPath: 'polygon(40% 0, 100% 0, 100% 100%, 0 100%)'
+                }}
+              ></div>
+            </div>
+            
+            {/* Additional layered geometric elements */}
+            <div className="absolute inset-0">
+              <div 
+                className="absolute top-1/4 left-1/4 w-96 h-96 bg-blue-500/10 rotate-45 blur-sm"
+              ></div>
+              <div 
+                className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-amber-500/10 -rotate-12 blur-sm"
+              ></div>
+            </div>
+          </div>
+          
+          {/* Subtle grid overlay */}
+          <div 
+            className="absolute inset-0 rounded-3xl opacity-[0.02]"
+            style={{
+              backgroundImage: `
+                linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px)
+              `,
+              backgroundSize: '50px 50px'
+            }}
           ></div>
+
+          {/* Decorative elements */}
+      <div className="absolute bottom-10 left-10 w-2 h-16 bg-gradient-to-t from-blue-500 to-transparent"></div>
+      <div className="absolute bottom-10 right-10 w-2 h-16 bg-gradient-to-t from-amber-500 to-transparent"></div>
+      
+      {/* Floating particles effect */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        {[...Array(20)].map((_, i) => (
+          <div
+            key={i}
+            className="absolute w-1 h-1 bg-white/20 rounded-full animate-pulse"
+            style={{
+              left: `${Math.random() * 100}%`,
+              top: `${Math.random() * 100}%`,
+              animationDelay: `${Math.random() * 3}s`,
+              animationDuration: `${2 + Math.random() * 3}s`
+            }}
+          ></div>
+        ))}
+      </div>
+        </div>
 
         {/* Animated Background Elements */}
         <div className="absolute z-2 inset-0 opacity-10">

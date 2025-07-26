@@ -47,6 +47,25 @@ const benefits = [
 }
 ];
 
+const solutions = [
+    {
+      id: 1,
+      number: "01",
+      description: "The new age education required holistic development of students, knowledge and facts are everywhere, even a small kid can access vast internet."
+    },
+    {
+      id: 2,
+      number: "02",
+      description: " This Olympiad gives every child a stage to explore, express, and excel with digital tools like calculators, internet access, and open resources — exactly how real-world problem-solving works!"
+    },
+    {
+      id: 3,
+      number: "03",
+      description: "Their efforts are perfectly analysed by AI and reliable insights, reports will be issued."
+    }
+  ];
+
+
 function Benefits() {
     const [isSectionVisible, setIsSectionVisible] = useState(false);
       const [isCardSectionVisible, setIsCardSectionVisible] = useState(false);
@@ -108,21 +127,35 @@ function Benefits() {
 
             {/* Header */}
             <div className="text-center mb-16">
-            <h2 className={`text-4xl md:text-5xl font-family-givonic-bold font-bold text-slate-800 mb-6 transition-all duration-1000 ${
+            <h2 className={`text-4xl md:text-5xl font-family-givonic-bold font-bold text-slate-800 transition-all duration-1000 ${
             isSectionVisible 
               ? 'opacity-100 translate-y-0' 
               : 'opacity-0 translate-y-8'
           }`}>
                 Why Join the Future of Learning?
             </h2>
-            <p className={`text-xl font-family-givonic-regular text-slate-600 max-w-4xl mx-auto transition-all duration-1000 delay-200 ${
-            isSectionVisible 
-              ? 'opacity-100 translate-y-0' 
-              : 'opacity-0 translate-y-8'
-          }`}>
-              SOBO'25 offers unprecedented opportunities to showcase your true potential 
-              and gain insights that traditional assessments simply cannot provide.
-            </p>
+            {/* Decorative line */}
+          <div className="flex items-center justify-center mb-6">
+            <div className="w-16 h-1 bg-gradient-to-r from-transparent via-blue-500 to-transparent rounded-full"></div>
+          </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 lg:gap-8">
+          {solutions.map((solution) => (
+            <div
+              key={solution.id}
+              className="flex justify-center items-start gap-2 md:gap-5"
+            >
+              <span className="text-blue-900 font-family-givonic-bold font-bold text-lg sm:text-3xl">
+                {solution.number}
+              </span>
+
+              <p className="text-gray-600 font-family-givonic-regular text-start text-sm sm:text-base leading-relaxed">
+                {solution.description}
+              </p>
+            </div>
+          ))}
+        </div>
+
             </div>
 
             {/* Main Content */}
