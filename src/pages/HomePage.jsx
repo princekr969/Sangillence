@@ -9,6 +9,7 @@ import {
   Footer,
   CTA,
   Navbar,
+  Testimonial,
 } from '../components/index.js';
 
 function HomePage() {
@@ -22,6 +23,7 @@ function HomePage() {
         <Benefits />
         <Skills />
         <Results />
+        <Testimonial/>
         <Awards />
         <Timeline />
         <CTA />

@@ -1,30 +1,70 @@
 import React, { useState, useEffect } from 'react';
-import { 
-    ChevronLeft,
-    ChevronRight,
-    Brain, 
-    Calculator, 
-    Palette, 
-    MessageSquare, 
-    Lightbulb, 
-    Users, 
-    Target, 
-    Book, 
-    Zap, 
-    Heart 
-} from 'lucide-react';
+import {
+  ChevronLeft,
+  ChevronRight,
+  Brain,
+  PenTool,
+  Sigma,
+  SearchCode,
+  Eye,
+  FileSearch,
+  Landmark,
+  Scale,
+  Puzzle,
+  Sparkles,
+} from "lucide-react";
 
 const skills = [
-  { icon: Brain, name: "Critical Thinking", description: "Analyze complex problems systematically" },
-  { icon: Calculator, name: "Logical Reasoning", description: "Apply mathematical and logical principles" },
-  { icon: Palette, name: "Creativity", description: "Generate innovative solutions and ideas" },
-  { icon: MessageSquare, name: "Communication", description: "Express ideas clearly and effectively" },
-  { icon: Lightbulb, name: "Problem Solving", description: "Find practical solutions to challenges" },
-  { icon: Users, name: "Leadership", description: "Guide teams and inspire collaboration" },
-  { icon: Target, name: "Focus & Attention", description: "Maintain concentration on important tasks" },
-  { icon: Book, name: "Research Skills", description: "Gather and analyze information efficiently" },
-  { icon: Zap, name: "Adaptability", description: "Adjust to new situations and challenges" },
-  { icon: Heart, name: "Emotional Intelligence", description: "Understand and manage emotions effectively" }
+  {
+    icon: Brain,
+    name: "Memory",
+    description: "Ability to retain and recall key information when it matters most.",
+  },
+  {
+    icon: PenTool,
+    name: "Creativity",
+    description: "Thinking beyond limits to generate fresh and original ideas.",
+  },
+  {
+    icon: Sigma,
+    name: "Logical",
+    description: "Applying structured reasoning to reach sound conclusions.",
+  },
+  {
+    icon: SearchCode,
+    name: "Analytical",
+    description: "Breaking down problems to understand patterns and relationships.",
+  },
+  {
+    icon: Eye,
+    name: "Observation",
+    description: "Noticing details others miss to make smarter decisions.",
+  },
+  {
+    icon: FileSearch,
+    name: "Research",
+    description: "Finding, filtering, and using relevant information effectively.",
+  },
+  {
+    icon: Landmark,
+    name: "Metacognition",
+    description: "Understanding how you think and learn to improve performance.",
+  },
+  {
+    icon: Scale,
+    name: "Critical Thinking",
+    description: "Evaluating ideas objectively to make informed judgments.",
+  },
+  {
+    icon: Puzzle,
+    name: "Out-of-the-Box (OOTB)",
+    description: "Approaching problems in unconventional, innovative ways.",
+  },
+  {
+    icon: Sparkles,
+    name: "Intelligence",
+    description: "The balanced use of knowledge, skills, and reasoning to adapt and excel.",
+  },
 ];
 
 const SkillsCarousel = () => {

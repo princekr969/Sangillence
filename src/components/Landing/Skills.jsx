@@ -1,31 +1,7 @@
 import { useState, useRef, useEffect } from 'react';
-import { 
-  Brain, 
-  Calculator, 
-  Palette, 
-  MessageSquare, 
-  Lightbulb, 
-  Users, 
-  Target, 
-  Book, 
-  Zap, 
-  Heart 
-} from 'lucide-react';
 import Report from './Report';
 import SkillsCarousel from './SkillsCarousal';
 
-const skills = [
-  { icon: Brain, name: "Critical Thinking", description: "Analyze complex problems systematically" },
-  { icon: Calculator, name: "Logical Reasoning", description: "Apply mathematical and logical principles" },
-  { icon: Palette, name: "Creativity", description: "Generate innovative solutions and ideas" },
-  { icon: MessageSquare, name: "Communication", description: "Express ideas clearly and effectively" },
-  { icon: Lightbulb, name: "Problem Solving", description: "Find practical solutions to challenges" },
-  { icon: Users, name: "Leadership", description: "Guide teams and inspire collaboration" },
-  { icon: Target, name: "Focus & Attention", description: "Maintain concentration on important tasks" },
-  { icon: Book, name: "Research Skills", description: "Gather and analyze information efficiently" },
-  { icon: Zap, name: "Adaptability", description: "Adjust to new situations and challenges" },
-  { icon: Heart, name: "Emotional Intelligence", description: "Understand and manage emotions effectively" }
-];
 
 const Skills = () => {
   const [isSectionVisible, setIsSectionVisible] = useState(false);
