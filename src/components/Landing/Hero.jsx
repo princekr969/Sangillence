@@ -17,7 +17,7 @@ const ModelViewer = useModelViewer(soboRun)
 export default function Hero() {
 
   return (
-    <div className="relative max-md:pb-10 md:min-h-[500px] lg:min-h-[calc(100vh-76px)] px-4 sm:px-6 md:px-16">
+    <div className="relative overflow-hidden max-md:pb-10 md:min-h-[500px] lg:min-h-[calc(100vh-76px)] px-4 sm:px-6 md:px-16">
       
       <div
       className="absolute inset-0 bg-cover bg-center bg-no-repeat z-0" style={{ backgroundImage: `url(${heroSectionBg})` }}></div>
