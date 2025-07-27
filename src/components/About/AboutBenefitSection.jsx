@@ -1,5 +1,6 @@
 import React from 'react'
 import { Brain, BookOpen, Target, Users, Globe, Star, Zap, Award, TrendingUp, Shield } from 'lucide-react';
+import AboutBenefitCarousel from './AboutBenefitTestimonial';
 
 
 const features = [
@@ -63,13 +64,13 @@ const features = [
 function AboutBenefitSection() {
   return (
 
-    <section className="bg-gray-50 py-16 px-4 sm:px-6 md:px-16">
+    <section className="bg-slate-100 py-16 px-4 sm:px-6 md:px-16">
       <div className="max-w-7xl mx-auto">
         
         {/* Header */}
-        <div className="text-center mb-16">
+        <div className="text-center mb-8">
           
-          <h2 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-2">
+          <h2 className="text-4xl lg:text-5xl font-family-givonic-bold font-bold text-gray-900 mb-2">
             Why Choose Sangillence
           </h2>
           
@@ -78,37 +79,14 @@ function AboutBenefitSection() {
             <div className="w-16 h-1 bg-gradient-to-r from-transparent via-amber-500 to-transparent rounded-full"></div>
           </div>
           
-          <p className="text-lg text-gray-600 max-w-3xl mx-auto">
+          <p className="text-lg text-gray-600 font-family-givonic-regular max-w-3xl mx-auto">
             Discover what sets our AI-powered education technology apart and why educators, 
             parents, and students trust Sangillence for transformative learning experiences.
           </p>
         </div>
 
-        {/* Features Grid */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-          {features.map((feature, index) => (
-            <div 
-              key={index} 
-              className="group bg-white p-8 rounded-2xl shadow-sm border border-gray-100"
-            >
-              {/* Icon with background */}
-              <div className={`w-16 h-16 bg-${feature.color}-50 rounded-full flex items-center justify-center mb-6`}>
-                {feature.icon}
-              </div>
-              
-              {/* Content */}
-              <h3 className="text-xl font-bold text-gray-900 mb-4">
-                {feature.title}
-              </h3>
-              
-              <p className="text-gray-600 leading-relaxed text-sm">
-                {feature.description}
-              </p>
-              
-            </div>
-          ))}
-        </div>
       </div>
+        <AboutBenefitCarousel/>
     </section>
   )
 }

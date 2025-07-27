@@ -55,23 +55,23 @@ const Testimonial = () => {
   }, []);
 
   return (
-    <div className="min-h-screen bg-gray-50 px-4 py-16 sm:px-6 ">
+    <div className="relative min-h-screen bg-gradient-to-t from-blue-100 via-blue-50 to-white px-4 py-16 sm:px-6 ">
       <div className="max-w-7xl mx-auto">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
           
           {/* Left Content */}
           <div className="space-y-6 lg:space-y-8 order-2 lg:order-1">
             <div>
-              <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-4 lg:mb-6 leading-tight">
+              <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-family-givonic-bold font-bold text-gray-900 mb-4 lg:mb-6 leading-tight">
                 What Students Are Saying
               </h1>
-              <p className="text-gray-600 text-base lg:text-lg leading-relaxed">
+              <p className="text-gray-600 text-base font-family-givonic-regular lg:text-lg leading-relaxed">
                 Real feedback from young minds who’ve discovered their strengths through our Olympiads and assessments.
               </p>
             </div>
 
             {/* Testimonials List */}
-            <div className="relative h-[400px] lg:h-[500px] overflow-hidden bg-gray-50 rounded-xl">
+            <div className="relative h-[400px] lg:h-[500px] overflow-hidden rounded-xl">
               <div 
                 className="absolute w-full transition-transform duration-100 ease-linear"
                 style={{
@@ -89,12 +89,12 @@ const Testimonial = () => {
                       />
                       <div className="flex-1 min-w-0">
                         <div className="flex items-center justify-between mb-2">
-                          <h3 className="text-base lg:text-lg font-semibold text-gray-900 truncate">
+                          <h3 className="text-base lg:text-lg font-family-givonic-semiBold font-semibold text-gray-900 truncate">
                             {testimonial.name}
                           </h3>
                           
                         </div>
-                        <p className="text-gray-600 text-sm lg:text-base leading-relaxed">
+                        <p className="text-gray-600 text-sm font-family-givonic-regular lg:text-base leading-relaxed">
                           "{testimonial.text}"
                         </p>
                       </div>
@@ -149,6 +149,10 @@ const Testimonial = () => {
 
         </div>
       </div>
+      
+      {/* Decorative elements */}
+      <div className="absolute top-1/2 left-0 w-1 h-16 bg-gradient-to-b from-blue-500 to-purple-500 transform -translate-y-1/2"></div>
+      <div className="absolute top-1/2 right-0 w-1 h-16 bg-gradient-to-b from-purple-500 to-blue-500 transform -translate-y-1/2"></div>
     </div>
   );
 };

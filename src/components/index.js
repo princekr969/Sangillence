@@ -1,9 +1,5 @@
 import Navbar from "./Navbar";
-import VideoSection from "./VideoSection";
-import ContentCard from "./ContentCard";
-import Carousel from "./Carousel";
 import Footer from "./Footer";
-import CourseStructure from "./CourseStructure";
 import FormContainer from "./RegistrationForm/FormContainer";
 import About from "./Landing/About";
 import Awards from "./Landing/Awards";
@@ -19,6 +15,8 @@ import AboutMainSection from "./About/AboutMainSection";
 import AboutBenefitSection from "./About/AboutBenefitSection";
 import AboutFlagshipSection from "./About/AboutFlagshipSection";
 import AboutBeliefSection from "./About/AboutBeliefSection";
+import ContactHeader from "./Contact/ContantHeader";
+import ContactDetails from "./Contact/ContactMainSection";
 
 export {
     Navbar,
@@ -30,16 +28,14 @@ export {
     Benefits,
     Awards,
     Timeline,
-    VideoSection,
-    ContentCard,
-    Carousel,
     Footer,
-    CourseStructure,
     FormContainer,
     Testimonial,
     AboutHeader,
     AboutMainSection,
     AboutBenefitSection,
     AboutFlagshipSection,
-    AboutBeliefSection
+    AboutBeliefSection,
+    ContactHeader,
+    ContactDetails
 }

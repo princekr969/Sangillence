@@ -78,7 +78,7 @@ function AboutBeliefSection() {
             </h2>
             
             <div className="max-w-5xl mx-auto">
-              <p className="text-3xl lg:text-4xl font-bold leading-tight mb-8">
+              <p className="text-3xl lg:text-4xl font-family-givonic-bold font-bold leading-tight mb-8">
                 At Sangillence, we don't just 
                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-300 via-purple-300 to-indigo-300"> test</span> — 
                 we <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-300 via-yellow-300 to-orange-300">empower minds</span> to 
@@ -90,7 +90,7 @@ function AboutBeliefSection() {
 
           {/* Brand Statement */}
           <div className="mb-16">
-            <h3 className="text-2xl lg:text-4xl font-bold text-nowrap">
+            <h3 className="text-2xl lg:text-4xl font-family-givonic-bold font-bold text-nowrap">
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-200 via-purple-200 to-indigo-200">
                 Sangillence:
               </span>
@@ -103,7 +103,7 @@ function AboutBeliefSection() {
           {/* Call to Action */}
           <div className="max-w-3xl mx-auto">
             
-            <Link to="/olympiad" className="bg-gradient-to-r from-blue-500 to-purple-600 text-white px-10 py-4 rounded-lg font-semibold hover:from-blue-600 hover:to-purple-700 transition-all duration-300 shadow-2xl hover:shadow-3xl transform hover:-translate-y-1">
+            <Link to="/olympiad" className="bg-gradient-to-r from-blue-500 to-purple-600 text-white px-10 py-4 rounded-lg font-family-givonic-semiBold font-semibold hover:from-blue-600 hover:to-purple-700 transition-all duration-300 shadow-2xl hover:shadow-3xl transform hover:-translate-y-1">
               Join Our Mission
             </Link>
           </div>

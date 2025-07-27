@@ -53,7 +53,10 @@ const Awards = () => {
             Awards & Recognition
           </h2>
           {/* Decorative line */}
-          <div className="flex items-center justify-center mb-6">
+          <div className={`flex items-center justify-center mb-6 transition-all duration-1000 ${
+            isSectionVisible 
+              ? 'opacity-100 translate-y-0' 
+              :'opacity-0 translate-y-12'}`}>
             <div className="w-16 h-1 bg-gradient-to-r from-transparent via-amber-500 to-transparent rounded-full"></div>
           </div>
           <div className={`text-6xl font-family-givonic-bold md:text-8xl font-bold bg-gradient-to-r from-yellow-500 to-orange-500 bg-clip-text text-transparent mb-4 transition-all delay-200 duration-1000 ${

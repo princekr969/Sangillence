@@ -1,4 +1,4 @@
-function AboutHeader() {
+function ContactHeader() {
   return (
 
      <div className="relative h-[15vh] md:h-[20vh] bg-slate-900 overflow-hidden">
@@ -72,8 +72,11 @@ function AboutHeader() {
       <div className="relative z-10 flex flex-col justify-center items-center h-full px-6 lg:px-8">
         {/* Main heading */}
         <h1 className="text-3xl font-family-givonic-bold lg:text-5xl font-bold text-white tracking-wider text-center">
-          ABOUT
+          CONTACT DETAILS
         </h1>
+        <p className="text-slate-300 font-family-givonic-regular">
+            Feel free to reach out to us through any of the following channels. We're always here to help!
+        </p>
       </div>
 
       {/* Decorative elements */}
@@ -101,4 +104,4 @@ function AboutHeader() {
   )
 }
 
-export default AboutHeader
+export default ContactHeader

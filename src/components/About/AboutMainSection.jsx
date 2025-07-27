@@ -3,7 +3,7 @@ import { Star, Target, Brain, Users, Lightbulb, Zap } from 'lucide-react';
 
 function AboutMainSection() {
   return (
-    <section className="relative bg-white overflow-hidden py-16 px-4 sm:px-6 md:px-16">
+    <section className="relative bg-gradient-to-t from-blue-100 via-blue-50 to-white overflow-hidden py-16 px-4 sm:px-6 md:px-16">
       {/* Subtle background elements */}
       <div className="absolute inset-0">
         <div className="absolute top-20 right-20 w-64 h-64 bg-blue-50 rounded-full blur-3xl opacity-30"></div>
