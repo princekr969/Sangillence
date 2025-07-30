@@ -1,6 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { MapPin, Phone, Mail, Linkedin, Instagram, Youtube } from 'lucide-react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faWhatsapp, faLinkedinIn, faInstagram, faYoutube } from '@fortawesome/free-brands-svg-icons';
+import { MapPin, Phone, Mail} from 'lucide-react';
 
 function ContactItem({ icon: Icon, title, text }) {
   return (
@@ -61,33 +63,44 @@ function ContactDetails() {
               </div>
 
               <div className="flex justify-center space-x-6">
+                
                 <Link 
-                    to="https://www.linkedin.com/in/sangillence-academy-810258342/"
+                    to="https://www.whatsapp.com/channel/0029VbAfanC23n3f8Zn3eD3O"
                     target="_blank"
                     rel="noopener noreferrer"
                     className={`group relative w-12 h-12 bg-gradient-to-br from-slate-800 to-slate-700 rounded-lg flex items-center justify-center shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105`}
                     aria-label="LinkedIn"
                     >
-                    <Linkedin className="w-6 h-6 group-hover:text-blue-600 text-white relative z-10" />
+                      <FontAwesomeIcon size='2x' className='group-hover:text-green-600 text-white relative z-10' icon={faWhatsapp} />
+                </Link>
+                <Link 
+                    to="https://www.linkedin.com/company/106711182/admin/dashboard/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={`group relative w-12 h-12 bg-gradient-to-br from-slate-800 to-slate-700 rounded-lg flex items-center justify-center shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105`}
+                    aria-label="LinkedIn"
+                    >
+                      <FontAwesomeIcon size='2x' className='w-8 h-8 group-hover:text-blue-600 text-white relative z-10' icon={faLinkedinIn} />
                 </Link>
                 <Link 
                     to="https://www.instagram.com/sangillence/"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className={`group relative w-12 h-12 bg-gradient-to-br from-slate-800 to-slate-700 rounded-lg flex items-center justify-center shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105 `}
-                    aria-label="Instagram"
+                    className={`group relative w-12 h-12 bg-gradient-to-br from-slate-800 to-slate-700 rounded-lg flex items-center justify-center shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105`}
+                    aria-label="LinkedIn"
                     >
-                    <Instagram className="w-6 h-6 text-white group-hover:text-pink-500 relative z-10" />
+                      <FontAwesomeIcon size='2x' className='w-8 h-8 group-hover:text-pink-500 text-white relative z-10' icon={faInstagram} />
                 </Link>
                 <Link 
                     to="https://www.youtube.com/@SangillenceAcademy"
                     target="_blank"
                     rel="noopener noreferrer"
                     className={`group relative w-12 h-12 bg-gradient-to-br from-slate-800 to-slate-700 rounded-lg flex items-center justify-center shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105`}
-                    aria-label="YouTube"
+                    aria-label="LinkedIn"
                     >
-                    <Youtube className="w-6 h-6 group-hover:text-red-600 text-white relative z-10" />
+                      <FontAwesomeIcon size='2x' className='w-8 h-8 group-hover:text-red-600 text-white relative z-10' icon={faYoutube} />
                 </Link>
+                
               </div>
             </div>
           </div>

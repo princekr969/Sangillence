@@ -1,4 +1,6 @@
 import React from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faWhatsapp, faLinkedinIn, faInstagram, faYoutube } from '@fortawesome/free-brands-svg-icons';
 import { Phone, MapPin, Facebook, Instagram, Linkedin, Youtube } from 'lucide-react';
 
 function Footer() {
@@ -89,14 +91,17 @@ function Footer() {
           <div className="space-y-4 ml-5">
             <h2 className="text-xl font-bold">Follow Us</h2>
             <div className="flex gap-4">
-              <a href="https://www.youtube.com/@sangillenceacademy" target="_blank" rel="noopener noreferrer" className="hover:text-red-500 transition-colors">
-                <Youtube size={24} />
+              <a href="https://www.whatsapp.com/channel/0029VbAfanC23n3f8Zn3eD3O" target="_blank" rel="noopener noreferrer" className="group hover:text-red-500 transition-colors">
+                <FontAwesomeIcon size='2x' className='w-8 h-8 group-hover:text-green-600 text-white relative z-10' icon={faWhatsapp} />
               </a>
-              <a href="https://www.instagram.com/p/DDm4CykhfLk/" target="_blank" rel="noopener noreferrer" className="hover:text-pink-400 transition-colors">
-                <Instagram size={24} />
+              <a href="https://www.linkedin.com/company/106711182/admin/dashboard/" target="_blank" rel="noopener noreferrer" className="group hover:text-red-500 transition-colors">
+                <FontAwesomeIcon size='2x' className='w-8 h-8 group-hover:text-blue-600 text-white relative z-10' icon={faLinkedinIn} />
               </a>
-              <a href="https://www.linkedin.com/in/sangillence-academy-810258342/" target="_blank" rel="noopener noreferrer" className="hover:text-blue-400 transition-colors">
-                <Linkedin size={24} />
+              <a href="https://www.instagram.com/sangillence/" target="_blank" rel="noopener noreferrer" className="group hover:text-red-500 transition-colors">
+                <FontAwesomeIcon size='2x' className='w-8 h-8 group-hover:text-pink-500 text-white relative z-10' icon={faInstagram} />
+              </a>
+              <a href="https://www.youtube.com/@sangillenceacademy" target="_blank" rel="noopener noreferrer" className="group hover:text-red-500 transition-colors">
+                <FontAwesomeIcon size='2x' className='w-8 h-8 group-hover:text-red-600 text-white relative z-10' icon={faYoutube} />
               </a>
             </div>
           </div>

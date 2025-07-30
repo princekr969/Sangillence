@@ -4,35 +4,16 @@ import { Star } from 'lucide-react';
 const testimonials = [
   {
     id: 1,
-    name: "Prince",
-    text: "The Olympiad was fun and different from school exams. I loved the questions, and the report told me I’m really strong in observation and logic. Now I know what to work on too!",
-    profileImage: "",
+    name: "Rakesh prajapat",
+    text: "The testing experience was blissful. The questions ranged from simple to twisted and challenging. The evaluation report was concise and helpful. Overall, it was a wonderful demonstration of what AI can achieve in the field of testing and evaluation.",
+    profileImage: "https://res.cloudinary.com/dstbd40ud/image/upload/v1753720704/Rakesh_prajapat_profile_kmephw.png",
   },
   {
     id: 2,
-    name: "Ansh",
-    text: "It wasn’t just a test, it was like solving mysteries. I liked the out-of-the-box questions. I didn’t even know there were different types of thinking — now I do!",
-    profileImage: "",
+    name: "Sai yogyabhilash",
+    text: "The exam I recently that tested my logical thinking and skills related to my thinking abilities . It included tasks like problem-solving and real-world scenarios. The test really made me think and apply my knowledge. I got clear feedback on my strengths and areas to improve. It was fair and accurate, and the experience helped me understand my readiness for a career in software. Overall, it was a helpful and eye-opening experience.",
+    profileImage: "https://res.cloudinary.com/dstbd40ud/image/upload/v1753891024/Sai_yogyabhilash_ah8wyv.png",
   },
-  {
-    id: 3,
-    name: "Log",
-    text: "Some questions made me think hard, but that’s what I liked! The test wasn’t boring, and the report helped me see how I think. I was excited to show it to my parents.",
-    profileImage: "",
-  },
-  {
-    id: 4,
-    name: "Vaibhav",
-    text: "This Olympiad was actually fun. No rote learning — just smart thinking. I scored well in creativity, which made me feel proud. Can’t wait for the next one!",
-    profileImage: "",
-  },
-  {
-    id: 5,
-    name: "Manav",
-    text: "I usually get nervous about tests, but this one felt exciting. The feedback report showed I improved from last year, and that gave me a big confidence boost!",
-    profileImage: "",
-  },
-  
 ];
 
 const eventImages = [

@@ -17,6 +17,8 @@ const StudentForm = ({ onSubmit }) => {
     class: '',
     mobile: '',
     email: '',
+    dob:'',
+    schoolEmail:''
   });
 
   const [errors, setErrors] = useState({
@@ -24,6 +26,8 @@ const StudentForm = ({ onSubmit }) => {
     class: '',
     mobile: '',
     email: '',
+    dob: '',
+    schoolEmail:''
   });
 
   const [isLoading, setIsLoading] = useState(false);
@@ -36,6 +40,8 @@ const StudentForm = ({ onSubmit }) => {
       class: '',
       mobile: '',
       email: '',
+      dob: '',
+      schoolEmail:''
     };
 
     if (!formData.name.trim()) {
@@ -64,6 +70,12 @@ const StudentForm = ({ onSubmit }) => {
       isValid = false;
     }
 
+    if (!formData.schoolEmail.trim()) {
+      newErrors.schoolEmail = 'Email is required';
+    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.schoolEmail)) {
+      newErrors.schoolEmail = 'Please enter a valid email address';
+    }
+
     setErrors(newErrors);
     return isValid;
   };
@@ -84,6 +96,7 @@ const StudentForm = ({ onSubmit }) => {
   };
 
   const handleSubmit = async (e) => {
+  
     e.preventDefault();
     setSubmitError('');
     
@@ -156,6 +169,16 @@ const StudentForm = ({ onSubmit }) => {
         />
 
         <FormInput
+            id="dob"
+            label="DOB"
+            type="date"
+            value={formData.dob}
+            onChange={handleChange}
+            error={errors.dob}
+            required
+          />
+
+        <FormInput
           id="mobile"
           label="Mobile Number"
           type="tel"
@@ -174,6 +197,17 @@ const StudentForm = ({ onSubmit }) => {
           onChange={handleChange}
           placeholder="example@email.com"
           error={errors.email}
+          required
+        />
+
+        <FormInput
+          id="schoolEmail"
+          label="School Email Address"
+          type="email"
+          value={formData.schoolEmail}
+          onChange={handleChange}
+          placeholder="school@email.com"
+          error={errors.schoolEmail}
           required
         />
       </div>

@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Link, NavLink } from 'react-router-dom';
 import { Menu, X, ArrowRight } from 'lucide-react';
 import useModelViewer from '../../hooks/useModelViewer.jsx'
+import VideoPlayer from './VideoPlayer.jsx';
 import sangillenceLogo from './../../../assets/sangillenceLogo.png';
 import heroSectionBg from '../../../assets/svgs/herosectionbg.svg';
 import mainSectionBg from '../../../assets/svgs/heromainsectionbg.svg';
@@ -11,8 +12,24 @@ import soboWalk2 from "../../../assets/3dModels/SOBO2walk.glb"
 import soboMat from "../../../assets/3dModels/SOBOmat.glb"
 import soboStart from "../../../assets/3dModels/SOBOstart.glb"
 import soboRun from "../../../assets/3dModels/SOBOrun.glb"
+// import smileSOBO from "../../../assets/3dModels/smileSOBO.mp4"
+import smileSOBO from "../../../assets/3dModels/smileSOBO.gif"
 
 const ModelViewer = useModelViewer(soboRun)
+
+function GiftAnimation() {
+  return (
+    <div style={{ textAlign: 'center' }}>
+      <img
+        src={smileSOBO}
+        alt="Gift Animation"
+        loading='lazy'
+        width={300}
+        className= "w-full h-auto"
+      />
+    </div>
+  );
+}
 
 export default function Hero() {
 
@@ -24,7 +41,8 @@ export default function Hero() {
             
         {/* Hero Section background */}
         <div className='relative z-5 h-[80%] mt-5 shadow-xl bg-[#233562] rounded-3xl'>
-          <div className="absolute inset-0 rounded-3xl">
+         
+ <div className="absolute inset-0 rounded-3xl">
 
           {/* Base dark background */}
           <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-slate-800 via-slate-900 to-indigo-900"></div>
@@ -116,7 +134,6 @@ export default function Hero() {
           <div className="absolute animate-float-medium top-40 right-20 w-24 h-24 bg-purple-400 rounded-full blur-lg"></div>
           <div className="absolute animate-float-fast bottom-20 left-1/3 w-16 h-16 bg-teal-400 rounded-full blur-md"></div>
         </div>
-
         <main className="relative z-10 h-full">
             <div className="h-full flex justify-center md:justify-between gap-2 p-4 sm:p-6 lg:p-10 text-white">
               
@@ -164,7 +181,7 @@ export default function Hero() {
               {/* right side */}
               <div className="w-full hidden overflow-hidden md:flex items-center lg:items-end justify-end">
                 <div className='md:w-[350px] md:h-[350px] lg:w-[500px] lg:h-[500px] flex items-center justify-start drop-shadow-[0_0px_16px_rgba(255,255,255)'>
-                  <ModelViewer />
+                  <ModelViewer/>
                 </div>
               </div>
 

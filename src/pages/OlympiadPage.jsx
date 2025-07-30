@@ -8,6 +8,23 @@ function OlympiadPage() {
   const { pathname } = useLocation();
   const [showScrollTop, setShowScrollTop] = useState(false);
 
+   const [bgImage, setBgImage] = useState("");
+
+  useEffect(() => {
+    const updateImage = () => {
+      const width = window.innerWidth;
+      if (width < 768) {
+        setBgImage("https://res.cloudinary.com/dstbd40ud/image/upload/v1753892141/olympiadBanner_rsvmau.png");
+      } else {
+        setBgImage("https://res.cloudinary.com/dstbd40ud/image/upload/v1753892141/olympiadBanner_rsvmau.png");
+      }
+    };
+
+    updateImage(); // Set initially
+    window.addEventListener("resize", updateImage);
+    return () => window.removeEventListener("resize", updateImage);
+  }, []);
+
   useEffect(() => {
     const handleScroll = () => {
       setShowScrollTop(window.scrollY > 400);
@@ -29,21 +46,11 @@ function OlympiadPage() {
     <div className="min-h-screen bg-white">
       {/* Hero Banner */}
       <div 
-        className="relative h-[30vh] md:h-[60vh] bg-cover bg-center flex pb-2 md:pb-7 lg:pb-4 items-end justify-center"
+        className="relative h-[40vh] md:h-[40vh] lg:h-[60vh] bg-cover bg-center flex pb-2 md:pb-7 lg:pb-4 items-end justify-center"
         style={{
-          backgroundImage: `url(${img})`,
+          backgroundImage: `url(${bgImage})`,
         }}
       >
-        <div className=" text-white max-md:hidden">
-        
-          <a 
-            href="#apply"
-            className="bg-blue-700 hover:bg-blue-800 text-white font-semibold px-4 py-2 rounded-full inline-flex items-center transition-all"
-          >
-            Register Now
-            <ArrowRight className="ml-2 w-5 h-5" />
-          </a>
-        </div>
       </div>
 
       {/* Rules Section */}

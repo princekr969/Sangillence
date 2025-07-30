@@ -11,7 +11,6 @@ import {
   Navbar,
   Testimonial,
 } from '../components/index.js';
-
 function HomePage() {
 
   return (

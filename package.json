@@ -13,6 +13,10 @@
     "deploy": "gh-pages -d dist"
   },
   "dependencies": {
+    "@fortawesome/fontawesome-svg-core": "^7.0.0",
+    "@fortawesome/free-brands-svg-icons": "^7.0.0",
+    "@fortawesome/free-solid-svg-icons": "^7.0.0",
+    "@fortawesome/react-fontawesome": "^0.2.3",
     "@react-three/drei": "^10.5.1",
     "@react-three/fiber": "^9.2.0",
     "@tailwindcss/vite": "^4.0.9",
