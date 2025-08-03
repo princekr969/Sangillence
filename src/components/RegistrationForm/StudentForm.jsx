@@ -13,7 +13,7 @@ const classOptions = [
 
 const StudentForm = ({ onSubmit }) => {
   const [formData, setFormData] = useState({
-    name: '',
+    fullName: '',
     class: '',
     mobile: '',
     email: '',
@@ -22,7 +22,7 @@ const StudentForm = ({ onSubmit }) => {
   });
 
   const [errors, setErrors] = useState({
-    name: '',
+    fullName: '',
     class: '',
     mobile: '',
     email: '',
@@ -36,7 +36,7 @@ const StudentForm = ({ onSubmit }) => {
   const validateForm = () => {
     let isValid = true;
     const newErrors = {
-      name: '',
+      fullName: '',
       class: '',
       mobile: '',
       email: '',
@@ -44,8 +44,8 @@ const StudentForm = ({ onSubmit }) => {
       schoolEmail:''
     };
 
-    if (!formData.name.trim()) {
-      newErrors.name = 'Name is required';
+    if (!formData.fullName.trim()) {
+      newErrors.fullName = 'Name is required';
       isValid = false;
     }
 
@@ -70,10 +70,17 @@ const StudentForm = ({ onSubmit }) => {
       isValid = false;
     }
 
+    if (!formData.dob) {
+      newErrors.dob = 'Date of birth is required';
+      isValid = false;
+    }
+
     if (!formData.schoolEmail.trim()) {
-      newErrors.schoolEmail = 'Email is required';
+      newErrors.schoolEmail = 'School email is required';
+      isValid = false;
     } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.schoolEmail)) {
       newErrors.schoolEmail = 'Please enter a valid email address';
+      isValid = false;
     }
 
     setErrors(newErrors);
@@ -148,13 +155,13 @@ const StudentForm = ({ onSubmit }) => {
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         <FormInput
-          id="name"
+          id="fullName"
           label="Full Name"
           type="text"
-          value={formData.name}
+          value={formData.fullName}
           onChange={handleChange}
           placeholder="Enter your full name"
-          error={errors.name}
+          error={errors.fullName}
           required
         />
 
@@ -212,64 +219,25 @@ const StudentForm = ({ onSubmit }) => {
         />
       </div>
 
-      <div className="relative group">
-      <button
-        type="submit"
-        disabled={isLoading}
-        className={`relative w-full py-4 px-8 font-semibold rounded-lg shadow-lg transition-all duration-300 transform overflow-hidden ${
-          isLoading
-            ? 'bg-slate-400 text-slate-200 cursor-not-allowed'
-            : 'bg-gradient-to-r from-slate-800 to-slate-900 text-white hover:shadow-xl hover:scale-[1.02]'
-        }`}
-      >
-        {/* Geometric hover overlay - only show when not disabled */}
-        {!isLoading && (
-          <div className="absolute inset-0 bg-gradient-to-r from-blue-600/20 via-transparent to-amber-500/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-        )}
-        
-        {/* Button content */}
-        <span className="relative z-10 flex items-center justify-center gap-2">
+      <div className="mt-6">
+        <button
+          type="submit"
+          disabled={isLoading}
+          className="w-full bg-blue-600 hover:bg-blue-700 disabled:bg-blue-400 text-white font-semibold py-3 px-6 rounded-lg transition duration-200 flex items-center justify-center"
+        >
           {isLoading ? (
             <>
-              {/* Loading spinner */}
-              <svg className="animate-spin h-5 w-5" viewBox="0 0 24 24">
-                <circle 
-                  className="opacity-25" 
-                  cx="12" 
-                  cy="12" 
-                  r="10" 
-                  stroke="currentColor" 
-                  strokeWidth="4" 
-                  fill="none"
-                />
-                <path 
-                  className="opacity-75" 
-                  fill="currentColor" 
-                  d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
-                />
+              <svg className="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
               </svg>
               Submitting...
             </>
           ) : (
             'Submit Application'
           )}
-        </span>
-        
-        {/* Decorative elements - only show when not disabled */}
-        {!isLoading && (
-          <>
-            <div className="absolute top-0 left-0 w-1 h-full bg-gradient-to-b from-blue-500 to-transparent opacity-50 group-hover:opacity-100 transition-opacity duration-300"></div>
-            <div className="absolute top-0 right-0 w-1 h-full bg-gradient-to-b from-amber-500 to-transparent opacity-50 group-hover:opacity-100 transition-opacity duration-300"></div>
-          </>
-        )}
-
-        {/* Loading state geometric overlay */}
-        {isLoading && (
-          <div className="absolute inset-0 bg-gradient-to-r from-slate-600/30 via-slate-500/20 to-slate-600/30 animate-pulse"></div>
-        )}
-      </button>
-    </div>
-
+        </button>
+      </div>
     </form>
   );
 };
