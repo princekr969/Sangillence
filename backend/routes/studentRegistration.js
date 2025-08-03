@@ -1,6 +1,7 @@
 import express from 'express';
 import { google } from 'googleapis';
 import dotenv from 'dotenv';
+import { sendStudentConfirmationEmail, sendSchoolNotificationEmail } from '../utils/emailService.js';
 
 dotenv.config();
 
@@ -75,7 +76,38 @@ router.post('/submit', async (req, res) => {
             resource: { values },
         });
 
-        res.status(200).json({ success: true, message: 'Student registration submitted successfully!' });
+        // Send confirmation emails
+        const studentData = {
+            fullName,
+            dob: formattedDob,
+            email,
+            class: studentClass,
+            mobile,
+            schoolEmail
+        };
+
+        // Send confirmation email to student
+        const studentEmailResult = await sendStudentConfirmationEmail(studentData);
+
+        // Send notification email to school
+        const schoolEmailResult = await sendSchoolNotificationEmail(studentData);
+
+        // Log email results
+        if (!studentEmailResult.success) {
+            console.error('Failed to send student confirmation email:', studentEmailResult.error);
+        }
+        if (!schoolEmailResult.success) {
+            console.error('Failed to send school notification email:', schoolEmailResult.error);
+        }
+
+        res.status(200).json({
+            success: true,
+            message: 'Student registration submitted successfully! Confirmation emails have been sent.',
+            emailStatus: {
+                studentEmail: studentEmailResult.success ? 'sent' : 'failed',
+                schoolEmail: schoolEmailResult.success ? 'sent' : 'failed'
+            }
+        });
     } catch (error) {
         console.error('Student registration error:', error);
         res.status(500).json({ success: false, message: 'Internal server error', error: error.message });

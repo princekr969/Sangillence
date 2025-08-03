@@ -61,13 +61,17 @@ NODE_ENV=production
 CLOUDINARY_CLOUD_NAME="your-cloud-name"
 CLOUDINARY_API_KEY="your-api-key"
 CLOUDINARY_API_SECRET="your-api-secret"
-```
+
+# Email Configuration (Gmail)
+EMAIL_USER="sangillence@gmail.com"
+EMAIL_PASSWORD="your-app-password"
 
 ## 📋 Pre-deployment Checklist
 
 - [ ] All environment variables are set
 - [ ] Google Sheets API credentials are configured
 - [ ] Spreadsheet IDs are correct
+- [ ] Email configuration is set up (Gmail App Password)
 - [ ] CORS origins are updated for production
 - [ ] Frontend API endpoints are updated to use production URL
 
@@ -114,9 +118,32 @@ curl -X POST https://your-backend-url/api/student/submit \
 - **Render:** Application logs and metrics
 - **Vercel:** Function logs and analytics
 
+## 📧 Email Setup Instructions
+
+### Gmail App Password Setup:
+1. **Enable 2-Factor Authentication** on your Gmail account
+2. **Generate App Password:**
+   - Go to Google Account settings
+   - Security → 2-Step Verification → App passwords
+   - Select "Mail" and "Other (Custom name)"
+   - Name it "Sangillence Backend"
+   - Copy the generated 16-character password
+3. **Set Environment Variables:**
+   ```
+   EMAIL_USER=your-gmail@gmail.com
+   EMAIL_PASSWORD=your-16-character-app-password
+   ```
+
+### Email Features:
+- ✅ Confirmation email sent to student
+- ✅ Notification email sent to school
+- ✅ Professional HTML email templates
+- ✅ Error handling and logging
+
 ## 🔒 Security Notes
 
 - Never commit `.env` files to version control
 - Use environment variables for all sensitive data
 - Enable HTTPS in production
-- Regularly rotate API keys 
+- Regularly rotate API keys
+- Use App Passwords for Gmail (not regular passwords) 
