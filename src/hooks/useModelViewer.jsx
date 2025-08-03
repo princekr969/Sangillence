@@ -35,14 +35,14 @@ function useModelViewer(url) {
    
       <Canvas className='h-full w-full' camera={{ position: [0, 0, 0], fov: 50 }} >
         <ambientLight intensity={0.9} />
-        <directionalLight position={[0, 2, 0]} intensity={1} />
+        <directionalLight position={[0, 0, 0]} intensity={1} />
         <Suspense fallback={null}>
           <Bounds fit clip >
             <Model url={url} />
          
           </Bounds>
         </Suspense>
-        <OrbitControls enableZoom={false} enableRotate={false} enablePan={false}  /> {/* Disable zoom */}
+        <OrbitControls enableZoom={false} enableRotate={true} enablePan={false}  /> {/* Disable zoom */}
       </Canvas>
    
   ) 

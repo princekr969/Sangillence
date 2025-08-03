@@ -12,6 +12,7 @@ import soboWalk2 from "../../../assets/3dModels/SOBO2walk.glb"
 import soboMat from "../../../assets/3dModels/SOBOmat.glb"
 import soboStart from "../../../assets/3dModels/SOBOstart.glb"
 import soboRun from "../../../assets/3dModels/SOBOrun.glb"
+import logofinal from "../../../assets/3dModels/logofinal.glb"
 // import smileSOBO from "../../../assets/3dModels/smileSOBO.mp4"
 import smileSOBO from "../../../assets/3dModels/smileSOBO.gif"
 

@@ -4,7 +4,7 @@ import StudentForm from './StudentForm';
 import SchoolForm from './SchoolForm';
 
 const FormContainer = () => {
-  const [formType, setFormType] = useState('student');
+  const [formType, setFormType] = useState('school');
   const [isSubmitted, setIsSubmitted] = useState(false);
 
   const handleToggle = (type) => {
