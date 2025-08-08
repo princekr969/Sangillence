@@ -138,8 +138,8 @@ function OlympiadPage() {
                 <div className="relative bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl p-6 ">
                   <h3 className="text-xl font-family-givonic-semiBold font-semibold mb-3 text-white">Important Dates</h3>
                   <ul className="list-none font-family-givonic-regular space-y-2 text-blue-100">
+                    <li>📍 <span className="text-white">Registration Start:</span> October 10, 2025</li>
                     <li>📍 <span className="text-white">Registration Deadline:</span> September 30, 2025</li>
-                    <li>📍 <span className="text-white">Preliminary Round:</span> October 15, 2025</li>
                     <li>📍 <span className="text-white">Final Event:</span> November 1-5, 2025</li>
                   </ul>
                 </div>
@@ -158,7 +158,7 @@ function OlympiadPage() {
                 <div className="absolute inset-0 bg-gradient-to-r from-yellow-600/20 to-orange-600/20 rounded-xl blur opacity-0"></div>
                 <div className="relative bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl p-6 ">
                   <ul className="list-none font-family-givonic-regular space-y-2 text-blue-100">
-                    <li>💵 Cash prize of up to <span className="text-white font-semibold">₹2000</span>.</li>
+                    <li>💵 Cash prize of up to <span className="text-white font-family-givonic-semiBold font-semibold">₹25,000</span>.</li>
                     <li>📑 <span className="text-white">Merit certificate</span>.</li>
                     <li>📊 <b className="text-white font-family-givonic-bold">Top 100 Performers:</b > Certificates of appreciation.</li>
                   </ul>
