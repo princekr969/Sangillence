@@ -73,7 +73,7 @@ function Footer() {
       </div>
 
       {/* Content */}
-      <div className="relative z-10">
+      <div className="relative">
         <div className="container pr-4 flex flex-col md:flex-row justify-between items-start gap-8">
           
           <div className="space-y-4 ml-5">

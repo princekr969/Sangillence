@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 import { ScrollText, ArrowRight, ArrowUp, Award } from 'lucide-react';
 import img from "./../../assets/svgs/sangillenceBanner1.svg"
 import { Link, useLocation } from 'react-router-dom';
+import OlympiadHeader from '../components/Olympiad/OlympiadHeader';
 
 function OlympiadPage() {
   const { pathname } = useLocation();
@@ -43,112 +44,156 @@ function OlympiadPage() {
   }, [pathname]);
 
   return (
-    <div className="min-h-screen bg-white">
-      {/* Hero Banner */}
-      <div 
-        className="relative h-[40vh] md:h-[40vh] lg:h-[60vh] bg-cover bg-center flex pb-2 md:pb-7 lg:pb-4 items-end justify-center"
-        style={{
-          backgroundImage: `url(${bgImage})`,
-        }}
-      >
+    <div className="relative min-h-screen ">
+
+      
+      <div className='overflow-hidden'>
+        <OlympiadHeader/>
       </div>
+      
+      {/* Rules Section with geometric theme */}
+      <div className="relative z-10 max-w-4xl mx-auto px-4 py-12">
+        {/* Main container with geometric background */}
+        <div className="relative rounded-3xl overflow-hidden">
+          {/* Geometric background for rules section */}
+          <div className="absolute inset-0 rounded-3xl">
+            <div className="absolute inset-0 bg-gradient-to-br from-slate-800/95 via-slate-900/95 to-indigo-900/95 backdrop-blur-sm"></div>
+            
+          </div>
 
-      {/* Rules Section */}
-      <div className="max-w-4xl mx-auto my-6 px-4 py-12 border-2 shadow-2xl border-slate-800/80 rounded-2xl ">
-        <div className="flex items-center mb-8">
-          <h2 className="text-3xl font-family-givonic-bold font-bold text-gray-800">Rules & Regulations</h2>
+          <div className="relative z-10 p-8 border border-white/10 rounded-3xl backdrop-blur-sm">
+            <div className="flex items-center mb-8">
+              <h2 className="text-3xl font-family-givonic-bold font-bold bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
+                Rules & Regulations
+              </h2>
+            </div>
+            
+            <div className="space-y-4">
+              <div className="relative">
+                <div className="absolute inset-0 bg-gradient-to-r from-blue-600/20 to-purple-600/20 rounded-xl blur opacity-0 "></div>
+                <div className="relative bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl p-6 ">
+                  <h3 className="text-xl font-family-givonic-semiBold font-semibold mb-3 text-white">Eligibility</h3>
+                  <ul className="list-none font-family-givonic-regular space-y-2 text-blue-100">
+                    <li>📝 Open to students from <b className="text-white font-family-givonic-bold">Classes 3 to 10</b> across India.</li>
+                    <div className='ml-6 space-y-1'>
+
+                      <li>Pool A : classes 3-5</li>
+                      <li>Pool B : classes 6-8</li>
+                      <li>Pool C : classes 9-10</li>
+                    </div>
+                  </ul>
+                </div>
+              </div>
+
+              <div className="relative">
+                <div className="absolute inset-0 bg-gradient-to-r from-amber-600/20 to-orange-600/20 rounded-xl blur opacity-0"></div>
+                <div className="relative bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl p-6 ">
+                  <h3 className="text-xl font-family-givonic-semiBold font-semibold mb-3 text-white">Competition Format</h3>
+                  <ul className="list-none font-family-givonic-regular space-y-2 text-blue-100">
+                    <li>🧩 <span className="text-white">10 Skill Competency</span> based questions</li>
+                    <li>💬 
+                      <span className="text-white"><b className="font-family-givonic-bold">Only Integer type answers allowed</b>
+                        <p className='ml-6'>Each integer answer is followed by a 100 word explanation.</p>
+                      </span>
+                    </li>
+                    <li>🧠 Use of <span className="text-white">calculators, phones, books</span> allowed</li>
+                  </ul>
+                </div>
+              </div>
+
+              <div className="relative">
+                <div className="absolute inset-0 bg-gradient-to-r from-teal-600/20 to-green-600/20 rounded-xl blur opacity-0"></div>
+                <div className="relative bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl p-6 ">
+                  <h3 className="text-xl font-family-givonic-semiBold font-semibold mb-3 text-white">Duration</h3>
+                  <ul className="list-none font-family-givonic-regular space-y-2 text-blue-100">
+                    <li>🕒 Students have <span className="text-white">12 hrs</span> to solve and submit the answers.</li>
+                  </ul>
+                </div>
+              </div>
+
+              <div className="relative">
+                <div className="absolute inset-0 bg-gradient-to-r from-purple-600/20 to-pink-600/20 rounded-xl blur opacity-0"></div>
+                <div className="relative bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl p-6 ">
+                  <h3 className="text-xl font-family-givonic-semiBold font-semibold mb-3 text-white">Integrity</h3>
+                  <ul className="list-none font-family-givonic-regular space-y-2 text-blue-100">
+                    <li>💡 <span className="text-white">Fair play. Original thinking. Unique logic.</span></li>      
+                    <li>🤖 <span className="text-white">Plagiarized or AI-only</span> copy-paste answers get rejected. <span className="text-white">Thinking matters most.</span></li>      
+                  </ul> 
+                </div>
+              </div>
+
+              <div className="relative ">
+                <div className="absolute inset-0 bg-gradient-to-r from-indigo-600/20 to-blue-600/20 rounded-xl blur opacity-0"></div>
+                <div className="relative bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl p-6 ">
+                  <h3 className="text-xl font-family-givonic-semiBold font-semibold mb-3 text-white">Submission</h3>
+                  <ul className="list-none font-family-givonic-regular space-y-2 text-blue-100">
+                    <li>📥 Test will be conducted on the official website sangillence.com only.</li>        
+                    <li>🏃 In case of a tie, the student who <span className="text-white">submits first</span> will rank higher.</li>        
+                  </ul> 
+                </div>
+              </div>
+
+              <div className="relative ">
+                <div className="absolute inset-0 bg-gradient-to-r from-rose-600/20 to-red-600/20 rounded-xl blur opacity-0 "></div>
+                <div className="relative bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl p-6 ">
+                  <h3 className="text-xl font-family-givonic-semiBold font-semibold mb-3 text-white">Important Dates</h3>
+                  <ul className="list-none font-family-givonic-regular space-y-2 text-blue-100">
+                    <li>📍 <span className="text-white">Registration Deadline:</span> September 30, 2025</li>
+                    <li>📍 <span className="text-white">Preliminary Round:</span> October 15, 2025</li>
+                    <li>📍 <span className="text-white">Final Event:</span> November 1-5, 2025</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+            {/* Awards Section */}
+            <div className="mt-12">
+              <div className="flex items-center mb-6">
+                <h2 className="text-2xl font-family-givonic-bold font-bold bg-gradient-to-r from-yellow-400 to-orange-400 bg-clip-text text-transparent">
+                  Awards
+                </h2>
+              </div>
+
+              <div className="relative group">
+                <div className="absolute inset-0 bg-gradient-to-r from-yellow-600/20 to-orange-600/20 rounded-xl blur opacity-0"></div>
+                <div className="relative bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl p-6 ">
+                  <ul className="list-none font-family-givonic-regular space-y-2 text-blue-100">
+                    <li>💵 Cash prize of up to <span className="text-white font-semibold">₹2000</span>.</li>
+                    <li>📑 <span className="text-white">Merit certificate</span>.</li>
+                    <li>📊 <b className="text-white font-family-givonic-bold">Top 100 Performers:</b > Certificates of appreciation.</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+            {/* Apply Section */}
+            <div id="apply" className="mt-16 text-center">
+              <h2 className="text-3xl font-family-givonic-bold font-bold mb-6 bg-gradient-to-r from-blue-400 via-purple-400 to-teal-400 bg-clip-text text-transparent">
+                Ready to Participate?
+              </h2>
+              <Link
+                to="/olympiadForm"
+                className="inline-block bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-family-givonic-semiBold font-semibold px-12 py-4 rounded-full transition-all text-lg shadow-2xl hover:shadow-purple-500/25 hover:scale-105 transform duration-300"
+              >
+                <span className="flex items-center gap-3">
+                  Apply Now
+                  <ArrowRight className="w-6 h-6" />
+                </span>
+              </Link>
+            </div>
+          </div>
         </div>
-        
-        <div className="space-y-2">
-          <div className="border-2 border-slate-900/20 rounded-lg p-6">
-            <h3 className=" text-xl font-family-givonic-semiBold font-semibold mb-3 text-black">Eligibility</h3>
-            <ul className="list-none list-inside font-family-givonic-regular space-y-2 text-black">
-              <li>📝 Open to students from <b>Classes 3 to 10</b> across India.</li>
-            </ul>
-          </div>
 
-          <div className="bg-white border-2 border-slate-900/20 text-black rounded-lg p-6">
-            <h3 className="text-xl font-family-givonic-semiBold font-semibold mb-3 ">Competition Format</h3>
-            <ul className="list-none list-inside font-family-givonic-regular space-y-2">
-              <li>🧩 10 Skill Competency based questions</li>
-              <li>💬 100-word reasoning (should explain their solution)</li>
-              <li>🧠 Use of calculators, phones, books allowed</li>
-            </ul>
-          </div>
-
-          <div className="bg-white border-2 border-slate-900/20 text-black rounded-lg p-6 ">
-            <h3 className="text-xl font-family-givonic-semiBold font-semibold mb-3 ">Duration</h3>
-            <ul className="list-none list-inside font-family-givonic-regular space-y-2 ">
-              <li>🕒 Students have one full day to solve and submit the answers.</li>
-            </ul>
-          </div>
-
-          <div className="bg-white border-2 border-slate-900/20 rounded-lg p-6">
-            <h3 className="text-xl font-family-givonic-semiBold font-semibold mb-3 text-gray-800">Integrity</h3>
-            <ul className="list-none list-inside font-family-givonic-regular space-y-2 text-gray-600">
-              <li>💡 Fair play. Original thinking. Unique logic.</li>      
-              <li>🤖 Plagiarized or AI-only copy-paste answers get rejected. Thinking matters most.</li>      
-            </ul> 
-          </div>
-
-          <div className="bg-white border-2 border-slate-900/20 rounded-lg p-6 ">
-            <h3 className="text-xl font-family-givonic-semiBold font-semibold mb-3 text-gray-800">Submission</h3>
-            <ul className="list-none list-inside font-family-givonic-regular space-y-2 text-gray-600">
-              <li>📥 Answers must be submitted through a Google Form accessible via a QR code in the booklet.</li>        
-              <li>🏃 In case of a tie, the student who submits first will rank higher.
-              </li>        
-            </ul> 
-          </div>
-
-          
-
-          <div className="bg-white border-2 border-slate-900/20 rounded-lg p-6">
-            <h3 className="text-xl font-family-givonic-semiBold font-semibold mb-3 text-gray-800">Important Dates</h3>
-            <ul className="list-none list-inside font-family-givonic-regular space-y-2 text-gray-600">
-              <li>📍 Registration Deadline: March 31, 2025</li>
-              <li>📍 Preliminary Round: April 15, 2025</li>
-              <li>📍 Final Event: June 1-5, 2025</li>
-            </ul>
-          </div>
-        </div>
-
-        
-          <div className="flex items-center mt-10 mb-3">
-          <h2 className="text-2xl font-family-givonic-bold font-bold text-gray-800">Awards</h2>
-          </div>
-
-          <div className='border-2 bg-white border-slate-900/20 rounded-lg p-6'>
-            <ul className="list-none list-inside font-family-givonic-regular space-y-2 text-gray-600">
-              <li>💵 Cash prize of up to ₹2000.</li>
-              <li>📑 Merit certificate.</li>
-              <li>🎓 Scholarships.</li>
-              <li>📊 <b>Top 100 Performers:</b> Certificates of appreciation. </li>
-            </ul>
-          </div>
-
-        {/* Apply Section */}
-        <div id="apply" className="mt-16 text-center">
-          <h2 className="text-3xl font-family-givonic-bold font-bold mb-6 text-gray-800">Ready to Participate?</h2>
-          <Link
-            to="/olympiadForm"
-            className="bg-blue-600 hover:bg-blue-700 text-white font-family-givonic-semiBold font-semibold px-12 py-4 rounded-full inline-flex items-center transition-all text-lg"
-          >
-            Apply Now
-            <ArrowRight className="ml-2 w-6 h-6" />
-          </Link>
-        </div>
-
-         {/* Scroll to Top Button */}
-      <button
-        onClick={scrollToTop}
-        className={`fixed bottom-8 right-8 bg-blue-600 hover:bg-blue-700 text-white p-3 rounded-full shadow-lg transition-all transform hover:scale-110 ${
-          showScrollTop ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-16'
-        }`}   
-        aria-label="Scroll to top"
-      >
-        <ArrowUp className="w-6 h-6" />
-      </button>
-
+        {/* Scroll to Top Button */}
+        <button
+          onClick={scrollToTop}
+          className={`fixed z-50 bottom-8 right-8 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white p-3 rounded-full shadow-2xl transition-all transform hover:scale-110 backdrop-blur-sm border border-white/10 ${
+            showScrollTop ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-16'
+          }`}   
+          aria-label="Scroll to top"
+        >
+          <ArrowUp className="w-6 h-6" />
+        </button>
       </div>
     </div>
   );
