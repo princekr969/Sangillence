@@ -10,6 +10,7 @@ function App() {
     <BrowserRouter>
       <Routes>
 
+
         <Route path="/" index element={<LoadingPage />} />
         <Route path="home" index element={<HomePage />} />
         <Route path="/" element={<Layout1 />}>
