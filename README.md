@@ -1,12 +1,18 @@
-# React + Vite
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+# Sangillence
+Live Demo: [https://sangillence.com](https://sangillence.com/)
+  
+Sangillence is a research-backed education-tech initiative dedicated to reshaping how young minds learn, think, and grow. Rooted in the belief that "Sangat से Intelligence है", we support students in their formative years through an ecosystem that fosters holistic development, skill-based learning, and brain-powered exploration through cutting-edge technologies.
 
-Currently, two official plugins are available:
+## Our Vision
+To become a leading force in holistic and skill-centric education, empowering students to unlock their true cognitive potential and thrive in an ever-evolving world.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Our Mission
+- To build a nurturing, AI-powered learning environment for students aged 6–14.
+- To develop tools that identify and enhance core cognitive skills beyond traditional academics.
+- To support parents, educators, and schools with meaningful insights that drive student growth.
+## Tech Stack
+- **Frontend**: React.js, Tailwind CSS
+- **Backend**: Node.js, Express.js
+- **Other Tools**: REST API
 
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend using TypeScript and enable type-aware lint rules. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
