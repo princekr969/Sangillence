@@ -20,11 +20,11 @@ function HomePage() {
         <Hero />
         <About />
         <Benefits />
+        <Awards />
         <Skills />
         <Results />
         <Timeline />
         <Testimonial/>
-        <Awards />
         <CTA />
         <Footer />
       </div>

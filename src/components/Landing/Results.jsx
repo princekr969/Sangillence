@@ -163,7 +163,7 @@ const Results = () => {
                 "The AI-powered assessment provided insights that traditional exams never could. 
                 Students discovered strengths they didn't know they had."
               </p>
-              <p className="text-sm text-slate-400 mt-2">— Dr. Rajesh Kumar, IIIT Gwalior</p>
+              <p className="text-sm text-slate-400 mt-2">— Mr. Akshat Dubey, IIIT Gwalior</p>
             </div>
           </div>
         </div>

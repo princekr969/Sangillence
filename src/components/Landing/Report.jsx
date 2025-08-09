@@ -18,11 +18,6 @@ const skills = [
     icon: Lightbulb,
   },
   {
-    name: 'Communication',
-    percentage: 94,
-    icon: MessageCircle,
-  },
-  {
     name: 'Problem Solving',
     percentage: 97,
     icon: Puzzle,
