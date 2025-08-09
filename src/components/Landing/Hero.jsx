@@ -1,11 +1,7 @@
-import React, { useState } from 'react';
-import { Link, NavLink } from 'react-router-dom';
-import { Menu, X, ArrowRight } from 'lucide-react';
+import { Link } from 'react-router-dom';
+import { ArrowRight } from 'lucide-react';
 import useModelViewer from '../../hooks/useModelViewer.jsx'
-import VideoPlayer from './VideoPlayer.jsx';
-import sangillenceLogo from './../../../assets/sangillenceLogo.png';
 import heroSectionBg from '../../../assets/svgs/herosectionbg.svg';
-import mainSectionBg from '../../../assets/svgs/heromainsectionbg.svg';
 import collegeLogo from "../../../assets/svgs/collegelogo.svg";
 import soboWalk from "../../../assets/3dModels/SOBOwalk.glb"
 import soboWalk2 from "../../../assets/3dModels/SOBO2walk.glb"
@@ -13,7 +9,6 @@ import soboMat from "../../../assets/3dModels/SOBOmat.glb"
 import soboStart from "../../../assets/3dModels/SOBOstart.glb"
 import soboRun from "../../../assets/3dModels/SOBOrun.glb"
 import logofinal from "../../../assets/3dModels/logofinal.glb"
-// import smileSOBO from "../../../assets/3dModels/smileSOBO.mp4"
 import smileSOBO from "../../../assets/3dModels/smileSOBO.gif"
 
 const ModelViewer = useModelViewer(soboRun)

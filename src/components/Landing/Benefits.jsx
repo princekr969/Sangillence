@@ -1,5 +1,5 @@
 import { useEffect, useState, useRef } from 'react';
-import { IndianRupee, BookOpenCheck, BrainCircuit, ChartColumnIncreasing, Award, School, TrendingUp, Users, Clock, Star } from 'lucide-react';
+import { IndianRupee, BookOpenCheck, BrainCircuit, ChartColumnIncreasing, Award, School} from 'lucide-react';
 
 const benefits = [
 {

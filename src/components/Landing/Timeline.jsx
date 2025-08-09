@@ -1,5 +1,5 @@
 import { useState,useRef,useEffect } from 'react';
-import { Calendar, Lock, Users, FileText, Award, CheckCircle } from 'lucide-react';
+import { Calendar, Lock, } from 'lucide-react';
 
 const timelineData = [
   {

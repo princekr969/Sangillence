@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Brain, Target, Lightbulb, MessageCircle, Puzzle } from 'lucide-react';
+import { Brain, Target, Lightbulb, Puzzle } from 'lucide-react';
 
 const skills = [
   {
