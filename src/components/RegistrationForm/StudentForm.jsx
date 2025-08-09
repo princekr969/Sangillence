@@ -112,7 +112,7 @@ const StudentForm = ({ onSubmit }) => {
       console.log('Student form data:', formData);
       
       try {
-        const response = await fetch('http://localhost:5001/api/student/submit', {
+        const response = await fetch('https://api-node-sangillence.onrender.com/api/student/submit', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',

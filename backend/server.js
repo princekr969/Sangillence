@@ -16,7 +16,7 @@ app.use(
   cors({
     origin:
       process.env.NODE_ENV === "production"
-        ? ["https://princekr969.github.io"]
+        ? ["http://localhost:5173", "https://sangillence.com/"]
         : ["http://localhost:5173", "http://localhost:3000"],
     credentials: true,
   })

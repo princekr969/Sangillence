@@ -179,7 +179,7 @@ const SchoolForm = ({ onSubmit }) => {
       console.log('Submitting to:', 'http://localhost:5001/api/school/submit');
 
       // Submit to backend API
-      const response = await fetch('http://localhost:5001/api/school/submit', {
+      const response = await fetch('https://api-node-sangillence.onrender.com/api/school/submit', {
         method: 'POST',
         body: submitData,
       });
