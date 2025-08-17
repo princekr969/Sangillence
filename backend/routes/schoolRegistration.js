@@ -13,7 +13,7 @@ const upload = multer({
   },
   fileFilter: (req, file, cb) => {
     // Only allow Excel files
-    if (
+    if ( 
       file.mimetype ===
         "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" ||
       file.mimetype === "application/vnd.ms-excel"
@@ -37,9 +37,10 @@ router.get("/test", (req, res) => {
 // POST endpoint to submit school registration
 router.post("/submit", upload.single("excelFile"), async (req, res) => {
   try {
+    
     const formData = req.body;
     const excelFile = req.file;
-
+    
     // Add file information to form data
     if (excelFile) {
       formData.excelFile = {
@@ -113,6 +114,7 @@ router.post("/submit", upload.single("excelFile"), async (req, res) => {
     const result = await appendToSheet(formData);
 
     if (result.success) {
+
       res.status(200).json({
         success: true,
         message: "School registration submitted successfully!",

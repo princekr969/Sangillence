@@ -92,6 +92,8 @@ export const sendStudentConfirmationEmail = async (studentData) => {
 // Send notification email to school
 export const sendSchoolNotificationEmail = async (studentData) => {
     try {
+        console.log("Sending confirmation email to:", studentData.email);
+
         const transporter = createTransporter();
 
         const mailOptions = {
