@@ -1,47 +1,47 @@
 import { useState,useRef,useEffect } from 'react';
-import { Calendar, Lock, } from 'lucide-react';
+import { Calendar, Lock, Award } from 'lucide-react';
 
 const timelineData = [
   {
-    date: "August 01, 2025",
+    date: "August 21, 2025",
     month: "August",
-    day: "01",
+    day: "21",
     year: "2025",
     icon: <Calendar className="w-4 h-4" />,
     title: "Registration Opens",
     description: "Free registration begins for all eligible students",
-    status: "completed"
+    status: "upcoming"
   },
   {
-    date: "September 15, 2025",
-    month: "September",
-    day: "15",
+    date: "October 10, 2025",
+    month: "October",
+    day: "10",
     year: "2025",
     icon: <Lock className="w-4 h-4" />,
-    title: "Registrations Closed",
-    description: "Registration period for the AI-powered open-book exam has ended.",
-    status: "current"
+    title: "Registrations Close",
+    description: "Registration period for the AI-powered open-book exam ends.",
+    status: "upcoming"
   },
-  // {
-  //   date: "March 1-15, 2025",
-  //   month: "March",
-  //   day: "1-15",
-  //   year: "2025",
-  //   icon: <Users className="w-4 h-4" />,
-  //   title: "Evaluation Phase",
-  //   description: "AI analysis and comprehensive skill assessment",
-  //   status: "current"
-  // },
-  // {
-  //   date: "March 30, 2025",
-  //   month: "March",
-  //   day: "30",
-  //   year: "2025",
-  //   icon: <Award className="w-4 h-4" />,
-  //   title: "Results & Awards",
-  //   description: "Results announcement and award ceremony",
-  //   status: "current"
-  // }
+  {
+    date: "October 26, 2025",
+    month: "October",
+    day: "26",
+    year: "2025",
+    icon: <Calendar className="w-4 h-4" />,
+    title: "Exam Date",
+    description: "SOBO'25 AI-powered open-book examination day",
+    status: "upcoming"
+  },
+  {
+    date: "February 2026",
+    month: "February",
+    day: "15",
+    year: "2026",
+    icon: <Award className="w-4 h-4" />,
+    title: "Winner Announcement",
+    description: "Results announcement and winner declaration ceremony (Tentative Date)",
+    status: "upcoming"
+  }
 ];
 
 

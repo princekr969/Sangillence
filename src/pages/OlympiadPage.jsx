@@ -158,7 +158,7 @@ function OlympiadPage() {
                 <div className="absolute inset-0 bg-gradient-to-r from-yellow-600/20 to-orange-600/20 rounded-xl blur opacity-0"></div>
                 <div className="relative bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl p-6 ">
                   <ul className="list-none font-family-givonic-regular space-y-2 text-blue-100">
-                    <li>💵 Cash prize of up to <span className="text-white font-family-givonic-semiBold font-semibold">₹25,000</span>.</li>
+                    <li>💵 Prize pool of  <span className="text-white font-family-givonic-semiBold font-semibold">₹25,000</span>.</li>
                     <li>📑 <span className="text-white">Merit certificate</span>.</li>
                     <li>📊 <b className="text-white font-family-givonic-bold">Top 100 Performers:</b > Certificates of appreciation.</li>
                   </ul>

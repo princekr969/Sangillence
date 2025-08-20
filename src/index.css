@@ -152,6 +152,15 @@
   }
 }
 
+@keyframes shimmer {
+  0% {
+    transform: translateY(0%);
+  }
+  100% {
+    transform: translateY(200%);
+  }
+}
+
 /* Animation Classes */
 .animate-fade-in {
   animation: fadeIn 1s ease-out;
@@ -199,6 +208,10 @@
 
 .animate-pulse-glow {
   animation: pulseGlow 2s ease-in-out infinite;
+}
+
+.animate-shimmer {
+  animation: shimmer 3s ease-in-out infinite;
 }
 
 /* Responsive adjustments */
