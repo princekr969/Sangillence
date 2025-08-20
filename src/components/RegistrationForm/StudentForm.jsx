@@ -9,6 +9,8 @@ const classOptions = [
   { value: '6', label: 'Class 6' },
   { value: '7', label: 'Class 7' },
   { value: '8', label: 'Class 8' },
+  { value: '9', label: 'Class 9' },
+  { value: '10', label: 'Class 10' }
 ];
 
 const StudentForm = ({ onSubmit }) => {
