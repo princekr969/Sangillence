@@ -105,7 +105,7 @@ useEffect(() => {
 }, []);
 
   return (
-    <div ref={sectionRef} className="min-h-screen bg-slate-100 py-8 px-4 sm:py-16">
+    <div ref={sectionRef} className="bg-slate-100 py-8 px-4 sm:py-16">
       <div className="max-w-4xl mx-auto">
         {/* Header */}
         <div className="text-center mb-16">

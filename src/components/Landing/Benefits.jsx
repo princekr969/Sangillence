@@ -122,7 +122,7 @@ function Benefits() {
     }, []);
 
     return (
-        <div ref={sectionRef} className="relative min-h-screen bg-gradient-to-t from-blue-100 via-blue-50 to-white py-16 px-4 sm:px-6 md:px-16">
+        <div ref={sectionRef} className="relative bg-gradient-to-t from-blue-100 via-blue-50 to-white py-16 px-4 sm:px-6 md:px-16">
         <div className="max-w-7xl mx-auto">
 
             {/* Header */}

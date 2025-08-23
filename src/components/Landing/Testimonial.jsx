@@ -14,6 +14,12 @@ const testimonials = [
     text: "The exam I recently that tested my logical thinking and skills related to my thinking abilities . It included tasks like problem-solving and real-world scenarios. The test really made me think and apply my knowledge. I got clear feedback on my strengths and areas to improve. It was fair and accurate, and the experience helped me understand my readiness for a career in software. Overall, it was a helpful and eye-opening experience.",
     profileImage: "https://res.cloudinary.com/dstbd40ud/image/upload/v1753891024/Sai_yogyabhilash_ah8wyv.png",
   },
+  {
+    id: 3,
+    name: "Siddesh Ambre",
+    text: "The online quiz was really good. It was made to check our aptitude with the help of AI. Most questions were easy, some were tricky, and a few were hard, so it was interesting. After the quiz, I got a performance report that had graphs showing my score compared with the highest score and the average score. The performance report also had many different parameters to check my aptitude in detail. Everything was simple to understand, and it showed how AI can make testing and results easy and clear.",
+    profileImage: "https://res.cloudinary.com/dstbd40ud/image/upload/v1755794268/Siddesh_Ambre_ezhabh.jpg",
+  },
 ];
 
 const eventImages = [
@@ -36,7 +42,7 @@ const Testimonial = () => {
   }, []);
 
   return (
-    <div className="relative min-h-screen bg-gradient-to-t from-blue-100 via-blue-50 to-white px-4 py-16 sm:px-6 ">
+    <div className="relative  bg-gradient-to-t from-blue-100 via-blue-50 to-white px-4 py-16 sm:px-6 ">
       <div className="max-w-7xl mx-auto">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
           

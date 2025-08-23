@@ -17,6 +17,8 @@ import AboutFlagshipSection from "./About/AboutFlagshipSection";
 import AboutBeliefSection from "./About/AboutBeliefSection";
 import ContactHeader from "./Contact/ContantHeader";
 import ContactDetails from "./Contact/ContactMainSection";
+import ChartGallery from "./Landing/school_section_performance_leaderboard";
+import SchoolSectionLeaderboard from './Landing/school_section_performance_leaderboard';
 
 export {
     Navbar,
@@ -37,5 +39,7 @@ export {
     AboutFlagshipSection,
     AboutBeliefSection,
     ContactHeader,
-    ContactDetails
+    ContactDetails,
+    ChartGallery,
+    SchoolSectionLeaderboard,
 }
