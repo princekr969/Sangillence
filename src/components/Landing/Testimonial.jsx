@@ -2,21 +2,21 @@ import React, { useState, useEffect } from 'react';
 
 
 const testimonials = [
-  {
-    id: 1,
-    name: "Prof. Anurag Srivastava",
-    text: `I've followed Sangillence and its young founders, impressed
-by their clarity and courage to test ideas in real settings.
-SOBO'25, India's first AI-powered open-book Olympiad,
-challenges traditional assessments and promotes skilled learning. It could redefine how we nurture student intelligence. I commend the team's vision and sincerity.`,
-    profileImage: "https://res.cloudinary.com/dstbd40ud/image/upload/v1756060274/Screenshot_2025-08-24_235904_s6lavm.png",
-  },
-  {
-    id: 2,
-    name: "Dr. Jeevaraj S",
-    text: "The Sangillence team shows a sincere, deep commitment to transforming education through AI. SOBO'25 reflects their vision—promoting creativity, reasoning, and real-world problem-solving over rote learning. It's a rare, forward-thinking effort with real potential for impact.",
-    profileImage: "https://res.cloudinary.com/dstbd40ud/image/upload/v1756060274/Screenshot_2025-08-24_235916_aofpbk.png",
-  },
+//   {
+//     id: 1,
+//     name: "Prof. Anurag Srivastava",
+//     text: `I've followed Sangillence and its young founders, impressed
+// by their clarity and courage to test ideas in real settings.
+// SOBO'25, India's first AI-powered open-book Olympiad,
+// challenges traditional assessments and promotes skilled learning. It could redefine how we nurture student intelligence. I commend the team's vision and sincerity.`,
+//     profileImage: "https://res.cloudinary.com/dstbd40ud/image/upload/v1756060274/Screenshot_2025-08-24_235904_s6lavm.png",
+//   },
+//   {
+//     id: 2,
+//     name: "Dr. Jeevaraj S",
+//     text: "The Sangillence team shows a sincere, deep commitment to transforming education through AI. SOBO'25 reflects their vision—promoting creativity, reasoning, and real-world problem-solving over rote learning. It's a rare, forward-thinking effort with real potential for impact.",
+//     profileImage: "https://res.cloudinary.com/dstbd40ud/image/upload/v1756060274/Screenshot_2025-08-24_235916_aofpbk.png",
+//   },
   {
     id: 3,
     name: "Rakesh Prajapat",
