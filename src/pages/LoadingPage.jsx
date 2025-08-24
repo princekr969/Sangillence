@@ -101,7 +101,6 @@ function LoadingPage() {
                 </span>
               </h1>
               <p className="flex items-center justify-center gap-1 text-lg text-gray-500 animate-fade-in animation-delay-500">
-                <Bot size={20}  className="text-blue-500"/>
                 AI-Powered Skill Assessment
               </p>
             </div>

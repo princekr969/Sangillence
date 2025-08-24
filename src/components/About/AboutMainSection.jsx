@@ -44,11 +44,8 @@ function AboutMainSection() {
                   ></div>
                 </div>
                 
-                <div className="relative z-10 text-center h-full flex flex-col justify-center">
-                  <Brain className="mx-auto mb-4 text-blue-300" size={40} />
-                  <h3 className="text-xl font-bold mb-2">Today.</h3>
-                  <h3 className="text-xl font-bold mb-2">Tomorrow.</h3>
-                  <h3 className="text-xl font-bold text-blue-300">Together.</h3>
+                <div className="relative z-10 text-center h-full flex flex-col justify-center"> 
+                  <p className="text-sm text-gray-200">Today. <br />Tomorrow. <br />Together</p>
                 </div>
               </div>
 
@@ -66,7 +63,6 @@ function AboutMainSection() {
                 
                 <div className="relative z-10 flex items-center justify-center h-full">
                   <div className="text-center">
-                    <Zap className="mx-auto mb-2 text-amber-300" size={32} />
                     <p className="text-sm text-gray-200">AI-Powered Learning</p>
                   </div>
                 </div>
@@ -101,7 +97,6 @@ function AboutMainSection() {
               {/* Who We Are */}
               <div className="border-l-4 border-blue-500 pl-6">
                 <div className="flex items-center mb-3">
-                  <Users className="text-blue-600 mr-2" size={20} />
                   <h3 className="text-xl font-family-givonic-semiBold font-semibold text-gray-900">Who We Are</h3>
                 </div>
                 <p className="text-gray-600 font-family-givonic-regular leading-relaxed">
@@ -115,7 +110,6 @@ function AboutMainSection() {
               {/* Our Vision */}
               <div className="border-l-4 border-purple-500 pl-6">
                 <div className="flex items-center mb-3">
-                  <Target className="text-purple-600 mr-2" size={20} />
                   <h3 className="text-xl font-family-givonic-semiBold font-semibold text-gray-900">Our Vision</h3>
                 </div>
                 <p className="text-gray-600 font-family-givonic-regular leading-relaxed">
@@ -127,7 +121,6 @@ function AboutMainSection() {
               {/* Our Mission */}
               <div className="border-l-4 border-green-500 pl-6">
                 <div className="flex items-center mb-4">
-                  <Lightbulb className="text-green-600 mr-2" size={20} />
                   <h3 className="text-xl font-family-givonic-semiBold font-semibold text-gray-900">Our Mission</h3>
                 </div>
                 <div className="space-y-4">

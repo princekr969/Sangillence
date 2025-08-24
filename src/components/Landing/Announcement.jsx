@@ -1,7 +1,11 @@
-function ContactHeader() {
-  return (
+import React from 'react'
+import { Link } from 'react-router-dom';
+import { ArrowRight } from 'lucide-react';
 
-     <div className="relative h-[15vh] md:h-[20vh] bg-slate-900 overflow-hidden">
+function Announcement() {
+  return (
+    <div>
+      <div className="relative z-20  bg-slate-900 overflow-hidden rounded-2xl shadow-2xl">
       {/* Background with geometric shapes */}
       <div className="absolute inset-0">
         {/* Base dark background */}
@@ -68,21 +72,49 @@ function ContactHeader() {
         ></div>
       </div>
 
-      {/* Content */}
-      <div className="relative z-10 flex flex-col justify-center items-center h-full px-6 lg:px-8">
-        {/* Main heading */}
-        <h1 className="text-3xl font-family-givonic-bold lg:text-5xl font-bold text-white tracking-wider text-center">
-          CONTACT DETAILS
-        </h1>
-        <p className="text-slate-300 font-family-givonic-regular">
-            Feel free to reach out to us through any of the following channels. We're always here to help!
-        </p>
-      </div>
+      {/* Glowing border effect */}
+          <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-slate-400/20 via-blue-400/20 to-indigo-400/20 blur-sm"></div>
+          
+          {/* Main content */}
+          <div className="relative px-6 py-4 md:py-5">
+            <div className="flex flex-col md:flex-row items-center justify-between gap-3">
+              {/* Left side - Announcement text */}
+              <div className="flex items-center gap-3">
+                {/* Animated icon */}
+                <div className="relative">
+                  <div className="w-8 h-8 md:w-10 md:h-10 bg-white/20 rounded-full flex items-center justify-center animate-pulse">
+                    <div className="w-4 h-4 md:w-5 md:h-5 bg-white rounded-full animate-ping"></div>
+                  </div>
+                  <div className="absolute inset-0 w-8 h-8 md:w-10 md:h-10 border-2 border-white/30 rounded-full animate-spin" style={{ animationDuration: '3s' }}></div>
+                </div>
+                
+                {/* Text content */}
+                <div className="text-center md:text-left">
+                  <h3 className="font-family-givonic-bold text-white text-lg md:text-xl font-bold">
+                    REGISTRATIONS ARE NOW OPEN!
+                  </h3>
+                  <p className="font-family-givonic-regular text-blue-100 text-sm md:text-base">
+                    Join SOBO'25 - India's First AI-Powered Olympiad
+                  </p>
+                  <p className="font-family-givonic-bold text-amber-300 text-sm md:text-base font-semibold mt-1">
+                    ✨ NO REGISTRATION FEE ✨
+                  </p>
+                </div>
+              </div>
+              
+              {/* Right side - CTA button */}
+              <div className="flex-shrink-0">
+                <Link
+                  to="/olympiad"
+                  className="inline-flex items-center gap-3 bg-white/20 hover:bg-white/30 backdrop-blur-sm text-white px-6 py-3  rounded-xl font-family-givonic-semiBold font-semibold transition-all duration-200 hover:shadow-lg border border-white/30 hover:border-white/50"
+                >
+                  <span className="text-base md:text-lg font-bold">Register Now</span>
+                  <ArrowRight className="w-5 h-5 md:w-6 md:h-6 group-hover:translate-x-1 transition-transform" />
+                </Link>
+              </div>
+            </div>
+          </div>
 
-      {/* Decorative elements */}
-      <div className="absolute bottom-4 left-4 w-1 h-8 bg-gradient-to-t from-blue-500 to-transparent"></div>
-      <div className="absolute bottom-4 right-4 w-1 h-8 bg-gradient-to-t from-amber-500 to-transparent"></div>
-      
       {/* Floating particles effect */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         {[...Array(8)].map((_, i) => (
@@ -99,8 +131,7 @@ function ContactHeader() {
         ))}
       </div>
     </div>
-
-  )
+    </div>)
 }
 
-export default ContactHeader
+export default Announcement

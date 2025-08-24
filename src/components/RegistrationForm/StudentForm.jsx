@@ -204,7 +204,7 @@ const StudentForm = ({ onSubmit }) => {
           type="email"
           value={formData.email}
           onChange={handleChange}
-          placeholder="example@email.com"
+          placeholder="student@email.com"
           error={errors.email}
           required
         />

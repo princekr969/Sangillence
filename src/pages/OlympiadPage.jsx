@@ -1,30 +1,12 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
 import { ScrollText, ArrowRight, ArrowUp, Award } from 'lucide-react';
-import img from "./../../assets/svgs/sangillenceBanner1.svg"
+import {ScrollToTop} from '../components';
 import { Link, useLocation } from 'react-router-dom';
 import OlympiadHeader from '../components/Olympiad/OlympiadHeader';
 
 function OlympiadPage() {
   const { pathname } = useLocation();
-  const [showScrollTop, setShowScrollTop] = useState(false);
-
-   const [bgImage, setBgImage] = useState("");
-
-  useEffect(() => {
-    const updateImage = () => {
-      const width = window.innerWidth;
-      if (width < 768) {
-        setBgImage("https://res.cloudinary.com/dstbd40ud/image/upload/v1753892141/olympiadBanner_rsvmau.png");
-      } else {
-        setBgImage("https://res.cloudinary.com/dstbd40ud/image/upload/v1753892141/olympiadBanner_rsvmau.png");
-      }
-    };
-
-    updateImage(); // Set initially
-    window.addEventListener("resize", updateImage);
-    return () => window.removeEventListener("resize", updateImage);
-  }, []);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -185,18 +167,11 @@ function OlympiadPage() {
         </div>
 
         {/* Scroll to Top Button */}
-        <button
-          onClick={scrollToTop}
-          className={`fixed z-50 bottom-8 right-8 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white p-3 rounded-full shadow-2xl transition-all transform hover:scale-110 backdrop-blur-sm border border-white/10 ${
-            showScrollTop ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-16'
-          }`}   
-          aria-label="Scroll to top"
-        >
-          <ArrowUp className="w-6 h-6" />
-        </button>
+        <ScrollToTop />
       </div>
     </div>
   );
 }
 
 export default OlympiadPage;
+

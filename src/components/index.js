@@ -19,6 +19,7 @@ import ContactHeader from "./Contact/ContantHeader";
 import ContactDetails from "./Contact/ContactMainSection";
 import ChartGallery from "./Landing/school_section_performance_leaderboard";
 import SchoolSectionLeaderboard from './Landing/school_section_performance_leaderboard';
+import ScrollToTop from "./ScrollToTop";
 
 export {
     Navbar,
@@ -42,4 +43,5 @@ export {
     ContactDetails,
     ChartGallery,
     SchoolSectionLeaderboard,
+    ScrollToTop
 }

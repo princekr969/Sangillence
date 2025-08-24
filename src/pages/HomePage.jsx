@@ -10,6 +10,7 @@ import {
   CTA,
   Navbar,
   Testimonial,
+  ScrollToTop,
 } from '../components/index.js';
 function HomePage() {
 
@@ -25,7 +26,8 @@ function HomePage() {
         <Results />
         <Timeline />
         <Testimonial/>
-        <CTA />
+        <ScrollToTop />
+        {/* <CTA /> */}
         <Footer />
       </div>
     </>

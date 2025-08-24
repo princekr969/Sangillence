@@ -4,22 +4,38 @@ import React, { useState, useEffect } from 'react';
 const testimonials = [
   {
     id: 1,
-    name: "Rakesh prajapat",
+    name: "Prof. Anurag Srivastava",
+    text: `I've followed Sangillence and its young founders, impressed
+by their clarity and courage to test ideas in real settings.
+SOBO'25, India's first AI-powered open-book Olympiad,
+challenges traditional assessments and promotes skilled learning. It could redefine how we nurture student intelligence. I commend the team's vision and sincerity.`,
+    profileImage: "https://res.cloudinary.com/dstbd40ud/image/upload/v1756060274/Screenshot_2025-08-24_235904_s6lavm.png",
+  },
+  {
+    id: 2,
+    name: "Dr. Jeevaraj S",
+    text: "The Sangillence team shows a sincere, deep commitment to transforming education through AI. SOBO'25 reflects their vision—promoting creativity, reasoning, and real-world problem-solving over rote learning. It's a rare, forward-thinking effort with real potential for impact.",
+    profileImage: "https://res.cloudinary.com/dstbd40ud/image/upload/v1756060274/Screenshot_2025-08-24_235916_aofpbk.png",
+  },
+  {
+    id: 3,
+    name: "Rakesh Prajapat",
     text: "The testing experience was blissful. The questions ranged from simple to twisted and challenging. The evaluation report was concise and helpful. Overall, it was a wonderful demonstration of what AI can achieve in the field of testing and evaluation.",
     profileImage: "https://res.cloudinary.com/dstbd40ud/image/upload/v1753720704/Rakesh_prajapat_profile_kmephw.png",
   },
   {
-    id: 2,
-    name: "Sai yogyabhilash",
+    id: 4,
+    name: "Sai Yogyabhilash",
     text: "The exam I recently that tested my logical thinking and skills related to my thinking abilities . It included tasks like problem-solving and real-world scenarios. The test really made me think and apply my knowledge. I got clear feedback on my strengths and areas to improve. It was fair and accurate, and the experience helped me understand my readiness for a career in software. Overall, it was a helpful and eye-opening experience.",
     profileImage: "https://res.cloudinary.com/dstbd40ud/image/upload/v1753891024/Sai_yogyabhilash_ah8wyv.png",
   },
   {
-    id: 3,
+    id: 5,
     name: "Siddesh Ambre",
     text: "The online quiz was really good. It was made to check our aptitude with the help of AI. Most questions were easy, some were tricky, and a few were hard, so it was interesting. After the quiz, I got a performance report that had graphs showing my score compared with the highest score and the average score. The performance report also had many different parameters to check my aptitude in detail. Everything was simple to understand, and it showed how AI can make testing and results easy and clear.",
     profileImage: "https://res.cloudinary.com/dstbd40ud/image/upload/v1755794268/Siddesh_Ambre_ezhabh.jpg",
   },
+  
 ];
 
 const eventImages = [
