@@ -100,7 +100,7 @@ function Footer() {
               <a href="https://www.instagram.com/sangillence/" target="_blank" rel="noopener noreferrer" className="group hover:text-red-500 transition-colors">
                 <FontAwesomeIcon size='2x' className='w-8 h-8 group-hover:text-pink-500 text-white relative z-10' icon={faInstagram} />
               </a>
-              <a href="https://www.youtube.com/@sangillenceacademy" target="_blank" rel="noopener noreferrer" className="group hover:text-red-500 transition-colors">
+              <a href="https://www.youtube.com/@Sangillence" target="_blank" rel="noopener noreferrer" className="group hover:text-red-500 transition-colors">
                 <FontAwesomeIcon size='2x' className='w-8 h-8 group-hover:text-red-600 text-white relative z-10' icon={faYoutube} />
               </a>
             </div>
