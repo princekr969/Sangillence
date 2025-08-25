@@ -92,7 +92,7 @@ function ContactDetails() {
                       <FontAwesomeIcon size='2x' className='w-8 h-8 group-hover:text-pink-500 text-white relative z-10' icon={faInstagram} />
                 </Link>
                 <Link 
-                    to="https://www.youtube.com/@SangillenceAcademy"
+                    to="https://www.youtube.com/@Sangillence"
                     target="_blank"
                     rel="noopener noreferrer"
                     className={`group relative w-12 h-12 bg-gradient-to-br from-slate-800 to-slate-700 rounded-lg flex items-center justify-center shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105`}
