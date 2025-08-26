@@ -4,7 +4,6 @@ import useModelViewer from '../../hooks/useModelViewer.jsx'
 import useCountry from '../../hooks/useCountry.js'
 import heroSectionBg from '../../../assets/svgs/herosectionbg.svg';
 import collegeLogo from "../../../assets/svgs/collegelogo.svg";
-import Announcement from './Announcement.jsx';
 import soboWalk from "../../../assets/3dModels/SOBOwalk.glb"
 import soboWalk2 from "../../../assets/3dModels/SOBO2walk.glb"
 import soboMat from "../../../assets/3dModels/SOBOmat.glb"
@@ -113,7 +112,6 @@ export default function Hero() {
       <div
       className="absolute inset-0 bg-cover bg-center bg-no-repeat z-0" style={{ backgroundImage: `url(${heroSectionBg})` }}></div>
             
-      <Announcement />
         {/* Hero Section background */}
         <div className='relative z-5 h-[80%] mt-5 shadow-xl bg-[#233562] rounded-3xl'>
          
