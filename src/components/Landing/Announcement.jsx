@@ -1,8 +1,10 @@
 import React from 'react'
+import useCountry from '../../hooks/useCountry'
 import { Link } from 'react-router-dom';
 import { ArrowRight } from 'lucide-react';
 
 function Announcement() {
+  const { isOman } = useCountry();
   return (
     <div>
       <div className="relative z-20  bg-slate-900 overflow-hidden rounded-2xl shadow-2xl">
@@ -97,7 +99,7 @@ function Announcement() {
                     Join SOBO'25 - India's First AI-Powered Olympiad
                   </p>
                   <p className="font-family-givonic-bold text-amber-300 text-sm md:text-base font-semibold mt-1">
-                    ✨ NO REGISTRATION FEE ✨
+                    {isOman ? '✨ 2 OMR ONLY ✨' : '✨ NO REGISTRATION FEE ✨'}
                   </p>
                 </div>
               </div>

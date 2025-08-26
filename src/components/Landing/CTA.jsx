@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
+import useCountry from '../../hooks/useCountry';
 import { Rocket } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
@@ -140,9 +141,7 @@ const CTA = () => {
             </Link>
           </div>
           
-          <p className="text-white font-family-givonic-regular  text-lg">
-            Free registration • No hidden costs • Open to all students
-          </p>
+          <CTAFreeOrPaid />
         </div>
       </div>
 
@@ -172,3 +171,12 @@ const CTA = () => {
 };
 
 export default CTA; 
+
+function CTAFreeOrPaid() {
+  const { isOman } = useCountry();
+  return (
+    <p className="text-white font-family-givonic-regular  text-lg">
+      {isOman ? 'Registration fee: 2 OMR only • No hidden costs' : 'Free registration • No hidden costs • Open to all students'}
+    </p>
+  );
+}

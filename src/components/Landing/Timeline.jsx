@@ -1,5 +1,6 @@
 import { useState,useRef,useEffect } from 'react';
 import { Calendar, Lock, Award } from 'lucide-react';
+import useCountry from '../../hooks/useCountry';
 
 const timelineData = [
   {
@@ -46,6 +47,7 @@ const timelineData = [
 
 
 const Timeline = () => {
+    const { isOman } = useCountry();
     const [isSectionVisible, setIsSectionVisible] = useState(false);
     const [visibleCards, setVisibleCards] = useState([]);
     const sectionRef = useRef(null);
@@ -179,7 +181,7 @@ useEffect(() => {
                         <div className="w-1/2 pl-12">
                           <div className="bg-white rounded-lg shadow-md p-6 border border-gray-200">
                             <h3 className="text-xl font-semibold text-gray-900 mb-3">{item.title}</h3>
-                            <p className="text-gray-600 leading-relaxed text-sm">{item.description}</p>
+                            <p className="text-gray-600 leading-relaxed text-sm">{item.title === 'Registration Opens' && isOman ? 'Registration begins — 2 OMR only' : item.description}</p>
                           </div>
                         </div>
                       </>
@@ -189,7 +191,7 @@ useEffect(() => {
                         <div className="w-1/2 pr-12">
                           <div className="bg-white rounded-lg shadow-md p-6 border border-gray-200">
                             <h3 className="text-xl font-semibold text-gray-900 mb-3">{item.title}</h3>
-                            <p className="text-gray-600 leading-relaxed text-sm">{item.description}</p>
+                            <p className="text-gray-600 leading-relaxed text-sm">{item.title === 'Registration Opens' && isOman ? 'Registration begins — 2 OMR only' : item.description}</p>
                           </div>
                         </div>
 
@@ -219,7 +221,7 @@ useEffect(() => {
                       <div className="flex items-start justify-between mb-3">
                         <div>
                           <h3 className="text-lg sm:text-xl font-semibold text-gray-900 mb-2">{item.title}</h3>
-                          <p className="text-gray-600 leading-relaxed text-sm">{item.description}</p>
+                          <p className="text-gray-600 leading-relaxed text-sm">{item.title === 'Registration Opens' && isOman ? 'Registration begins — 2 OMR only' : item.description}</p>
                         </div>
                         <div className="text-right ml-4 flex-shrink-0">
                           <div className="text-gray-500 text-xs font-medium">{item.month}</div>
