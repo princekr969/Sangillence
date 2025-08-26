@@ -133,9 +133,20 @@ const SkillsCarousel = () => {
               >
                 {/* skills */}
                 <div className='flex flex-col justify-center items-center'>
-                  <div className={`w-12 h-12 rounded-full bg-gradient-to-br from-blue-800 via-blue-900 to-blue-950 flex items-center justify-center shadow-xl`}>
-                      <testimonial.icon className="w-6 h-6 text-slate-100" />
-                  </div>
+                  <div className="relative group">
+                      <div className={`relative w-12 h-12 bg-gradient-to-br from-slate-800 to-slate-900 rounded-full flex items-center justify-center shadow-lg transition-all duration-300 transform hover:shadow-xl overflow-hidden`}>
+                        {/* Geometric hover overlay */}
+                        <div className="absolute inset-0 bg-gradient-to-r from-blue-600/20 via-transparent to-amber-500/20  rounded-full"></div>
+                        
+                        {/* Icon content */}
+                        <testimonial.icon className="relative z-10 w-6 h-6 text-white" />
+                        
+                        {/* Decorative elements */}
+                        <div className="absolute top-0 left-1/2 transform -translate-x-1/2 w-0.5 h-3 bg-gradient-to-b from-blue-500 to-transparent"></div>
+                        <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-0.5 h-3 bg-gradient-to-t from-amber-500 to-transparent "></div>
+                      </div>
+                    </div>
+                
                     <h3 className="text-xl font-family-givonic-semiBold font-semibold text-slate-800 my-2 ">
                       {testimonial.name}
                     </h3>
@@ -157,7 +168,7 @@ const SkillsCarousel = () => {
                 onClick={() => goToSlide(index)}
                 className={`w-2 h-2 rounded-full transition-all duration-300 ${
                   index === currentSlide
-                    ? 'bg-blue-900 w-8'
+                    ? 'bg-gradient-to-r from-slate-800 to-slate-900 w-8'
                     : 'bg-gray-300 hover:bg-gray-400'
                 }`}
               />

@@ -148,7 +148,7 @@ function Benefits() {
               key={solution.id}
               className="flex justify-center items-start gap-2 md:gap-5"
             >
-              <span className="text-blue-900 font-family-givonic-bold font-bold text-lg sm:text-3xl">
+              <span className="text-slate-800 font-family-givonic-bold font-bold text-lg sm:text-3xl">
                 {solution.number}
               </span>
 
@@ -173,8 +173,18 @@ function Benefits() {
                   : 'opacity-0 translate-y-12'
               }`}
                 >
-                    <div className={`w-12 h-12 ${benefit.iconBgColor} rounded-full flex items-center justify-center shadow-lg`}>
-                        <benefit.icon className="w-6 h-6 text-slate-600" />
+                    <div className="relative group">
+                      <div className={`relative w-12 h-12 bg-gradient-to-br from-slate-800 to-slate-900 rounded-full flex items-center justify-center shadow-lg transition-all duration-300 transform hover:shadow-xl overflow-hidden`}>
+                        {/* Geometric hover overlay */}
+                        <div className="absolute inset-0 bg-gradient-to-r from-blue-600/20 via-transparent to-amber-500/20  rounded-full"></div>
+                        
+                        {/* Icon content */}
+                        <benefit.icon className="relative z-10 w-6 h-6 text-white" />
+                        
+                        {/* Decorative elements */}
+                        <div className="absolute top-0 left-1/2 transform -translate-x-1/2 w-0.5 h-3 bg-gradient-to-b from-blue-500 to-transparent"></div>
+                        <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-0.5 h-3 bg-gradient-to-t from-amber-500 to-transparent "></div>
+                      </div>
                     </div>
             
                     <div className="flex-1">

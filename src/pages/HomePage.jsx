@@ -11,7 +11,9 @@ import {
   Navbar,
   Testimonial,
   ScrollToTop,
+  
 } from '../components/index.js';
+
 function HomePage() {
 
   return (

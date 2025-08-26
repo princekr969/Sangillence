@@ -1,6 +1,23 @@
 import { useState, useRef, useEffect } from 'react';
 import { BarChart3, PieChart, TrendingUp} from 'lucide-react';
 
+const testimonials = [
+    {
+      id: 1,
+      name: "Prof. Anurag Srivastava",
+      post: "Head of Engineering Science Dept , ABV IIITM Gwalior",
+      text: `I've followed Sangillence and its young founders, impressed by their clarity and courage to test ideas in real settings. SOBO'25, India's first AI-powered open-book Olympiad, challenges traditional assessments and promotes skilled learning. It could redefine how we nurture student intelligence. I commend the team's vision and sincerity.`,
+      profileImage: "https://res.cloudinary.com/dstbd40ud/image/upload/v1756060274/Screenshot_2025-08-24_235904_s6lavm.png",
+    },
+    {
+      id: 2,
+      name: "Dr. Jeevaraj S",
+      post: "Assistant Professor Engineering Science Dept, ABV IIITM Gwalior",
+      text: "The Sangillence team shows a sincere, deep commitment to transforming education through AI. SOBO'25 reflects their vision—promoting creativity, reasoning, and real-world problem-solving over rote learning. It's a rare, forward-thinking effort with real potential for impact.",
+      profileImage: "https://res.cloudinary.com/dstbd40ud/image/upload/v1756060274/Screenshot_2025-08-24_235916_aofpbk.png",
+    },
+  ];
+
 const Results = () => {
   const [isSectionVisible, setIsSectionVisible] = useState(false);
         const [isCardSectionVisible, setIsCardSectionVisible] = useState(false);
@@ -129,42 +146,99 @@ const Results = () => {
             </div>
           </div>
 
-          <div className={`h-full flex justify-center items-center bg-slate-800 shadow-xl rounded-3xl p-8 text-white transition-all duration-1000 ${
+          <div className={`relative group h-full flex justify-center items-center bg-gradient-to-br from-slate-800 to-slate-900 shadow-xl rounded-3xl p-8 text-white overflow-hidden delay-0 transition-all duration-1000  ${
                 isCardSectionVisible 
                   ? 'opacity-100 translate-y-0' 
                   : 'opacity-0 translate-y-12'
               }`}>
-                <div className='flex-col justify-center items-center'>
+                <div className='relative z-10 flex-col justify-center items-center'>
                   <h3 className="text-2xl font-bold mb-6 text-center">IIIT Gwalior Pilot Results</h3>
                   
                   <div className="grid grid-cols-2 gap-6 mb-8">
                     <div className="text-center">
                       <div className="text-3xl font-bold text-blue-400 mb-2">500+</div>
-                      <div className="text-sm ">Students Assessed</div>
+                      <div className="text-sm text-slate-300">Students Assessed</div>
                     </div>
                     <div className="text-center">
                       <div className="text-3xl font-bold text-green-400 mb-2">95%</div>
-                      <div className="text-sm ">Satisfaction Rate</div>
+                      <div className="text-sm text-slate-300">Satisfaction Rate</div>
                     </div>
                       <div className="text-center">
                       <div className="text-3xl font-bold text-purple-400 mb-2">10</div>
-                      <div className="text-sm ">Skills Measured</div>
+                      <div className="text-sm text-slate-300">Skills Measured</div>
                     </div>
                     <div className="text-center">
-                      <div className="text-3xl font-bold text-slate-300 mb-2">AI</div>
-                      <div className="text-sm">Powered Analysis</div>
+                      <div className="text-3xl font-bold text-amber-400 mb-2">AI</div>
+                      <div className="text-sm text-slate-300">Powered Analysis</div>
                     </div>
                   </div>
 
-                  <div className="bg-slate-700 rounded-2xl p-4 text-slate-200">
-                    <p className="text-sm  italic">
+                  <div className="relative">
+                    <p className="text-sm italic">
                       "The AI-powered assessment provided insights that traditional exams never could. 
                       Students discovered strengths they didn't know they had."
                     </p>
-                    <p className="text-sm mt-2">— Mr. Akshat Dubey, IIIT Gwalior</p>
+                    <p className="text-sm mt-2 text-slate-300">— Mr. Akshat Dubey, IIIT Gwalior</p>
                   </div>
                 </div>
+
           </div>
+        </div>
+      </div>
+      <div className={`max-w-7xl mx-auto delay-200 transition-all duration-1000 ${
+                isCardSectionVisible 
+                  ? 'opacity-100 translate-y-0' 
+                  : 'opacity-0 translate-y-12'
+              }`}>
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+          {testimonials.map((testimonial, index) => (
+            <div 
+              key={testimonial.id}
+              className={`relative group bg-gradient-to-br from-slate-800 to-slate-900 rounded-2xl p-8 shadow-lg overflow-hidden ${
+                isSectionVisible 
+                  ? 'opacity-100 translate-y-0' 
+                  : 'opacity-0 translate-y-12'
+              }`}
+              
+            >
+              
+              {/* Content */}
+              <div className="relative z-10 flex flex-col h-full">
+                {/* Profile Section */}
+                <div className="flex items-center mb-6">
+                  <div className="relative group">
+                    <div className="relative w-16 h-16 rounded-full overflow-hidden shadow-lg">
+                      <img 
+                        src={testimonial.profileImage} 
+                        alt={testimonial.name}
+                        className="w-full h-full object-cover"
+                      />
+                      {/* Profile image overlay */}
+                      <div className="absolute inset-0 bg-gradient-to-r from-blue-600/10 to-amber-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                    </div>
+                  </div>
+                  <div className="ml-4">
+                    <h3 className="text-xl font-bold text-white">{testimonial.name}</h3>
+                    <span className="text-sm text-slate-400">{testimonial.post}</span>
+                  </div>
+                </div>
+
+                {/* Message */}
+                <div className="flex-1 relative bg-gradient-to-br from-slate-700 to-slate-800 rounded-2xl p-4 text-slate-200 shadow-lg">
+                  <blockquote className="text-slate-300 leading-relaxed italic">
+                    "{testimonial.text}"
+                  </blockquote>
+                </div>
+              </div>
+
+              {/* Decorative elements */}
+              <div className="absolute top-0 left-0 w-1 h-full bg-gradient-to-b from-blue-500 to-transparent opacity-80"></div>
+              <div className="absolute top-0 right-0 w-1 h-full bg-gradient-to-b from-amber-500 to-transparent opacity-80"></div>
+              
+              {/* Quote mark decoration */}
+              <div className="absolute top-4 right-4 text-6xl text-slate-700/20 font-serif leading-none">"</div>
+            </div>
+          ))}
         </div>
       </div>
       

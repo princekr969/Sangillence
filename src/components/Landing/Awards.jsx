@@ -129,22 +129,52 @@ const Awards = () => {
             <p className={`text-2xl text-slate-700 font-family-givonic-semiBold font-semibold mb-4`}>#For Everyone</p>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             <div className="text-center">
-              <div className="w-16 h-16 bg-gradient-to-br from-blue-500 to-purple-600 rounded-full flex items-center justify-center mx-auto mb-4">
-                <BadgeCheck className="w-8 h-8 text-white" />
+              <div className="relative group">
+                <div className="relative w-16 h-16 bg-gradient-to-br from-slate-800 to-slate-900 rounded-full flex items-center justify-center mx-auto mb-4 shadow-lg transition-all duration-300 transform hover:shadow-xl hover:scale-[1.02] overflow-hidden">
+                  {/* Geometric hover overlay */}
+                  <div className="absolute inset-0 bg-gradient-to-r from-blue-600/20 via-transparent to-amber-500/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-full"></div>
+                  
+                  {/* Icon content */}
+                  <BadgeCheck className="relative z-10 w-8 h-8 text-white" />
+                  
+                  {/* Decorative elements */}
+                  <div className="absolute top-0 left-1/2 transform -translate-x-1/2 w-0.5 h-3 bg-gradient-to-b from-blue-500 to-transparent opacity-50 group-hover:opacity-100 transition-opacity duration-300"></div>
+                  <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-0.5 h-3 bg-gradient-to-t from-amber-500 to-transparent opacity-50 group-hover:opacity-100 transition-opacity duration-300"></div>
+                </div>
               </div>
               <h4 className="font-semibold text-slate-800 mb-2">Digital Certificates</h4>
               <p className="text-slate-600">Verified proof of your participation.</p>
             </div>
             <div className="text-center">
-              <div className="w-16 h-16 bg-gradient-to-br from-green-500 to-teal-600 rounded-full flex items-center justify-center mx-auto mb-4">
-                <LineChart  className="w-8 h-8 text-white" />
+              <div className="relative group">
+                <div className="relative w-16 h-16 bg-gradient-to-br from-slate-800 to-slate-900 rounded-full flex items-center justify-center mx-auto mb-4 shadow-lg transition-all duration-300 transform hover:shadow-xl hover:scale-[1.02] overflow-hidden">
+                  {/* Geometric hover overlay */}
+                  <div className="absolute inset-0 bg-gradient-to-r from-blue-600/20 via-transparent to-amber-500/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-full"></div>
+                  
+                  {/* Icon content */}
+                  <LineChart className="relative z-10 w-8 h-8 text-white" />
+                  
+                  {/* Decorative elements */}
+                  <div className="absolute top-0 left-1/2 transform -translate-x-1/2 w-0.5 h-3 bg-gradient-to-b from-blue-500 to-transparent opacity-50 group-hover:opacity-100 transition-opacity duration-300"></div>
+                  <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-0.5 h-3 bg-gradient-to-t from-amber-500 to-transparent opacity-50 group-hover:opacity-100 transition-opacity duration-300"></div>
+                </div>
               </div>
               <h4 className="font-semibold text-slate-800 mb-2"> Skill Reports</h4>
               <p className="text-slate-600">AI-based insights on your core skills.</p>
             </div>
             <div className="text-center">
-              <div className="w-16 h-16 bg-gradient-to-br from-orange-500 to-red-600 rounded-full flex items-center justify-center mx-auto mb-4">
-                <Users  className="w-8 h-8 text-white" />
+              <div className="relative group">
+                <div className="relative w-16 h-16 bg-gradient-to-br from-slate-800 to-slate-900 rounded-full flex items-center justify-center mx-auto mb-4 shadow-lg transition-all duration-300 transform hover:shadow-xl hover:scale-[1.02] overflow-hidden">
+                  {/* Geometric hover overlay */}
+                  <div className="absolute inset-0 bg-gradient-to-r from-blue-600/20 via-transparent to-amber-500/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-full"></div>
+                  
+                  {/* Icon content */}
+                  <Users className="relative z-10 w-8 h-8 text-white" />
+                  
+                  {/* Decorative elements */}
+                  <div className="absolute top-0 left-1/2 transform -translate-x-1/2 w-0.5 h-3 bg-gradient-to-b from-blue-500 to-transparent opacity-50 group-hover:opacity-100 transition-opacity duration-300"></div>
+                  <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-0.5 h-3 bg-gradient-to-t from-amber-500 to-transparent opacity-50 group-hover:opacity-100 transition-opacity duration-300"></div>
+                </div>
               </div>
               <h4 className="font-semibold text-slate-800 mb-2">Stakeholder Insights</h4>
               <p className="text-slate-600">Smart suggestions for students, parents & teachers.</p>
@@ -156,4 +186,4 @@ const Awards = () => {
   );
 };
 
-export default Awards; 
+export default Awards;
