@@ -11,6 +11,7 @@ import soboStart from "../../../assets/3dModels/SOBOstart.glb"
 import soboRun from "../../../assets/3dModels/SOBOrun.glb"
 import logofinal from "../../../assets/3dModels/logofinal.glb"
 import smileSOBO from "../../../assets/3dModels/smileSOBO.gif"
+import Announcement from './Announcement.jsx';
 
 const ModelViewer = useModelViewer(soboRun)
 
@@ -48,45 +49,8 @@ export default function Hero() {
           {/* Glowing border effect */}
           <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-slate-400/20 via-blue-400/20 to-indigo-400/20 blur-sm"></div>
           
-          {/* Main content */}
-          <div className="relative px-6 py-4 md:py-5">
-            <div className="flex flex-col md:flex-row items-center justify-between gap-3">
-              {/* Left side - Announcement text */}
-              <div className="flex items-center gap-3">
-                {/* Animated icon */}
-                <div className="relative">
-                  <div className="w-8 h-8 md:w-10 md:h-10 bg-white/20 rounded-full flex items-center justify-center animate-pulse">
-                    <div className="w-4 h-4 md:w-5 md:h-5 bg-white rounded-full animate-ping"></div>
-                  </div>
-                  <div className="absolute inset-0 w-8 h-8 md:w-10 md:h-10 border-2 border-white/30 rounded-full animate-spin" style={{ animationDuration: '3s' }}></div>
-                </div>
-                
-                {/* Text content */}
-                <div className="text-center md:text-left">
-                  <h3 className="font-family-givonic-bold text-white text-lg md:text-xl font-bold">
-                    🎯 REGISTRATIONS ARE NOW OPEN!
-                  </h3>
-                  <p className="font-family-givonic-regular text-blue-100 text-sm md:text-base">
-                    Join SOBO'25 - India's First AI-Powered Olympiad
-                  </p>
-                  <p className="font-family-givonic-bold text-amber-300 text-sm md:text-base font-semibold mt-1">
-                    {isOman ? '✨ 2 OMR ONLY ✨' : '✨ NO REGISTRATION FEE ✨'}
-                  </p>
-                </div>
-              </div>
-              
-              {/* Right side - CTA button */}
-              <div className="flex-shrink-0">
-                <Link
-                  to="/olympiad"
-                  className="inline-flex items-center gap-3 bg-white/20 hover:bg-white/30 backdrop-blur-sm text-white px-6 py-3 md:px-8 md:py-4 rounded-xl font-family-givonic-semiBold font-semibold transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-white/25 border border-white/30 hover:border-white/50"
-                >
-                  <span className="text-base md:text-lg font-bold">{isOman ? 'Register Now - Oman' : 'Register Now'}</span>
-                  <ArrowRight className="w-5 h-5 md:w-6 md:h-6 group-hover:translate-x-1 transition-transform" />
-                </Link>
-              </div>
-            </div>
-          </div>
+          
+          <Announcement/>
           
           {/* Floating particles */}
           <div className="absolute inset-0 overflow-hidden pointer-events-none">
@@ -238,7 +202,7 @@ export default function Hero() {
                 <p className="animate-slide-up-5 font-family-givonic-regular text-center md:text-start text-xs md:text-lg text-blue-100 mb-8 md:mb-12">
                     "Test Your Skills — Not Just Academics"
                 </p>
-                <div className='text-center md:text-start'>
+                {/* <div className='text-center md:text-start'>
                   <Link
                       to='/olympiad'
                       className="inline-block animate-pulse-glow max-w-max max-md:text-center bg-gradient-to-r from-blue-600 to-purple-600 text-white px-2 py-1 md:px-4 md:py-2 rounded-full text-lg font-semibold hover:scale-105 transition-all duration-300 shadow-2xl hover:shadow-purple-500/25"
@@ -248,7 +212,7 @@ export default function Hero() {
                         <ArrowRight className="w-6 h-6 group-hover:translate-x-1 transition-transform" />
                       </span>
                   </Link>
-                </div>
+                </div> */}
               </div>
 
               {/* right side */}
