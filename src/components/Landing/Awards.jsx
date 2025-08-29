@@ -1,4 +1,5 @@
 import { useState, useRef, useEffect } from 'react';
+import useCountry from '../../hooks/useCountry';
 import { Trophy, Medal, Star, Gift, BadgeCheck, LineChart, Users} from 'lucide-react';
 
 const Awards = () => {
@@ -41,6 +42,8 @@ const Awards = () => {
     };
   }, []);
 
+  const { isOman } = useCountry();
+
   return (
     <section ref={sectionRef} className="bg-gradient-to-br from-amber-50 via-orange-50 to-yellow-100 py-16 px-4 sm:px-6 md:px-16">
       <div className="max-w-7xl mx-auto">
@@ -64,7 +67,7 @@ const Awards = () => {
               ? 'opacity-100 translate-y-0' 
               : 'opacity-0 translate-y-8'
           }`}>
-            ₹25,000
+            {isOman ? '110 OMR' : '₹25,000'}
           </div>
           <p className={`text-2xl text-slate-700 font-family-givonic-semiBold font-semibold mb-4 transition-all duration-1000 delay-400 ${
             isSectionVisible 
