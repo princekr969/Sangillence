@@ -1,4 +1,5 @@
 import { useEffect, useState, useRef } from 'react';
+import useCountry from '../../hooks/useCountry';
 import { IndianRupee, BookOpenCheck, BrainCircuit, ChartColumnIncreasing, Award, School} from 'lucide-react';
 
 const benefits = [
@@ -67,6 +68,7 @@ const solutions = [
 
 
 function Benefits() {
+    const { isOman } = useCountry();
     const [isSectionVisible, setIsSectionVisible] = useState(false);
       const [isCardSectionVisible, setIsCardSectionVisible] = useState(false);
       const sectionRef = useRef(null);
@@ -164,39 +166,35 @@ function Benefits() {
             {/* Main Content */}
             <div ref={sectionCardRef} className="grid md:grid-cols-2 gap-5 items-center">
         
-                {benefits.map((benefit, index) => (
+                {benefits.map((benefit, index) => {
+                const adjusted = { ...benefit };
+                if (index === 0) {
+                    adjusted.title = isOman ? '2 OMR Only' : 'Zero Registration Fee';
+                    adjusted.description = isOman ? 'Registration fee is 2 OMR only for Oman participants' : '0 registrations fees for all students';
+                }
+                return (
                 <div 
                     key={index}
-                    className={`${benefit.classes} flex items-start lg:h-36 space-x-4 p-6 bg-white rounded-xl shadow-lg transition-all duration-1000 ${
+                    className={`${adjusted.classes} flex items-start lg:h-36 space-x-4 p-6 bg-white rounded-xl shadow-lg transition-all duration-1000 ${
                 isCardSectionVisible 
                   ? 'opacity-100 translate-y-0' 
                   : 'opacity-0 translate-y-12'
               }`}
                 >
-                    <div className="relative group">
-                      <div className={`relative w-12 h-12 bg-gradient-to-br from-slate-800 to-slate-900 rounded-full flex items-center justify-center shadow-lg transition-all duration-300 transform hover:shadow-xl overflow-hidden`}>
-                        {/* Geometric hover overlay */}
-                        <div className="absolute inset-0 bg-gradient-to-r from-blue-600/20 via-transparent to-amber-500/20  rounded-full"></div>
-                        
-                        {/* Icon content */}
-                        <benefit.icon className="relative z-10 w-6 h-6 text-white" />
-                        
-                        {/* Decorative elements */}
-                        <div className="absolute top-0 left-1/2 transform -translate-x-1/2 w-0.5 h-3 bg-gradient-to-b from-blue-500 to-transparent"></div>
-                        <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-0.5 h-3 bg-gradient-to-t from-amber-500 to-transparent "></div>
-                      </div>
+                    <div className={`w-12 h-12 ${adjusted.iconBgColor} rounded-full flex items-center justify-center shadow-lg`}>
+                        <adjusted.icon className="w-6 h-6 text-slate-600" />
                     </div>
             
                     <div className="flex-1">
                     <h3 className="text-xl font-semibold text-gray-900 mb-2">
-                        {benefit.title}
+                        {adjusted.title}
                     </h3>
                     <p className="text-gray-600 leading-relaxed">
-                        {benefit.description}
+                        {adjusted.description}
                     </p>
                     </div>
                 </div>
-                ))}
+                )})}
             
             </div>
         </div>
