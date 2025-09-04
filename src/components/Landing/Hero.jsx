@@ -178,16 +178,6 @@ export default function Hero() {
               {/* Main Content */}
               <div className="flex flex-col justify-center">
 
-                {/* College Logo */}
-                <div className='animate-slide-up-1 flex justify-center md:justify-start'>
-                  <div className='h-16 w-12 lg:w-16 mb-3'>
-                      <img src={collegeLogo} className='h-full drop-shadow-[0_0px_16px_rgba(255,255,255)] shadow-white w-ful object-contain' alt="ABV-IIITM logo" />
-                  </div>
-                </div>
-              
-                <h1 className="animate-slide-up-1 font-family-givonic-regular text-xs text-center md:text-start md:text-lg text-blue-100 mb-2">
-                    An initiative from IIIT Gwalior
-                </h1>
                 <h2 className="animate-slide-up-2 font-family-givonic-bold whitespace-nowrap
                   text-center md:text-start font-bold text-2xl sm:text-5xl md:text-3xl lg:text-4xl bg-gradient-to-r from-blue-400 via-purple-400 to-teal-400 bg-clip-text text-transparent leading-tight">
                     INDIA'S FIRST AI-POWERED 

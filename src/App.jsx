@@ -1,6 +1,7 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { Layout1 } from "./layouts";
-import { LoadingPage, HomePage, OlympiadPage, AboutPage, ContactUs } from "./pages";
+import { LoadingPage, HomePage, OlympiadPage, AboutPage, ContactUs, PhotoCapture } from "./pages";
+import { StudentLoginForm } from './components';
 import FormContainer from './components/RegistrationForm/FormContainer';
 import SuccessPage from './components/RegistrationForm/SuccessPage';
 import MainContainer from './components/OlympiadDashboard/MainContainer';
@@ -16,6 +17,8 @@ function App() {
           <Route path="olympiad" element={<OlympiadPage />} />
           <Route path="about" element={<AboutPage/>} />
           <Route path='olympiadForm' element={<FormContainer/>}/>  
+          <Route path='photoCapture' element={<PhotoCapture/>}/> 
+          <Route path='studentLogin' element={<StudentLoginForm/>}/> 
           <Route path="contactUs" element={<ContactUs />} />
         </Route>
 

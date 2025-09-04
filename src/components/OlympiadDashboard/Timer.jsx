@@ -1,65 +1,52 @@
 import React, { useState, useEffect } from 'react';
 import { Clock } from 'lucide-react';
 
-export const Timer = ({ 
-  initialMinutes, 
-  initialSeconds, 
-  label,
-  variant = 'primary'
-}) => {
-  const [minutes, setMinutes] = useState(initialMinutes);
-  const [seconds, setSeconds] = useState(initialSeconds);
-  const [isExpired, setIsExpired] = useState(false);
+const Timer = ({ type, resetTrigger, className = '' }) => {
+  const [seconds, setSeconds] = useState(0);
+
+  useEffect(() => {
+    if (type === 'question') {
+      setSeconds(0);
+    }
+  }, [resetTrigger, type]);
 
   useEffect(() => {
     const interval = setInterval(() => {
-      if (seconds > 0) {
-        setSeconds(seconds - 1);
-      } else if (minutes > 0) {
-        setMinutes(minutes - 1);
-        setSeconds(59);
-      } else {
-        setIsExpired(true);
-      }
+      setSeconds(prev => prev + 1);
     }, 1000);
 
     return () => clearInterval(interval);
-  }, [minutes, seconds]);
+  }, []);
 
-  const getTimerStyle = () => {
-    if (isExpired) {
-      return 'bg-red-50 border-red-200';
+  const formatTime = (totalSeconds) => {
+    const hours = Math.floor(totalSeconds / 3600);
+    const minutes = Math.floor((totalSeconds % 3600) / 60);
+    const secs = totalSeconds % 60;
+
+    if (type === 'global') {
+      return `${hours.toString().padStart(2, '0')}:${minutes
+        .toString()
+        .padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
+    } else {
+      return `${minutes.toString().padStart(2, '0')}:${secs
+        .toString()
+        .padStart(2, '0')}`;
     }
-    if (variant === 'secondary') {
-      return 'bg-blue-50 border-blue-200';
-    }
-    return 'bg-white border-gray-200';
   };
 
-  const getTextColor = () => {
-    if (isExpired) {
-      return 'text-red-600';
-    }
-    if (minutes === 0 && seconds <= 30) {
-      return 'text-orange-600';
-    }
-    return 'text-gray-800';
-  };
+  const getTimerLabel = () => (type === 'global' ? 'Total Time' : 'Question Time');
 
   return (
-    <div className={`rounded-lg p-4 border transition-colors ${getTimerStyle()}`}>
-      <div className="flex items-center gap-2 text-gray-600 mb-2">
-        <Clock size={16} />
-        <span className="text-sm font-medium">{label}</span>
-      </div>
-      <div className={`text-2xl font-bold transition-colors ${getTextColor()}`}>
-        {String(minutes).padStart(2, '0')}:{String(seconds).padStart(2, '0')}
-      </div>
-      {isExpired && (
-        <div className="text-xs text-red-500 mt-1 font-medium">
-          Waktu Habis!
+    <div className={`flex items-center space-x-2 ${className}`}>
+      <Clock size={16} className='text-blue-600' />
+      <div className="text-sm">
+        <div className="font-medium text-gray-700">{getTimerLabel()}</div>
+        <div className={`font-mono font-bold text-blue-600`}>
+          {formatTime(seconds)}
         </div>
-      )}
+      </div>
     </div>
   );
 };
+
+export default Timer;
