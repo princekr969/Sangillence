@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useRef, useState } from "react";
-import { Link } from "react-router-dom";
+import { useNavigate, useParams, Link } from 'react-router-dom'
+
 
 function formatDateToDDMMYYYY(value) {
   if (!value) return "";
@@ -18,6 +19,7 @@ function formatDateToYYYYMMDD(value) {
 }
 
 function StudentLoginForm() {
+  const navigate = useNavigate()
   const [formData, setFormData] = useState({
     school: "",
     studentName: "",
@@ -35,6 +37,7 @@ function StudentLoginForm() {
     { value: "school_a", label: "School A" },
     { value: "school_b", label: "School B" },
     { value: "school_c", label: "School C" },
+    { value: "school_d  ", label: "School D" },
   ];
 
   const schoolConfig = useMemo(() => {
@@ -92,12 +95,23 @@ function StudentLoginForm() {
     if (!validateForm()) return;
 
     setIsLoading(true);
-    // Simulate API call
-    setTimeout(() => {
-      console.log("Form submitted:", formData);
-      setIsLoading(false);
-      // Navigate logic here
-    }, 1500);
+    event.preventDefault()
+    if (!formData.school) return
+    // If already on a specific school route, keep the user on the same page
+    // and (for now) just proceed with local handling; otherwise navigate.
+    if (formData.school) {
+      const params = new URLSearchParams({
+        school: formData.school || '',
+        name: formData.studentName || '',
+        dob: formData.dateOfBirth || '',
+        rollNo: formData.rollNo || '',
+        class: formData.class || '',
+        section: formData.section || '',
+      })
+      navigate(`/sobo/${formData.school}/EXAM_PAGE?${params.toString()}`)
+      return
+    }
+    navigate(`/sobo/${formData.school}`)
   }
 
   return (
@@ -174,7 +188,6 @@ function StudentLoginForm() {
                     )}
                   </div>
 
-                  {formData.school && (
                     <>
                       {/* Student Name */}
                       <div>
@@ -338,7 +351,7 @@ function StudentLoginForm() {
                         )}
                       </div>
                     </>
-                  )}
+                  
                 </div>
 
                 {/* Submit Button with advanced styling */}
