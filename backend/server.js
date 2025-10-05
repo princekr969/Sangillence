@@ -44,6 +44,7 @@ app.get("/", (req, res) => {
       health: "/health",
       schoolRegistration: "/api/school",
       studentRegistration: "/api/student",
+      ipTest: "/api/student/test-ip",
     },
     timestamp: new Date().toISOString(),
   });

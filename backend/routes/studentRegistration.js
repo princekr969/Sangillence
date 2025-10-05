@@ -1,7 +1,9 @@
 import express from 'express';
 import { google } from 'googleapis';
 import dotenv from 'dotenv';
+import fetch from 'node-fetch';
 import { sendStudentConfirmationEmail, sendSchoolNotificationEmail } from '../utils/emailService.js';
+import { blockOmanForStudentRegistrationV2 } from '../middleware/ipRestriction.js';
 
 dotenv.config();
 
@@ -23,6 +25,51 @@ const sheets = google.sheets({ version: 'v4', auth });
 
 const STUDENT_SPREADSHEET_ID = process.env.GOOGLE_SHEETS_STUDENT_SPREADSHEET_ID;
 
+// Test endpoint to check IP and country detection
+router.get('/test-ip', async (req, res) => {
+    try {
+        const getClientIP = (req) => {
+            return req.headers['x-forwarded-for'] ||
+                req.headers['x-real-ip'] ||
+                req.connection?.remoteAddress ||
+                req.socket?.remoteAddress ||
+                req.ip ||
+                '127.0.0.1';
+        };
+
+        const clientIP = getClientIP(req);
+
+        // Skip for localhost/development
+        if (clientIP === '127.0.0.1' || clientIP === '::1' || clientIP === '::ffff:127.0.0.1') {
+            return res.status(200).json({
+                success: true,
+                message: 'Development mode - IP detection bypassed',
+                ip: clientIP,
+                country: 'Development',
+                studentRegistrationAvailable: true
+            });
+        }
+
+        // Get country from IP
+        const response = await fetch(`https://ipapi.co/${clientIP}/country_code/`);
+        const countryCode = await response.text();
+
+        res.status(200).json({
+            success: true,
+            message: 'IP and country detection working',
+            ip: clientIP,
+            country: countryCode.trim(),
+            studentRegistrationAvailable: countryCode.trim() !== 'OM'
+        });
+    } catch (error) {
+        res.status(500).json({
+            success: false,
+            message: 'Error detecting IP/country',
+            error: error.message
+        });
+    }
+});
+
 // Helper function to convert ISO date to dd/mm/yyyy format
 const formatDateForSheet = (isoDate) => {
     if (!isoDate) return '';
@@ -33,7 +80,7 @@ const formatDateForSheet = (isoDate) => {
     return `${day}/${month}/${year}`;
 };
 
-router.post('/submit', async (req, res) => {
+router.post('/submit', blockOmanForStudentRegistrationV2, async (req, res) => {
     try {
         const { fullName, dob, email, class: studentClass, mobile, schoolEmail } = req.body;
 
