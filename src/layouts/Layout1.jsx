@@ -11,12 +11,13 @@ function Layout1() {
 
   // Only show Navbar if not on the landing page
   const isLandingPage = pathname === "/";
+  const isExamPage = /^\/sobo\/[^/]+\/EXAM_PAGE$/.test(pathname);
 
   return (
     <>
-        {!isLandingPage && <Navbar/>}
+        {!isLandingPage && !isExamPage && <Navbar/>}
         <Outlet/>
-        <Footer/>
+        {!isExamPage && <Footer/>}
     </>
   )
 }
