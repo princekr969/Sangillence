@@ -4,6 +4,8 @@ import ContactUs from "./ContactUsPage";
 import LoadingPage from "./LoadingPage";
 import AboutPage from "./AboutPage";
 import PhotoCapture from "./PhotoCapturePage";
+import SoboPage from "./SoboPage";
+import SoboExamPage from "./SoboExamPage";
 
 export {
     HomePage,
@@ -11,5 +13,7 @@ export {
     ContactUs,
     LoadingPage,
     PhotoCapture,
-    AboutPage
+    AboutPage,
+    SoboPage,
+    SoboExamPage
 }
