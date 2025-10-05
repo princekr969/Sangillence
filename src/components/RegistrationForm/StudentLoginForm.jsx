@@ -83,19 +83,19 @@ const StudentLoginForm = ({ onSubmit }) => {
       console.log('Student form data:', formData);
       
       try {
-        // const response = await fetch('https://api-node-sangillence.onrender.com/api/student/submit', {
-        //   method: 'POST',
-        //   headers: {
-        //     'Content-Type': 'application/json',
-        //   },
-        //   body: JSON.stringify(formData),
-        // });
+        const response = await fetch('http://localhost:5000/api/students/login', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(formData),
+        });
 
         const result = await response.json();
 
         if (response.ok) {
           console.log('Student registration successful:', result);
-          onSubmit();
+          if (onSubmit) onSubmit();
         } else {
           console.error('Student registration failed:', result);
           setSubmitError(result.message || 'Failed to submit registration. Please try again.');
