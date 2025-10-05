@@ -111,61 +111,6 @@ function StudentLoginForm() {
       navigate(`/sobo/${formData.school}/EXAM_PAGE?${params.toString()}`)
       return
     }
-
-    setErrors(newErrors);
-    return isValid;
-  };
-
-  const handleChange = (e) => {
-    const { id, value } = e.target;
-    setFormData((prev) => ({
-      ...prev,
-      [id]: value,
-    }));
-
-    if (errors[id]) {
-      setErrors((prev) => ({
-        ...prev,
-        [id]: '',
-      }));
-    }
-  };
-
-  const handleSubmit = async (e) => {
-  
-    e.preventDefault();
-    setSubmitError('');
-    
-    if (validateForm()) {
-      setIsLoading(true);
-      console.log('Student form data:', formData);
-      
-      try {
-        const response = await fetch('http://localhost:5000/api/students/login', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify(formData),
-        });
-
-        const result = await response.json();
-
-        if (response.ok) {
-          console.log('Student registration successful:', result);
-          if (onSubmit) onSubmit();
-        } else {
-          console.error('Student registration failed:', result);
-          setSubmitError(result.message || 'Failed to submit registration. Please try again.');
-        }
-      } catch (error) {
-        console.error('Error submitting student form:', error);
-        setSubmitError('Network error. Please check your connection and try again.');
-      } finally {
-        setIsLoading(false);
-      }
-    }
-  };
     navigate(`/sobo/${formData.school}`)
   }
 
