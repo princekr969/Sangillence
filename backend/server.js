@@ -4,9 +4,14 @@ import dotenv from "dotenv";
 import multer from "multer";
 import schoolRegistrationRoutes from "./routes/schoolRegistration.js";
 import studentRegistrationRoutes from "./routes/studentRegistration.js";
+import studentRoutes from "./routes/studentRoutes.js";
+import connectDB from "./config/db.js";
 
 // Load environment variables
 dotenv.config();
+
+// connect to db
+connectDB();
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -53,6 +58,9 @@ app.get("/", (req, res) => {
 // Routes
 app.use("/api/school", schoolRegistrationRoutes);
 app.use("/api/student", studentRegistrationRoutes);
+
+// all routes for student. get/add/login
+app.use("/api/students", studentRoutes);
 
 // Error handling middleware
 app.use((err, req, res, next) => {
