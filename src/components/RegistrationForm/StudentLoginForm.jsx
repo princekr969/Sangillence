@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { useNavigate, useParams, Link } from 'react-router-dom'
+import axios from "axios";
 
 
 function formatDateToDDMMYYYY(value) {
@@ -90,7 +91,7 @@ function StudentLoginForm() {
     return Object.keys(newErrors).length === 0;
   }
 
-  function handleSubmit(event) {
+  async function handleSubmit(event) {
     event.preventDefault();
     if (!validateForm()) return;
 
@@ -108,10 +109,17 @@ function StudentLoginForm() {
         class: formData.class || '',
         section: formData.section || '',
       })
-      navigate(`/sobo/${formData.school}/EXAM_PAGE?${params.toString()}`)
+      console.log(formData);
+      try {
+        const response = await axios.post(`/api/students/login`, formData);
+        console.log("Login successful:", response.data);
+        // navigate(`/sobo/${formData.school}/EXAM_PAGE?${params.toString()}`)
+        navigate(`/sobo/${formData.school}`)
+      } catch (error) {
+        console.error("Login failed:", error);
+      }
       return
     }
-    navigate(`/sobo/${formData.school}`)
   }
 
   return (
