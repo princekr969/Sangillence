@@ -123,7 +123,7 @@ function OlympiadPage() {
                   <h3 className="text-xl font-family-givonic-semiBold font-semibold mb-3 text-white">Important Dates</h3>
                   <ul className="list-none font-family-givonic-regular space-y-2 text-blue-100">
                     <li>📍 <span className="text-white">Registration Start:</span> August 21, 2025</li>
-                    <li>📍 <span className="text-white">Registration Deadline:</span> October 10, 2025</li>
+                    <li>📍 <span className="text-white">Registration Deadline:</span> October 20, 2025</li>
                     <li>📍 <span className="text-white">Final Event:</span> October 26, 2025</li>
                   </ul>
                 </div>
