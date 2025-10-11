@@ -14,9 +14,9 @@ const timelineData = [
     status: "upcoming"
   },
   {
-    date: "October 10, 2025",
+    date: "October 20, 2025",
     month: "October",
-    day: "10",
+    day: "20",
     year: "2025",
     icon: <Lock className="w-4 h-4" />,
     title: "Registrations Close",
