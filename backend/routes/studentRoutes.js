@@ -74,7 +74,7 @@ Example post request
 }
 */ 
 router.post("/login", verifyStudent, (req, res) => {
-    console.log("recieved request: ", req.body);
+  console.log("recieved request: ", req.body);
   const { fullName, class: studentClass, dob } = req.body;
 
   return res.status(200).json({
