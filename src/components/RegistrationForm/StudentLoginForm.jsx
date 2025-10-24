@@ -23,15 +23,14 @@ function StudentLoginForm() {
   const navigate = useNavigate()
   const [formData, setFormData] = useState({
     school: "",
-    studentName: "",
-    dateOfBirth: "",
+    fullName: "",
+    dob: "",
     rollNo: "",
     class: "",
     section: "",
   });
   const [errors, setErrors] = useState({});
   const [isLoading, setIsLoading] = useState(false);
-  const [loginError, setLoginError] = useState('');
 
   const schools = [
     { value: "", label: "Select School" },
@@ -74,20 +73,16 @@ function StudentLoginForm() {
     if (errors[name]) {
       setErrors((prev) => ({ ...prev, [name]: "" }));
     }
-    // Clear login error when user makes changes
-    if (loginError) {
-      setLoginError('');
-    }
   }
 
   function validateForm() {
     const newErrors = {};
     if (!formData.school) newErrors.school = "School is required";
     if (formData.school) {
-      if (!formData.studentName.trim())
-        newErrors.studentName = "Student name is required";
-      if (!formData.dateOfBirth)
-        newErrors.dateOfBirth = "Date of birth is required";
+      if (!formData.fullName.trim())
+        newErrors.fullName = "Student name is required";
+      if (!formData.dob)
+        newErrors.dob = "Date of birth is required";
       if (!formData.rollNo.trim()) newErrors.rollNo = "Roll number is required";
       if (!formData.class) newErrors.class = "Class is required";
       if (!formData.section) newErrors.section = "Section is required";
@@ -101,32 +96,31 @@ function StudentLoginForm() {
     if (!validateForm()) return;
 
     setIsLoading(true);
-    if (!formData.school) {
-      setIsLoading(false);
-      return;
-    }
+    event.preventDefault()
+    if (!formData.school) return
+    // If already on a specific school route, keep the user on the same page
+    // and (for now) just proceed with local handling; otherwise navigate.
+    if (formData.school) {
+      const params = new URLSearchParams({
+        school: formData.school || '',
+        name: formData.fullName || '',
+        dob: formData.dob || '',
+        rollNo: formData.rollNo || '',
+        class: formData.class || '',
+        section: formData.section || '',
+      })
+      console.log(formData)
+      try {
+        const response = await axios.post(`http://localhost:5001/api/students/login`, formData);
+        console.log("Login successful:", response.data);
+        navigate(`/photoCapture/${response.data.data._id}`)
+        // navigate(`/sobo/${formData.school}`)
+      } catch (error) {
+        console.error("Login failed:", error);
+      }
+    setIsLoading(false);
 
-    const params = new URLSearchParams({
-      school: formData.school || '',
-      name: formData.studentName || '',
-      dob: formData.dateOfBirth || '',
-      rollNo: formData.rollNo || '',
-      class: formData.class || '',
-      section: formData.section || '',
-    });
-
-    console.log(formData);
-    try {
-      const response = await axios.post(`https://api-node-sangillence.onrender.com/api/students/login`, formData);
-      console.log("Login successful:", response.data);
-      setLoginError(''); // Clear any previous errors
-      // Navigate directly to the exam page with pre-filled data
-      navigate(`/sobo/${formData.school}/EXAM_PAGE?${params.toString()}`);
-    } catch (error) {
-      console.error("Login failed:", error);
-      setLoginError(error.response?.data?.message || 'Login failed. Please check your details and try again.');
-    } finally {
-      setIsLoading(false);
+      return
     }
   }
 
@@ -172,11 +166,6 @@ function StudentLoginForm() {
 
             <div className="p-8">
               <form onSubmit={handleSubmit} className="animate-fade-in">
-                {loginError && (
-                  <div className="mb-4 p-3 bg-red-100 border border-red-400 text-red-700 rounded">
-                    {loginError}
-                  </div>
-                )}
                 <div className="flex flex-col gap-4">
                   {/* School Select */}
                   <div>
@@ -213,28 +202,28 @@ function StudentLoginForm() {
                       {/* Student Name */}
                       <div>
                         <label
-                          htmlFor="studentName"
+                          htmlFor="fullName"
                           className="block text-sm font-semibold text-slate-700 mb-2"
                         >
                           Student Name <span className="text-red-500">*</span>
                         </label>
                         <input
-                          id="studentName"
-                          name="studentName"
+                          id="fullName"
+                          name="fullName"
                           type="text"
-                          value={formData.studentName}
+                          value={formData.fullName}
                           onChange={handleChange}
                           className={`block w-full px-4 py-3 rounded-lg border ${
-                            errors.studentName
+                            errors.fullName
                               ? "border-red-500"
                               : "border-slate-300"
                           } bg-white shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition`}
                           placeholder="Enter full name"
                           required
                         />
-                        {errors.studentName && (
+                        {errors.fullName && (
                           <p className="mt-1 text-sm text-red-600">
-                            {errors.studentName}
+                            {errors.fullName}
                           </p>
                         )}
                       </div>
@@ -248,24 +237,24 @@ function StudentLoginForm() {
                           Date of Birth <span className="text-red-500">*</span>
                         </label>
                         <DateWithCalendar
-                          value={formData.dateOfBirth}
+                          value={formData.dob}
                           onChange={(val) => {
                             setFormData((prev) => ({
                               ...prev,
-                              dateOfBirth: val,
+                              dob: val,
                             }));
-                            if (errors.dateOfBirth) {
+                            if (errors.dob) {
                               setErrors((prev) => ({
                                 ...prev,
-                                dateOfBirth: "",
+                                dob: "",
                               }));
                             }
                           }}
-                          error={errors.dateOfBirth}
+                          error={errors.dob}
                         />
-                        {errors.dateOfBirth && (
+                        {errors.dob && (
                           <p className="mt-1 text-sm text-red-600">
-                            {errors.dateOfBirth}
+                            {errors.dob}
                           </p>
                         )}
                         <p className="mt-1 text-xs text-slate-500">
