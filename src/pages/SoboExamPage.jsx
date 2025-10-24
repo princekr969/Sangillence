@@ -37,10 +37,13 @@ function SoboExamPage() {
   const formattedDob = formatDateForGoogle(dob)
   const formattedClass = formatClassForGoogle(classValue)
 
-  // If embedding Google Forms, fields must use entry IDs.
-  // Replace the placeholders below with your actual entry IDs:
-  // Open the form → three dots → Get pre-filled link → fill sample values → Get link →
-  // copy the generated URL and map the query keys (e.g. entry.1234567890) here.
+  // Google Form entry IDs - these need to be updated with the actual entry IDs from your form
+  // To get the correct entry IDs:
+  // 1. Open your Google Form
+  // 2. Click the three dots menu → "Get pre-filled link"
+  // 3. Fill in sample values for each field
+  // 4. Click "Get link" and copy the generated URL
+  // 5. Extract the entry IDs from the URL (e.g., entry.1234567890)
   const GOOGLE_ENTRY_IDS = {
     schoolName: 'entry.1061894325',        // School Name
     studentName: 'entry.166164457',        // Student Name
@@ -70,12 +73,26 @@ function SoboExamPage() {
 
   const googleFormSrc = `${baseForm}?${prefill.toString()}`
   
-  // Debug: Log the generated URL
+  // Debug: Log the generated URL and data
   console.log('Generated Google Form URL:', googleFormSrc)
   console.log('Prefill params:', Object.fromEntries(prefill))
+  console.log('Student data:', { school, name, dob, rollNo, classValue, section })
+  console.log('Formatted data:', { formattedDob, formattedClass })
 
   return (
     <div className="fixed inset-0 bg-white">
+      <div className="absolute top-4 left-4 z-10 bg-blue-100 border border-blue-300 rounded p-2 text-sm text-blue-800">
+        <strong>Note:</strong> If form fields are not pre-filled, the entry IDs may need to be updated.
+        <br />
+        <a 
+          href={googleFormSrc} 
+          target="_blank" 
+          rel="noopener noreferrer"
+          className="underline hover:text-blue-600"
+        >
+          Open form in new tab
+        </a>
+      </div>
       <iframe
         title={`${schoolId?.toUpperCase()} Exam`}
         src={googleFormSrc}

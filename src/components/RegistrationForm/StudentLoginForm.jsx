@@ -31,6 +31,7 @@ function StudentLoginForm() {
   });
   const [errors, setErrors] = useState({});
   const [isLoading, setIsLoading] = useState(false);
+  const [loginError, setLoginError] = useState('');
 
   const schools = [
     { value: "", label: "Select School" },
@@ -73,6 +74,10 @@ function StudentLoginForm() {
     if (errors[name]) {
       setErrors((prev) => ({ ...prev, [name]: "" }));
     }
+    // Clear login error when user makes changes
+    if (loginError) {
+      setLoginError('');
+    }
   }
 
   function validateForm() {
@@ -96,29 +101,32 @@ function StudentLoginForm() {
     if (!validateForm()) return;
 
     setIsLoading(true);
-    event.preventDefault()
-    if (!formData.school) return
-    // If already on a specific school route, keep the user on the same page
-    // and (for now) just proceed with local handling; otherwise navigate.
-    if (formData.school) {
-      const params = new URLSearchParams({
-        school: formData.school || '',
-        name: formData.studentName || '',
-        dob: formData.dateOfBirth || '',
-        rollNo: formData.rollNo || '',
-        class: formData.class || '',
-        section: formData.section || '',
-      })
-      console.log(formData);
-      try {
-        const response = await axios.post(`/api/students/login`, formData);
-        console.log("Login successful:", response.data);
-        // navigate(`/sobo/${formData.school}/EXAM_PAGE?${params.toString()}`)
-        navigate(`/sobo/${formData.school}`)
-      } catch (error) {
-        console.error("Login failed:", error);
-      }
-      return
+    if (!formData.school) {
+      setIsLoading(false);
+      return;
+    }
+
+    const params = new URLSearchParams({
+      school: formData.school || '',
+      name: formData.studentName || '',
+      dob: formData.dateOfBirth || '',
+      rollNo: formData.rollNo || '',
+      class: formData.class || '',
+      section: formData.section || '',
+    });
+
+    console.log(formData);
+    try {
+      const response = await axios.post(`https://api-node-sangillence.onrender.com/api/students/login`, formData);
+      console.log("Login successful:", response.data);
+      setLoginError(''); // Clear any previous errors
+      // Navigate directly to the exam page with pre-filled data
+      navigate(`/sobo/${formData.school}/EXAM_PAGE?${params.toString()}`);
+    } catch (error) {
+      console.error("Login failed:", error);
+      setLoginError(error.response?.data?.message || 'Login failed. Please check your details and try again.');
+    } finally {
+      setIsLoading(false);
     }
   }
 
@@ -164,6 +172,11 @@ function StudentLoginForm() {
 
             <div className="p-8">
               <form onSubmit={handleSubmit} className="animate-fade-in">
+                {loginError && (
+                  <div className="mb-4 p-3 bg-red-100 border border-red-400 text-red-700 rounded">
+                    {loginError}
+                  </div>
+                )}
                 <div className="flex flex-col gap-4">
                   {/* School Select */}
                   <div>
