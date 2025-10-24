@@ -25,6 +25,31 @@ router.get("/", async (req, res) => {
   }
 });
 
+// @route   GET /api/students/:id
+// @desc    Fetch a single student by ID
+router.get("/:id", async (req, res) => {
+  try {
+    const student = await Student.findById(req.params.id);
+    if (!student) {
+      return res.status(404).json({
+        success: false,
+        message: "Student not found",
+      });
+    }
+    res.status(200).json({
+      success: true,
+      data: student,
+    });
+  } catch (err) {
+    console.error("Error fetching student:", err);
+    res.status(500).json({
+      success: false,
+      message: "Failed to fetch student",
+      error: err.message,
+    });
+  }
+});
+
 // @route   POST /api/students
 // @desc    Add a new student
 router.post("/", async (req, res) => {
@@ -73,7 +98,7 @@ Example post request
   "dob": "2010-05-01",
   "section": "A"
 }
-*/ 
+*/
 router.post("/login", verifyStudent, loginStudentController);
 
 export default router;

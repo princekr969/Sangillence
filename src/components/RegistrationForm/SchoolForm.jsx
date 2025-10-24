@@ -176,7 +176,7 @@ const SchoolForm = ({ onSubmit }) => {
         console.log('Adding Excel file:', excelFile.name);
       }
 
-      console.log('Submitting to:', 'http://localhost:5001/api/school/submit');
+      console.log('Submitting to:', 'http://localhost:54112/api/school/submit');
 
       // Submit to backend API
       const response = await fetch('https://api-node-sangillence.onrender.com/api/school/submit', {

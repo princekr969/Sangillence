@@ -59,14 +59,14 @@ function SoboExamPage() {
     if (GOOGLE_ENTRY_IDS.studentName) prefill.set(GOOGLE_ENTRY_IDS.studentName, name)
     if (GOOGLE_ENTRY_IDS.class) prefill.set(GOOGLE_ENTRY_IDS.class, formattedClass)
     if (GOOGLE_ENTRY_IDS.section) prefill.set(GOOGLE_ENTRY_IDS.section, section)
-    if (GOOGLE_ENTRY_IDS.rollNo) prefill.set(GOOGLE_ENTRY_IDS.rollNo, rollNo)
+    // Roll number prefill removed as requested
     if (GOOGLE_ENTRY_IDS.dateOfBirth) prefill.set(GOOGLE_ENTRY_IDS.dateOfBirth, formattedDob)
   } else {
     // Fillout/Tally/Typeform style alias params
     prefill.set('school', school)
     prefill.set('name', name)
     prefill.set('dob', dob)
-    prefill.set('rollNo', rollNo)
+    // Roll number prefill removed as requested
     prefill.set('class', classValue)
     prefill.set('section', section)
   }
@@ -76,7 +76,7 @@ function SoboExamPage() {
   // Debug: Log the generated URL and data
   console.log('Generated Google Form URL:', googleFormSrc)
   console.log('Prefill params:', Object.fromEntries(prefill))
-  console.log('Student data:', { school, name, dob, rollNo, classValue, section })
+  console.log('Student data:', { school, name, dob, classValue, section })
   console.log('Formatted data:', { formattedDob, formattedClass })
 
   return (
