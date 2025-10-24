@@ -113,8 +113,10 @@ function StudentLoginForm() {
       try {
         const response = await axios.post(`http://localhost:5001/api/students/login`, formData);
         console.log("Login successful:", response.data);
-        navigate(`/photoCapture/${response.data.data._id}`)
-        // navigate(`/sobo/${formData.school}`)
+        if(response.data.success){
+          navigate(`/photoCapture/${response.data.data.student._id}`)
+        }
+       
       } catch (error) {
         console.error("Login failed:", error);
       }
