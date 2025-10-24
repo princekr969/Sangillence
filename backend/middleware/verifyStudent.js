@@ -12,26 +12,57 @@ export const verifyStudent = async (req, res, next) => {
       });
     }
 
-    // Convert DOB string to Date (important for matching)
-    const parsedDob = new Date(dob);
+   const [day, month, year] = dob.split("/");
+  const parsedDob = new Date(Number(year), Number(month) - 1, Number(day)); // JS months are 0-indexed
 
-    // Check if the student exists in DB
-    const existingStudent = await Student.findOne({
-      fullName: fullName.trim(),
-      class: studentClass.trim(),
-      section: section.trim(),
-      dob: parsedDob,
-    });
+  // Define start and end of the day
+  const startOfDay = new Date(parsedDob);
+  startOfDay.setHours(0, 0, 0, 0);
 
+  const endOfDay = new Date(parsedDob);
+  endOfDay.setHours(23, 59, 59, 999);
+
+  console.log("Searching for student with:", {
+    fullName: fullName.trim(),
+    class: studentClass.trim().replace("Class ", ""),
+    section: section.trim(),
+    dob: startOfDay,
+    dob1: endOfDay,
+  });
+  // Query the database
+
+  const studentId = "68f5bb73716e5342752489df"; // example ID
+
+  Student.findById(studentId)
+  .then(student => {
+    if (!student) {
+      console.log("Student not found");
+    } else {
+      console.log(student);
+    }
+  })
+  .catch(err => console.error(err));
+
+  const existingStudent = await Student.findOne({
+    fullName: fullName.trim(),
+    "class": studentClass.trim().replace("Class ", ""),
+    section: section.trim(),
+    dob: { $gte: startOfDay, $lte: endOfDay },
+  });
+
+    console.log(existingStudent)
+   
     if (!existingStudent) {
       return res.status(404).json({
         success: false,
         message: "Student not found. Please check your details and try again.",
       });
     }
+    console.log(existingStudent)
 
     // Attach found student to request for use in controller
     req.student = existingStudent;
+   
     next(); // Proceed to controller
 
   } catch (err) {

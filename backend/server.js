@@ -5,6 +5,7 @@ import multer from "multer";
 import schoolRegistrationRoutes from "./routes/schoolRegistration.js";
 import studentRegistrationRoutes from "./routes/studentRegistration.js";
 import studentRoutes from "./routes/studentRoutes.js";
+import studentPhotoUploadRoutes from "./routes/uploadStudentPhoto.js";
 import connectDB from "./config/db.js";
 
 // Load environment variables
@@ -58,6 +59,9 @@ app.get("/", (req, res) => {
 // Routes
 app.use("/api/school", schoolRegistrationRoutes);
 app.use("/api/student", studentRegistrationRoutes);
+
+// Route for uploading student photos
+app.use("/api/student", studentPhotoUploadRoutes);
 
 // all routes for student. get/add/login
 app.use("/api/students", studentRoutes);

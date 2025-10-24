@@ -6,10 +6,10 @@ const studentSchema = new mongoose.Schema(
       type: String,
       required: [true, "Full name is required"],
       trim: true,
-    },
+    }, 
     rollNo: {
       type: String,
-      required: [true, "Roll number is required"],
+      required: [false, "Roll number is required"],
       unique: true,
       trim: true,
     },
@@ -28,9 +28,14 @@ const studentSchema = new mongoose.Schema(
       required: [true, "Date of birth is required"],
     },
     school: {
-      type: mongoose.Schema.Types.ObjectId,
+      type: String,
       ref: "School",
       required: false, // optional — if you later link it to a school collection
+    },
+    imageUrl: {
+      type: String,       // <-- New field for student image URL
+      required: false,    // optional
+      trim: true,
     },
   },
   {

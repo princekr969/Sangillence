@@ -1,6 +1,7 @@
 import express from "express";
 import Student from "../models/student.js";
 import { verifyStudent } from "../middleware/verifyStudent.js";
+import { loginStudentController } from "../controllers/studentVerify.controller.js";
 
 const router = express.Router();
 
@@ -73,20 +74,6 @@ Example post request
   "section": "A"
 }
 */ 
-router.post("/login", verifyStudent, (req, res) => {
-  console.log("recieved request: ", req.body);
-  const { fullName, class: studentClass, dob } = req.body;
-
-  return res.status(200).json({
-    success: true,
-    message: "Echo successful — student verified and data received back.",
-    data: {
-      fullName,
-      class: studentClass,
-      dob,
-      student: req.student, // optional, shows full DB record
-    },
-  });
-});
+router.post("/login", verifyStudent, loginStudentController);
 
 export default router;
