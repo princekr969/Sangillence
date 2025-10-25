@@ -42,7 +42,7 @@ function PhotoCapture() {
       if (videoRef.current) {
         videoRef.current.srcObject = mediaStream;
       }
-      retakePhoto();
+     
     } catch (error) {
       console.error('Error accessing camera:', error);
       alert('Unable to access camera. Please grant camera permissions.');
