@@ -55,7 +55,6 @@ function StudentLoginForm() {
     { value: "school_e", label: "PM SHRI KENDRIYA VIDYALAYA NUMBER-1 AFS CHAKERI, KANPUR" },
     { value: "school_f", label: "PM SHRI KENDRIYA VIDYALAYA NUMBER-1, SURAT" },
     { value: "school_g", label: "ARMY PUBLIC SCHOOL, GWALIOR" },
-    { value: "other", label: "OTHER" },
   ];
 
   const schoolConfig = useMemo(() => {
