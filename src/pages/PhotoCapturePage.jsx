@@ -77,7 +77,6 @@ function PhotoCapture() {
         body: formData,
       });
 
-      console.log("student:",uploadResponse)
 
       if (uploadResponse.ok) {
         setUploadStatus('success');
