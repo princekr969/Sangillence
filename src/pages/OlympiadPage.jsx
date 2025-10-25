@@ -14,8 +14,6 @@ function OlympiadPage() {
     const now = new Date();
     const target = new Date();
 
-    // Set target to tomorrow 9:00 AM
-    target.setDate(now.getDate() + 1);
     target.setHours(9, 0, 0, 0);
 
     const diff = Math.max(0, Math.floor((target - now) / 1000)); // in seconds
