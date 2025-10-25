@@ -11,6 +11,7 @@ import {
   Navbar,
   Testimonial,
   ScrollToTop,
+  FreshStudentsSection,
   
 } from '../components/index.js';
 
@@ -20,7 +21,9 @@ function HomePage() {
     <> 
       <div className="relative z-0 cursor-default">
         <Navbar/>
+
         <Hero />
+        <FreshStudentsSection />
         <About />
         <Benefits />
         <Awards />
@@ -28,8 +31,9 @@ function HomePage() {
         <Results />
         <Timeline />
         <Testimonial/>
+       
         <ScrollToTop />
-        {/* <CTA /> */}
+        <CTA />
         <Footer />
       </div>
     </>

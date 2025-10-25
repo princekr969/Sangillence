@@ -1,6 +1,6 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { Layout1 } from "./layouts";
-import { LoadingPage, HomePage, OlympiadPage, AboutPage, ContactUs, PhotoCapture, SoboPage, SoboExamPage } from "./pages";
+import { LoadingPage, HomePage, OlympiadPage, AboutPage, ContactUs, PhotoCapture, SoboPage, SoboExamPage, FreshStudentsFormPage } from "./pages";
 import { StudentLoginForm } from './components';
 import FormContainer from './components/RegistrationForm/FormContainer';
 import SuccessPage from './components/RegistrationForm/SuccessPage';
@@ -23,6 +23,7 @@ function App() {
           <Route path="sobo" element={<SoboPage />} />
           <Route path="sobo/:schoolId" element={<SoboPage />} />
           <Route path="sobo/:schoolId/EXAM_PAGE" element={<SoboExamPage />} />
+          <Route path="fresh-students-form" element={<FreshStudentsFormPage />} />
         </Route>
 
 

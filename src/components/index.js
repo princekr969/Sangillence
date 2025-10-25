@@ -21,6 +21,7 @@ import ChartGallery from "./Landing/school_section_performance_leaderboard";
 import SchoolSectionLeaderboard from './Landing/school_section_performance_leaderboard';
 import ScrollToTop from "./ScrollToTop";
 import StudentLoginForm from "./RegistrationForm/StudentLoginForm";
+import FreshStudentsSection from "./Landing/FreshStudentsSection";
 
 export {
     Navbar,
@@ -45,5 +46,6 @@ export {
     ChartGallery,
     SchoolSectionLeaderboard,
     ScrollToTop,
-    StudentLoginForm
+    StudentLoginForm,
+    FreshStudentsSection
 }
