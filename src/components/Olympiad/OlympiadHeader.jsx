@@ -131,17 +131,17 @@ export default function OlympiadHeader() {
                 <p className="animate-slide-up-5 font-family-givonic-regular text-center text-xs md:text-lg text-blue-100 mb-8 md:mb-12">
                     "Test Your Skills — Not Just Academics"
                 </p>
-                {/* <div className='text-center'>
-                  <Link
-                      to='/studentLogin'
+                <div className='text-center'>
+                  <a
+                      href='#apply'
                       className="inline-block animate-pulse-glow max-w-max max-md:text-center bg-gradient-to-r from-blue-600 to-purple-600 text-white px-2 py-1 md:px-4 md:py-2 rounded-full text-lg font-semibold hover:scale-105 transition-all duration-300 shadow-2xl hover:shadow-purple-500/25"
                   >
                       <span className="flex items-center text-sm md:text-lg gap-2 md:gap-3">
-                        START NOW
+                          Apply Now
                         <ArrowRight className="w-6 h-6 group-hover:translate-x-1 transition-transform" />
                       </span>
-                  </Link>
-                </div> */}
+                  </a>
+                </div>
               </div>
           </div>
         </main>   

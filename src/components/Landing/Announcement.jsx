@@ -49,7 +49,7 @@ function Announcement() {
 
   if (isLive) {
     // State 1: Exam is LIVE
-    buttonText = 'Login Now';
+    buttonText = 'Start Now';
     linkTo = LOGIN_PATH;
     secondaryText = 'Access is now open';
     linkIcon = ArrowRight;
@@ -205,11 +205,13 @@ function Announcement() {
                 </>
               ) : (
                 // Use Link component for internal navigation (Login/Get Ready)
+                <div className='flex flex-row gap-4'>
+
                 <Link
                   to={linkTo}
                   className={`inline-flex items-center gap-3 px-6 py-3 rounded-xl font-semibold transition-all duration-200 border ${
                     isLive
-                      ? 'bg-blue-600/80 hover:bg-blue-500/90 text-white border-blue-400/40 hover:border-blue-300 shadow-lg hover:shadow-xl group'
+                      ? 'bg-green-600/80 hover:bg-green-500/90 text-white border-green-400/40 hover:border-green-300 shadow-lg hover:shadow-xl group'
                       : 'bg-white/10 text-white/50 border-white/20 cursor-not-allowed' // Disabled style
                   }`}
                   onClick={(e) => isDisabled && e.preventDefault()}
@@ -219,6 +221,21 @@ function Announcement() {
                   </span>
                   <CurrentLinkIcon className={`w-5 h-5 md:w-6 md:h-6 transition-transform ${isLive ? 'group-hover:translate-x-1' : ''}`} />
                 </Link>
+                <Link
+                  to='/olympiad'
+                  className={`inline-flex items-center gap-3 px-6 py-3 rounded-xl font-semibold transition-all duration-200 border ${
+                    isLive
+                      ? 'bg-blue-600/10 hover:bg-blue-500/10 text-white border-blue-400/50 hover:border-blue-300 shadow-lg hover:shadow-xl group'
+                      : 'bg-white/15 text-white/50 border-white/20 cursor-not-allowed' // Disabled style
+                  }`}
+                  onClick={(e) => isDisabled && e.preventDefault()}
+                >
+                  <span className="text-base md:text-lg font-bold flex flex-col items-center">
+                    Haven't Registered Yet ?
+                    <p className='text-sm text-blue-200/80 ml-1'>Click Here</p>
+                  </span>
+                </Link>
+                </div>
               )}
             </div>
           </div>

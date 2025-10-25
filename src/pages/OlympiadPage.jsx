@@ -187,7 +187,7 @@ function OlympiadPage() {
                 Exam Begins In
               </h2>
               <Link
-      to="/studentLogin"
+      to="/new/student"
       className={`inline-block ${
         timeLeft > 0
           ? "bg-blue-200/40 cursor-not-allowed "
@@ -198,8 +198,8 @@ function OlympiadPage() {
       }}
     >
       <span className="flex items-center">
-            
-            {(timeLeft>0)? (
+
+            {(timeLeft > 0) ? (
               <span className="bg-black/30 px-4 py-2 rounded-full text-2xl ">
                 {formatTime(timeLeft)}
               </span>

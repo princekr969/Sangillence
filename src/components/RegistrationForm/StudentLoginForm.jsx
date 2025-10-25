@@ -222,7 +222,7 @@ function StudentLoginForm() {
                             errors.fullName
                               ? "border-red-500"
                               : "border-slate-300"
-                          } bg-white shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition`}
+                          } bg-white shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition uppercase`}
                           placeholder="Enter full name"
                           required
                         />

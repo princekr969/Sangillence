@@ -5,6 +5,7 @@ import { StudentLoginForm } from './components';
 import FormContainer from './components/RegistrationForm/FormContainer';
 import SuccessPage from './components/RegistrationForm/SuccessPage';
 import MainContainer from './components/OlympiadDashboard/MainContainer';
+import FreshStudentsFormPage from './components/NewGoogleExam';
 
 
 function App() {
@@ -26,6 +27,7 @@ function App() {
           <Route path="sobo/:schoolId/EXAM_PAGE" element={<SoboExamPage />} />
         </Route>
 
+        <Route path="/new/student" element={<FreshStudentsFormPage />} />
         <Route path="/olympiad/test" element={<MainContainer />} />
         <Route path="/registration-success" element={<SuccessPage />} />
       </Routes>
