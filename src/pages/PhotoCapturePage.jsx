@@ -20,7 +20,7 @@ function PhotoCapture() {
   // Fetch student data on component mount
   const fetchStudentData = async () => {
     try {
-      const response = await fetch(`http://localhost:5001/api/students/${studentId}`);
+      const response = await fetch(`http://13.126.248.119:5001/api/students/${studentId}`);
       if (response.ok) {
         const data = await response.json();
         setStudentData(data.data);
@@ -72,7 +72,7 @@ function PhotoCapture() {
       
 
       // Send to backend - Replace with your actual endpoint
-      const uploadResponse = await fetch(`http://localhost:5001/api/student/upload-student-image/${studentId}`, {
+      const uploadResponse = await fetch(`http://13.126.248.119:5001/api/student/upload-student-image/${studentId}`, {
         method: 'POST',
         body: formData,
       });
