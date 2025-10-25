@@ -12,6 +12,7 @@ function PhotoCapture() {
   const [studentData, setStudentData] = useState(null);
   const [cameraError, setCameraError] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
+  const [isMobile, setIsMobile] = useState(false);
   
   const videoRef = useRef(null);
   const canvasRef = useRef(null);
@@ -19,6 +20,20 @@ function PhotoCapture() {
 
   const { studentId } = useParams();
   const navigate = useNavigate();
+
+  // Check if device is mobile
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    
+    return () => {
+      window.removeEventListener('resize', checkMobile);
+    };
+  }, []);
 
   // Fetch student data on component mount
   const fetchStudentData = async () => {
@@ -59,12 +74,13 @@ function PhotoCapture() {
       stopCamera(); // Clean up any existing stream first
       setCameraError(null);
 
+      // Mobile-optimized constraints
       const constraints = {
         video: { 
           facingMode: facingMode,
-          width: { ideal: 1920 },
-          height: { ideal: 1080 },
-          aspectRatio: { ideal: 1.7777777778 } // 16:9
+          width: { ideal: isMobile ? 1280 : 1920 },
+          height: { ideal: isMobile ? 720 : 1080 },
+          aspectRatio: isMobile ? { ideal: 9/16 } : { ideal: 16/9 } // Portrait for mobile
         },
         audio: false
       };
@@ -244,33 +260,71 @@ function PhotoCapture() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [facingMode]);
 
- 
+  // Student info display - mobile optimized
+  const renderStudentInfo = () => {
+    if (!studentData) return null;
+
+    return (
+      <div className="mb-4 p-3 bg-blue-50 rounded-lg border border-blue-200">
+        <h3 className="font-semibold text-blue-800 mb-2 text-sm">Student Information</h3>
+        <div className={`grid ${isMobile ? 'grid-cols-1 gap-1' : 'grid-cols-2 gap-2'} text-xs`}>
+          <div>
+            <span className="text-blue-600 font-medium">Name:</span> {studentData.fullName}
+          </div>
+          <div>
+            <span className="text-blue-600 font-medium">Class:</span> {studentData.class}
+          </div>
+          {!isMobile && (
+            <>
+              <div>
+                <span className="text-blue-600 font-medium">Section:</span> {studentData.section}
+              </div>
+              <div>
+                <span className="text-blue-600 font-medium">Roll No:</span> {studentData.rollNo}
+              </div>
+            </>
+          )}
+        </div>
+      </div>
+    );
+  };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 flex items-center justify-center p-4">
-      <div className="w-full max-w-2xl">
-        <div className="bg-white rounded-2xl shadow-2xl overflow-hidden">
-          <div className="bg-gradient-to-r from-slate-700 to-slate-800 p-6">
-            <div className="flex items-center justify-between">
-              <div className="flex items-center gap-3">
-                <Camera className="w-8 h-8 text-white" />
+    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 flex items-center justify-center p-2 sm:p-4">
+      <div className="w-full max-w-2xl mx-auto">
+        <div className="bg-white rounded-xl sm:rounded-2xl shadow-xl sm:shadow-2xl overflow-hidden">
+          {/* Header - Mobile Optimized */}
+          <div className="bg-gradient-to-r from-slate-700 to-slate-800 p-4 sm:p-6">
+            <div className={`flex items-center ${isMobile ? 'flex-col gap-2 text-center' : 'justify-between'}`}>
+              <div className={`flex items-center gap-2 sm:gap-3 ${isMobile ? 'justify-center' : ''}`}>
+                <Camera className="w-6 h-6 sm:w-8 sm:h-8 text-white" />
                 <div>
-                  <h1 className="text-2xl font-bold text-white">Student Photo Capture</h1>
-                  <p className="text-slate-300 text-sm">Take a clear photo for identification</p>
+                  <h1 className="text-lg sm:text-2xl font-bold text-white">
+                    {isMobile ? 'Photo Capture' : 'Student Photo Capture'}
+                  </h1>
+                  <p className="text-slate-300 text-xs sm:text-sm">
+                    {isMobile ? 'Take a clear photo' : 'Take a clear photo for identification'}
+                  </p>
                 </div>
               </div>
               {studentData && (
-                <div className="text-right">
-                  <p className="text-white font-medium">{studentData.fullName}</p>
-                  <p className="text-slate-300 text-sm">Class {studentData.class} - {studentData.section}</p>
+                <div className={`text-white ${isMobile ? 'text-center mt-2' : 'text-right'}`}>
+                  <p className="font-medium text-sm sm:text-base">{studentData.fullName}</p>
+                  <p className="text-slate-300 text-xs sm:text-sm">
+                    Class {studentData.class} - {studentData.section}
+                  </p>
                 </div>
               )}
             </div>
           </div>
 
-          <div className="p-6">
+          <div className="p-4 sm:p-6">
+            {renderStudentInfo()}
 
-            <div className="relative bg-slate-900 rounded-xl overflow-hidden aspect-video mb-4">
+            {/* Camera Preview - Mobile Optimized */}
+            <div className={`relative bg-slate-900 rounded-lg sm:rounded-xl overflow-hidden ${
+              isMobile ? 'aspect-[3/4]' : 'aspect-video'
+            } mb-4`}>
               {/* Camera Feed */}
               {!capturedImage && isCameraActive && !cameraError && (
                 <video
@@ -292,20 +346,20 @@ function PhotoCapture() {
                   />
                   {isUploading && (
                     <div className="absolute inset-0 bg-black bg-opacity-70 flex items-center justify-center">
-                      <div className="text-center text-white">
-                        <Upload className="w-12 h-12 mx-auto mb-2 animate-pulse" />
-                        <p className="font-medium">Uploading Photo...</p>
-                        <p className="text-sm text-slate-300 mt-1">Please wait</p>
+                      <div className="text-center text-white p-4">
+                        <Upload className="w-8 h-8 sm:w-12 sm:h-12 mx-auto mb-2 animate-pulse" />
+                        <p className="font-medium text-sm sm:text-base">Uploading Photo...</p>
+                        <p className="text-xs sm:text-sm text-slate-300 mt-1">Please wait</p>
                       </div>
                     </div>
                   )}
                   {uploadStatus === 'success' && (
-                    <div className="absolute top-4 left-1/2 transform -translate-x-1/2 bg-green-500 text-white px-4 py-2 rounded-lg shadow-lg animate-pulse">
+                    <div className="absolute top-2 sm:top-4 left-1/2 transform -translate-x-1/2 bg-green-500 text-white px-3 py-1 sm:px-4 sm:py-2 rounded-lg shadow-lg animate-pulse text-xs sm:text-sm">
                       ✅ Photo uploaded successfully! Redirecting...
                     </div>
                   )}
                   {uploadStatus === 'error' && (
-                    <div className="absolute top-4 left-1/2 transform -translate-x-1/2 bg-red-500 text-white px-4 py-2 rounded-lg shadow-lg">
+                    <div className="absolute top-2 sm:top-4 left-1/2 transform -translate-x-1/2 bg-red-500 text-white px-3 py-1 sm:px-4 sm:py-2 rounded-lg shadow-lg text-xs sm:text-sm">
                       ❌ Upload failed. Please try again.
                     </div>
                   )}
@@ -316,12 +370,12 @@ function PhotoCapture() {
               {cameraError && (
                 <div className="absolute inset-0 bg-slate-800 flex items-center justify-center">
                   <div className="text-center text-white p-4">
-                    <AlertCircle className="w-16 h-16 mx-auto mb-4 text-red-400" />
-                    <p className="font-medium mb-2">Camera Error</p>
-                    <p className="text-sm text-slate-300 mb-4">{cameraError}</p>
+                    <AlertCircle className="w-12 h-12 sm:w-16 sm:h-16 mx-auto mb-3 sm:mb-4 text-red-400" />
+                    <p className="font-medium mb-2 text-sm sm:text-base">Camera Error</p>
+                    <p className="text-xs sm:text-sm text-slate-300 mb-4 max-w-xs">{cameraError}</p>
                     <button
                       onClick={startCamera}
-                      className="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition-colors"
+                      className="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition-colors text-sm"
                     >
                       Try Again
                     </button>
@@ -333,17 +387,17 @@ function PhotoCapture() {
               {!isCameraActive && !capturedImage && !cameraError && (
                 <div className="absolute inset-0 bg-slate-800 flex items-center justify-center">
                   <div className="text-center text-white">
-                    <Camera className="w-16 h-16 mx-auto mb-4 text-slate-400 animate-pulse" />
-                    <p className="text-slate-400">Initializing camera...</p>
+                    <Camera className="w-12 h-12 sm:w-16 sm:h-16 mx-auto mb-3 sm:mb-4 text-slate-400 animate-pulse" />
+                    <p className="text-slate-400 text-sm sm:text-base">Initializing camera...</p>
                   </div>
                 </div>
               )}
 
               {/* Camera Active Indicator */}
               {isCameraActive && !capturedImage && (
-                <div className="absolute top-4 right-4">
-                  <div className="flex items-center gap-2 bg-black bg-opacity-50 text-white px-3 py-1 rounded-full text-sm">
-                    <div className="w-2 h-2 bg-red-500 rounded-full animate-pulse"></div>
+                <div className="absolute top-2 sm:top-4 right-2 sm:right-4">
+                  <div className="flex items-center gap-1 sm:gap-2 bg-black bg-opacity-50 text-white px-2 py-1 sm:px-3 sm:py-1 rounded-full text-xs sm:text-sm">
+                    <div className="w-1.5 h-1.5 sm:w-2 sm:h-2 bg-red-500 rounded-full animate-pulse"></div>
                     Live
                   </div>
                 </div>
@@ -353,40 +407,40 @@ function PhotoCapture() {
             </div>
 
             {/* Camera Instructions */}
-            <div className="text-center mb-6">
-              <p className="text-sm text-slate-600">
+            <div className="text-center mb-4 sm:mb-6">
+              <p className="text-xs sm:text-sm text-slate-600">
                 {!capturedImage 
                   ? "Ensure your face is clearly visible and well-lit" 
                   : "Review your photo before saving"}
               </p>
             </div>
 
-            {/* Action Buttons */}
-            <div className="mt-6 flex flex-wrap gap-3 justify-center">
+            {/* Action Buttons - Mobile Optimized */}
+            <div className="mt-4 sm:mt-6 flex flex-wrap gap-2 sm:gap-3 justify-center">
               {!capturedImage && isCameraActive && !cameraError && (
                 <>
                   <button
                     onClick={capturePhoto}
-                    className="flex items-center gap-2 px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-lg font-medium transition-colors shadow-lg transform hover:scale-105"
+                    className="flex items-center gap-1 sm:gap-2 px-4 sm:px-6 py-2 sm:py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-lg font-medium transition-colors shadow-lg text-sm sm:text-base flex-1 sm:flex-none justify-center min-w-0"
                   >
-                    <Camera className="w-5 h-5" />
-                    Capture Photo
+                    <Camera className="w-4 h-4 sm:w-5 sm:h-5" />
+                    {isMobile ? 'Capture' : 'Capture Photo'}
                   </button>
 
                   <button
                     onClick={switchCamera}
-                    className="flex items-center gap-2 px-6 py-3 bg-slate-600 hover:bg-slate-700 text-white rounded-lg font-medium transition-colors"
+                    className="flex items-center gap-1 sm:gap-2 px-3 sm:px-6 py-2 sm:py-3 bg-slate-600 hover:bg-slate-700 text-white rounded-lg font-medium transition-colors text-sm sm:text-base flex-1 sm:flex-none justify-center min-w-0"
                   >
-                    <RefreshCw className="w-5 h-5" />
-                    Switch Camera
+                    <RefreshCw className="w-4 h-4 sm:w-5 sm:h-5" />
+                    {isMobile ? 'Switch' : 'Switch Camera'}
                   </button>
 
                   <button
                     onClick={stopCamera}
-                    className="flex items-center gap-2 px-6 py-3 bg-red-600 hover:bg-red-700 text-white rounded-lg font-medium transition-colors"
+                    className="flex items-center gap-1 sm:gap-2 px-3 sm:px-6 py-2 sm:py-3 bg-red-600 hover:bg-red-700 text-white rounded-lg font-medium transition-colors text-sm sm:text-base flex-1 sm:flex-none justify-center min-w-0"
                   >
-                    <X className="w-5 h-5" />
-                    Stop Camera
+                    <X className="w-4 h-4 sm:w-5 sm:h-5" />
+                    {isMobile ? 'Stop' : 'Stop Camera'}
                   </button>
                 </>
               )}
@@ -394,57 +448,59 @@ function PhotoCapture() {
               {!isCameraActive && !capturedImage && !cameraError && (
                 <button
                   onClick={startCamera}
-                  className="flex items-center gap-2 px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-lg font-medium transition-colors shadow-lg"
+                  className="flex items-center gap-1 sm:gap-2 px-4 sm:px-6 py-2 sm:py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-lg font-medium transition-colors shadow-lg text-sm sm:text-base w-full sm:w-auto justify-center"
                 >
-                  <Camera className="w-5 h-5" />
+                  <Camera className="w-4 h-4 sm:w-5 sm:h-5" />
                   Start Camera
                 </button>
               )}
 
               {capturedImage && (
-                <>
+                <div className="flex flex-wrap gap-2 sm:gap-3 justify-center w-full">
                   <button
                     onClick={savePhoto}
                     disabled={isUploading || uploadStatus === 'success'}
-                    className="flex items-center gap-2 px-6 py-3 bg-green-600 hover:bg-green-700 disabled:bg-gray-400 disabled:cursor-not-allowed text-white rounded-lg font-medium transition-colors shadow-lg"
+                    className="flex items-center gap-1 sm:gap-2 px-4 sm:px-6 py-2 sm:py-3 bg-green-600 hover:bg-green-700 disabled:bg-gray-400 disabled:cursor-not-allowed text-white rounded-lg font-medium transition-colors shadow-lg text-sm sm:text-base flex-1 justify-center min-w-0"
                   >
-                    <Save className="w-5 h-5" />
-                    {isUploading ? 'Saving...' : uploadStatus === 'success' ? 'Saved!' : 'Save Photo'}
+                    <Save className="w-4 h-4 sm:w-5 sm:h-5" />
+                    {isUploading ? 'Saving...' : uploadStatus === 'success' ? 'Saved!' : (isMobile ? 'Save' : 'Save Photo')}
                   </button>
 
                   {uploadStatus === 'success' && (
                     <button
                       onClick={continueToExam}
-                      className="flex items-center gap-2 px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-lg font-medium transition-colors shadow-lg"
+                      className="flex items-center gap-1 sm:gap-2 px-4 sm:px-6 py-2 sm:py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-lg font-medium transition-colors shadow-lg text-sm sm:text-base flex-1 justify-center min-w-0"
                     >
-                      Continue to Exam
+                      {isMobile ? 'Continue' : 'Continue to Exam'}
                     </button>
                   )}
 
                   <button
                     onClick={retakePhoto}
                     disabled={isUploading}
-                    className="flex items-center gap-2 px-6 py-3 bg-slate-600 hover:bg-slate-700 disabled:bg-gray-400 text-white rounded-lg font-medium transition-colors"
+                    className="flex items-center gap-1 sm:gap-2 px-3 sm:px-6 py-2 sm:py-3 bg-slate-600 hover:bg-slate-700 disabled:bg-gray-400 text-white rounded-lg font-medium transition-colors text-sm sm:text-base flex-1 justify-center min-w-0"
                   >
-                    <RefreshCw className="w-5 h-5" />
-                    Retake Photo
+                    <RefreshCw className="w-4 h-4 sm:w-5 sm:h-5" />
+                    {isMobile ? 'Retake' : 'Retake Photo'}
                   </button>
-                </>
+                </div>
               )}
             </div>
 
-            {/* Terms of Use Section */}
-            <div className="mt-8 pt-6 border-t border-slate-200">
-              <h2 className="text-lg font-semibold text-slate-700 mb-3">Terms of Use</h2>
-              <div className="text-sm text-slate-600 bg-slate-50 p-4 rounded-lg border border-slate-200">
+            {/* Terms of Use Section - Mobile Optimized */}
+            <div className="mt-6 sm:mt-8 pt-4 sm:pt-6 border-t border-slate-200">
+              <h2 className="text-base sm:text-lg font-semibold text-slate-700 mb-2 sm:mb-3">
+                {isMobile ? 'Terms' : 'Terms of Use'}
+              </h2>
+              <div className="text-xs sm:text-sm text-slate-600 bg-slate-50 p-3 sm:p-4 rounded-lg border border-slate-200">
                 <p className="mb-2">
                   <strong>Important:</strong> By capturing or saving a photo, you acknowledge and agree that:
                 </p>
                 <ul className="list-disc list-inside space-y-1">
-                  <li>The photo is being taken strictly for <strong>surveillance</strong> and <strong>student identification</strong> purposes</li>
-                  <li>This image will be used only for the online examination process</li>
-                  <li>Ensure your face is clearly visible and well-lit in the photo</li>
-                  <li>The photo will not be used for any other purpose without consent</li>
+                  <li className="text-xs sm:text-sm">The photo is for <strong>surveillance</strong> and <strong>identification</strong></li>
+                  <li className="text-xs sm:text-sm">Used only for online examination</li>
+                  <li className="text-xs sm:text-sm">Ensure face is clearly visible</li>
+                  <li className="text-xs sm:text-sm">Not used for other purposes without consent</li>
                 </ul>
               </div>
             </div>
