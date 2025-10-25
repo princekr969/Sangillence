@@ -6,6 +6,7 @@ import FormContainer from './components/RegistrationForm/FormContainer';
 import SuccessPage from './components/RegistrationForm/SuccessPage';
 import MainContainer from './components/OlympiadDashboard/MainContainer';
 
+
 function App() {
   return (
     <BrowserRouter>
@@ -24,7 +25,6 @@ function App() {
           <Route path="sobo/:schoolId" element={<SoboPage />} />
           <Route path="sobo/:schoolId/EXAM_PAGE" element={<SoboExamPage />} />
         </Route>
-
 
         <Route path="/olympiad/test" element={<MainContainer />} />
         <Route path="/registration-success" element={<SuccessPage />} />

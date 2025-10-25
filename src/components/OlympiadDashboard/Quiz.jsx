@@ -8,6 +8,17 @@ const Quiz = () => {
   const [currentQuestion, setCurrentQuestion] = useState(1);
   const [answers, setAnswers] = useState({});
 
+  // Student / form fields for Google Sheet
+  const [schoolName, setSchoolName] = useState('');
+  const [studentName, setStudentName] = useState('');
+  const [className, setClassName] = useState(''); // avoid reserved word "class"
+  const [section, setSection] = useState('');
+  const [rollNo, setRollNo] = useState('');
+  const [dob, setDob] = useState('');
+  const [submitting, setSubmitting] = useState(false);
+  const [submitResult, setSubmitResult] = useState('');
+
+
   // Sample quiz data
   const quizData = [
     {
@@ -36,6 +47,53 @@ const Quiz = () => {
   const currentAnswer = answers[currentQuestion] || {
     textAnswer: "",
     numericalAnswer: "",
+  };
+
+  
+  // Map answers to App Script expected parameter names and POST to Sheets endpoint
+  const SHEET_URL = 'https://script.google.com/macros/s/AKfycbw5AO-hNrdOP_akBnfBRnSeeny-wWGL_DPhBdeMPMM8bnPnXFBjOALxsgtbGfiOI1Be/exec';
+
+  const submitToSheet = async () => {
+    setSubmitting(true);
+    setSubmitResult('');
+    try {
+      const params = new URLSearchParams();
+      params.append('schoolName', schoolName);
+      params.append('studentName', studentName);
+      params.append('class', className);
+      params.append('section', section);
+      params.append('rollNo', rollNo);
+      params.append('dob', dob);
+
+      // For up to 10 questions; fill missing with empty strings
+      for (let i = 1; i <= 10; i++) {
+        const ans = answers[i] || { numericalAnswer: '', textAnswer: '' };
+        params.append(`q${i}int`, String(ans.numericalAnswer || ''));
+        params.append(`q${i}desc`, String(ans.textAnswer || ''));
+      }
+
+      const res = await fetch(SHEET_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8' },
+        body: params.toString(),
+      });
+
+      const text = await res.text();
+      setSubmitResult(text);
+    } catch (err) {
+      setSubmitResult('❌ Error: ' + (err.message || err));
+    } finally {
+      setSubmitting(false);
+    }
+  };
+
+  // When navigation submit is triggered and it's the last question, send data
+  const handleSubmitOrNext = async () => {
+    if (currentQuestion === totalQuestions) {
+      await submitToSheet();
+    } else {
+      setCurrentQuestion((cq) => Math.min(totalQuestions, cq + 1));
+    }
   };
 
 
@@ -95,7 +153,17 @@ const Quiz = () => {
       <div className="max-w-7xl mx-auto">
         {/* Quiz Header */}
         <div className="mb-8">
-    
+             {/* Student info form - submitted to Google Sheet */}
+          <div className="mb-4 p-4 bg-white rounded-lg shadow-sm grid grid-cols-1 sm:grid-cols-2 gap-3">
+            <input value={schoolName} onChange={(e) => setSchoolName(e.target.value)} placeholder="School Name" className="input" />
+            <input value={studentName} onChange={(e) => setStudentName(e.target.value)} placeholder="Student Name" className="input" />
+            <input value={className} onChange={(e) => setClassName(e.target.value)} placeholder="Class" className="input" />
+            <input value={section} onChange={(e) => setSection(e.target.value)} placeholder="Section" className="input" />
+            <input value={rollNo} onChange={(e) => setRollNo(e.target.value)} placeholder="Roll No" className="input" />
+            <input value={dob} onChange={(e) => setDob(e.target.value)} placeholder="DOB (YYYY-MM-DD)" className="input" />
+          </div>
+
+
           {/* Timers */}
           <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6 p-4 bg-white rounded-lg shadow-sm">
             <Timer type="global" className="mb-4 sm:mb-0" />
