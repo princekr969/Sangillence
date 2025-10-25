@@ -10,6 +10,37 @@ function OlympiadPage() {
   const { isOman } = useCountry();
   const { pathname } = useLocation();
 
+  const calculateTimeLeft = () => {
+    const now = new Date();
+    const target = new Date();
+
+    // Set target to tomorrow 9:00 AM
+    target.setDate(now.getDate() + 1);
+    target.setHours(9, 0, 0, 0);
+
+    const diff = Math.max(0, Math.floor((target - now) / 1000)); // in seconds
+    return diff;
+  };
+
+  const [timeLeft, setTimeLeft] = useState(calculateTimeLeft());
+
+  useEffect(() => {
+    if (timeLeft <= 0) return;
+
+    const interval = setInterval(() => {
+      setTimeLeft(calculateTimeLeft());
+    }, 1000);
+
+    return () => clearInterval(interval);
+  }, [timeLeft]);
+
+  const formatTime = (seconds) => {
+    const h = Math.floor(seconds / 3600);
+    const m = Math.floor((seconds % 3600) / 60);
+    const s = seconds % 60;
+    return `${h}h : ${m}m : ${s}s`;
+  };
+
   useEffect(() => {
     const handleScroll = () => {
       setShowScrollTop(window.scrollY > 400);
@@ -153,17 +184,29 @@ function OlympiadPage() {
             {/* Apply Section */}
             <div id="apply" className="mt-16 text-center">
               <h2 className="text-3xl font-family-givonic-bold font-bold mb-6 bg-gradient-to-r from-blue-400 via-purple-400 to-teal-400 bg-clip-text text-transparent">
-                Ready to Participate?
+                Exam Begins In
               </h2>
               <Link
-                to="/olympiadForm"
-                className="inline-block bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-family-givonic-semiBold font-semibold px-12 py-4 rounded-full transition-all text-lg shadow-2xl hover:shadow-purple-500/25 hover:scale-105 transform duration-300"
-              >
-                <span className="flex items-center gap-3">
-                  Apply Now
-                  <ArrowRight className="w-6 h-6" />
-                </span>
-              </Link>
+      to="/studentLogin"
+      className={`inline-block ${
+        timeLeft > 0
+          ? "bg-blue-200/40 cursor-not-allowed "
+          : "bg-gradient-to-r from-blue-600 to-purple-600 px-12 py-4 hover:from-blue-700 hover:to-purple-700 cursor-pointer"
+      } text-white font-family-givonic-semiBold font-semibold  rounded-full transition-all text-lg shadow-2xl hover:shadow-purple-500/25 hover:scale-105 transform duration-300`}
+      onClick={(e) => {
+        if (timeLeft > 0) e.preventDefault(); // prevent click before countdown ends
+      }}
+    >
+      <span className="flex items-center">
+            
+            {(timeLeft>0)? (
+              <span className="bg-black/30 px-4 py-2 rounded-full text-2xl ">
+                {formatTime(timeLeft)}
+              </span>
+            ):(<span className='flex gap-4'> Start Now 
+            <ArrowRight className="w-6 h-6" /></span>)}
+          </span>
+        </Link>
             </div>
           </div>
         </div>
