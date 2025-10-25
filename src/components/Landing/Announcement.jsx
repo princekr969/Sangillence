@@ -55,7 +55,7 @@ function Announcement() {
     linkIcon = ArrowRight;
   } else if (!isRegistered) {
     // State 2: Not Live AND Not Registered (show WhatsApp CTA)
-    buttonText = 'Join WhatsApp Group';
+    buttonText = 'Join WhatsApp Channel';
     linkTo = WHATSAPP_LINK;
     secondaryText = 'Join for **immediate exam updates and details**'; 
     linkIcon = MessageCircle;
