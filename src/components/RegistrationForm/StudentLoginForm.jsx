@@ -111,7 +111,7 @@ function StudentLoginForm() {
       })
       console.log(formData)
       try {
-        const response = await axios.post(`http://localhost:5001/api/students/login`, formData);
+        const response = await axios.post(`http://localhost:54112/api/students/login`, formData);
         console.log("Login successful:", response.data);
         if(response.data.success){
           navigate(`/photoCapture/${response.data.data.student._id}`)

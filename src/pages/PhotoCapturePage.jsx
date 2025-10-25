@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect } from 'react';
 import { Camera, RefreshCw, X, Upload, Save } from 'lucide-react';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate, useLocation } from 'react-router-dom';
 
 function PhotoCapture() {
   const [stream, setStream] = useState(null);
@@ -9,10 +9,27 @@ function PhotoCapture() {
   const [facingMode, setFacingMode] = useState('user');
   const [isUploading, setIsUploading] = useState(false);
   const [uploadStatus, setUploadStatus] = useState(null);
+  const [studentData, setStudentData] = useState(null);
   const videoRef = useRef(null);
   const canvasRef = useRef(null);
 
-   const { studentId } = useParams();
+  const { studentId } = useParams();
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  // Fetch student data on component mount
+  const fetchStudentData = async () => {
+    try {
+      const response = await fetch(`http://localhost:54112/api/students/${studentId}`);
+      if (response.ok) {
+        const data = await response.json();
+        setStudentData(data.data);
+      }
+    } catch (error) {
+      console.error('Error fetching student data:', error);
+    }
+  };
+
   const startCamera = async () => {
     try {
       const mediaStream = await navigator.mediaDevices.getUserMedia({
@@ -55,7 +72,7 @@ function PhotoCapture() {
       console.log("student",studentId)
 
       // Send to backend - Replace with your actual endpoint
-      const uploadResponse = await fetch(`http://localhost:5001/api/student/upload-student-image/${studentId}`, {
+      const uploadResponse = await fetch(`http://localhost:54112/api/student/upload-student-image/${studentId}`, {
         method: 'POST',
         body: formData,
       });
@@ -64,6 +81,21 @@ function PhotoCapture() {
 
       if (uploadResponse.ok) {
         setUploadStatus('success');
+        // Redirect to exam page after successful upload
+        setTimeout(() => {
+          if (studentData) {
+            const params = new URLSearchParams({
+              school: studentData.school || 'SOBO',
+              name: studentData.fullName || '',
+              dob: studentData.dob ? new Date(studentData.dob).toLocaleDateString('en-GB') : '',
+              class: studentData.class || '',
+              section: studentData.section || '',
+            });
+            console.log('Auto-redirecting to exam with student data:', studentData);
+            console.log('URL params:', params.toString());
+            navigate(`/sobo/${studentData.school || 'SOBO'}/EXAM_PAGE?${params.toString()}`);
+          }
+        }, 2000); // Wait 2 seconds to show success message
       } else {
         setUploadStatus('error');
       }
@@ -109,6 +141,26 @@ function PhotoCapture() {
     setUploadStatus(null);
     await startCamera();
   };
+
+  const continueToExam = () => {
+    if (studentData) {
+      const params = new URLSearchParams({
+        school: studentData.school || 'SOBO',
+        name: studentData.fullName || '',
+        dob: studentData.dob ? new Date(studentData.dob).toLocaleDateString('en-GB') : '',
+        class: studentData.class || '',
+        section: studentData.section || '',
+      });
+      console.log('Navigating to exam with student data:', studentData);
+      console.log('URL params:', params.toString());
+      navigate(`/sobo/${studentData.school || 'SOBO'}/EXAM_PAGE?${params.toString()}`);
+    }
+  };
+
+  useEffect(() => {
+    // Fetch student data when component mounts
+    fetchStudentData();
+  }, [studentId]);
 
   useEffect(() => {
     if (!capturedImage && !isCameraActive) {
@@ -163,7 +215,7 @@ function PhotoCapture() {
                   )}
                   {uploadStatus === 'success' && (
                     <div className="absolute top-4 left-1/2 transform -translate-x-1/2 bg-green-500 text-white px-4 py-2 rounded-lg shadow-lg">
-                      Photo uploaded successfully!
+                      Photo uploaded successfully! Redirecting to exam...
                     </div>
                   )}
                   {uploadStatus === 'error' && (
@@ -235,6 +287,16 @@ function PhotoCapture() {
                     <Save className="w-5 h-5" />
                     {isUploading ? 'Saving...' : uploadStatus === 'success' ? 'Saved' : 'Save Photo'}
                   </button>
+
+                  {uploadStatus === 'success' && (
+                    <button
+                      onClick={continueToExam}
+                      className="flex items-center gap-2 px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-lg font-medium transition-colors shadow-lg"
+                    >
+                      <Camera className="w-5 h-5" />
+                      Continue to Exam
+                    </button>
+                  )}
 
                   <button
                     onClick={retakePhoto}
