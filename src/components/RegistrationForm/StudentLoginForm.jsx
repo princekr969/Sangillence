@@ -34,11 +34,14 @@ function StudentLoginForm() {
 
   const schools = [
     { value: "", label: "Select School" },
-    { value: "SOBO", label: "SOBO" },
-    { value: "school_a", label: "School A" },
-    { value: "school_b", label: "School B" },
-    { value: "school_c", label: "School C" },
-    { value: "school_d  ", label: "School D" },
+    { value: "school_a  ", label: "PM SHRI KENDRIYA VIDYALAYA NUMBER-1 GWALIOR" },
+    { value: "school_b  ", label: "PM SHRI KENDRIYA VIDYALAYA NUMBER-2, AFS, GWALIOR" },
+    { value: "school_c", label: "PM SHRI KENDRIYA VIDYALAYA NUMBER-4, GWALIOR" },
+    { value: "school_d", label: "PM SHRI KENDRIYA VIDYALAYA NUMBER-5, GWALIOR " },
+    { value: "school_e", label: "PM SHRI KENDRIYA VIDYALAYA NUMBER-1 AFS CHAKERI, KANPUR" },
+    { value: "school_f  ", label: "PM SHRI KENDRIYA VIDYALAYA NUMBER-1, SURAT " },
+    { value: "school_g  ", label: "ARMY PUBLIC SCHOOL, GWALIOR" },
+    { value: "other", label: "OTHER" },
   ];
 
   const schoolConfig = useMemo(() => {
@@ -111,7 +114,7 @@ function StudentLoginForm() {
       })
       console.log(formData)
       try {
-        const response = await axios.post(`http://localhost:54112/api/students/login`, formData);
+        const response = await axios.post(`http://localhost:5001/api/students/login`, formData);
         console.log("Login successful:", response.data);
         if(response.data.success){
           navigate(`/photoCapture/${response.data.data.student._id}`)

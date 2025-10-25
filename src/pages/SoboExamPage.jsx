@@ -74,10 +74,10 @@ function SoboExamPage() {
   const googleFormSrc = `${baseForm}?${prefill.toString()}`
   
   // Debug: Log the generated URL and data
-  console.log('Generated Google Form URL:', googleFormSrc)
-  console.log('Prefill params:', Object.fromEntries(prefill))
-  console.log('Student data:', { school, name, dob, classValue, section })
-  console.log('Formatted data:', { formattedDob, formattedClass })
+  // console.log('Generated Google Form URL:', googleFormSrc)
+  // console.log('Prefill params:', Object.fromEntries(prefill))
+  // console.log('Student data:', { school, name, dob, classValue, section })
+  // console.log('Formatted data:', { formattedDob, formattedClass })
 
   return (
     <div className="fixed inset-0 bg-white">

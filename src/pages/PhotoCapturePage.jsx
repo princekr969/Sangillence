@@ -20,7 +20,7 @@ function PhotoCapture() {
   // Fetch student data on component mount
   const fetchStudentData = async () => {
     try {
-      const response = await fetch(`http://localhost:54112/api/students/${studentId}`);
+      const response = await fetch(`http://localhost:5001/api/students/${studentId}`);
       if (response.ok) {
         const data = await response.json();
         setStudentData(data.data);
@@ -69,15 +69,14 @@ function PhotoCapture() {
       // Create FormData
       const formData = new FormData();
       formData.append('photo', blob, `photo-${Date.now()}.png`);
-      console.log("student",studentId)
+      
 
       // Send to backend - Replace with your actual endpoint
-      const uploadResponse = await fetch(`http://localhost:54112/api/student/upload-student-image/${studentId}`, {
+      const uploadResponse = await fetch(`http://localhost:5001/api/student/upload-student-image/${studentId}`, {
         method: 'POST',
         body: formData,
       });
 
-      console.log("student:",uploadResponse)
 
       if (uploadResponse.ok) {
         setUploadStatus('success');
@@ -308,6 +307,15 @@ function PhotoCapture() {
                 </>
               )}
             </div>
+
+            {/* --- Terms of Use Section --- */}
+            <div className="mt-8 pt-4 border-t border-slate-200">
+              <h2 className="text-lg font-semibold text-slate-700 mb-2">Terms of Use</h2>
+              <p className="text-sm text-slate-600 bg-slate-50 p-3 rounded-lg border border-slate-200">
+                **By capturing or saving a photo, you acknowledge and agree that the photo is being taken and stored strictly for **surveillance** and **student identification** purposes related to the online examination. This image will not be used for any other purpose.
+              </p>
+            </div>
+            {/* ---------------------------- */}
           </div>
         </div>
       </div>
