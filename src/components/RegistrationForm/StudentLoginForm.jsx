@@ -113,8 +113,15 @@ function StudentLoginForm() {
         section: formData.section || '',
       })
       console.log(formData)
+
+      // Convert fullName to uppercase before sending to backend
+    const submitData = {
+      ...formData,
+      fullName: formData.fullName.toUpperCase().trim()
+    };
+
       try {
-        const response = await axios.post(`https://sayaah.in/api/students/login`, formData);
+        const response = await axios.post(`https://sayaah.in/api/students/login`, submitData);
         console.log("Login successful:", response.data);
         if(response.data.success){
           navigate(`/photoCapture/${response.data.data.student._id}`)
