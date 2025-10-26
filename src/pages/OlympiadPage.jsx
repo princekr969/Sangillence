@@ -182,17 +182,17 @@ function OlympiadPage() {
             {/* Apply Section */}
             <div id="apply" className="mt-16 text-center">
               <h2 className="text-3xl font-family-givonic-bold font-bold mb-6 bg-gradient-to-r from-blue-400 via-purple-400 to-teal-400 bg-clip-text text-transparent">
-                Exam Begins In
+                You’ve been part of something historic — India’s First Open-Book & AI-Powered Olympiad!, Kudos to Every Young Mind
               </h2>
               <Link
       to="/new/student"
       className={`inline-block ${
-        timeLeft > 0
-          ? "bg-blue-200/40 cursor-not-allowed "
-          : "bg-gradient-to-r from-blue-600 to-purple-600 px-12 py-4 hover:from-blue-700 hover:to-purple-700 cursor-pointer"
-      } text-white font-family-givonic-semiBold font-semibold  rounded-full transition-all text-lg shadow-2xl hover:shadow-purple-500/25 hover:scale-105 transform duration-300`}
+        (true)
+          ? "bg-blue-200/40 cursor-not-allowed"
+          : "bg-gradient-to-r from-blue-600 to-purple-600  hover:from-blue-700 hover:to-purple-700 cursor-pointer"
+      } text-white font-family-givonic-semiBold font-semibold px-12 py-4 rounded-full transition-all text-lg shadow-2xl hover:shadow-purple-500/25 hover:scale-105 transform duration-300`}
       onClick={(e) => {
-        if (timeLeft > 0) e.preventDefault(); // prevent click before countdown ends
+         e.preventDefault(); // prevent click before countdown ends
       }}
     >
       <span className="flex items-center">
@@ -201,8 +201,10 @@ function OlympiadPage() {
               <span className="bg-black/30 px-4 py-2 rounded-full text-2xl ">
                 {formatTime(timeLeft)}
               </span>
-            ):(<span className='flex gap-4'> Start Now 
-            <ArrowRight className="w-6 h-6" /></span>)}
+            ):(<span className='flex gap-4'> Exam Over
+            {/* <ArrowRight className="w-6 h-6" /> */}
+            </span>
+          )}
           </span>
         </Link>
             </div>
