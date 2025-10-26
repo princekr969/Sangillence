@@ -4,13 +4,13 @@ import { ArrowRight, Clock, MessageCircle } from 'lucide-react'; // Added Messag
 
 function Announcement() {
   const [timeLeft, setTimeLeft] = useState({ hours: 0, minutes: 0, seconds: 0 });
-  const [isLive, setIsLive] = useState(false);
+  const [isLive, setIsLive] = useState(true);
   // A state to represent if the current user is registered. 
   const [isRegistered, setIsRegistered] = useState(false); // Set to 'true' in a real app if logged in
 
   // Set your target date/time here
-  const targetDate = new Date('2025-10-26T09:00:00'); // Example: Oct 26, 2025, 09:00 AM
-  
+  const targetDate = new Date('2025-10-26T21:00:00'); // Example: Oct 26, 2025, 09:00 PM
+
   // --- Constants for WhatsApp and Login ---
   const WHATSAPP_LINK = 'https://whatsapp.com/channel/0029VbAfanC23n3f8Zn3eD3O'; // <<< REPLACE WITH YOUR ACTUAL INVITE LINK
   const LOGIN_PATH = '/studentLogin';
@@ -22,7 +22,7 @@ function Announcement() {
       const difference = targetDate - now;
 
       if (difference <= 0) {
-        setIsLive(true);
+        setIsLive(false);
         return { hours: 0, minutes: 0, seconds: 0 };
       }
 
@@ -51,13 +51,13 @@ function Announcement() {
     // State 1: Exam is LIVE
     buttonText = 'Start Now';
     linkTo = LOGIN_PATH;
-    secondaryText = 'Access is now open';
+    secondaryText = 'Attempt the exam before the deadline';
     linkIcon = ArrowRight;
   } else if (!isRegistered) {
     // State 2: Not Live AND Not Registered (show WhatsApp CTA)
     buttonText = 'Join WhatsApp Channel';
     linkTo = WHATSAPP_LINK;
-    secondaryText = 'Join for **immediate exam updates and details**'; 
+    secondaryText = "Thank You for Participating in SOBO'25";
     linkIcon = MessageCircle;
   } else {
     // State 3: Not Live BUT Registered (show Coming Soon/Get Ready)
@@ -139,7 +139,7 @@ function Announcement() {
               
               <div className="text-center md:text-left">
                 <h3 className="text-white text-lg md:text-xl font-bold">
-                  {isLive ? 'START YOUR EXAM NOW!' : 'EXAM STARTS IN'}
+                  {isLive ? 'SUBMISSION DEADLINE IN' : 'The Exam Has Ended'}
                 </h3>
                 <p className="text-blue-100 text-sm md:text-base">
                   {/* Using dangerouslySetInnerHTML to render the bold markdown for the WhatsApp CTA */}
