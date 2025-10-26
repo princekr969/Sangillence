@@ -49,9 +49,9 @@ const FreshStudentsFormPage = () => {
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 flex items-center justify-center p-4">
       <div className="max-w-2xl w-full bg-white rounded-2xl shadow-2xl p-8 text-center">
         <div className="mb-8">
-          <h1 className="text-4xl font-bold text-gray-800 mb-4">Fresh Student Registration</h1>
+          <h1 className="text-4xl font-bold text-gray-800 mb-4">Fresh Student Exam</h1>
           <p className="text-lg text-gray-600 mb-8">
-            Click the button below to access the registration form. The form will open in a new tab for the best experience.
+            Click the button below to access the exam form. The form will open in a new tab for the best experience.
           </p>
         </div>
         
@@ -60,7 +60,7 @@ const FreshStudentsFormPage = () => {
             onClick={handleOpenForm}
             className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-4 px-8 rounded-lg text-lg transition duration-200 shadow-lg hover:shadow-xl"
           >
-            Open Registration Form
+            Open Exam Form
           </button>
           
           <button
@@ -73,7 +73,7 @@ const FreshStudentsFormPage = () => {
         
         <div className="mt-8 p-4 bg-yellow-50 border border-yellow-200 rounded-lg">
           <p className="text-sm text-yellow-800">
-            <strong>Note:</strong> If the form doesn't open in a new tab, try the fallback option or check if your browser is blocking popups.
+            <strong>Note:</strong> If the exam form doesn't open in a new tab, try the fallback option or check if your browser is blocking popups.
           </p>
         </div>
       </div>
