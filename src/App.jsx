@@ -19,6 +19,7 @@ function App() {
           <Route path="olympiad" element={<OlympiadPage />} />
           <Route path="about" element={<AboutPage/>} />
           <Route path='olympiadForm' element={<FormContainer/>}/>  
+         
           <Route path='photoCapture/:studentId' element={<PhotoCapture/>}/> 
           <Route path='studentLogin' element={<StudentLoginForm/>}/> 
           <Route path="contactUs" element={<ContactUs />} />
