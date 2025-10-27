@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowRight, Clock, MessageCircle } from 'lucide-react'; // Added MessageCircle
+import { ArrowRight, Clock, MessageCircle, Award } from 'lucide-react'; // Added MessageCircle
 
 function Announcement() {
   const [timeLeft, setTimeLeft] = useState({ hours: 0, minutes: 0, seconds: 0 });
@@ -151,9 +151,19 @@ function Announcement() {
                 </p>
               </div>
             </div>
+
+                  <div className="flex-shrink-0 flex items-center gap-3 bg-gradient-to-r from-amber-900/40 via-yellow-900/40 to-amber-900/40 px-5 py-3 rounded-xl border border-amber-500/30 shadow-lg">
+              
+              <div className="text-left">
+                <h4 className="text-amber-100 text-sm md:text-base font-semibold">
+                  Result will Announce by  <span className="font-bold text-amber-300">February 2026</span>
+                </h4>
+               
+              </div>
+              </div>
             
             {/* Center - Timer (unchanged) */}
-            <div className="flex gap-2 md:gap-3">
+            {/* <div className="flex gap-2 md:gap-3">
               <div className="flex flex-col items-center bg-white/10 backdrop-blur-sm rounded-lg px-3 py-2 md:px-4 md:py-3 border border-white/20">
                 <span className="text-2xl md:text-4xl font-bold text-white tabular-nums">
                   {formatTime(timeLeft.hours)}
@@ -178,12 +188,12 @@ function Announcement() {
                 </span>
                 <span className="text-xs md:text-sm text-blue-200 mt-1">Seconds</span>
               </div>
-            </div>
+            </div> */}
             
             {/* Right side - CTA button - UPDATED HERE */}
-            <div className="flex-shrink-0 flex flex-col items-center justify-center">
+            {/* <div className="flex-shrink-0 flex flex-col items-center justify-center">
               {isExternalLink ? (
-                // Use a standard anchor tag for external links (WhatsApp)
+                
                 <>
                   <a
                     href={linkTo}
@@ -198,13 +208,12 @@ function Announcement() {
                     </span>
                     <CurrentLinkIcon className="w-5 h-5 md:w-6 md:h-6 transition-transform group-hover:scale-110" />
                   </a>
-                  {/* NEW TEXT BELOW THE LINK */}
                   <p className="text-xs text-green-300/80 mt-2 text-center max-w-xs">
                     *For Latest Updates & Details.*
                   </p>
                 </>
               ) : (
-                // Use Link component for internal navigation (Login/Get Ready)
+               
                 <div className='flex flex-row gap-4'>
 
                 <Link
@@ -237,9 +246,36 @@ function Announcement() {
                 </Link>
                 </div>
               )}
-            </div>
+            </div> */}
           </div>
         </div>
+
+         {/* Results Announcement - NEW SECTION */}
+      {/* <div className="relative bg-gradient-to-r from-amber-900/40 via-yellow-900/40 to-amber-900/40 overflow-hidden rounded-xl shadow-lg border border-amber-500/30">
+        <div className="absolute inset-0 bg-gradient-to-br from-amber-600/10 to-yellow-600/10"></div>
+        
+        <div className="relative px-6 py-4 flex flex-col md:flex-row items-center justify-between gap-4">
+          <div className="flex items-center gap-3">
+            <div className="w-10 h-10 bg-amber-500/20 rounded-full flex items-center justify-center border-2 border-amber-400/40">
+              <Award className="w-5 h-5 text-amber-300" />
+            </div>
+            <div className="text-center md:text-left">
+              <h4 className="text-amber-100 text-base md:text-lg font-semibold">
+                Results Announcement
+              </h4>
+              <p className="text-amber-200/80 text-sm">
+                Winners will be declared by <span className="font-bold text-amber-300">February 2026</span>
+              </p>
+            </div>
+          </div>
+          
+          <div className="flex items-center gap-2 bg-amber-500/10 px-4 py-2 rounded-lg border border-amber-400/30">
+            <span className="text-amber-300 text-sm font-medium">Stay Tuned</span>
+          </div>
+        </div>
+        
+        <div className="absolute top-0 right-0 w-32 h-32 bg-amber-400/5 rounded-full blur-2xl"></div>
+      </div> */}
 
         {/* Floating particles effect (unchanged) */}
         <div className="absolute inset-0 overflow-hidden pointer-events-none">

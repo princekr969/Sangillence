@@ -18,19 +18,18 @@ function App() {
         <Route path="/" element={<Layout1 />}>
           <Route path="olympiad" element={<OlympiadPage />} />
           <Route path="about" element={<AboutPage/>} />
-          <Route path='olympiadForm' element={<FormContainer/>}/>  
-         
-          <Route path='photoCapture/:studentId' element={<PhotoCapture/>}/> 
-          <Route path='studentLogin' element={<StudentLoginForm/>}/> 
           <Route path="contactUs" element={<ContactUs />} />
-          <Route path="sobo" element={<SoboPage />} />
-          <Route path="sobo/:schoolId" element={<SoboPage />} />
-          <Route path="sobo/:schoolId/EXAM_PAGE" element={<SoboExamPage />} />
+          {/* <Route path="sobo" element={<SoboPage />} /> */}
+          {/* <Route path='olympiadForm' element={<FormContainer/>}/>   */}
+          {/* <Route path='studentLogin' element={<StudentLoginForm/>}/>  */}
+          {/* <Route path='photoCapture/:studentId' element={<PhotoCapture/>}/>  */}
+          {/* <Route path="sobo/:schoolId" element={<SoboPage />} /> */}
+          {/* <Route path="sobo/:schoolId/EXAM_PAGE" element={<SoboExamPage />} /> */}
         </Route>
 
-        <Route path="/new/student" element={<FreshStudentsFormPage />} />
-        <Route path="/olympiad/test" element={<MainContainer />} />
-        <Route path="/registration-success" element={<SuccessPage />} />
+        {/* <Route path="/new/student" element={<FreshStudentsFormPage />} /> */}
+        {/* <Route path="/olympiad/test" element={<MainContainer />} /> */}
+        {/* <Route path="/registration-success" element={<SuccessPage />} /> */}
       </Routes>
     </BrowserRouter>
   );
