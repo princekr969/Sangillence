@@ -197,14 +197,10 @@ function OlympiadPage() {
     >
       <span className="flex items-center">
 
-            {(timeLeft > 0) ? (
-              <span className="bg-black/30 px-4 py-2 rounded-full text-2xl ">
-                {formatTime(timeLeft)}
-              </span>
-            ):(<span className='flex gap-4'> Exam Over
+            <span className='flex gap-4'> Exam Over
             {/* <ArrowRight className="w-6 h-6" /> */}
             </span>
-          )}
+       
           </span>
         </Link>
             </div>
