@@ -6,6 +6,8 @@ import AboutPage from "./AboutPage";
 import PhotoCapture from "./PhotoCapturePage";
 import SoboPage from "./SoboPage";
 import SoboExamPage from "./SoboExamPage";
+import MentorShipPage from "./Mentorship.page";
+import MentorshipTestPage from "./Mentorship_test/Mentorship_test.page";
 
 export {
     HomePage,
@@ -15,5 +17,7 @@ export {
     PhotoCapture,
     AboutPage,
     SoboPage,
-    SoboExamPage
+    SoboExamPage,
+    MentorShipPage,
+    MentorshipTestPage
 }

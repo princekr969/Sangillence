@@ -28,6 +28,9 @@ const Navbar = () => {
             <NavLink to="/home" className={({isActive}) => `${isActive? "text-white bg-[#1e3366]":"bg-transparent text-gray-700"} hover:text-white hover:bg-[#1e3366] rounded-4xl px-3 py-2 transition-colors`}>
                   Home
               </NavLink>
+              <NavLink to="/mentorship" className={({isActive}) => `${isActive? "text-white bg-[#1e3366]":"bg-transparent text-gray-700"} rounded-4xl px-3 py-2 hover:text-white hover:bg-[#1e3366] transition-colors`}>
+                  Mentorship
+              </NavLink>
               <NavLink to="/olympiad" className={({isActive}) => `${isActive? "text-white bg-[#1e3366]":"bg-transparent text-gray-700"} rounded-4xl px-3 py-2 hover:text-white hover:bg-[#1e3366] transition-colors`}>
                   Olympiad
               </NavLink>
