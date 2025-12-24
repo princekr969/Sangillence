@@ -422,6 +422,12 @@ export default function Results({ preData, answers, onNext, onBack }) {
               Your primary bottlenecks are: <strong style={{color:'#ef4444', textTransform:'uppercase'}}>{weakestLinkString}</strong>.
             </p>
          </div>
+         {/* 5. FOOTER */}
+         <div style={{fontSize:'0.7rem', color:'#64748b', borderTop:'1px solid rgba(99, 102, 241, 0.2)', paddingTop:'15px', marginTop:'auto', display:'flex', justifyContent:'space-between', fontWeight: 500}}>
+            <span>© 2025 Sangillence | A Sangillence Product</span>
+            <span>This report is a mathematical projection based on user-submitted data and current JEE trends. It serves as a diagnostic tool to identify preparation gaps and is not a guarantee of future rank or score. Actual results may vary due to external factors, exam difficulty, and changes in student consistency.</span>
+         </div>
+      
 
       </div>
     </>
