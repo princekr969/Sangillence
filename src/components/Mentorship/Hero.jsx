@@ -115,7 +115,7 @@ export default function Hero() {
               <div className="flex flex-col items-center justify-center">
                 {/* Hero badge */}
                 <div className="animate-slide-up-2 inline-block mb-6 px-5 py-2.5 bg-white/10 backdrop-blur-sm rounded-full text-sm font-medium border border-white/20 max-w-max">
-                  For DASA & NRI Students
+                  JEE'26 Candidates
                 </div>
 
                 {/* Main Heading - Hero content */}

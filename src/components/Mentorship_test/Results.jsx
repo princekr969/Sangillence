@@ -300,36 +300,35 @@ export default function Results({ preData, answers, onNext, onBack }) {
           *Share your Top 3 Challenges in the next step and get a chance for FREE mentorship.
         </p>
 
-        <div style={{display:'flex', gap:'15px', marginTop:'20px'}}>
+        <div className='flex mt-5 justify-between  gap-5'>
           <button 
-            className="btn-main btn-large" 
+            className="bg-gray-600 rounded-lg py-4 px-8 font-semibold shadow-lg text-white hover:bg-gray-500 transition-all duration-300 transform hover:scale-[1.02] active:scale-[0.98]" 
             onClick={onBack}
-            style={{flex: 1, background: 'linear-gradient(135deg, #64748b, #475569)'}}
           >
              Back
           </button>
-          <button 
-            className="btn-main btn-large" 
-            onClick={() => onNext(res.efficiency)} 
-            style={{
-              flex: 1,
-              background: 'linear-gradient(135deg, var(--primary), #8b5cf6)',
-              position: 'relative',
-              overflow: 'hidden'
-            }}
-          >
-            <span style={{position: 'relative', zIndex: 2}}>Win a Chance </span>
-            <div style={{
-              position: 'absolute',
-              top: 0,
-              left: '-100%',
-              width: '100%',
-              height: '100%',
-              background: 'linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent)',
-              animation: 'shine 2s infinite',
-              zIndex: 1
-            }}></div>
-          </button>
+            <button 
+              className="group relative py-4 px-6 font-semibold rounded-lg shadow-lg transition-all duration-300 transform overflow-hidden border border-gray-400 bg-gradient-to-r from-gray-800 to-gray-900 text-white hover:shadow-xl hover:scale-[1.02] active:scale-[0.98]"
+              onClick={() => onNext(res.efficiency)}
+            >
+              {/* Continuous shine animation overlay */}
+              <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000"></div>
+              
+              {/* Geometric hover overlay */}
+              <div className="absolute inset-0 bg-gradient-to-r from-blue-600/20 via-transparent to-amber-500/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+
+              {/* Button content */}
+              <span className="relative z-10 flex items-center justify-center gap-3">
+                <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+                Win a Chance
+              </span>
+
+              {/* Decorative elements */}
+              <div className="absolute top-0 left-0 w-1 h-full bg-gradient-to-b from-blue-500 to-transparent opacity-50 group-hover:opacity-100 transition-opacity duration-300"></div>
+              <div className="absolute top-0 right-0 w-1 h-full bg-gradient-to-b from-amber-500 to-transparent opacity-50 group-hover:opacity-100 transition-opacity duration-300"></div>
+            </button>
         </div>
       </div>
 
