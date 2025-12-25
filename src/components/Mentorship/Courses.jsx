@@ -200,7 +200,7 @@ function Courses() {
                   </div>
                 </div>
 
-                <div className="relative z-10">
+                <div className="relative z-10 pb-20">
                   <div className="flex items-center gap-4">
                     <h3 className="text-xl font-bold text-gray-900">{program.title}</h3>
                   </div>
@@ -272,20 +272,20 @@ function Courses() {
                     ))}
                   </div>
 
+                </div>
                   {/* Notify Me Button */}
-                  <div className="relative w-full mt-8 pt-6 border-t border-gray-100">
+                  <div className="absolute bottom-5 w-90 pt-6 border-t border-gray-100">
                     <button
                       onClick={() => {
                         // Add notification signup logic here
                         alert(`We'll notify you when ${program.title} opens for enrollment!`);
                       }}
-                      className="w-full py-3 bg-gradient-to-r from-gray-600 to-gray-700 text-white font-bold rounded-xl hover:from-gray-500 hover:to-gray-600 transition-all duration-300 flex items-center justify-center gap-2"
+                      className="w-full p-3 bg-gradient-to-r from-gray-600 to-gray-700 text-white font-bold rounded-xl hover:from-gray-500 hover:to-gray-600 transition-all duration-300 flex items-center justify-center gap-2"
                     >
                       <AlertCircle className="w-4 h-4" />
                       Notify Me When Available
                     </button>
                   </div>
-                </div>
               </div>
             ))}
           </div>

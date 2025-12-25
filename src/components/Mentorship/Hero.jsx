@@ -6,7 +6,7 @@ export default function Hero() {
   const Navigate = useNavigate();
 
   const takeFreeTrial = () => {
-    Navigate('/mentorship-test');
+    Navigate('/jee-trajectory-predictor');
   };
 
   const handleApplyNow = () => {
