@@ -144,7 +144,7 @@ export default function Hero() {
                     onClick={takeFreeTrial}
                     className="group px-4 py-3 hover:scale-101 hover:bg-gray-100/10 backdrop-blur-sm text-white rounded-2xl border-2 border-white/30 transition-all duration-300 font-bold text-lg flex items-center justify-center gap-2 cursor-pointer"
                   >
-                    Book a Free Strategy Call
+                    Take a JEE Trajectory Predictor Test
                   </button>
                 </div>
 
