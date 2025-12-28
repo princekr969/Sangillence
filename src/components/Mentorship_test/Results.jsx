@@ -100,23 +100,35 @@ export default function Results({ preData, answers, onNext, onBack }) {
     setIsGeneratingPdf(true);
     
     try {
-      reportRef.current.style.display = 'block'; 
+      reportRef.current.style.display = 'block';
+      reportRef.current.style.position = 'absolute';
+      reportRef.current.style.left = '-9999px';
       
       const canvas = await html2canvas(reportRef.current, {
         scale: 2,
         backgroundColor: '#020617', 
-        useCORS: true 
+        useCORS: true,
+        logging: false,
+        allowTaint: true
       });
 
       const imgData = canvas.toDataURL('image/png');
       const pdf = new jsPDF('p', 'mm', 'a4');
       const pdfWidth = pdf.internal.pageSize.getWidth();
-      const pdfHeight = (canvas.height * pdfWidth) / canvas.width;
+      const pdfHeight = pdf.internal.pageSize.getHeight();
+      const imgWidth = pdfWidth;
+      const imgHeight = (canvas.height * pdfWidth) / canvas.width;
       
-      pdf.addImage(imgData, 'PNG', 0, 0, pdfWidth, pdfHeight);
+      // Fit to single page - scale down if needed
+      const finalHeight = imgHeight > pdfHeight ? pdfHeight : imgHeight;
+      const finalWidth = imgHeight > pdfHeight ? (imgWidth * pdfHeight) / imgHeight : imgWidth;
+      
+      pdf.addImage(imgData, 'PNG', 0, 0, finalWidth, finalHeight);
       pdf.save(`Sangillence_JEE_Report_${res.efficiency}.pdf`);
       
-      reportRef.current.style.display = 'none'; 
+      reportRef.current.style.display = 'none';
+      reportRef.current.style.position = 'relative';
+      reportRef.current.style.left = 'auto';
 
     } catch (err) {
       console.error("PDF Error:", err);
@@ -342,7 +354,7 @@ export default function Results({ preData, answers, onNext, onBack }) {
           height: '297mm',
           background: 'linear-gradient(135deg, #0f172a 0%, #1e293b 100%)',
           color: '#e2e8f0',
-          padding: '20mm',
+          padding: '12mm',
           fontFamily: "'Outfit', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif",
           position: 'relative',
           margin: '0',
@@ -351,77 +363,82 @@ export default function Results({ preData, answers, onNext, onBack }) {
         }}
       >
          {/* 1. PDF HEADER */}
-         <div style={{borderBottom: '2px solid rgba(99, 102, 241, 0.3)', paddingBottom:'20px', marginBottom:'30px', display:'flex', justifyContent:'space-between', alignItems:'center'}}>
-            <div style={{display:'flex', alignItems:'center', gap:'15px'}}>
+         <div style={{borderBottom: '2px solid rgba(99, 102, 241, 0.3)', paddingBottom:'12px', marginBottom:'15px', display:'flex', justifyContent:'space-between', alignItems:'center'}}>
+            <div style={{display:'flex', alignItems:'center', gap:'10px'}}>
                <img 
                  src="https://res.cloudinary.com/dstbd40ud/image/upload/v1766321457/Untitled_design_5_zq2tz9.png" 
                  alt="Sangillence" 
-                 style={{height: '50px'}} 
+                 style={{height: '40px'}} 
                />
                <div>
-                 <h1 style={{color:'#f8fafc', margin:0, fontSize:'1.8rem', fontWeight: 700}}>JEE Trajectory Audit</h1>
-                 <p style={{color:'#94a3b8', margin:'2px 0 0 0', fontSize:'0.8rem', letterSpacing:'1px', textTransform:'uppercase', fontWeight: 600}}>A Sangillence Product</p>
+                 <h1 style={{color:'#f8fafc', margin:0, fontSize:'1.4rem', fontWeight: 700}}>JEE Trajectory Audit</h1>
+                 <p style={{color:'#94a3b8', margin:'2px 0 0 0', fontSize:'0.7rem', letterSpacing:'1px', textTransform:'uppercase', fontWeight: 600}}>A Sangillence Product</p>
                </div>
             </div>
             <div style={{textAlign:'right'}}>
-              <h2 style={{margin:0, color: '#10b981', fontSize:'2rem', fontWeight: 800}}>{res.efficiency}%</h2>
-              <p style={{margin:0, color:'#cbd5e1', fontSize:'0.9rem', fontWeight: 500}}>Habit Efficiency Score</p>
+              <h2 style={{margin:0, color: '#10b981', fontSize:'1.6rem', fontWeight: 800}}>{res.efficiency}%</h2>
+              <p style={{margin:0, color:'#cbd5e1', fontSize:'0.75rem', fontWeight: 500}}>Habit Efficiency Score</p>
             </div>
          </div>
 
          {/* 2. THREE-COLUMN METRICS */}
-         <div style={{display:'grid', gridTemplateColumns:'1fr 1fr 1fr', gap:'15px', marginBottom:'40px'}}>
-            <div style={{background:'linear-gradient(135deg, rgba(79, 102, 229, 0.15), rgba(79, 102, 229, 0.08))', padding:'15px', borderRadius:'8px', textAlign:'center', border: '1px solid rgba(99, 102, 241, 0.3)'}}>
-               <h3 style={{color:'#94a3b8', fontSize:'0.75rem', textTransform:'uppercase', margin:'0 0 10px 0', fontWeight: 600, letterSpacing: '0.5px'}}>Predicted JEE Score</h3>
-               <div style={{fontSize:'2rem', fontWeight:'bold', color: '#99f3ff'}}>
+         <div style={{display:'grid', gridTemplateColumns:'1fr 1fr 1fr', gap:'10px', marginBottom:'20px'}}>
+            <div style={{background:'linear-gradient(135deg, rgba(79, 102, 229, 0.15), rgba(79, 102, 229, 0.08))', padding:'10px', borderRadius:'6px', textAlign:'center', border: '1px solid rgba(99, 102, 241, 0.3)'}}>
+               <h3 style={{color:'#94a3b8', fontSize:'0.65rem', textTransform:'uppercase', margin:'0 0 6px 0', fontWeight: 600, letterSpacing: '0.5px'}}>Predicted JEE Score</h3>
+               <div style={{fontSize:'1.5rem', fontWeight:'bold', color: '#99f3ff'}}>
                  {res.predictedMarks}
                </div>
-               <span style={{fontSize:'0.8rem', color:'#64748b', fontWeight: 500}}>/ 300</span>
+               <span style={{fontSize:'0.7rem', color:'#64748b', fontWeight: 500}}>/ 300</span>
             </div>
 
-            <div style={{background:'linear-gradient(135deg, rgba(16, 185, 129, 0.15), rgba(16, 185, 129, 0.08))', padding:'15px', borderRadius:'8px', textAlign:'center', border:'1px solid rgba(16, 185, 129, 0.3)'}}>
-               <h3 style={{color:'#94a3b8', fontSize:'0.75rem', textTransform:'uppercase', margin:'0 0 10px 0', fontWeight: 600, letterSpacing: '0.5px'}}>Target Goal</h3>
-               <div style={{fontSize:'2rem', fontWeight:'bold', color:'#5eead4'}}>
+            <div style={{background:'linear-gradient(135deg, rgba(16, 185, 129, 0.15), rgba(16, 185, 129, 0.08))', padding:'10px', borderRadius:'6px', textAlign:'center', border:'1px solid rgba(16, 185, 129, 0.3)'}}>
+               <h3 style={{color:'#94a3b8', fontSize:'0.65rem', textTransform:'uppercase', margin:'0 0 6px 0', fontWeight: 600, letterSpacing: '0.5px'}}>Target Goal</h3>
+               <div style={{fontSize:'1.5rem', fontWeight:'bold', color:'#5eead4'}}>
                  {res.targetMarks}
                </div>
-               <span style={{fontSize:'0.8rem', color:'#64748b', fontWeight: 500}}>/ 300</span>
+               <span style={{fontSize:'0.7rem', color:'#64748b', fontWeight: 500}}>/ 300</span>
             </div>
 
-            <div style={{background:'linear-gradient(135deg, rgba(245, 158, 11, 0.15), rgba(245, 158, 11, 0.08))', padding:'15px', borderRadius:'8px', textAlign:'center', border: '1px solid rgba(245, 158, 11, 0.3)'}}>
-               <h3 style={{color:'#94a3b8', fontSize:'0.75rem', textTransform:'uppercase', margin:'0 0 10px 0', fontWeight: 600, letterSpacing: '0.5px'}}>Success Probability</h3>
-               <div style={{fontSize:'2rem', fontWeight:'bold', color: res.probability > 70 ? '#10b981' : '#f59e0b'}}>
+            <div style={{background:'linear-gradient(135deg, rgba(245, 158, 11, 0.15), rgba(245, 158, 11, 0.08))', padding:'10px', borderRadius:'6px', textAlign:'center', border: '1px solid rgba(245, 158, 11, 0.3)'}}>
+               <h3 style={{color:'#94a3b8', fontSize:'0.65rem', textTransform:'uppercase', margin:'0 0 6px 0', fontWeight: 600, letterSpacing: '0.5px'}}>Success Probability</h3>
+               <div style={{fontSize:'1.5rem', fontWeight:'bold', color: res.probability > 70 ? '#10b981' : '#f59e0b'}}>
                  {res.probability}%
                </div>
             </div>
          </div>
 
          {/* 3. FULL SKILL DNA */}
-         <h3 style={{borderLeft:'4px solid #4f46e5', paddingLeft:'10px', color:'#f8fafc', marginBottom:'20px', fontWeight: 700, fontSize: '1.1rem'}}>Full SkillDNA Profile</h3>
+         <h3 style={{borderLeft:'4px solid #4f46e5', paddingLeft:'8px', color:'#f8fafc', marginBottom:'12px', fontWeight: 700, fontSize: '0.95rem'}}>Full SkillDNA Profile</h3>
          
-         <div style={{display:'grid', gridTemplateColumns:'1fr 1fr', gap:'15px 40px', marginBottom:'40px'}}>
+         <div style={{display:'grid', gridTemplateColumns:'1fr 1fr', gap:'8px 20px', marginBottom:'18px'}}>
             {res.skillDNA.all.map((skill, i) => (
               <div key={i}>
-                <div style={{display:'flex', justifyContent:'space-between', marginBottom:'5px', fontSize:'0.9rem'}}>
+                <div style={{display:'flex', justifyContent:'space-between', marginBottom:'3px', fontSize:'0.75rem'}}>
                   <span style={{color:'#cbd5e1', fontWeight: 500}}>{skill.name}</span>
                   <span style={{fontWeight:'bold', color: skill.color}}>{Number(skill.visualScore).toFixed(1)}%</span>
                 </div>
-                <div style={{width:'100%', height:'6px', background:'rgba(255, 255, 255, 0.1)', borderRadius:'4px', overflow: 'hidden'}}>
-                  <div style={{width: `${skill.visualScore}%`, height:'100%', background: skill.color, borderRadius:'4px'}}></div>
+                <div style={{width:'100%', height:'4px', background:'rgba(255, 255, 255, 0.1)', borderRadius:'3px', overflow: 'hidden'}}>
+                  <div style={{width: `${skill.visualScore}%`, height:'100%', background: skill.color, borderRadius:'3px'}}></div>
                 </div>
               </div>
             ))}
          </div>
 
          {/* 4. VERDICT */}
-         <div style={{background:`${res.verdict.color}20`, border:`1.5px solid ${res.verdict.color}`, padding:'20px', borderRadius:'8px', marginBottom:'30px'}}>
-            <h4 style={{margin:'0 0 10px 0', color: res.verdict.color, textTransform:'uppercase', fontWeight: 700, fontSize: '0.95rem'}}>Mentor Verdict: {res.verdict.status}</h4>
-            <p style={{margin:0, color:'#cbd5e1', lineHeight:'1.6', fontWeight: 500}}>
+         <div style={{background:`${res.verdict.color}20`, border:`1.5px solid ${res.verdict.color}`, padding:'12px', borderRadius:'6px', marginBottom:'15px'}}>
+            <h4 style={{margin:'0 0 6px 0', color: res.verdict.color, textTransform:'uppercase', fontWeight: 700, fontSize: '0.85rem'}}>Mentor Verdict: {res.verdict.status}</h4>
+            <p style={{margin:0, color:'#cbd5e1', lineHeight:'1.4', fontWeight: 500, fontSize:'0.8rem'}}>
               {res.verdict.msg} 
-              <br/><br/>
+              <br/>
               Your primary bottlenecks are: <strong style={{color:'#ef4444', textTransform:'uppercase'}}>{weakestLinkString}</strong>.
             </p>
          </div>
 
+         {/* 5. FOOTER */}
+         <div style={{fontSize:'0.6rem', color:'#64748b', borderTop:'1px solid rgba(99, 102, 241, 0.2)', paddingTop:'8px', display:'flex', flexDirection:'column', gap:'4px', fontWeight: 500, lineHeight:'1.3'}}>
+            <div>© 2025 Sangillence | A Sangillence Product</div>
+            <div>This report is a mathematical projection based on user-submitted data and current JEE trends. It serves as a diagnostic tool to identify preparation gaps and is not a guarantee of future rank or score. Actual results may vary due to external factors, exam difficulty, and changes in student consistency.</div>
+         </div>
       </div>
     </>
   );
