@@ -27,7 +27,7 @@ function App() {
           {/* <Route path="sobo/:schoolId/EXAM_PAGE" element={<SoboExamPage />} /> */}
         </Route>
           <Route path='/*' element={<HomePage/>}/>
-          <Route path="mentorship-test" element={<MentorshipTestPage />} />
+          <Route path="jee-trajectory-predictor" element={<MentorshipTestPage />} />
 
         {/* <Route path="/new/student" element={<FreshStudentsFormPage />} /> */}
         {/* <Route path="/olympiad/test" element={<MainContainer />} /> */}

@@ -39,11 +39,11 @@ function ContactDetails() {
                 title="Address" 
                 text="Abv-iiitm, Morena Link Road, Gwalior, Madhya Pradesh, India-474015"
               />
-              <ContactItem 
+              {/* <ContactItem 
                 icon={Phone} 
                 title="Mobile" 
                 text="+91-6307616741" 
-              />
+              /> */}
               <ContactItem 
                 icon={Mail} 
                 title="Email" 

@@ -6,7 +6,7 @@ export default function Hero() {
   const Navigate = useNavigate();
 
   const takeFreeTrial = () => {
-    Navigate('/mentorship-test');
+    Navigate('/jee-trajectory-predictor');
   };
 
   const handleApplyNow = () => {
@@ -115,7 +115,7 @@ export default function Hero() {
               <div className="flex flex-col items-center justify-center">
                 {/* Hero badge */}
                 <div className="animate-slide-up-2 inline-block mb-6 px-5 py-2.5 bg-white/10 backdrop-blur-sm rounded-full text-sm font-medium border border-white/20 max-w-max">
-                  For DASA & NRI Students
+                  JEE'26 Candidates
                 </div>
 
                 {/* Main Heading - Hero content */}
@@ -144,7 +144,7 @@ export default function Hero() {
                     onClick={takeFreeTrial}
                     className="group px-4 py-3 hover:scale-101 hover:bg-gray-100/10 backdrop-blur-sm text-white rounded-2xl border-2 border-white/30 transition-all duration-300 font-bold text-lg flex items-center justify-center gap-2 cursor-pointer"
                   >
-                    Book a Free Strategy Call
+                    Take a JEE Trajectory Predictor Test
                   </button>
                 </div>
 

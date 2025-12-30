@@ -82,7 +82,7 @@ export default function Registration({ efficiency, onComplete, onBack }) {
   };
 
   const validatePhone = (phone) => {
-    return phone.length === 10 && /^\d+$/.test(phone);
+    return  /^\d+$/.test(phone);
   };
 
   const validateJeeAppNo = (jeeAppNo) => {
@@ -113,12 +113,12 @@ export default function Registration({ efficiency, onComplete, onBack }) {
     }
 
     if (!validatePhone(formData.phone)) {
-      alert("Phone number must be exactly 10 digits.");
+      alert("Phone number must be digits.");
       return;
     }
 
     if (!validatePhone(formData.whatsapp)) {
-      alert("WhatsApp number must be exactly 10 digits.");
+      alert("WhatsApp number must be digits.");
       return;
     }
 

@@ -78,10 +78,10 @@ function Footer() {
           
           <div className="space-y-4 ml-5">
             <h2 className="text-xl font-bold">Contact Us</h2>
-            <div className="flex items-center gap-2">
+            {/* <div className="flex items-center gap-2">
               <Phone size={18} className="text-white" />
                <p>Contact: +91 6307616741</p>
-            </div>
+            </div> */}
             <div className="flex items-start gap-2">
               <MapPin size={18} className="text-white mt-1" />
               <p>ABV-IIITM, Morena Link Road, Gwalior, Madhya Pradesh, India-474015</p>

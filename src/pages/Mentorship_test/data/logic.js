@@ -1,8 +1,9 @@
 // src/data/logic.js
 
+// 1. SKILL LOGIC (Preserved Original)
 const runBayesianAnalysis = (answers, theoryPct, practPct, currentMarks) => {
   
-  // 1. Initialize Vector (Neutral 0)
+  // Initialize Vector (Neutral 0)
   let skills = {
     "Memory Efficiency": 0,
     "Patience": 0,
@@ -16,222 +17,120 @@ const runBayesianAnalysis = (answers, theoryPct, practPct, currentMarks) => {
     "Deep Focus": 0            
   };
 
-  // --- PHASE 1: THE HARD ANCHORS (Base Reality) ---
-  
-  // A. Competency (Pure Knowledge)
-  // We map 0-100% theory to -40 to +40 scale
+  // --- PHASE 1: THE HARD ANCHORS ---
   skills["Competency"] += (theoryPct - 50) * 0.8;
-
-  // B. Problem Solving (Action Bias)
-  // We map 0-100% practice to -40 to +40 scale
   skills["Problem Solving"] += (practPct - 50) * 0.8;
 
-  // C. Intellectual Honesty (The Gap)
-  // If Theory >> Practice, you are deluding yourself.
   const gap = theoryPct - practPct;
-  if (gap > 30) skills["Intellectual Honesty"] -= 25; // Massive Penalty
+  if (gap > 30) skills["Intellectual Honesty"] -= 25; 
   else if (gap > 15) skills["Intellectual Honesty"] -= 10;
-  else if (gap < 5) skills["Intellectual Honesty"] += 15; // Reward for balance
+  else if (gap < 5) skills["Intellectual Honesty"] += 15; 
 
-  // --- PHASE 2: EFFICIENCY MODIFIERS (The "Genius" vs "Leakage" Check) ---
-  
-  // Metric: Conversion Efficiency (CE)
-  // How many marks do you get per % of theory?
-  // Ideal: 3 marks per 1% theory (300 marks / 100% theory).
-  // Real World Median: ~0.8 to 1.2 marks per 1% theory.
-  
-  // Avoid division by zero
+  // --- PHASE 2: EFFICIENCY MODIFIERS ---
   const safeTheory = Math.max(10, theoryPct);
-  const conversionRatio = currentMarks / (safeTheory * 3); // 0.0 to 1.0 scale
+  const conversionRatio = currentMarks / (safeTheory * 3); 
 
   if (conversionRatio > 0.6) {
-    // High Efficiency: They understand deeply, don't just memorize.
     skills["Critical Thinking"] += 20; 
     skills["Memory Efficiency"] += 15;
   } else if (conversionRatio < 0.25) {
-    // Critical Leakage: Studying a lot, scoring nothing.
-    skills["Critical Thinking"] -= 15; // Rote learner
-    skills["Deep Focus"] -= 15;        // Likely "Fake Work" (distracted study)
-    skills["Memory Efficiency"] -= 20; // Forgetting everything
+    skills["Critical Thinking"] -= 15; 
+    skills["Deep Focus"] -= 15;        
+    skills["Memory Efficiency"] -= 20; 
   } else {
-    // Median Range (0.25 - 0.6)
-    // Normal student. Small adjustments.
     skills["Critical Thinking"] += 5;
   }
 
-  // --- PHASE 3: BEHAVIORAL EVIDENCE (32 Questions) ---
-  // We iterate through every answer to adjust the profile.
-  // 1-5 Scale: 1=Never, 5=Always.
-  // We normalize this: 1 -> -2, 2 -> -1, 3 -> 0, 4 -> +1, 5 -> +2 (Weighted by importance)
-
-  const applyEvidence = (qId, val, weight = 1) => {
-    const v = parseInt(val); // 1 to 5
-    const score = (v - 3) * 2; // -4 to +4 base impact
+  // --- PHASE 3: BEHAVIORAL EVIDENCE ---
+  const applyEvidence = (qId, val) => {
+    const v = parseInt(val); 
+    const score = (v - 3) * 2; 
 
     switch(parseInt(qId)) {
-        // --- TRUENESS DETECTORS ---
-        case 101: // Struggle 20 mins (Positive)
-            skills["Patience"] += score * 1.5; 
-            skills["Problem Solving"] += score * 1.0;
-            break;
-        case 102: // Phone Off (Positive)
-            skills["Deep Focus"] += score * 2.0; // High Weight
-            break;
-        case 103: // Daily Targets (Positive)
-            skills["Resilience"] += score * 1.0;
-            skills["Competency"] += score * 0.5;
-            break;
-        case 104: // Timer Used (Positive)
-            skills["Time Management"] += score * 1.5;
-            skills["Exam Temperament"] += score * 1.0;
-            break;
-        case 105: // Accept Fault (Positive)
-            skills["Resilience"] += score * 1.5; // Growth Mindset
-            skills["Intellectual Honesty"] += score * 1.5;
-            break;
-        case 106: // Review Weak Topics (Positive)
-            skills["Intellectual Honesty"] += score * 1.5;
-            skills["Critical Thinking"] += score * 1.0;
-            break;
-
-        // --- STRATEGY ---
-        case 1: // Written Plan (Positive)
-            skills["Time Management"] += score * 0.8;
-            break;
-        case 2: // Overwhelmed (Negative: 5 is bad)
-            skills["Resilience"] -= score * 1.2; 
-            break;
-        case 5: // High Weightage Focus (Positive)
-            skills["Exam Temperament"] += score * 1.0; // Smart strategy
-            skills["Competency"] += score * 0.5;
-            break;
-
-        // --- DISCIPLINE ---
-        case 6: // Timetable Fail (Negative)
-            skills["Resilience"] -= score * 1.0;
-            skills["Intellectual Honesty"] -= score * 0.5;
-            break;
-        case 8: // Digital Distraction (Negative)
-            skills["Deep Focus"] -= score * 2.0; // Major penalty
-            break;
-        case 9: // 3hr Sit (Positive)
-            skills["Deep Focus"] += score * 1.5;
-            skills["Patience"] += score * 1.0;
-            break;
-
-        // --- PROFICIENCY ---
-        case 12: // Concept vs Rote (Positive)
-            skills["Critical Thinking"] += score * 2.0;
-            break;
-        case 13: // Formula vs App (Negative)
-            skills["Problem Solving"] -= score * 1.5;
-            skills["Critical Thinking"] -= score * 1.0;
-            break;
-        case 14: // Neglect Inorganic (Negative)
-            skills["Memory Efficiency"] -= score * 1.5;
-            skills["Competency"] -= score * 1.0;
-            break;
-
-        // --- EXAM SKILLS ---
-        case 16: // Silly Mistakes (Negative)
-            skills["Exam Temperament"] -= score * 1.5;
-            skills["Deep Focus"] -= score * 0.5;
-            break;
-        case 17: // Run out of time (Negative)
-            skills["Time Management"] -= score * 1.5;
-            break;
-        case 19: // Guessing (Negative)
-            skills["Intellectual Honesty"] -= score * 1.5;
-            skills["Exam Temperament"] -= score * 1.2; // Gambling is bad temperament
-            break;
-
-        // --- PSYCHOLOGY ---
-        case 22: // Peer Pressure (Negative)
-            skills["Resilience"] -= score * 1.0;
-            break;
-        case 24: // Worry vs Study (Negative)
-            skills["Patience"] -= score * 1.2;
-            skills["Deep Focus"] -= score * 0.8;
-            break;
-        case 25: // Calm Mindset (Positive)
-            skills["Exam Temperament"] += score * 1.5;
-            skills["Resilience"] += score * 1.0;
-            break;
-
+        case 101: skills["Patience"] += score * 1.5; skills["Problem Solving"] += score * 1.0; break;
+        case 102: skills["Deep Focus"] += score * 2.0; break;
+        case 103: skills["Resilience"] += score * 1.0; skills["Competency"] += score * 0.5; break;
+        case 104: skills["Time Management"] += score * 1.5; skills["Exam Temperament"] += score * 1.0; break;
+        case 105: skills["Resilience"] += score * 1.5; skills["Intellectual Honesty"] += score * 1.5; break;
+        case 106: skills["Intellectual Honesty"] += score * 1.5; skills["Critical Thinking"] += score * 1.0; break;
+        case 1: skills["Time Management"] += score * 0.8; break;
+        case 2: skills["Resilience"] -= score * 1.2; break;
+        case 5: skills["Exam Temperament"] += score * 1.0; skills["Competency"] += score * 0.5; break;
+        case 6: skills["Resilience"] -= score * 1.0; skills["Intellectual Honesty"] -= score * 0.5; break;
+        case 8: skills["Deep Focus"] -= score * 2.0; break;
+        case 9: skills["Deep Focus"] += score * 1.5; skills["Patience"] += score * 1.0; break;
+        case 12: skills["Critical Thinking"] += score * 2.0; break;
+        case 13: skills["Problem Solving"] -= score * 1.5; skills["Critical Thinking"] -= score * 1.0; break;
+        case 14: skills["Memory Efficiency"] -= score * 1.5; skills["Competency"] -= score * 1.0; break;
+        case 16: skills["Exam Temperament"] -= score * 1.5; skills["Deep Focus"] -= score * 0.5; break;
+        case 17: skills["Time Management"] -= score * 1.5; break;
+        case 19: skills["Intellectual Honesty"] -= score * 1.5; skills["Exam Temperament"] -= score * 1.2; break;
+        case 22: skills["Resilience"] -= score * 1.0; break;
+        case 24: skills["Patience"] -= score * 1.2; skills["Deep Focus"] -= score * 0.8; break;
+        case 25: skills["Exam Temperament"] += score * 1.5; skills["Resilience"] += score * 1.0; break;
         default: break;
     }
   };
 
-  // Run Evidence Loop
   Object.keys(answers).forEach(qId => applyEvidence(qId, answers[qId]));
 
-  // Normalize & Sort skill scores into 0-100 visual scale
-  
-  let skillArray = Object.keys(skills).map(key => ({
-      name: key,
-      rawScore: skills[key]
-  }));
+  // --- NORMALIZATION (Absolute Anchoring) ---
+  let skillArray = Object.keys(skills).map(key => {
+      let raw = skills[key];
+      let visual = 50; 
+      visual += (raw * 1.5); // Scaling
+      visual = Math.max(10, Math.min(98, visual)); // Clamping
 
-  // Find extremes to normalize
-  const maxScore = Math.max(...skillArray.map(s => s.rawScore));
-  const minScore = Math.min(...skillArray.map(s => s.rawScore));
-  const range = Math.max(1, maxScore - minScore);
-
-  const finalProfile = skillArray.map(s => {
-      // Normalize to 10-100 range
-      let visual = 10 + ((s.rawScore - minScore) / range) * 90;
-      
-      // Determine Color Bucket
-      let color = '#3b82f6'; // Default Blue
-      if (s.name === "Intellectual Honesty" && s.rawScore < -10) color = '#ef4444'; // Red flag
-      else if (visual >= 85) color = '#10b981'; // Green
-      else if (visual <= 30) color = '#ef4444'; // Red
-      else if (visual <= 60) color = '#f59e0b'; // Orange
+      let color = '#3b82f6'; 
+      if (key === "Intellectual Honesty" && visual < 40) color = '#ef4444'; 
+      else if (visual >= 80) color = '#10b981'; 
+      else if (visual <= 35) color = '#ef4444'; 
+      else if (visual <= 60) color = '#f59e0b'; 
 
       return {
-          name: s.name,
+          name: key,
           visualScore: Math.round(visual),
-          rawScore: s.rawScore,
+          rawScore: raw,
           color: color
       };
   });
 
-  // Sort: Best first
-  finalProfile.sort((a, b) => b.visualScore - a.visualScore);
+  skillArray.sort((a, b) => b.visualScore - a.visualScore);
 
   return {
-      all: finalProfile,
-      top3: finalProfile.slice(0, 3),
-      bottom3: finalProfile.slice(-3).reverse() // Worst first
+      all: skillArray,
+      top3: skillArray.slice(0, 3),
+      bottom3: skillArray.slice(-3).reverse() 
   };
 };
 
-// --- MAIN FUNCTION ---
+// 2. MAIN CALCULATION
 export const calculateAnalysis = (currentScore, targetScore, answers, allQuestions, syllabusData) => {
   const current = parseInt(currentScore) || 0;
   const target = parseInt(targetScore) || 0;
   const theoryPct = syllabusData?.theory || 50;
   const practPct = syllabusData?.practice || 50;
   
-  // Time Calculation
-  const targetDate = new Date("2026-01-24");
+  // --- UPDATED TIME CALCULATION (Target: 21 Jan 2026) ---
+  const targetDate = new Date("2026-01-21");
   const today = new Date();
   const daysLeft = Math.max(0, Math.ceil((targetDate - today) / (1000 * 60 * 60 * 24)));
+  // ------------------------------------------------------
 
-  // Habit Efficiency (Simple Calculation for UI)
+  // Habit Efficiency
   let scoreSum = 0; 
   let maxScore = 0;
   Object.keys(answers).forEach((qId) => {
-     const q = allQuestions.find(qq => qq.id === parseInt(qId));
-     if(q) {
-         const point = (q.type === 'positive') ? (answers[qId] - 1) / 4 : (5 - answers[qId]) / 4;
-         scoreSum += point * (q.bayesWeight || 1);
-         maxScore += (q.bayesWeight || 1);
-     }
+      const q = allQuestions.find(qq => qq.id === parseInt(qId));
+      if(q) {
+          const point = (q.type === 'positive') ? (answers[qId] - 1) / 4 : (5 - answers[qId]) / 4;
+          scoreSum += point * (q.bayesWeight || 1);
+          maxScore += (q.bayesWeight || 1);
+      }
   });
   const habitEfficiency = maxScore > 0 ? (scoreSum/maxScore) : 0.5;
 
-  // Prediction Physics (The "Ceiling" Logic)
+  // Prediction Physics
   const crammingCapacity = (daysLeft > 60) ? 20 : 10;
   const effectiveTheoryLimit = Math.min(100, theoryPct + crammingCapacity);
   const maxTheoreticalScore = 300 * (effectiveTheoryLimit / 100);
@@ -249,6 +148,21 @@ export const calculateAnalysis = (currentScore, targetScore, answers, allQuestio
   if (predictedMarks > maxTheoreticalScore) predictedMarks = (predictedMarks + (maxTheoreticalScore * 3)) / 4;
   predictedMarks = Math.floor(predictedMarks);
 
+  // --- VOLATILITY CALCULATION (Shift Difficulty) ---
+  const stability = (Math.min(theoryPct, practPct) / 100) * 0.5; 
+  
+  let baseDown = 0.30; 
+  let baseUp = 0.40;
+
+  if (predictedMarks > 170) { baseDown = 0.20; baseUp = 0.25; } 
+  else if (predictedMarks > 100) { baseDown = 0.25; baseUp = 0.30; }
+
+  const finalDown = baseDown * (1 - stability); 
+  const finalUp = baseUp * (1 - stability);
+
+  const minPredicted = Math.floor(predictedMarks * (1 - finalDown));
+  const maxPredicted = Math.floor(predictedMarks * (1 + finalUp));
+
   // Probability Calculation
   let probability = 0;
   if (predictedMarks >= target) probability = 95 + (habitEfficiency * 4);
@@ -261,12 +175,13 @@ export const calculateAnalysis = (currentScore, targetScore, answers, allQuestio
   else if (totalEfficiency < 0.5) verdict = { status: "NEED MENTORSHIP", color: "#ef4444", msg: "Inefficient habits." };
   else if (target - predictedMarks > 25) verdict = { status: "ADVISED MENTORSHIP", color: "#f59e0b", msg: "Gap in trajectory." };
 
-  // --- NEW: Run The Context-Aware Bayesian Analysis ---
-  // We pass 'current' marks now to perform the efficiency checks
+  // Run Bayesian Analysis
   const skillDNA = runBayesianAnalysis(answers, theoryPct, practPct, current);
 
   return {
     predictedMarks,
+    minPredicted, 
+    maxPredicted, 
     targetMarks: target,
     efficiency: (totalEfficiency * 100).toFixed(1),
     probability: probability.toFixed(1),

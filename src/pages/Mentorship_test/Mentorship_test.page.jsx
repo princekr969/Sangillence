@@ -75,16 +75,16 @@ export default function MentorshipTestPage() {
       <div className="sky-container sunrise-bg"></div>
 
       {/* Main Container */}
-      <div className="max-w-7xl" > 
+      <div className="max-w-7xl flex items-center justify-center" > 
         {step === 'landing' && <PreQuiz onStart={handlePre} />}
         
         {step === 'quiz' && (
-          <Quiz 
-            data={questions[qIdx]} 
-            index={qIdx} 
-            total={questions.length} 
-            onAns={handleAns} 
-          />
+            <Quiz 
+              data={questions[qIdx]} 
+              index={qIdx} 
+              total={questions.length} 
+              onAns={handleAns} 
+            />
         )}
 
         {step === 'result' && (
