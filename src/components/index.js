@@ -27,6 +27,7 @@ import CareersRequirements from "./Careers/CareersRequirements";
 import CareersRoles from "./Careers/CareersRoles";
 import CareersExpectations from "./Careers/CareersExpectations";
 import CareersApply from "./Careers/CareersApply";
+import CareersSocialGood from "./Careers/CareersSocialGood";
 
 export {
     Navbar,
@@ -57,5 +58,6 @@ export {
     CareersRequirements,
     CareersRoles,
     CareersExpectations,
-    CareersApply
+    CareersApply,
+    CareersSocialGood
 }

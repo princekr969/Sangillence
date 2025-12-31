@@ -7,7 +7,7 @@ function CareersHeader() {
         <div className="flex items-center gap-4">
           <div>
             <img 
-              src="/assets/sangillenceLogo.png" 
+              src="https://res.cloudinary.com/dstbd40ud/image/upload/v1766321457/Untitled_design_5_zq2tz9.png" 
               alt="Team Sangillence Logo"
               className="h-12 w-auto"
               style={{ filter: 'drop-shadow(0 0 8px rgba(99, 102, 241, 0.6))' }}

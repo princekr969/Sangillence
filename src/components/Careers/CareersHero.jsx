@@ -85,6 +85,21 @@ function CareersHero() {
 
       {/* Content */}
       <div className="relative z-10 container mx-auto max-w-4xl text-center">
+        <div className="mb-8">
+          <h2 className="text-3xl md:text-5xl lg:text-6xl font-bold mb-2 bg-gradient-to-r from-yellow-300 via-amber-400 to-yellow-500 bg-clip-text text-transparent" 
+              style={{
+                letterSpacing: '0.05em'
+              }}>
+            Career Opportunities
+          </h2>
+          <div className="flex items-center justify-center gap-3 mb-4">
+            <div className="h-px w-16 bg-gradient-to-r from-transparent via-amber-400 to-transparent"></div>
+            <span className="text-2xl md:text-4xl font-bold bg-gradient-to-r from-yellow-400 via-amber-400 to-yellow-500 bg-clip-text text-transparent">
+              Team Sangillence
+            </span>
+            <div className="h-px w-16 bg-gradient-to-r from-transparent via-amber-400 to-transparent"></div>
+          </div>
+        </div>
         <h1 className="text-4xl md:text-5xl font-bold text-white mb-6">
           Internship Program 2025
         </h1>
