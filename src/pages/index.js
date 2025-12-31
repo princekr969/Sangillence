@@ -8,6 +8,7 @@ import SoboPage from "./SoboPage";
 import SoboExamPage from "./SoboExamPage";
 import MentorShipPage from "./Mentorship.page";
 import MentorshipTestPage from "./Mentorship_test/Mentorship_test.page";
+import CareersPage from "./CareersPage";
 
 export {
     HomePage,
@@ -19,5 +20,6 @@ export {
     SoboPage,
     SoboExamPage,
     MentorShipPage,
-    MentorshipTestPage
+    MentorshipTestPage,
+    CareersPage
 }

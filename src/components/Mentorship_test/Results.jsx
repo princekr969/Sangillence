@@ -100,7 +100,7 @@ export default function Results({ preData, answers, onNext, onBack }) {
     setIsGeneratingPdf(true);
     
     try {
-      reportRef.current.style.display = 'block';
+      reportRef.current.style.display = 'block'; 
       reportRef.current.style.position = 'absolute';
       reportRef.current.style.left = '-9999px';
       
@@ -126,7 +126,7 @@ export default function Results({ preData, answers, onNext, onBack }) {
       pdf.addImage(imgData, 'PNG', 0, 0, finalWidth, finalHeight);
       pdf.save(`Sangillence_JEE_Report_${res.efficiency}.pdf`);
       
-      reportRef.current.style.display = 'none';
+      reportRef.current.style.display = 'none'; 
       reportRef.current.style.position = 'relative';
       reportRef.current.style.left = 'auto';
 

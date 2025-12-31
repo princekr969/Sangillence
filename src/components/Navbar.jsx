@@ -37,6 +37,9 @@ const Navbar = () => {
               <NavLink to="/contactUs" className={({isActive}) => `${isActive? "text-white bg-[#1e3366]":"bg-transparent text-gray-700"} rounded-4xl px-3 py-2 hover:text-white hover:bg-[#1e3366] transition-colors`}>
                   Contact
               </NavLink>
+              <NavLink to="/careers" className={({isActive}) => `${isActive? "text-white bg-[#1e3366]":"bg-transparent text-gray-700"} rounded-4xl px-3 py-2 hover:text-white hover:bg-[#1e3366] transition-colors`}>
+                  Careers
+              </NavLink>
               <NavLink to="/about" className={({isActive}) => `${isActive? "text-white bg-[#1e3366]":"bg-transparent text-gray-700"} rounded-4xl px-3 py-2 hover:text-white hover:bg-[#1e3366] transition-colors`}>
                   About
               </NavLink>
@@ -67,6 +70,9 @@ const Navbar = () => {
               </NavLink>
               <NavLink to="/contactUs" className={({isActive}) => `${isActive?'bg-[#0a2972]':'bg-transparent'} hover:bg-[#0a2972] text-slate-50 rounded-2xl px-4 py-2 font-medium transition-colors`}>
               Contact
+              </NavLink>
+              <NavLink to="/careers" className={({isActive}) => `${isActive?'bg-[#0a2972]':'bg-transparent'} hover:bg-[#0a2972] text-slate-50 rounded-2xl px-4 py-2 font-medium transition-colors`}>
+              Careers
               </NavLink>
               <NavLink to="/about" className={({isActive}) => `${isActive?'bg-[#0a2972]':'bg-transparent'} hover:bg-[#0a2972] text-slate-50 rounded-2xl px-4 py-2 font-medium transition-colors`}>
               About

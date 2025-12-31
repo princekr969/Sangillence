@@ -21,6 +21,12 @@ import ChartGallery from "./Landing/school_section_performance_leaderboard";
 import SchoolSectionLeaderboard from './Landing/school_section_performance_leaderboard';
 import ScrollToTop from "./ScrollToTop";
 import StudentLoginForm from "./RegistrationForm/StudentLoginForm";
+import CareersHeader from "./Careers/CareersHeader";
+import CareersHero from "./Careers/CareersHero";
+import CareersRequirements from "./Careers/CareersRequirements";
+import CareersRoles from "./Careers/CareersRoles";
+import CareersExpectations from "./Careers/CareersExpectations";
+import CareersApply from "./Careers/CareersApply";
 
 export {
     Navbar,
@@ -45,5 +51,11 @@ export {
     ChartGallery,
     SchoolSectionLeaderboard,
     ScrollToTop,
-    StudentLoginForm
+    StudentLoginForm,
+    CareersHeader,
+    CareersHero,
+    CareersRequirements,
+    CareersRoles,
+    CareersExpectations,
+    CareersApply
 }
