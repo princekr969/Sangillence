@@ -37,7 +37,7 @@ function CareersSocialGood() {
     <section className="py-16 px-4 bg-gradient-to-b from-white to-blue-50">
       <div className="container mx-auto max-w-6xl">
         <div className="text-center mb-12">
-          <h2 className="text-3xl md:text-4xl font-bold text-slate-800 mb-4">Build for Social Good</h2>
+          <h2 className="text-3xl md:text-4xl font-bold text-slate-800 mb-4">"Build for Social Good"</h2>
           <p className="text-lg text-slate-600 max-w-3xl mx-auto">
             Join our mission to create meaningful impact through technology. Work on projects that make a difference in education and beyond.
           </p>
@@ -51,7 +51,7 @@ function CareersSocialGood() {
             </div>
             <h3 className="text-xl font-bold text-gray-800 mb-3 text-center">Education Impact</h3>
             <p className="text-gray-700 text-sm font-medium text-center">
-              Develop tools and platforms that help students learn better and achieve their academic goals
+              Develop tools and platforms that help students learn better and help individuals to unlock their potential.
             </p>
           </div>
 
@@ -88,7 +88,7 @@ function CareersSocialGood() {
             rel="noopener noreferrer"
             className="bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700 text-white px-8 py-3 rounded-lg font-semibold text-lg transition-all duration-300 transform hover:scale-105 inline-flex items-center gap-2 shadow-lg"
           >
-            Join Build for Social Good <i className="fas fa-hands-helping"></i>
+            Contribute Now <i className="fas fa-hands-helping"></i>
           </a>
         </div>
       </div>

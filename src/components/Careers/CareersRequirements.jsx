@@ -21,7 +21,7 @@ function CareersRequirements() {
             </li>
             <li className="flex items-start gap-4 text-slate-700 text-lg">
               <i className="fas fa-check-circle text-green-500 text-xl mt-1 flex-shrink-0"></i>
-              <span>Certificate provided upon successful completion</span>
+              <span>Certificate of "Build for Social Good" & Certificate of "Successful Deployment" provided upon successful Intern completion</span>
             </li>
           </ul>
         </div>

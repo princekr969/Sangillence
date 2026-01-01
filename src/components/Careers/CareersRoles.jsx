@@ -52,7 +52,7 @@ function CareersRoles() {
             <ul className="space-y-3 text-gray-700">
               <li className="flex items-start gap-2">
                 <i className="fas fa-check text-gray-800 mt-1 text-sm flex-shrink-0"></i>
-                <span className="text-sm font-medium">Develop and fine-tune generative AI models</span>
+                <span className="text-sm font-medium">Develop RAG pipelines and fine-tune generative AI models</span>
               </li>
               <li className="flex items-start gap-2">
                 <i className="fas fa-check text-gray-800 mt-1 text-sm flex-shrink-0"></i>
@@ -64,7 +64,7 @@ function CareersRoles() {
               </li>
               <li className="flex items-start gap-2">
                 <i className="fas fa-check text-gray-800 mt-1 text-sm flex-shrink-0"></i>
-                <span className="text-sm font-medium">Collaborate with AI researchers and engineers</span>
+                <span className="text-sm font-medium">Innovate with with AI researchers and engineers</span>
               </li>
             </ul>
           </div>
@@ -104,7 +104,7 @@ function CareersRoles() {
               <div className="rounded-full bg-white/80 p-3 inline-flex items-center justify-center mb-4">
                 <i className="fas fa-server text-gray-800 text-2xl"></i>
               </div>
-              <h3 className="text-xl font-bold text-gray-800 mb-2">Node.js Intern</h3>
+              <h3 className="text-xl font-bold text-gray-800 mb-2">Backend (Node.js) Intern</h3>
               <p className="text-gray-700 font-medium">Develop REST APIs and backend systems</p>
             </div>
             <ul className="space-y-3 text-gray-700">
@@ -133,7 +133,7 @@ function CareersRoles() {
               <div className="rounded-full bg-white/80 p-3 inline-flex items-center justify-center mb-4">
                 <i className="fas fa-user-friends text-gray-800 text-2xl"></i>
               </div>
-              <h3 className="text-xl font-bold text-gray-800 mb-2">Psychologist - HCI</h3>
+              <h3 className="text-xl font-bold text-gray-800 mb-2">Psychologist - HCI Intern</h3>
               <p className="text-gray-700 font-medium">Human Computer Interaction & UX Research</p>
             </div>
             <ul className="space-y-3 text-gray-700">
@@ -147,11 +147,11 @@ function CareersRoles() {
               </li>
               <li className="flex items-start gap-2">
                 <i className="fas fa-check text-gray-800 mt-1 text-sm flex-shrink-0"></i>
-                <span className="text-sm font-medium">Design intuitive user interfaces based on psychological principles</span>
+                <span className="text-sm font-medium">Design intuitive mechanisms for AI models based on psychological principles</span>
               </li>
               <li className="flex items-start gap-2">
                 <i className="fas fa-check text-gray-800 mt-1 text-sm flex-shrink-0"></i>
-                <span className="text-sm font-medium">Improve user experience through behavioral insights</span>
+                <span className="text-sm font-medium">Improves Accuracy, Use case and User Experience of AI models</span>
               </li>
             </ul>
           </div>
@@ -162,7 +162,7 @@ function CareersRoles() {
               <div className="rounded-full bg-white/80 p-3 inline-flex items-center justify-center mb-4">
                 <i className="fas fa-bullhorn text-gray-800 text-2xl"></i>
               </div>
-              <h3 className="text-xl font-bold text-gray-800 mb-2">Digital Marketer & Social Media Manager</h3>
+              <h3 className="text-xl font-bold text-gray-800 mb-2">Digital Marketer </h3>
               <p className="text-gray-700 font-medium">Drive brand awareness and engagement</p>
             </div>
             <ul className="space-y-3 text-gray-700">

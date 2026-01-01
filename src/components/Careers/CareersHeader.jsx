@@ -16,10 +16,10 @@ function CareersHeader() {
           <div>
             <div className="font-bold text-lg">
               <Link to="/home" className="bg-gradient-to-r from-yellow-400 via-amber-400 to-yellow-500 bg-clip-text text-transparent hover:from-yellow-300 hover:via-amber-300 hover:to-yellow-400 transition-all">
-                Team Sangillence
+                Sangillence
               </Link>
             </div>
-            <div className="text-slate-400 text-sm">An ABV IIITM Startup</div>
+            <div className="text-slate-400 text-sm">Incubated @TIIC, ABV IIITM Gwalior</div>
           </div>
         </div>
         <div>

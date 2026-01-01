@@ -95,13 +95,13 @@ function CareersHero() {
           <div className="flex items-center justify-center gap-3 mb-4">
             <div className="h-px w-16 bg-gradient-to-r from-transparent via-amber-400 to-transparent"></div>
             <span className="text-2xl md:text-4xl font-bold bg-gradient-to-r from-yellow-400 via-amber-400 to-yellow-500 bg-clip-text text-transparent">
-              Team Sangillence
+              With Sangillence
             </span>
             <div className="h-px w-16 bg-gradient-to-r from-transparent via-amber-400 to-transparent"></div>
           </div>
         </div>
         <h1 className="text-4xl md:text-5xl font-bold text-white mb-6">
-          Internship Program 2025
+          "Build for Social Good" Internship Program 2026
         </h1>
         <p className="text-lg md:text-xl text-slate-300 mb-8 leading-relaxed">
           We're excited that you're interested in joining our internship program! This is your opportunity to work on real projects, build practical skills, and grow professionally in a flexible remote environment.
