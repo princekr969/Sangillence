@@ -420,7 +420,7 @@ export default function Results({ preData, answers, onNext, onBack, onSubmit }) 
 
          {/* 6. FOOTER */}
          <div style={{fontSize:'0.6rem', color:'#64748b', borderTop:'1px solid rgba(99, 102, 241, 0.2)', paddingTop:'8px', marginTop:'15px', display:'flex', flexDirection:'column', gap:'4px', fontWeight: 500, lineHeight:'1.3'}}>
-            <div>© 2025 Sangillence | A Sangillence Product</div>
+            <div>© 2026 Sangillence | A Sangillence Product</div>
             <div>This report is a mathematical projection based on user-submitted data and current JEE trends. It serves as a diagnostic tool to identify preparation gaps and is not a guarantee of future rank or score. Actual results may vary due to external factors, exam difficulty, and changes in student consistency.</div>
          </div>
       </div>
