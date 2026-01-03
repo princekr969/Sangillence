@@ -134,17 +134,18 @@ export default function Hero() {
                 {/* CTA Buttons */}
                 <div className="animate-slide-up-5 flex flex-col sm:flex-row gap-4 mb-8">
                   <button
-                    onClick={handleApplyNow}
+                    onClick={takeFreeTrial}
                     className="group px-4 py-3 bg-gradient-to-r from-blue-600 to-purple-600 hover:scale-101 text-white rounded-2xl transition-all duration-300 font-bold text-lg shadow-2xl shadow-blue-500/20 flex items-center justify-center gap-2 cursor-pointer"
                   >
-                    Apply for Mentorship
+                    Take a JEE Trajectory Predictor Test
+
                     <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform duration-300" />
                   </button>
                   <button
-                    onClick={takeFreeTrial}
+                    onClick={handleApplyNow}
                     className="group px-4 py-3 hover:scale-101 hover:bg-gray-100/10 backdrop-blur-sm text-white rounded-2xl border-2 border-white/30 transition-all duration-300 font-bold text-lg flex items-center justify-center gap-2 cursor-pointer"
                   >
-                    Take a JEE Trajectory Predictor Test
+                    Apply for Mentorship
                   </button>
                 </div>
 

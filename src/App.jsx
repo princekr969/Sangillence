@@ -1,9 +1,9 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { Layout1 } from "./layouts";
 import { LoadingPage, HomePage, OlympiadPage, AboutPage, ContactUs, MentorshipTestPage, PhotoCapture, SoboPage, SoboExamPage, MentorShipPage, CareersPage } from "./pages";
-import { StudentLoginForm } from './components';
-import FormContainer from './components/RegistrationForm/FormContainer';
-import SuccessPage from './components/RegistrationForm/SuccessPage';
+import { StudentLoginForm, JeePredictionForm } from './components';
+import FormContainer from './components/Forms/FormContainer';
+import SuccessPage from './components/Forms/SuccessPage';
 import MainContainer from './components/OlympiadDashboard/MainContainer';
 import FreshStudentsFormPage from './components/NewGoogleExam';
 
@@ -30,7 +30,7 @@ function App() {
           <Route path='/*' element={<HomePage/>}/>
           <Route path="jee-trajectory-predictor" element={<MentorshipTestPage />} />
 
-        {/* <Route path="/new/student" element={<FreshStudentsFormPage />} /> */}
+        <Route path="/new/student" element={<JeePredictionForm />} />
         {/* <Route path="/olympiad/test" element={<MainContainer />} /> */}
         {/* <Route path="/registration-success" element={<SuccessPage />} /> */}
       </Routes>

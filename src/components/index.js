@@ -1,6 +1,6 @@
-import Navbar from "./Navbar";
-import Footer from "./Footer";
-import FormContainer from "./RegistrationForm/FormContainer";
+import Navbar from "./common/Navbar";
+import Footer from "./common/Footer";
+import FormContainer from "./Forms/FormContainer";
 import About from "./Landing/About";
 import Awards from "./Landing/Awards";
 import Benefits from "./Landing/Benefits";
@@ -19,8 +19,8 @@ import ContactHeader from "./Contact/ContantHeader";
 import ContactDetails from "./Contact/ContactMainSection";
 import ChartGallery from "./Landing/school_section_performance_leaderboard";
 import SchoolSectionLeaderboard from './Landing/school_section_performance_leaderboard';
-import ScrollToTop from "./ScrollToTop";
-import StudentLoginForm from "./RegistrationForm/StudentLoginForm";
+import ScrollToTop from "./common/ScrollToTop";
+import StudentLoginForm from "./Forms/StudentLoginForm";
 import CareersHeader from "./Careers/CareersHeader";
 import CareersHero from "./Careers/CareersHero";
 import CareersRequirements from "./Careers/CareersRequirements";
@@ -28,6 +28,7 @@ import CareersRoles from "./Careers/CareersRoles";
 import CareersExpectations from "./Careers/CareersExpectations";
 import CareersApply from "./Careers/CareersApply";
 import CareersSocialGood from "./Careers/CareersSocialGood";
+import JeePredictionForm from "./Forms/JeePredictionForm";
 
 export {
     Navbar,
@@ -59,5 +60,6 @@ export {
     CareersRoles,
     CareersExpectations,
     CareersApply,
-    CareersSocialGood
+    CareersSocialGood,
+    JeePredictionForm
 }

@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Menu, X } from 'lucide-react';
 import { NavLink, Link } from 'react-router-dom';
-import sangillenceLogo from './../../assets/sangillenceLogo.png';
+import sangillenceLogo from './../../../assets/sangillenceLogo.png';
 
 const Navbar = () => {
    const [isMenuOpen, setIsMenuOpen] = useState(false);
