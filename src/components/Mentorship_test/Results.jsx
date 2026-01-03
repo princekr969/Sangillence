@@ -11,8 +11,6 @@ export default function Results({ preData, answers, onNext, onBack, onSubmit }) 
   const [isLoading, setIsLoading] = useState(true);
   const [isUnlocked, setIsUnlocked] = useState(false);
   const [isGeneratingPdf, setIsGeneratingPdf] = useState(false);
-  const [showHabitInfo, setShowHabitInfo] = useState(false);
-  const [showProbabilityInfo, setShowProbabilityInfo] = useState(false);
   
   const reportRef = useRef(null);
 
@@ -142,118 +140,79 @@ export default function Results({ preData, answers, onNext, onBack, onSubmit }) 
 
         <h1 className="result-main-heading" style={{color: '#ffffffff'}}>Your JEE Trajectory Report</h1>
 
-        {/* METRICS WITH INTERACTIVE INFO BUTTONS */}
+        {/* METRICS WITH PERMANENT INFO BOXES */}
         <div className="metrics-with-info">
           
           {/* CARD 1: Habit Efficiency */}
           <div 
             className="info-card habit-card"
             style={{
-              background: showHabitInfo ? 'linear-gradient(135deg, rgba(79, 102, 229, 0.28), rgba(139, 92, 246, 0.18))' : 'rgba(255, 255, 255, 0.1)',
-              border: showHabitInfo ? '1.5px solid rgba(99, 102, 241, 0.6)' : '1px solid rgba(255, 255, 255, 0.15)',
+              background: 'rgba(255, 255, 255, 0.05)',
+              border: '1px solid rgba(129, 140, 248, 0.3)',
               transition: 'all 0.35s cubic-bezier(0.4, 0.0, 0.2, 1)',
-              boxShadow: showHabitInfo ? '0 0 30px rgba(79, 102, 229, 0.3), inset 0 1px 2px rgba(255, 255, 255, 0.1)' : 'none'
+              padding: '16px',
+              borderRadius: '12px'
             }}
           >
-            <div style={{display:'flex', justifyContent:'space-between', alignItems:'flex-start', marginBottom: showHabitInfo ? '12px' : '0'}}>
-              <div>
-                <div className="card-label" style={{color: showHabitInfo ? '#818cf8' : '#94a3b8', transition: 'color 0.3s ease'}}>Habit Efficiency</div>
-                <div className="metric-large" style={{
-                  color: showHabitInfo ? '#99f3ff' : '#f8fafc', 
-                  transition: 'color 0.3s ease',
-                  textShadow: showHabitInfo ? '0 0 10px rgba(79, 102, 229, 0.5)' : 'none'
-                }}>{res.efficiency}%</div>
-              </div>
-              <button 
-                className="info-icon-btn" 
-                onClick={() => setShowHabitInfo(!showHabitInfo)}
-                style={{
-                  background:'none', 
-                  border:'none', 
-                  cursor:'pointer', 
-                  fontSize:'1.4rem', 
-                  padding: '4px 8px', 
-                  transition: 'all 0.3s ease',
-                  transform: showHabitInfo ? 'rotate(180deg)' : 'rotate(0deg)',
-                  color: showHabitInfo ? '#a78bfa' : '#64748b'
-                }}
-              >
-                {showHabitInfo ? '✕' : '▼'}
-              </button>
+            <div style={{marginBottom: '12px'}}>
+              <div className="card-label" style={{color: '#818cf8', fontWeight: '600', letterSpacing: '0.5px', marginBottom: '4px'}}>HABIT EFFICIENCY</div>
+              <div className="metric-large" style={{
+                color: '#99f3ff', 
+                fontSize: '2.5rem',
+                fontWeight: '800',
+                textShadow: '0 0 15px rgba(79, 102, 229, 0.4)'
+              }}>{res.efficiency}%</div>
             </div>
             
-            {/* Info Box */}
-            {showHabitInfo && (
-              <div style={{
-                background: 'linear-gradient(135deg, rgba(99, 102, 241, 0.15), rgba(79, 102, 229, 0.1))',
-                border: '1px solid rgba(99, 102, 241, 0.45)',
-                padding: '12px 14px',
-                borderRadius: '8px',
-                fontSize: '0.9rem',
-                color: '#cbd5e1',
-                lineHeight: '1.6',
-                marginTop: '8px',
-                animation: 'slideDown 0.3s ease-out'
-              }}>
-                Based on your habits, skill developed and efficiency. Higher values indicate better study habits alignment.
-              </div>
-            )}
+            {/* Always Visible Info Box */}
+            <div style={{
+              background: 'rgba(30, 41, 59, 0.5)',
+              border: '1px solid rgba(99, 102, 241, 0.2)',
+              padding: '12px',
+              borderRadius: '8px',
+              fontSize: '0.85rem',
+              color: '#cbd5e1',
+              lineHeight: '1.5',
+            }}>
+              Based on your habits, skill developed and efficiency. Higher values indicate better study habits alignment.
+            </div>
           </div>
 
           {/* CARD 2: Probability */}
           <div 
             className="info-card probability-card"
             style={{
-              background: showProbabilityInfo ? 'linear-gradient(135deg, rgba(16, 185, 129, 0.26), rgba(52, 211, 153, 0.16))' : 'rgba(255, 255, 255, 0.1)',
-              border: showProbabilityInfo ? '1.5px solid rgba(16, 185, 129, 0.6)' : '1px solid rgba(255, 255, 255, 0.15)',
+              background: 'rgba(255, 255, 255, 0.05)',
+              border: '1px solid rgba(52, 211, 153, 0.3)',
               transition: 'all 0.35s cubic-bezier(0.4, 0.0, 0.2, 1)',
-              boxShadow: showProbabilityInfo ? '0 0 30px rgba(16, 185, 129, 0.3), inset 0 1px 2px rgba(255, 255, 255, 0.1)' : 'none'
+              padding: '16px',
+              borderRadius: '12px'
             }}
           >
-            <div style={{display:'flex', justifyContent:'space-between', alignItems:'flex-start', marginBottom: showProbabilityInfo ? '12px' : '0'}}>
-              <div>
-                <div className="card-label" style={{color: showProbabilityInfo ? '#6ee7b7' : '#94a3b8', transition: 'color 0.3s ease'}}>Success Rate</div>
-                <div className="metric-large" style={{ 
-                  color: showProbabilityInfo ? '#5eead4' : '#f8fafc',
-                  transition: 'color 0.3s ease',
-                  textShadow: showProbabilityInfo ? '0 0 10px rgba(16, 185, 129, 0.5)' : 'none'
-                }}>
-                  {res.probability}%
-                </div>
+            <div style={{marginBottom: '12px'}}>
+              <div className="card-label" style={{color: '#6ee7b7', fontWeight: '600', letterSpacing: '0.5px', marginBottom: '4px'}}>SUCCESS RATE</div>
+              <div className="metric-large" style={{ 
+                color: '#5eead4',
+                fontSize: '2.5rem',
+                fontWeight: '800',
+                textShadow: '0 0 15px rgba(16, 185, 129, 0.4)'
+              }}>
+                {res.probability}%
               </div>
-              <button 
-                className="info-icon-btn" 
-                onClick={() => setShowProbabilityInfo(!showProbabilityInfo)}
-                style={{
-                  background:'none', 
-                  border:'none', 
-                  cursor:'pointer', 
-                  fontSize:'1.4rem', 
-                  padding: '4px 8px', 
-                  transition: 'all 0.3s ease',
-                  transform: showProbabilityInfo ? 'rotate(180deg)' : 'rotate(0deg)',
-                  color: showProbabilityInfo ? '#6ee7b7' : '#64748b'
-                }}
-              >
-                {showProbabilityInfo ? '✕' : '▼'}
-              </button>
             </div>
 
-            {/* Info Box */}
-            {showProbabilityInfo && (
-              <div style={{
-                background: 'linear-gradient(135deg, rgba(16, 185, 129, 0.15), rgba(52, 211, 153, 0.1))',
-                border: '1px solid rgba(16, 185, 129, 0.45)',
-                padding: '12px 14px',
-                borderRadius: '8px',
-                fontSize: '0.9rem',
-                color: '#e2e8f0',
-                lineHeight: '1.6',
-                marginTop: '8px'
-              }}>
-                Mathematical probability of achieving your target score of {res.targetMarks}+ based on your current trajectory and study patterns.
-              </div>
-            )}
+            {/* Always Visible Info Box */}
+            <div style={{
+              background: 'rgba(30, 41, 59, 0.5)',
+              border: '1px solid rgba(16, 185, 129, 0.2)',
+              padding: '12px',
+              borderRadius: '8px',
+              fontSize: '0.85rem',
+              color: '#cbd5e1',
+              lineHeight: '1.5',
+            }}>
+              Mathematical probability of achieving your target score of {res.targetMarks}+ based on your current trajectory and study patterns.
+            </div>
           </div>
         </div>
 
