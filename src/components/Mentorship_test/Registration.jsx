@@ -7,24 +7,44 @@ import {
 // --- YOUR LIVE GOOGLE SCRIPT URL ---
 const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbw3xKFP49Qxsiq2f82P9RLSMoIrqBtADpeLla9u-qBAx43BL3ThVXpXUth3mUnkNeeY/exec"
 
+// Updated list of countries where JEE Mains is conducted
 const countryData = [
-  { name: "India", code: "+91" }, 
-  { name: "United Arab Emirates", code: "+971" },
-  { name: "United States", code: "+1" }, 
-  { name: "United Kingdom", code: "+44" },
-  { name: "Saudi Arabia", code: "+966" }, 
-  { name: "Qatar", code: "+974" },
-  { name: "Oman", code: "+968" }, 
+  { name: "Australia", code: "+61" },
+  { name: "Austria", code: "+43" },
+  { name: "Bahrain", code: "+973" },
+  { name: "Brazil", code: "+55" },
+  { name: "Canada", code: "+1" },
+  { name: "China", code: "+86" },
+  { name: "France", code: "+33" },
+  { name: "Germany", code: "+49" },
+  { name: "Hong Kong", code: "+852" },
+  { name: "India", code: "+91" },
+  { name: "Indonesia", code: "+62" },
   { name: "Kuwait", code: "+965" },
-  { name: "Singapore", code: "+65" }, 
-  { name: "Nepal", code: "+977" }
+  { name: "Malaysia", code: "+60" },
+  { name: "Nepal", code: "+977" },
+  { name: "Nigeria", code: "+234" },
+  { name: "Norway", code: "+47" },
+  { name: "Oman", code: "+968" },
+  { name: "Qatar", code: "+974" },
+  { name: "Russia", code: "+7" },
+  { name: "Saudi Arabia", code: "+966" },
+  { name: "Singapore", code: "+65" },
+  { name: "South Africa", code: "+27" },
+  { name: "Sri Lanka", code: "+94" },
+  { name: "Thailand", code: "+66" },
+  { name: "United Arab Emirates", code: "+971" },
+  { name: "United Kingdom", code: "+44" },
+  { name: "United States", code: "+1" },
+  { name: "Vietnam", code: "+84" }
 ].sort((a, b) => a.name.localeCompare(b.name));
 
-export default function Registration({ efficiency, onComplete, onBack }) {
+export default function Registration({ efficiency, onComplete, onBack, initialData }) {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [states, setStates] = useState([]);
   const [cities, setCities] = useState([]);
   
+  // PREFILL DATA LOGIC HERE
   const [formData, setFormData] = useState({
     challenge1: '', 
     challenge2: '', 
@@ -32,15 +52,16 @@ export default function Registration({ efficiency, onComplete, onBack }) {
     country: '', 
     state: '', 
     city: '',
-    name: '', 
-    email: '', 
+    // Prefill from initialData (passed from MentorshipTestPage)
+    name: initialData?.fullName || '', 
+    email: initialData?.email || '', 
     phone: '', 
     phoneCode: '+91', 
     whatsapp: '', 
     whatsappCode: '+91',
     sameAsContact: false,
-    jeeAppNo: '', 
-    currentStatus: '',
+    jeeAppNo: initialData?.jeeApplicationNo || '', 
+    currentStatus: initialData?.passYear || '',
     subPhysics: 'Rank 1', 
     subChem: 'Rank 1', 
     subMath: 'Rank 1'

@@ -62,7 +62,7 @@ export default function PreQuiz1({ onStart }) {
                     JEE'26 Trajectory Predictor
                     </h1>
                     <p className="text-slate-300 text-sm sm:text-base ">
-                        An AI powered psychometric test to predict your projected JEE score and study efficiency.
+                        An AI powered psychometric audit to predict your projected JEE score and study efficiency.
                     </p>
                 </div>
               </div>

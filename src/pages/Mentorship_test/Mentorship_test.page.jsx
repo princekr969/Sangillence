@@ -9,14 +9,17 @@ import { JeePredictionForm } from '../../components';
 
 export default function MentorshipTestPage() {
   const [step, setStep] = useState('studentInfo');
-  const [studentData, setStudentData] = useState({
+  
+  // Initial empty state for student data
+  const initialStudentData = {
     fullName: "",
     email: "",
     jeeApplicationNo: "",
     passYear: "",
     registered: false
-  });
+  };
 
+  const [studentData, setStudentData] = useState(initialStudentData);
   const [preData, setPreData] = useState(null);
   const [qIdx, setQIdx] = useState(0);
   const [answers, setAnswers] = useState({});
@@ -25,7 +28,6 @@ export default function MentorshipTestPage() {
 
   // Handle student registration
   const handleStudentRegistration = (studentInfo) => {
-    // console.log("Student registered:", studentInfo);
     setStudentData(studentInfo);
     if(studentInfo.registered){
         setStep('landing');
@@ -33,7 +35,6 @@ export default function MentorshipTestPage() {
   };
 
   const handleAssessmentCompletion = (assessmentData) => {
-    // console.log("Assessment completed:", assessmentData); 
     setAssessmentResult(assessmentData);
 
     // Send data to Google Sheets when assessment is complete
@@ -79,9 +80,6 @@ export default function MentorshipTestPage() {
         preData: initialData || {}
       };
       
-      // console.log("Sending to Google Sheets:", payload);
-      
-      // Send data to Google Sheets using fetch with no-cors
       const response = await fetch(WEB_APP_URL, {
         method: 'POST',
         mode: 'no-cors',
@@ -90,8 +88,6 @@ export default function MentorshipTestPage() {
         },
         body: JSON.stringify(payload)
       });
-      
-      // console.log("Data sent successfully");
       
     } catch (error) {
       console.error("Error sending data to Google Sheets:", error);
@@ -118,22 +114,32 @@ export default function MentorshipTestPage() {
     console.log("FULL DATA:", { ...preData, answers, ...finalData });
     setStep('success');
 
-    // System Reset
+    // System Reset after success message
     setTimeout(() => {
-      setStep('landing');
+      // 1. Reset Step to the very beginning
+      setStep('studentInfo'); 
+      
+      // 2. Clear Student Data (Name, Email, etc.)
+      setStudentData(initialStudentData);
+
+      // 3. Clear Quiz Data
       setPreData(null);
       setQIdx(0);
       setAnswers({});
       setEfficiency(null);
+      setAssessmentResult(null);
     }, 6000); 
   };
 
   const handleBack = () => {
+    // Reset everything if user goes back from Results/Registration
     setStep('studentInfo');
+    setStudentData(initialStudentData);
     setPreData(null);
     setQIdx(0);
     setAnswers({});
     setEfficiency(null);
+    setAssessmentResult(null);
   };
 
   // Mouse Parallax Logic
@@ -194,7 +200,12 @@ export default function MentorshipTestPage() {
         )}
 
         {step === 'register' && (
-          <Registration efficiency={efficiency} onComplete={handleRegister} onBack={handleBack} />
+          <Registration 
+            efficiency={efficiency} 
+            onComplete={handleRegister} 
+            onBack={handleBack} 
+            initialData={studentData} 
+          />
         )}
 
         {step === 'success' && (
