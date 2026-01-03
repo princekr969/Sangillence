@@ -30,14 +30,7 @@ function JeePredictionForm({onComplete}) {
   }, []);
 
   // Generate pass year options (from 2010 to current year + 1)
-  const passYearOptions = useMemo(() => {
-    const currentYear = new Date().getFullYear();
-    const years = [];
-    for (let year = currentYear + 1; year >= 2023; year--) {
-      years.push(year);
-    }
-    return years;
-  }, []);
+  const passYearOptions = ['Dropper', 'Class 12th'];
 
   function handleChange(event) {
     const { name, value } = event.target;

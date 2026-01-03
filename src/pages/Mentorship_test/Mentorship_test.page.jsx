@@ -46,7 +46,7 @@ export default function MentorshipTestPage() {
   const sendToGoogleSheets = async (studentData, assessmentData, initialData) => {
     try {
       // Your Google Apps Script Web App URL
-      const WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbzZmgx892dOkH2jqz5ZBebGhQNqGArQjyH7mCn5JaV8iQoVw_8WZ_8UwyHx-pCKv5DaPg/exec';
+      const WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbx6W7rrSG02pznbZD00tvWH4J5Rqnt34RbgK3pfJqL6MDhJuAMrBN0Y5HzgSg2bKD7Z/exec';
       
       // Prepare the payload matching your data structure
       const payload = {
