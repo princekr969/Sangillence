@@ -29,7 +29,7 @@ export default function Results({ preData, answers, onNext, onBack, onSubmit }) 
   const handleShare = async () => {
     const shareData = {
       title: 'JEE Predictor Challenge 2026 by Sangillence',
-      text: `🔥 *JEE 2026 Audit Report*\n\n📉 Habit Efficiency: ${res.efficiency}%\n\nI just predicted my JEE 2026 Trajectory with *Sangillence*! 🚀\n\nI've also claimed a chance to WIN FREE JEE Mentorship by participating in the *JEE Prediction Challenge 2026*.\n\nCheck your trajectory here:`,
+      text: `🔥 *JEE 2026 Audit Report*\n\n📉 Habit Efficiency: ${res.efficiency}%\n\nI just predicted my *JEE 2026 Score* with *Sangillence*! 🚀\n& claimed a chance to *WIN a FREE JEE Mentorship* by participating in *JEE Prediction Challenge 2026*.\n\nCheck your trajectory here:`,
       url: window.location.href 
     };
 
@@ -274,7 +274,7 @@ export default function Results({ preData, answers, onNext, onBack, onSubmit }) 
                 <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                 </svg>
-                Proceed to Enrollment
+                Claim Now
               </span>
 
               {/* Decorative elements */}
