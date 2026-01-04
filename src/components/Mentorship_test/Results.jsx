@@ -28,10 +28,12 @@ export default function Results({ preData, answers, onNext, onBack, onSubmit }) 
 
   const handleShare = async () => {
     const shareData = {
-      title: 'I have predicted my JEE 2026 Trajectory with Sangillence! in JEE Predictor Challenge 2026',
-      text: `🔥 JEE Audit Report:\n\n📉 Efficiency: ${res.efficiency}%\n🎯 Predicted: ${res.predictedMarks}/300\nI have predicted my JEE 2026 Trajectory with Sangillence! & claimed a chance to WIN FREE JEE Mentorship! by participating in JEE Prediction Challenge 2026 \n\nCheck out this deal :`,
+      title: 'JEE Predictor Challenge 2026 by Sangillence',
+      text: `🔥 *JEE 2026 Audit Report*\n\n📉 Habit Efficiency: ${res.efficiency}%\n\nI just predicted my JEE 2026 Trajectory with *Sangillence*! 🚀\n\nI've also claimed a chance to WIN FREE JEE Mentorship by participating in the *JEE Prediction Challenge 2026*.\n\nCheck your trajectory here:`,
       url: window.location.href 
     };
+
+   
 
     try {
       if (navigator.share) {
