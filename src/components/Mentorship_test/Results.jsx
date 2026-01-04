@@ -28,8 +28,8 @@ export default function Results({ preData, answers, onNext, onBack, onSubmit }) 
 
   const handleShare = async () => {
     const shareData = {
-      title: 'I have predicted my JEE 2026 Trajectory with Sangillence!',
-      text: `🔥 JEE Audit Report:\n\n📉 Efficiency: ${res.efficiency}%\n🎯 Predicted: ${res.predictedMarks}/300\nI have predicted my JEE 2026 Trajectory with Sangillence!\n\nCheck your reality here:`,
+      title: 'I have predicted my JEE 2026 Trajectory with Sangillence! in JEE Predictor Challenge 2026',
+      text: `🔥 JEE Audit Report:\n\n📉 Efficiency: ${res.efficiency}%\n🎯 Predicted: ${res.predictedMarks}/300\nI have predicted my JEE 2026 Trajectory with Sangillence! & claimed a chance to WIN FREE JEE Mentorship! by participating in JEE Prediction Challenge 2026 \n\nCheck out this deal :`,
       url: window.location.href 
     };
 
@@ -247,7 +247,7 @@ export default function Results({ preData, answers, onNext, onBack, onSubmit }) 
         </div>
 
         <p style={{fontSize:'0.85rem', color:'#94a3b8', marginTop:'15px', fontStyle:'italic'}}>
-          *Share your Top 3 Challenges in the next step and get a chance for FREE mentorship.
+          *Enroll with your Predicted JEE Score in the next section and WIN a chance for FREE Mentorship from IIT/NIT/IIIT Experts!
         </p>
 
         <div className='flex mt-5 justify-between  gap-5'>
@@ -259,7 +259,7 @@ export default function Results({ preData, answers, onNext, onBack, onSubmit }) 
           </button>
             <button 
               className="group relative py-4 px-6 font-semibold rounded-lg shadow-lg transition-all duration-300 transform overflow-hidden border border-gray-400 bg-gradient-to-r from-gray-800 to-gray-900 text-white hover:shadow-xl hover:scale-[1.02] active:scale-[0.98]"
-              onClick={() => onNext(res.efficiency)}
+              onClick={() => onNext(res)}
             >
               {/* Continuous shine animation overlay */}
               <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000"></div>
@@ -272,7 +272,7 @@ export default function Results({ preData, answers, onNext, onBack, onSubmit }) 
                 <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                 </svg>
-                Win a Chance
+                Proceed to Enrollment
               </span>
 
               {/* Decorative elements */}

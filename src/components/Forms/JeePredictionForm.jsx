@@ -136,17 +136,30 @@ function JeePredictionForm({onComplete}) {
               </div>
 
               <div className="relative z-10">
-                <h1 className={`font-bold text-white mb-1 sm:mb-2 ${
-                  isMobile ? "text-xl" : "text-2xl sm:text-3xl"
-                }`}>
-                  JEE Aspirant Registration
-                </h1>
-                <p className={`text-slate-200 ${
-                  isMobile ? "text-xs" : "text-sm sm:text-base"
-                }`}>
-                  Register for JEE preparation portal
-                </p>
+
+                <img 
+                src="https://res.cloudinary.com/dstbd40ud/image/upload/v1766321457/Untitled_design_5_zq2tz9.png" 
+                alt="Sangillence" 
+                style={{
+                    height: '60px', 
+                    display: 'block',             // 1. Allows margin auto to work
+                    margin: '0 auto 10px auto',   // 2. Centers the image horizontally
+                    filter: 'drop-shadow(0 0 15px rgba(5, 0, 0, 0.8))' // 3. Black Glow
+                }} 
+            />
+               
+                  <h1 className={`font-bold text-white mb-1 sm:mb-2 text-center ${
+          isMobile ? "text-xl" : "text-2xl sm:text-3xl"
+      }`}>
+          JEE Trajectory Challenge 2026
+      </h1>
+                <p className={`text-slate-200 text-center mx-auto ${
+        isMobile ? "text-xs" : "text-sm sm:text-base"
+    }`}>
+        Enrol now to get your JEE Trajectory - Predicted Score and Understand your preparation gaps, efficiency & skills!
+    </p>
               </div>
+              
 
               {/* Decorative elements */}
               <div className="absolute bottom-2 left-4 sm:left-8 w-1 h-4 sm:h-6 bg-gradient-to-t from-orange-500 to-transparent"></div>
@@ -251,7 +264,7 @@ function JeePredictionForm({onComplete}) {
                       htmlFor="passYear"
                       className="block text-sm font-semibold text-slate-700 mb-1 sm:mb-2"
                     >
-                      12th Pass Year <span className="text-red-500">*</span>
+                      Status <span className="text-red-500">*</span>
                     </label>
                     <select
                       id="passYear"
@@ -263,7 +276,7 @@ function JeePredictionForm({onComplete}) {
                       } bg-white shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition text-sm sm:text-base`}
                       required
                     >
-                      <option value="">Select Pass Year</option>
+                      <option value="">Select Your Class</option>
                       {passYearOptions.map((year) => (
                         <option key={year} value={year}>
                           {year}
@@ -276,7 +289,7 @@ function JeePredictionForm({onComplete}) {
                       </p>
                     )}
                     <p className="mt-1 text-xs text-slate-500">
-                      Year in which you passed/are passing 12th grade
+                      Click on "Next" to Start your JEE Preparation Analysis & Prediction for JEE 2026 Score.
                     </p>
                   </div>
                 </div>
@@ -324,7 +337,7 @@ function JeePredictionForm({onComplete}) {
                         </>
                       ) : (
                         <>
-                          <span>Register Now</span>
+                          <span>Next</span>
                           <svg className="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
                           </svg>

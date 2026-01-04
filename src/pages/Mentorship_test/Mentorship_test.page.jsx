@@ -18,6 +18,7 @@ export default function MentorshipTestPage() {
     passYear: "",
     registered: false
   };
+  
 
   const [studentData, setStudentData] = useState(initialStudentData);
   const [preData, setPreData] = useState(null);
@@ -209,15 +210,40 @@ export default function MentorshipTestPage() {
         )}
 
         {step === 'success' && (
-          <div className="glass-card">
-            <h1 style={{color:'#10b981'}}>You are Registered!</h1>
-            <p style={{fontSize:'1.2rem', color:'white'}}>If you got selected your mentor will contact you within 24 hrs.</p>
-            
-            <div style={{marginTop:'40px', fontSize:'0.8rem', color:'#64748b', opacity:0.7}}>
-              You will received an email confirmation shortly.
-            </div>
-          </div>
-        )}
+  <div 
+    className="glass-card" 
+    style={{
+      display: 'flex',            // 1. Flexbox layout
+      flexDirection: 'column',    // 2. Stack vertically
+      alignItems: 'center',       // 3. Center elements horizontally
+      justifyContent: 'center',   // 4. Center vertically (optional)
+      textAlign: 'center',        // 5. Center the text itself
+      padding: '40px'             // 6. Add breathing room
+    }}
+  >
+      <img 
+          src="https://res.cloudinary.com/dstbd40ud/image/upload/v1766321457/Untitled_design_5_zq2tz9.png" 
+          alt="Sangillence" 
+          style={{
+            height: '60px', 
+            marginBottom: '15px', 
+            filter: 'drop-shadow(0 0 15px rgba(5, 0, 0, 0.8))' 
+          }} 
+        />
+      
+      <h1 style={{color:'#10b981', marginBottom: '15px'}}>
+        JEE Predictor Challenge 2026: Your Score is Locked!
+      </h1>
+      
+      <p style={{fontSize:'1.2rem', color:'white', maxWidth: '600px', lineHeight: '1.6'}}>
+        Your JEE Mains 2026 Prediction is locked. Get back after JEE Mains Session 1 Results to unlock "FREE Mentorship" from our IITians/NITians/IIITians TOP Mentors.
+      </p>
+      
+      <div style={{marginTop:'40px', fontSize:'0.8rem', color:'#64748b', opacity:0.7}}>
+        You will receive an email confirmation shortly.
+      </div>
+  </div>
+)}
       </div>
     </div>
   );

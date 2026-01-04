@@ -50,21 +50,31 @@ export default function PreQuiz1({ onStart }) {
               ></div>
             </div>
 
-            <div className="relative z-10">
-              <div className="flex items-center justify-center gap-3">
+           <div className="relative z-10">
+              {/* Changed to flex-col to stack Image on top of Text */}
+              <div className="flex flex-col items-center justify-center gap-3">
+                
                 <img 
-                    src="https://res.cloudinary.com/dstbd40ud/image/upload/v1766321457/Untitled_design_5_zq2tz9.png" 
-                    alt="Sangillence" 
-                    style={{height: '60px', marginBottom: '10px', filter: 'drop-shadow(0 0 10px rgba(99,102,241,0.5))'}} 
+                  src="https://res.cloudinary.com/dstbd40ud/image/upload/v1766321457/Untitled_design_5_zq2tz9.png" 
+                  alt="Sangillence" 
+                  style={{
+                    height: '60px', 
+                    // No need for display: block or margin: auto here because the parent 'items-center' handles it
+                    marginBottom: '5px', 
+                    filter: 'drop-shadow(0 0 15px rgba(5, 0, 0, 0.8))' 
+                  }} 
                 />
-                <div className=''>
-                    <h1 className="font-bold text-white text-2xl sm:text-3xl">
+
+                {/* Added text-center to center the text lines */}
+                <div className='text-center'>
+                  <h1 className="font-bold text-white text-2xl sm:text-3xl">
                     JEE'26 Trajectory Predictor
-                    </h1>
-                    <p className="text-slate-300 text-sm sm:text-base ">
-                        An AI powered psychometric audit to predict your projected JEE score and study efficiency.
-                    </p>
+                  </h1>
+                  <p className="text-slate-300 text-sm sm:text-base">
+                    An AI powered psychometric audit to predict your projected JEE score and study efficiency.
+                  </p>
                 </div>
+
               </div>
             </div>
 
@@ -177,7 +187,7 @@ export default function PreQuiz1({ onStart }) {
             {/* Note */}
             <div className="mt-4 text-center">
               <p className="text-xs text-slate-500">
-                This AI-powered analysis will provide personalized insights for your JEE preparation journey
+                This AI-powered analysis will provide personalized insights for your JEE preparation journey and Core Human Skills in JEE competencies.
               </p>
             </div>
           </div>
