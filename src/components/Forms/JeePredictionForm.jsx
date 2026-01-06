@@ -1,9 +1,9 @@
-import { useEffect, useMemo, useRef, useState } from "react";
-import { useNavigate, Link } from 'react-router-dom'
-import axios from "axios";
+import { useEffect, useState } from "react";
+// Removed unused imports (useNavigate, Link, axios, useRef, useMemo)
 
-function JeePredictionForm({onComplete}) {
-  const navigate = useNavigate()
+function JeePredictionForm({ onComplete }) {
+  // Removed unused navigate hook
+  
   const [formData, setFormData] = useState({
     fullName: "",
     email: "",
@@ -13,7 +13,6 @@ function JeePredictionForm({onComplete}) {
   const [errors, setErrors] = useState({});
   const [isLoading, setIsLoading] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
-  
 
   // Check if device is mobile
   useEffect(() => {
@@ -29,7 +28,7 @@ function JeePredictionForm({onComplete}) {
     };
   }, []);
 
-  // Generate pass year options (from 2010 to current year + 1)
+  // Generate pass year options
   const passYearOptions = ['Class 12th', 'Dropper'];
 
   function handleChange(event) {
@@ -84,20 +83,17 @@ function JeePredictionForm({onComplete}) {
       ...formData,
       fullName: formData.fullName.toUpperCase().trim(),
       email: formData.email.toLowerCase().trim(),
-      jeeApplicationNo: formData.jeeApplicationNo.trim() || undefined, // Send undefined if empty
+      jeeApplicationNo: formData.jeeApplicationNo.trim() || undefined,
     };
 
     try {
-    //   console.log("Registration successful:", submitData);
-        onComplete && onComplete({ ...submitData, registered: true });
+        // Pass data back to parent component
+        if (onComplete) {
+            onComplete({ ...submitData, registered: true });
+        }
     } catch (error) {
       console.error("Registration failed:", error);
-      // Handle specific error cases
-      if (error.response?.data?.message) {
-        alert(error.response.data.message);
-      } else {
-        alert("Registration failed. Please try again.");
-      }
+      alert("Registration failed. Please try again.");
     } finally {
       setIsLoading(false);
     }
@@ -108,6 +104,7 @@ function JeePredictionForm({onComplete}) {
       <div className="relative z-10">
         <div className="max-w-2xl mx-auto w-full">
           <div className="relative backdrop-blur-sm rounded-xl sm:rounded-2xl shadow-xl sm:shadow-2xl border border-slate-200/50 overflow-hidden bg-white">
+            
             {/* Header with JEE-themed design */}
             <div className="relative p-4 sm:p-6 md:p-8">
               {/* Background with geometric accent */}
@@ -115,15 +112,11 @@ function JeePredictionForm({onComplete}) {
                 {/* Geometric overlays */}
                 <div
                   className="absolute top-0 left-0 w-1/3 h-full bg-gradient-to-r from-orange-500/30 to-transparent rounded-l-lg sm:rounded-l-xl"
-                  style={{
-                    clipPath: "polygon(0 0, 80% 0, 60% 100%, 0 100%)",
-                  }}
+                  style={{ clipPath: "polygon(0 0, 80% 0, 60% 100%, 0 100%)" }}
                 ></div>
                 <div
                   className="absolute top-0 right-0 w-1/3 h-full bg-gradient-to-l from-green-500/20 to-transparent rounded-r-lg sm:rounded-r-xl"
-                  style={{
-                    clipPath: "polygon(40% 0, 100% 0, 100% 100%, 20% 100%)",
-                  }}
+                  style={{ clipPath: "polygon(40% 0, 100% 0, 100% 100%, 20% 100%)" }}
                 ></div>
                 
                 {/* JEE Pattern overlay */}
@@ -135,31 +128,19 @@ function JeePredictionForm({onComplete}) {
                 </div>
               </div>
 
-              <div className="relative z-10">
-
+              <div className="relative z-10 text-center">
                 <img 
-                src="https://res.cloudinary.com/dstbd40ud/image/upload/v1766321457/Untitled_design_5_zq2tz9.png" 
-                alt="Sangillence" 
-                style={{
-                    height: '60px', 
-                    display: 'block',             // 1. Allows margin auto to work
-                    margin: '0 auto 10px auto',   // 2. Centers the image horizontally
-                    filter: 'drop-shadow(0 0 15px rgba(5, 0, 0, 0.8))' // 3. Black Glow
-                }} 
-            />
-               
-                  <h1 className={`font-bold text-white mb-1 sm:mb-2 text-center ${
-          isMobile ? "text-xl" : "text-2xl sm:text-3xl"
-      }`}>
-          JEE Trajectory Challenge 2026
-      </h1>
-                <p className={`text-slate-200 text-center mx-auto ${
-        isMobile ? "text-xs" : "text-sm sm:text-base"
-    }`}>
-        Enrol now to get your JEE Trajectory - Predicted Score and Understand your preparation gaps, efficiency & skills!
-    </p>
+                    src="https://res.cloudinary.com/dstbd40ud/image/upload/v1766321457/Untitled_design_5_zq2tz9.png" 
+                    alt="Sangillence" 
+                    className="h-12 sm:h-16 mx-auto mb-2 drop-shadow-[0_0_15px_rgba(5,0,0,0.8)]"
+                />
+                
+                {/* Form Title (Simple & Clean) */}
+                
+                <h1 className="text-blue-50 text-xs sm:text-sm mt-1 opacity-90">
+                    Enter Your Details
+                </h1>
               </div>
-              
 
               {/* Decorative elements */}
               <div className="absolute bottom-2 left-4 sm:left-8 w-1 h-4 sm:h-6 bg-gradient-to-t from-orange-500 to-transparent"></div>
@@ -171,10 +152,7 @@ function JeePredictionForm({onComplete}) {
                 <div className="flex flex-col gap-4 sm:gap-5">
                   {/* Full Name */}
                   <div>
-                    <label
-                      htmlFor="fullName"
-                      className="block text-sm font-semibold text-slate-700 mb-1 sm:mb-2"
-                    >
+                    <label htmlFor="fullName" className="block text-sm font-semibold text-slate-700 mb-1 sm:mb-2">
                       Full Name <span className="text-red-500">*</span>
                     </label>
                     <input
@@ -184,26 +162,17 @@ function JeePredictionForm({onComplete}) {
                       value={formData.fullName}
                       onChange={handleChange}
                       className={`block w-full px-3 sm:px-4 py-2 sm:py-3 rounded-lg border ${
-                        errors.fullName
-                          ? "border-red-500"
-                          : "border-slate-300"
-                      } bg-white shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition text-sm sm:text-base`}
+                        errors.fullName ? "border-red-500" : "border-slate-300"
+                      } bg-white shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 transition text-sm sm:text-base`}
                       placeholder="Enter your full name"
                       required
                     />
-                    {errors.fullName && (
-                      <p className="mt-1 text-xs sm:text-sm text-red-600">
-                        {errors.fullName}
-                      </p>
-                    )}
+                    {errors.fullName && <p className="mt-1 text-xs text-red-600">{errors.fullName}</p>}
                   </div>
 
                   {/* Email */}
                   <div>
-                    <label
-                      htmlFor="email"
-                      className="block text-sm font-semibold text-slate-700 mb-1 sm:mb-2"
-                    >
+                    <label htmlFor="email" className="block text-sm font-semibold text-slate-700 mb-1 sm:mb-2">
                       Email Address <span className="text-red-500">*</span>
                     </label>
                     <input
@@ -213,27 +182,18 @@ function JeePredictionForm({onComplete}) {
                       value={formData.email}
                       onChange={handleChange}
                       className={`block w-full px-3 sm:px-4 py-2 sm:py-3 rounded-lg border ${
-                        errors.email
-                          ? "border-red-500"
-                          : "border-slate-300"
-                      } bg-white shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition text-sm sm:text-base`}
+                        errors.email ? "border-red-500" : "border-slate-300"
+                      } bg-white shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 transition text-sm sm:text-base`}
                       placeholder="Enter your email address"
                       required
                     />
-                    {errors.email && (
-                      <p className="mt-1 text-xs sm:text-sm text-red-600">
-                        {errors.email}
-                      </p>
-                    )}
+                    {errors.email && <p className="mt-1 text-xs text-red-600">{errors.email}</p>}
                   </div>
 
-                  {/* JEE Application Number (Optional) */}
+                  {/* JEE Application Number */}
                   <div>
                     <div className="flex items-center justify-between mb-1 sm:mb-2">
-                      <label
-                        htmlFor="jeeApplicationNo"
-                        className="block text-sm font-semibold text-slate-700"
-                      >
+                      <label htmlFor="jeeApplicationNo" className="block text-sm font-semibold text-slate-700">
                         JEE Application Number
                       </label>
                       <span className="text-xs text-slate-500">Optional</span>
@@ -245,25 +205,16 @@ function JeePredictionForm({onComplete}) {
                       value={formData.jeeApplicationNo}
                       onChange={handleChange}
                       className={`block w-full px-3 sm:px-4 py-2 sm:py-3 rounded-lg border ${
-                        errors.jeeApplicationNo
-                          ? "border-red-500"
-                          : "border-slate-300"
-                      } bg-white shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition text-sm sm:text-base`}
-                      placeholder="Enter JEE application number (if available)"
+                        errors.jeeApplicationNo ? "border-red-500" : "border-slate-300"
+                      } bg-white shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 transition text-sm sm:text-base`}
+                      placeholder="Enter JEE application number"
                     />
-                    {errors.jeeApplicationNo && (
-                      <p className="mt-1 text-xs sm:text-sm text-red-600">
-                        {errors.jeeApplicationNo}
-                      </p>
-                    )}
+                    {errors.jeeApplicationNo && <p className="mt-1 text-xs text-red-600">{errors.jeeApplicationNo}</p>}
                   </div>
 
-                  {/* 12th Pass Year */}
+                  {/* Pass Year */}
                   <div>
-                    <label
-                      htmlFor="passYear"
-                      className="block text-sm font-semibold text-slate-700 mb-1 sm:mb-2"
-                    >
+                    <label htmlFor="passYear" className="block text-sm font-semibold text-slate-700 mb-1 sm:mb-2">
                       Status <span className="text-red-500">*</span>
                     </label>
                     <select
@@ -273,23 +224,17 @@ function JeePredictionForm({onComplete}) {
                       onChange={handleChange}
                       className={`block w-full px-3 sm:px-4 py-2 sm:py-3 rounded-lg border ${
                         errors.passYear ? "border-red-500" : "border-slate-300"
-                      } bg-white shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition text-sm sm:text-base`}
+                      } bg-white shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 transition text-sm sm:text-base`}
                       required
                     >
                       <option value="">Select Your Class</option>
                       {passYearOptions.map((year) => (
-                        <option key={year} value={year}>
-                          {year}
-                        </option>
+                        <option key={year} value={year}>{year}</option>
                       ))}
                     </select>
-                    {errors.passYear && (
-                      <p className="mt-1 text-xs sm:text-sm text-red-600">
-                        {errors.passYear}
-                      </p>
-                    )}
+                    {errors.passYear && <p className="mt-1 text-xs text-red-600">{errors.passYear}</p>}
                     <p className="mt-1 text-xs text-slate-500">
-                      Click on "Next" to Start your JEE Preparation Analysis & Prediction for JEE 2026 Score.
+                      Click on "Next" to Start your JEE Preparation Analysis.
                     </p>
                   </div>
                 </div>
@@ -305,35 +250,17 @@ function JeePredictionForm({onComplete}) {
                         : "bg-gradient-to-r from-blue-600 to-indigo-700 text-white hover:shadow-xl sm:hover:scale-[1.02]"
                     } text-sm sm:text-base`}
                   >
-                    {/* Geometric hover overlay */}
                     {!isLoading && (
                       <div className="absolute inset-0 bg-gradient-to-r from-orange-500/20 via-transparent to-green-500/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                     )}
-
-                    {/* Button content */}
                     <span className="relative z-10 flex items-center justify-center gap-2">
                       {isLoading ? (
                         <>
-                          <svg
-                            className="animate-spin h-4 w-4 sm:h-5 sm:w-5"
-                            viewBox="0 0 24 24"
-                          >
-                            <circle
-                              className="opacity-25"
-                              cx="12"
-                              cy="12"
-                              r="10"
-                              stroke="currentColor"
-                              strokeWidth="4"
-                              fill="none"
-                            />
-                            <path
-                              className="opacity-75"
-                              fill="currentColor"
-                              d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
-                            />
+                          <svg className="animate-spin h-4 w-4 sm:h-5 sm:w-5" viewBox="0 0 24 24">
+                            <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" fill="none" />
+                            <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
                           </svg>
-                          {isMobile ? "Registering..." : "Registering..."}
+                          <span>Processing...</span>
                         </>
                       ) : (
                         <>
@@ -344,25 +271,11 @@ function JeePredictionForm({onComplete}) {
                         </>
                       )}
                     </span>
-
-                    {/* Decorative elements */}
-                    {!isLoading && (
-                      <>
-                        <div className="absolute top-0 left-0 w-1 h-full bg-gradient-to-b from-orange-500 to-transparent opacity-50 group-hover:opacity-100 transition-opacity duration-300"></div>
-                        <div className="absolute top-0 right-0 w-1 h-full bg-gradient-to-b from-green-500 to-transparent opacity-50 group-hover:opacity-100 transition-opacity duration-300"></div>
-                      </>
-                    )}
-
-                    {/* Loading state overlay */}
-                    {isLoading && (
-                      <div className="absolute inset-0 bg-gradient-to-r from-slate-600/30 via-slate-500/20 to-slate-600/30 animate-pulse"></div>
-                    )}
                   </button>
                 </div>
               </form>
             </div>
           </div>
-
         </div>
       </div>
     </div>
