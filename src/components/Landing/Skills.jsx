@@ -89,7 +89,7 @@ const Skills = () => {
         <SkillsCarousel/>
 
         {/* Sample Skill Report Visualization */}
-        <Report/>
+        {/* <Report/> */}
       
       </div>
     </section>

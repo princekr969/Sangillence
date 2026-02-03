@@ -22,15 +22,13 @@ function HomePage() {
         <Navbar/>
         <Hero />
         <About />
-        <Benefits />
         <Awards />
         <Skills />
         <Results />
         <Timeline />
         <Testimonial/>
-        <ScrollToTop />
-        {/* <CTA /> */}
         <Footer />
+        <ScrollToTop />
       </div>
     </>
   );

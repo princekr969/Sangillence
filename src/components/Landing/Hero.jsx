@@ -15,19 +15,6 @@ import Announcement from './Announcement.jsx';
 
 const ModelViewer = useModelViewer(soboRun)
 
-function GiftAnimation() {
-  return (
-    <div style={{ textAlign: 'center' }}>
-      <img
-        src={smileSOBO}
-        alt="Gift Animation"
-        loading='lazy'
-        width={300}
-        className= "w-full h-auto"
-      />
-    </div>
-  );
-}
 
 export default function Hero() {
   const { isOman } = useCountry();
@@ -46,7 +33,6 @@ export default function Hero() {
             }}></div>
           </div>
           
-          {/* Glowing border effect */}
           <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-slate-400/20 via-blue-400/20 to-indigo-400/20 blur-sm"></div>
           
           
