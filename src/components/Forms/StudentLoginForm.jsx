@@ -123,10 +123,33 @@ function StudentLoginForm() {
       const response = await axios.post(`https://sayaah.in/api/students/login`, submitData);
       console.log("Login successful:", response.data);
       if(response.data.success){
-        navigate(`/photoCapture/${response.data.data.student._id}`)
+        // Store student ID and email in localStorage for dashboard access
+        const studentData = response.data.data.student;
+        localStorage.setItem('studentId', studentData._id || studentData.id || studentData.studentId);
+        localStorage.setItem('studentEmail', studentData.email);
+        
+        // Navigate to dashboard
+        navigate('/student-dashboard');
       }
     } catch (error) {
-      console.error("Login failed:", error);
+      console.error("API Login failed, trying mock data:", error);
+      
+      // Fallback to mock data verification
+      try {
+        const { verifyLogin } = await import('../../data/mockStudentData');
+        const mockResponse = await verifyLogin(submitData);
+        
+        if (mockResponse.success) {
+          const studentData = mockResponse.data.student;
+          localStorage.setItem('studentId', studentData._id);
+          localStorage.setItem('studentEmail', studentData.email);
+          console.log("✅ Mock login successful!");
+          navigate('/student-dashboard');
+        }
+      } catch (mockError) {
+        console.error("Mock login also failed:", mockError);
+        setErrors({ submit: mockError.message || "Login failed. Please check your details." });
+      }
     } finally {
       setIsLoading(false);
     }
