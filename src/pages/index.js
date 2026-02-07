@@ -9,6 +9,7 @@ import SoboExamPage from "./SoboExamPage";
 import MentorShipPage from "./Mentorship.page";
 import MentorshipTestPage from "./Mentorship_test/Mentorship_test.page";
 import CareersPage from "./CareersPage";
+import StudentDashboard from "./StudentDashboard";
 
 export {
     HomePage,
@@ -21,5 +22,6 @@ export {
     SoboExamPage,
     MentorShipPage,
     MentorshipTestPage,
-    CareersPage
+    CareersPage,
+    StudentDashboard
 }
