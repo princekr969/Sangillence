@@ -160,7 +160,7 @@ function Announcement() {
               
               <div className="text-left">
                 <h4 className="text-amber-100 text-sm md:text-base font-semibold">
-                  The result will be announced by <span className="font-bold text-amber-300">12th February 2026 at 4PM IST</span>
+                  The result will be announced by <span className="font-bold text-amber-300">15th February 2026 at 4PM IST</span>
                 </h4>
                
               </div>
