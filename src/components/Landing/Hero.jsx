@@ -3,18 +3,10 @@ import { ArrowRight } from 'lucide-react';
 import useModelViewer from '../../hooks/useModelViewer.jsx'
 import useCountry from '../../hooks/useCountry.js'
 import heroSectionBg from '../../../assets/svgs/herosectionbg.svg';
-import collegeLogo from "../../../assets/svgs/collegelogo.svg";
-import soboWalk from "../../../assets/3dModels/SOBOwalk.glb"
-import soboWalk2 from "../../../assets/3dModels/SOBO2walk.glb"
-import soboMat from "../../../assets/3dModels/SOBOmat.glb"
-import soboStart from "../../../assets/3dModels/SOBOstart.glb"
 import soboRun from "../../../assets/3dModels/SOBOrun.glb"
-import logofinal from "../../../assets/3dModels/logofinal.glb"
-import smileSOBO from "../../../assets/3dModels/smileSOBO.gif"
 import Announcement from './Announcement.jsx';
 
 const ModelViewer = useModelViewer(soboRun)
-
 
 export default function Hero() {
   const { isOman } = useCountry();

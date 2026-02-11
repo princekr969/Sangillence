@@ -1,12 +1,12 @@
 import express from "express";
 import Student from "../models/student.js";
 import { verifyStudent } from "../middleware/verifyStudent.js";
-import { loginStudentController } from "../controllers/studentVerify.controller.js";
+import { loginStudentController,  studentResult} from "../controllers/student.controller.js";
 
 const router = express.Router();
 
-// @route   GET /api/students
-// @desc    Fetch all students
+router.get("/result/:id", studentResult);
+
 router.get("/", async (req, res) => {
   try {
     const students = await Student.find();
@@ -25,11 +25,10 @@ router.get("/", async (req, res) => {
   }
 });
 
-// @route   GET /api/students/:id
-// @desc    Fetch a single student by ID
 router.get("/:id", async (req, res) => {
   try {
     const student = await Student.findById(req.params.id);
+    console.log(student)
     if (!student) {
       return res.status(404).json({
         success: false,
@@ -50,8 +49,6 @@ router.get("/:id", async (req, res) => {
   }
 });
 
-// @route   POST /api/students
-// @desc    Add a new student
 router.post("/", async (req, res) => {
   try {
     const { schoolName, fullName, rollNo, class: studentClass, dob, section } = req.body;
@@ -87,18 +84,6 @@ router.post("/", async (req, res) => {
   }
 });
 
-// student Login
-/*
-Example post request
-{
-  "schoolName": "ABC",
-  "fullName": "Jae Doe",
-  "class": "7",
-  "rollNo": "103",
-  "dob": "2010-05-01",
-  "section": "A"
-}
-*/
 router.post("/login", verifyStudent, loginStudentController);
 
 export default router;

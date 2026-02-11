@@ -19,6 +19,7 @@ function formatDateToYYYYMMDD(value) {
 }
 
 function StudentLoginForm() {
+  const [student, setStudent] = useState(null);
   const navigate = useNavigate()
   const [formData, setFormData] = useState({
     school: "",
@@ -99,7 +100,6 @@ function StudentLoginForm() {
         newErrors.fullName = "Student name is required";
       if (!formData.dob)
         newErrors.dob = "Date of birth is required";
-      if (!formData.rollNo.trim()) newErrors.rollNo = "Roll number is required";
       if (!formData.class) newErrors.class = "Class is required";
       if (!formData.section) newErrors.section = "Section is required";
     }
@@ -113,20 +113,29 @@ function StudentLoginForm() {
 
     setIsLoading(true);
 
-    // Convert fullName to uppercase before sending to backend
     const submitData = {
       ...formData,
       fullName: formData.fullName.toUpperCase().trim()
     };
 
     try {
-      const response = await axios.post(`https://sayaah.in/api/students/login`, submitData);
-      console.log("Login successful:", response.data);
-      if(response.data.success){
-        navigate(`/photoCapture/${response.data.data.student._id}`)
+      const response = await axios.post('http://localhost:5001/api/students/login', {
+        fullName: submitData.fullName,
+        class: submitData.class,
+        section: submitData.section,
+        dob: submitData.dob
+      });
+
+      if (response.data.success) {
+        const { student } = response.data.data;
+        setStudent(student);
+        navigate(`/student-dashboard/${student._id}`);
+      }else{
+        console.log("Login failed:", response.data.message || "Login failed. Please check your details and try again.");
       }
     } catch (error) {
-      console.error("Login failed:", error);
+      console.error("Login failed:", error.response?.data?.message || error.message || "An error occurred during login. Please try again.");
+      setErrors({ form: error.response?.data?.message || "An error occurred during login. Please try again with correct detail." });
     } finally {
       setIsLoading(false);
     }
@@ -213,8 +222,8 @@ function StudentLoginForm() {
                     )}
                   </div>
 
-                  {formData.school && (
-                    <>
+                  
+                    
                       {/* Student Name */}
                       <div>
                         <label
@@ -280,7 +289,7 @@ function StudentLoginForm() {
                       </div>
 
                       {/* Roll No */}
-                      <div>
+                      {/* <div>
                         <label
                           htmlFor="rollNo"
                           className="block text-sm font-semibold text-slate-700 mb-1 sm:mb-2"
@@ -306,7 +315,7 @@ function StudentLoginForm() {
                             {errors.rollNo}
                           </p>
                         )}
-                      </div>
+                      </div> */}
 
                       {/* Class and Section in row on mobile */}
                       <div className={`grid gap-3 sm:gap-4 ${
@@ -382,8 +391,11 @@ function StudentLoginForm() {
                           )}
                         </div>
                       </div>
-                    </>
-                  )}
+                      {errors.form && (
+                            <p className="mt-1 text-xs sm:text-sm text-red-600">
+                              {errors.form}
+                            </p>
+                          )}
                 </div>
 
                 {/* Submit Button with mobile optimization */}
@@ -448,27 +460,7 @@ function StudentLoginForm() {
                   </button>
                 </div>
 
-                {formData.school && (
-                  <div className="mt-3 sm:mt-4 text-center text-xs sm:text-sm text-slate-600">
-                    Not your school?{" "}
-                    <button
-                      type="button"
-                      onClick={() =>
-                        setFormData({
-                          school: "",
-                          fullName: "",
-                          dob: "",
-                          rollNo: "",
-                          class: "",
-                          section: "",
-                        })
-                      }
-                      className="text-blue-600 hover:underline font-semibold"
-                    >
-                      Change school
-                    </button>
-                  </div>
-                )}
+                
               </form>
             </div>
           </div>
