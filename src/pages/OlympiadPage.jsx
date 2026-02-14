@@ -222,47 +222,59 @@ function SimpleSection({ title, data }) {
 
 function WinnerCard({ student, index }) {
   const medals = ["🥇", "🥈", "🥉"];
-  const gradients = [
+
+  const rankBorders = [
+    "border-yellow-400 shadow-yellow-500/70",
+    "border-slate-300 shadow-slate-400/70",
+    "border-amber-600 shadow-amber-600/70",
+  ];
+
+  const rankGradients = [
     "from-yellow-500 to-orange-600",
     "from-slate-400 to-slate-600",
     "from-orange-600 to-amber-700",
   ];
-  const glows = [
-    "shadow-yellow-500/50",
-    "shadow-slate-400/50",
-    "shadow-orange-600/50",
-  ];
+
+  const borderStyle =
+    index < 3
+      ? `${rankBorders[index]} shadow-2xl`
+      : "border-cyan-500 shadow-cyan-500/30";
 
   return (
     <div
-      className={`
+      className="
         relative bg-gradient-to-br from-slate-800/80 to-slate-900/80 backdrop-blur-sm
         rounded-xl p-6 border border-slate-600/30
         hover:scale-105 hover:shadow-2xl transition-all duration-300
-        ${index < 3 ? `hover:${glows[index]}` : "hover:shadow-cyan-500/30"}
         group overflow-hidden
-      `}
+      "
     >
-      {/* Background effect */}
-      <div className="absolute inset-0 bg-gradient-to-br from-blue-600/5 to-purple-600/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-
-      {/* Medal/Position */}
+      {/* Profile + Rank Section */}
       <div className="relative flex justify-between items-start mb-4">
-        <div
-          className={`
-          text-5xl drop-shadow-lg animate-float
-          ${index < 3 ? "scale-110" : ""}
-        `}
-        >
-          {medals[index] || "🏅"}
+
+        {/* Profile Image with Rank Glow */}
+        <div className="relative">
+          <img
+            src={student.image || "/winners/default.png"}
+            alt={student.name}
+            onError={(e) => (e.target.src = "/winners/default.png")}
+            className={`w-20 h-20 rounded-full object-cover border-4 transition-all duration-300 ${borderStyle}`}
+          />
+
+          {/* Medal overlay */}
+          <div className="absolute -bottom-2 -right-2 text-2xl">
+            {medals[index] || "🏅"}
+          </div>
         </div>
+
+        {/* Rank Badge */}
         {index < 3 && (
           <div
             className={`
-            px-3 py-1 rounded-full text-xs font-bold
-            bg-gradient-to-r ${gradients[index]} text-white
-            shadow-lg
-          `}
+              px-3 py-1 rounded-full text-xs font-bold
+              bg-gradient-to-r ${rankGradients[index]} text-white
+              shadow-lg
+            `}
           >
             Rank {index + 1}
           </div>
@@ -270,7 +282,7 @@ function WinnerCard({ student, index }) {
       </div>
 
       {/* Student Info */}
-      <div className="relative space-y-2">
+      <div className="space-y-2">
         <h4 className="text-xl font-bold text-white group-hover:text-cyan-300 transition-colors">
           {student.name}
         </h4>
@@ -296,12 +308,10 @@ function WinnerCard({ student, index }) {
           </div>
         </div>
       </div>
-
-      {/* Hover shine effect */}
-      <div className="absolute inset-0 animate-shimmer opacity-0 group-hover:opacity-100 pointer-events-none"></div>
     </div>
   );
 }
+
 
 function AwardCard({ icon, title, winner, color }) {
   return (
