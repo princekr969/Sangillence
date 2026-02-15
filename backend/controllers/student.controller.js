@@ -25,21 +25,21 @@ export const studentResult = async (req, res) => {
     }
 
     const dob = new Date(student.dob);
-    const dobString = `${dob.getMonth() + 1}/${dob.getDate()}/${dob.getFullYear()}`;
-
+    const dobString = `${String(dob.getMonth() + 1).padStart(2, '0')}/${String(dob.getDate()).padStart(2, '0')}/${dob.getFullYear()}`;
+    
     console.log("Searching with criteria:", {
-      Name: student.fullName.trim().toUpperCase(),
-      'School ': student.school,
-      'Class ': Number(student.class),
-      'Section ': student.section.trim().toUpperCase(),
+      Name: student.fullName.trim(),
+      School: student.school,
+      Class: Number(student.class),
+      Section: student.section.trim().toUpperCase(),
       DOB: dobString,
     });
 
-    const result = await soboResult.findOne({
-      Name: student.fullName,
-      'School ': student.school,
-      'Class ': Number(student.class),   
-      'Section ': student.section.trim().toUpperCase(),
+    let result = await soboResult.findOne({
+      Name: student.fullName.trim(),
+      School: student.school.toUpperCase(), 
+      Class: Number(student.class),   
+      Section: student.section.trim().toUpperCase(),
       DOB: dobString,
     });
 
@@ -50,9 +50,11 @@ export const studentResult = async (req, res) => {
         success: false,
         message: "Result not found for this student",
         searchCriteria: {
-          Name: student.fullName,
-          Class: student.studentClass,
-          DOB: dobString
+          Name: student.fullName.trim(),
+          Class: student.class,
+          Section: student.section,
+          DOB: dobString,
+          School: student.school
         }
       });
     }

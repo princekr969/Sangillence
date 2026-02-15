@@ -22,6 +22,8 @@ import {
   Eye,
   Cpu,
   Sparkles,
+  ChevronLeft,
+  BookCopy,
   Home,
   Bookmark,
   Settings,
@@ -29,6 +31,41 @@ import {
 } from "lucide-react";
 import heroSectionBg from "../../assets/svgs/herosectionbg.svg";
 import axios from "axios";
+import Report from "../components/Landing/Report";
+
+const SkillBar = ({ skill, value, isVisible, delay }) => {
+  const [animatedValue, setAnimatedValue] = useState(0);
+  const Icon = skill.icon;
+
+  useEffect(() => {
+    if (isVisible) {
+      const timer = setTimeout(() => {
+        setAnimatedValue(value);
+      }, delay);
+      return () => clearTimeout(timer);
+    }
+  }, [isVisible, value, delay]);
+
+  return (
+    <div className="flex items-center space-x-4 mb-6">
+      <div className="flex items-center justify-center w-10 h-10 bg-blue-500/20 rounded-lg">
+        <Icon className="w-5 h-5 text-blue-400" />
+      </div>
+      <div className="flex-1">
+        <div className="flex justify-between items-center mb-2">
+          <span className="font-medium text-white">{skill.name}</span>
+          <span className="text-blue-300 font-semibold">{value}%</span>
+        </div>
+        <div className="w-full bg-slate-700 rounded-full h-2.5">
+          <div
+            className="h-2.5 rounded-full bg-gradient-to-r from-blue-500 to-blue-700 transition-all duration-1500 ease-out"
+            style={{ width: `${animatedValue}%` }}
+          />
+        </div>
+      </div>
+    </div>
+  );
+};
 
 export default function StudentDashboard() {
   const [studentData, setStudentData] = useState(null);
@@ -72,11 +109,13 @@ export default function StudentDashboard() {
   }, [studentId, navigate]);
 
   const handleLogout = () => {
-    localStorage.removeItem("studentId");
-    navigate("/student-login");
+    if (activeTab !== "dashboard") {
+      setActiveTab("dashboard");
+    } else {
+      navigate("/student-login");
+    }
   };
 
-  // Format date of birth
   const formatDOB = (dobString) => {
     if (!dobString) return "Not provided";
     const dob = new Date(dobString);
@@ -87,18 +126,6 @@ export default function StudentDashboard() {
     });
   };
 
-  // Format registration date
-  const formatRegistrationDate = (dateString) => {
-    if (!dateString) return "Not available";
-    const date = new Date(dateString);
-    return date.toLocaleDateString("en-US", {
-      year: "numeric",
-      month: "long",
-      day: "numeric",
-    });
-  };
-
-  // Calculate age from DOB
   const calculateAge = (dobString) => {
     if (!dobString) return "N/A";
     const dob = new Date(dobString);
@@ -127,15 +154,17 @@ export default function StudentDashboard() {
   // Get background color for score bars
   const getScoreBarColor = (score, maxScore = 10) => {
     const percentage = (score / maxScore) * 100;
-    if (percentage >= 70) return "bg-gradient-to-r from-green-500 to-emerald-500";
-    if (percentage >= 40) return "bg-gradient-to-r from-yellow-500 to-amber-500";
+    if (percentage >= 70)
+      return "bg-gradient-to-r from-green-500 to-emerald-500";
+    if (percentage >= 40)
+      return "bg-gradient-to-r from-yellow-500 to-amber-500";
     return "bg-gradient-to-r from-red-500 to-pink-500";
   };
 
   // Process question data
   const processQuestionData = () => {
     if (!resultData) return [];
-    
+
     const questions = [];
     for (let i = 1; i <= 10; i++) {
       const qData = {
@@ -144,7 +173,7 @@ export default function StudentDashboard() {
         domain: resultData[`Q${i}_Dom`] || "-",
         lateral: resultData[`Q${i}_Lat`] || "-",
         support: resultData[`Q${i}_Sup`] || "-",
-        tag: resultData[`Q${i}_Tag`] || "-"
+        tag: resultData[`Q${i}_Tag`] || "-",
       };
       questions.push(qData);
     }
@@ -154,25 +183,38 @@ export default function StudentDashboard() {
   // Get skill categories
   const getSkillCategories = () => {
     if (!resultData) return [];
-    
+
     return [
-      { name: "Creativity", value: resultData.CV_Score || 0, icon: Sparkles },
-      { name: "Analytical", value: resultData.A_Score || 0, icon: Brain },
-      { name: "Logical", value: resultData.L_Score || 0, icon: Cpu },
+      {
+        name: "Creativity",
+        value: (resultData.CV_Score * 10) / 11.11 || 0,
+        icon: Sparkles,
+      },
+      {
+        name: "Analytical Thinking",
+        value: resultData.A_Score || 0,
+        icon: Brain,
+      },
+      { name: "Logical Thinking", value: resultData.L_Score || 0, icon: Cpu },
       { name: "Memory", value: resultData.M_Score || 0, icon: Brain },
       { name: "Observational", value: resultData.OB_Score || 0, icon: Eye },
-      { name: "OOTB Thinking", value: resultData.OOTB_Score || 0, icon: Lightbulb },
+      { name: "Critical Thinking", value: resultData.CT_Score || 0, icon: Eye },
+      { name: "Research", value: resultData.R_Score || 0, icon: Eye },
+      {
+        name: "Out-of-the-Box Thinking",
+        value: resultData.OOTB_Score || 0,
+        icon: Lightbulb,
+      },
       { name: "Meta-cognition", value: resultData.MC_Score || 0, icon: Target },
     ];
   };
 
-  // Get rank color based on rank
-  const getRankColor = (rank) => {
-    if (!rank) return "text-gray-300";
-    if (rank <= 3) return "text-yellow-400";
-    if (rank <= 10) return "text-purple-400";
-    if (rank <= 25) return "text-blue-400";
-    return "text-green-400";
+  const getPoolFromClass = (cls) => {
+    const classNum = parseInt(cls, 10);
+    if (classNum >= 3 && classNum <= 5) return "Pool A";
+    if (classNum >= 6 && classNum <= 8) return "Pool B";
+    if (classNum >= 9 && classNum <= 10) return "Pool C";
+    return "Unknown Pool";
   };
 
   if (loading) {
@@ -238,62 +280,23 @@ export default function StudentDashboard() {
                   Welcome back, {studentData.fullName.split(" ")[0]}!
                 </h1>
                 <p className="text-blue-200 mt-2">
-                  {resultData ? "SOBO Assessment Results Ready" : "Complete your assessment to view results"}
+                  {resultData
+                    ? "SOBO Assessment Results Ready"
+                    : "Complete your assessment to view results"}
                 </p>
               </div>
               <button
                 onClick={handleLogout}
                 className="flex items-center gap-2 bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-lg transition-all duration-300 self-start md:self-auto"
               >
-                <LogOut className="w-5 h-5" />
-                <span>Logout</span>
+                {activeTab !== "dashboard" ? (
+                  <ChevronLeft className="w-5 h-5" />
+                ) : (
+                  <LogOut className="w-5 h-5" />
+                )}
+                <span>{activeTab == "dashboard" ? "Logout" : "Back"}</span>
               </button>
             </div>
-          </div>
-        </div>
-
-        {/* Dashboard Tabs */}
-        <div className="mb-6">
-          <div className="flex flex-wrap gap-2">
-            <button
-              onClick={() => setActiveTab("dashboard")}
-              className={`px-6 py-3 rounded-xl font-semibold transition-all ${
-                activeTab === "dashboard"
-                  ? "bg-gradient-to-r from-blue-600 to-purple-600 text-white"
-                  : "bg-slate-800/50 text-gray-300 hover:bg-slate-700/50"
-              }`}
-            >
-              <div className="flex items-center gap-2">
-                <Home className="w-5 h-5" />
-                Dashboard
-              </div>
-            </button>
-            <button
-              onClick={() => setActiveTab("results")}
-              className={`px-6 py-3 rounded-xl font-semibold transition-all ${
-                activeTab === "results"
-                  ? "bg-gradient-to-r from-purple-600 to-pink-600 text-white"
-                  : "bg-slate-800/50 text-gray-300 hover:bg-slate-700/50"
-              }`}
-            >
-              <div className="flex items-center gap-2">
-                <BarChart className="w-5 h-5" />
-                Results
-              </div>
-            </button>
-            <button
-              onClick={() => setActiveTab("profile")}
-              className={`px-6 py-3 rounded-xl font-semibold transition-all ${
-                activeTab === "profile"
-                  ? "bg-gradient-to-r from-amber-600 to-orange-600 text-white"
-                  : "bg-slate-800/50 text-gray-300 hover:bg-slate-700/50"
-              }`}
-            >
-              <div className="flex items-center gap-2">
-                <User className="w-5 h-5" />
-                Profile
-              </div>
-            </button>
           </div>
         </div>
 
@@ -348,7 +351,8 @@ export default function StudentDashboard() {
                                 // If image fails to load, show initial
                                 e.target.style.display = "none";
                                 const initialDiv = e.target.nextElementSibling;
-                                if (initialDiv) initialDiv.style.display = "flex";
+                                if (initialDiv)
+                                  initialDiv.style.display = "flex";
                               }}
                             />
                           </div>
@@ -371,13 +375,29 @@ export default function StudentDashboard() {
                       <div className="flex items-center gap-2 text-blue-300 mb-1">
                         <GraduationCap className="w-4 h-4" />
                         <span>
-                          Class {studentData.class || resultData?.["Class "] || "N/A"} - {studentData.section || resultData?.["Section "] || "N/A"}
+                          Class{" "}
+                          {studentData.class || resultData?.["Class "] || "N/A"}{" "}
+                          -{" "}
+                          {studentData.section ||
+                            resultData?.["Section "] ||
+                            "N/A"}
                         </span>
                       </div>
 
                       <div className="flex items-center gap-2 text-gray-400 text-sm mb-4">
                         <School className="w-4 h-4" />
-                        <span>{studentData.school || resultData?.["School "] || "N/A"}</span>
+                        <span>
+                          {studentData.school ||
+                            resultData?.["School "] ||
+                            "N/A"}
+                        </span>
+                      </div>
+                      <div className="">
+                        <span className="px-2 py-1 bg-green-500/20 text-green-300 rounded-full text-xs font-semibold">
+                          {getPoolFromClass(
+                            studentData.class || resultData?.Class,
+                          )}
+                        </span>
                       </div>
 
                       <div className="w-full space-y-3 mt-4">
@@ -395,11 +415,14 @@ export default function StudentDashboard() {
                           <div className="bg-purple-500/10 rounded-lg p-3 border border-purple-500/20">
                             <p className="text-purple-300 text-xs">Age</p>
                             <p className="text-white font-semibold">
-                              {calculateAge(studentData.dob || resultData?.DOB)} years
+                              {calculateAge(studentData.dob || resultData?.DOB)}{" "}
+                              years
                             </p>
                           </div>
                           <div className="bg-teal-500/10 rounded-lg p-3 border border-teal-500/20">
-                            <p className="text-teal-300 text-xs">Date of Birth</p>
+                            <p className="text-teal-300 text-xs">
+                              Date of Birth
+                            </p>
                             <p className="text-white font-semibold text-sm">
                               {formatDOB(studentData.dob || resultData?.DOB)}
                             </p>
@@ -409,126 +432,81 @@ export default function StudentDashboard() {
                     </div>
                   </div>
 
-                  {/* Info Cards */}
+                  {/*  Perfomance Card */}
                   <div className="md:col-span-2 grid sm:grid-cols-2 gap-4">
-                    {/* Overall Rank Card */}
-                    <div className="bg-gradient-to-br from-yellow-600/20 to-amber-800/20 backdrop-blur-sm rounded-2xl p-6 border border-yellow-500/30">
-                      <div className="flex items-start justify-between mb-4">
-                        <div>
-                          <p className="text-yellow-300 text-sm mb-1">
-                            Overall Rank
-                          </p>
-                          <h3 className={`text-3xl md:text-4xl font-bold ${getRankColor(resultData?.R_Score || 1)}`}>
-                            #{resultData?.R_Score || "N/A"}
-                          </h3>
-                          <p className="text-gray-300 text-sm mt-1">
-                            {resultData?.R_Score <= 10 
-                              ? "Top Performer! 🏆" 
-                              : resultData?.R_Score <= 25 
-                                ? "Excellent Performance! ✨" 
-                                : "Great Work! 👍"}
-                          </p>
-                        </div>
-                        <div className="relative">
-                          <Star className="w-12 h-12 text-yellow-400" />
-                          {resultData?.R_Score <= 3 && (
-                            <div className="absolute -top-2 -right-2 w-6 h-6 bg-red-500 rounded-full flex items-center justify-center">
-                              <span className="text-white text-xs font-bold">{resultData.R_Score}</span>
-                            </div>
-                          )}
-                        </div>
-                      </div>
-                      <div className="mt-4">
-                        <div className="flex items-center justify-between mb-2">
-                          <span className="text-gray-300 text-sm">Percentile Rank</span>
-                          <span className="text-white font-semibold">
-                            {resultData?.R_Score ? `${Math.min(100, Math.max(1, Math.round((1 - (resultData.R_Score - 1) / 100) * 100)))}%` : "N/A"}
-                          </span>
-                        </div>
-                        <div className="w-full bg-yellow-500/20 rounded-full h-2">
-                          <div 
-                            className="bg-gradient-to-r from-yellow-400 to-amber-500 h-2 rounded-full transition-all duration-500"
-                            style={{ 
-                              width: resultData?.R_Score 
-                                ? `${Math.min(100, Math.max(1, Math.round((1 - (resultData.R_Score - 1) / 100) * 100)))}%` 
-                                : "0%" 
-                            }}
-                          ></div>
-                        </div>
-                      </div>
-                    </div>
-
-                    {/* Academic Information */}
-                    <div className="bg-gradient-to-br from-purple-600/20 to-purple-800/20 backdrop-blur-sm rounded-2xl p-6 border border-purple-500/30">
-                      <div className="flex items-start justify-between mb-4">
-                        <div>
-                          <p className="text-purple-300 text-sm mb-1">
-                            Academic Details
-                          </p>
-                          <h3 className="text-2xl font-bold text-white">
-                            Grade {studentData.class || resultData?.["Class "] || "N/A"}
-                          </h3>
-                        </div>
-                        <BookOpen className="w-10 h-10 text-purple-400" />
-                      </div>
-                      <div className="space-y-2">
-                        <div className="flex justify-between text-sm">
-                          <span className="text-gray-300">Class</span>
-                          <span className="text-white font-semibold">
-                            {studentData.class || resultData?.["Class "] || "N/A"}
-                          </span>
-                        </div>
-                        <div className="flex justify-between text-sm">
-                          <span className="text-gray-300">Section</span>
-                          <span className="text-white font-semibold">
-                            {studentData.section || resultData?.["Section "] || "N/A"}
-                          </span>
-                        </div>
-                        <div className="flex justify-between text-sm">
-                          <span className="text-gray-300">School</span>
-                          <span className="text-white font-semibold text-right">
-                            {studentData.school || resultData?.["School "] || "N/A"}
-                          </span>
-                        </div>
-                      </div>
-                    </div>
-
-                    {/* Results Summary */}
                     {resultData && (
                       <div className="bg-gradient-to-br from-green-600/20 to-emerald-800/20 backdrop-blur-sm rounded-2xl p-6 border border-green-500/30">
+                        {/* Header with Archetype */}
                         <div className="flex items-start justify-between mb-4">
                           <div>
                             <p className="text-green-300 text-sm mb-1">
                               Assessment Results
                             </p>
                             <h3 className="text-2xl font-bold text-white">
-                              Score: {resultData.g_Score || "N/A"}
+                              {resultData.StuArch || "AI Parasite"}
                             </h3>
-                            <p className="text-gray-300 text-sm mt-1">g-Score</p>
+                            <p className="text-gray-300 text-sm mt-1">
+                              Archetype
+                            </p>
                           </div>
                           <Trophy className="w-10 h-10 text-green-400" />
                         </div>
-                        <div className="mt-4">
-                          <p className="text-gray-300 text-sm mb-2">
-                            Architecture Type:
-                          </p>
-                          <div className="space-y-2">
-                            <div className="flex items-center justify-between p-2 bg-green-500/10 rounded">
-                              <span className="text-green-200 text-sm">
-                                {resultData.StuArch || "AI Parasite"}
-                              </span>
-                              <span className="text-white text-xs bg-green-600 px-2 py-1 rounded">
-                                View Details
-                              </span>
-                            </div>
+
+                        {/* Score cards */}
+                        <div className="grid grid-cols-2 gap-4 mt-4">
+                          <div className="bg-green-500/10 rounded p-3">
+                            <p className="text-green-300 text-xs">
+                              {" "}
+                              Intelligence Score{" "}
+                            </p>
+                            <p className="text-white text-xl font-bold">
+                              {resultData.g_Score || "N/A"}
+                            </p>
                           </div>
+
+                          <div className="bg-green-500/10 rounded p-3 ">
+                            <p className="text-green-300 text-xs">
+                              Plagiarism %
+                            </p>
+                            <p className="text-white text-xl font-bold">
+                              {resultData.Plag__Score || "0"}
+                            </p>
+                          </div>
+                          <div className="bg-green-500/10 rounded p-3 col-span-2">
+                            <p className="text-green-300 text-xs">
+                              Actual Score
+                            </p>
+                            <p className="text-white text-xl font-bold">
+                              {resultData["Actual Score"] ||
+                                resultData.Actual_Score ||
+                                "N/A"}
+                            </p>
+                          </div>
+                          <div className="bg-green-500/10 rounded p-3 col-span-2">
+                            <p className="text-green-300 text-xs">Top Skills</p>
+                            <p className="text-white text-xl font-bold">
+                              {resultData.TopSkills ||
+                                "Creativity, Meta-cognition"}
+                            </p>
+                          </div>
+                        </div>
+
+                        {/* Button to view full report */}
+                        <div className="mt-4 flex justify-end">
+                          <button
+                            onClick={() => setActiveTab("results")}
+                            className="cursor-pointer text-white text-xs bg-green-600 hover:bg-green-700 px-3 py-1.5 rounded"
+                          >
+                            View Full Report
+                          </button>
                         </div>
                       </div>
                     )}
-
                     {/* Quick Actions */}
                     <div className="bg-gradient-to-br from-teal-600/20 to-teal-800/20 backdrop-blur-sm rounded-2xl p-6 border border-teal-500/30">
-                      <p className="text-teal-300 text-sm mb-4">Quick Actions</p>
+                      <p className="text-teal-300 text-sm mb-4">
+                        Quick Actions
+                      </p>
                       <div className="space-y-3">
                         {resultData ? (
                           <button
@@ -561,135 +539,246 @@ export default function StudentDashboard() {
                     </div>
                   </div>
                 </div>
-
-                {/* Additional Info Section */}
-                {resultData && (
-                  <div className="bg-gradient-to-br from-slate-800/60 to-slate-900/60 backdrop-blur-sm rounded-2xl p-6 border border-white/10">
-                    <h3 className="text-xl font-bold mb-6 bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
-                      Assessment Insights
-                    </h3>
-                    <div className="grid md:grid-cols-2 gap-6">
-                      <div className="space-y-4">
-                        <div className="flex items-start gap-3 p-4 bg-blue-500/10 rounded-xl border border-blue-500/20">
-                          <div className="w-3 h-3 bg-blue-500 rounded-full mt-2"></div>
-                          <div>
-                            <p className="text-white font-semibold">
-                              Top Skills Identified
-                            </p>
-                            <p className="text-gray-400 text-sm mt-1">
-                              {resultData.TopSkills || "Creativity, Meta-cognition"}
-                            </p>
-                          </div>
-                        </div>
-                        <div className="flex items-start gap-3 p-4 bg-purple-500/10 rounded-xl border border-purple-500/20">
-                          <div className="w-3 h-3 bg-purple-500 rounded-full mt-2"></div>
-                          <div>
-                            <p className="text-white font-semibold">Architecture Type</p>
-                            <p className="text-gray-400 text-sm mt-1">
-                              You're classified as a "{resultData.StuArch || "AI Parasite"}" - This means you excel at leveraging tools and resources effectively.
-                            </p>
-                          </div>
-                        </div>
-                      </div>
-                      <div className="space-y-4">
-                        <div className="flex items-start gap-3 p-4 bg-teal-500/10 rounded-xl border border-teal-500/20">
-                          <div className="w-3 h-3 bg-teal-500 rounded-full mt-2"></div>
-                          <div>
-                            <p className="text-white font-semibold">Growth Areas</p>
-                            <p className="text-gray-400 text-sm mt-1">
-                              Focus on improving: {resultData.SuppressedSkills || "Critical Thinking"}
-                            </p>
-                          </div>
-                        </div>
-                        <div className="flex items-start gap-3 p-4 bg-amber-500/10 rounded-xl border border-amber-500/20">
-                          <div className="w-3 h-3 bg-amber-500 rounded-full mt-2"></div>
-                          <div>
-                            <p className="text-white font-semibold">Performance Summary</p>
-                            <p className="text-gray-400 text-sm mt-1">
-                              Your overall g-Score is {resultData.g_Score || "N/A"}. Click "View Results" for detailed analysis.
-                            </p>
-                          </div>
-                        </div>
-                      </div>
+                {/* Remark Section */}
+                <div className="bg-gradient-to-br from-amber-600/10 to-orange-600/10 backdrop-blur-sm rounded-2xl p-6 border border-amber-500/30">
+                  <div className="flex items-start gap-4">
+                    <Lightbulb className="w-8 h-8 text-amber-400 mt-1" />
+                    <div>
+                      <h3 className="text-xl font-bold text-white mb-2">
+                        Remark & Feedback
+                      </h3>
+                      <p className="text-gray-200 leading-relaxed">
+                        {resultData.Remark ||
+                          "You have a fantastic tech-savvy mind and a high-speed approach to solving difficult tasks; which is a massive skill! My challenge for you is to now anchor that speed in your own deep reasoning; as understanding the 'why' will make you unstoppable."}
+                      </p>
                     </div>
                   </div>
-                )}
+                </div>
               </>
             )}
 
             {activeTab === "results" && resultData && (
               <>
-                {/* Results Tabs within Results Section */}
-                <div className="mb-6">
-                  <div className="flex flex-wrap gap-2">
-                    <button
-                      onClick={() => setActiveTab("results")}
-                      className={`px-4 py-2 rounded-lg font-semibold transition-all ${
-                        true ? "bg-gradient-to-r from-blue-600 to-purple-600 text-white" : "bg-slate-800/50 text-gray-300 hover:bg-slate-700/50"
-                      }`}
-                    >
-                      <div className="flex items-center gap-2">
-                        <BarChart className="w-4 h-4" />
-                        Overview
-                      </div>
-                    </button>
-                  </div>
-                </div>
-
                 <div className="space-y-8">
-                  {/* Overall Score Card */}
+                  
+
                   <div className="bg-gradient-to-br from-blue-600/20 to-purple-600/20 backdrop-blur-sm rounded-2xl p-8 border border-blue-500/30">
-                    <div className="flex flex-col md:flex-row items-center justify-between gap-6">
-                      <div className="text-center md:text-left">
-                        <p className="text-blue-300 text-sm mb-2">OVERALL SCORE</p>
-                        <h2 className="text-5xl md:text-6xl font-bold text-white mb-2">
-                          {resultData.g_Score || "N/A"}
-                          <span className="text-2xl text-gray-300">/100</span>
-                        </h2>
-                        <div className="flex items-center gap-2">
-                          <Award className="w-6 h-6 text-yellow-400" />
-                          <span className="text-xl font-semibold text-white">
-                            {resultData.StuArch || "AI Parasite"}
-                          </span>
-                        </div>
-                      </div>
-                      
-                      <div className="relative">
-                        <div className="w-48 h-48 rounded-full border-8 border-blue-500/30 flex items-center justify-center">
-                          <div className="w-40 h-40 rounded-full border-8 border-transparent border-t-blue-500 border-r-purple-500 border-b-pink-500 border-l-teal-500 animate-spin-slow">
-                            <div className="absolute inset-0 flex items-center justify-center">
-                              <div className="text-center">
-                                <div className="text-4xl font-bold text-white">
-                                  {resultData.g_Score || "N/A"}
+                    {/* Title */}
+                    <h3 className="text-2xl font-bold text-white mb-6 text-center md:text-left">
+                      Performance Overview
+                    </h3>
+
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                  
+                        <div className="relative flex flex-col items-center justify-center gap-4">
+                          <div className="w-48 h-48 rounded-full border-8 border-blue-500/30 flex items-center justify-center">
+                            <div className="w-40 h-40 rounded-full border-8 border-transparent border-t-blue-500 border-r-purple-500 border-b-pink-500 border-l-teal-500 flex items-center justify-center ">
+                              <div className="flex items-center justify-center">
+                                <div className="text-center">
+                                  <div className="text-4xl font-bold text-white">
+                                    {resultData["Actual Score"] || "N/A"}
+                                  </div>
+                                   <div className="text-gray-300">Actual Score</div>
                                 </div>
-                                <div className="text-gray-300">g-Score</div>
                               </div>
                             </div>
+                            
+                          </div>
+                          <p className="text-white font-family-givonic-bold text-xl">
+                          OVERALL SCORE
+                        </p>
+                        </div>
+
+                      <div className="space-y-4">
+                        <div className="bg-slate-800/50 rounded-xl p-4 border border-white/10 flex items-center gap-3">
+                          <div className="p-2 bg-purple-500/20 rounded-lg">
+                            <Award className="w-5 h-5 text-purple-400" />
+                          </div>
+                          <div>
+                            <p className="text-gray-400 text-xs">
+                              Student Archetype
+                            </p>
+                            <p className="text-white font-bold text-lg">
+                              {resultData.StuArch || "AI Parasite"}
+                            </p>
+                          </div>
+                        </div>
+                        <div className="bg-slate-800/50 rounded-xl p-4 border border-white/10 flex items-center gap-3">
+                          <div className="p-2 bg-blue-500/20 rounded-lg">
+                            <Target className="w-5 h-5 text-blue-400" />
+                          </div>
+                          <div>
+                            <p className="text-gray-400 text-xs">Intelligence Score</p>
+                            <p className="text-white text-2xl font-bold">
+                              {resultData.g_Score || "N/A"}
+                            </p>
+                          </div>
+                        </div>
+                        <div className="bg-slate-800/50 rounded-xl p-4 border border-white/10 flex items-center gap-3">
+                          <div className="p-2 bg-teal-500/20 rounded-lg">
+                            <Lightbulb className="w-5 h-5 text-teal-400" />
+                          </div>
+                          <div>
+                            <p className="text-gray-400 text-xs">Top Skills</p>
+                            <p className="text-white font-bold text-lg">
+                              {resultData.TopSkills ||
+                                "Creativity, Meta‑cognition"}
+                            </p>
                           </div>
                         </div>
                       </div>
-                    </div>
 
-                    {/* Key Metrics */}
-                    <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-8">
-                      <div className="bg-slate-800/50 rounded-xl p-4 border border-white/10">
-                        <p className="text-gray-400 text-sm">Architecture</p>
-                        <p className="text-white font-bold text-lg">{resultData.StuArch || "AI Parasite"}</p>
+                      <div className="space-y-4">
+                        <div className="bg-slate-800/50 rounded-xl p-4 border border-white/10 flex items-center gap-3">
+                          <div className="p-2 bg-amber-500/20 rounded-lg">
+                            <Brain className="w-5 h-5 text-amber-400" />
+                          </div>
+                          <div>
+                            <p className="text-gray-400 text-xs">
+                              Suppressed Skills
+                            </p>
+                            <p className="text-white font-bold text-lg">
+                              {resultData.SuppressedSkills ||
+                                "Critical Thinking"}
+                            </p>
+                          </div>
+                        </div>
+                        <div className="bg-slate-800/50 rounded-xl p-4 border border-white/10 flex items-center gap-3">
+                          <div className="p-2 bg-amber-500/20 rounded-lg">
+                            <BookCopy className="w-5 h-5 text-red-400" />
+                          </div>
+                          <div>
+                            <p className="text-gray-400 text-xs">
+                              Plagiarism %
+                            </p>
+                            <p className="text-white font-bold text-lg">
+                              {resultData.Plag__Score || "0"}
+                    
+                            </p>
+                          </div>
+                        </div>
+                        {(resultData.AAS_Score>0) && (<div className="bg-slate-800/50 rounded-xl p-4 border border-white/10 flex items-center gap-3">
+                          <div className="p-2 bg-pink-500/20 rounded-lg">
+                            <BarChart className="w-5 h-5 text-pink-400" />
+                          </div>
+                          <div>
+                            <p className="text-gray-400 text-xs">AI Augmentation Score</p>
+                            <p className="text-white text-2xl font-bold">
+                              {resultData.AAS_Score?.toFixed(1) || "N/A"}
+                            </p>
+                          </div>
+                        </div>)}
                       </div>
-                      <div className="bg-slate-800/50 rounded-xl p-4 border border-white/10">
-                        <p className="text-gray-400 text-sm">Top Skills</p>
-                        <p className="text-white font-bold text-lg">{resultData.TopSkills || "Creativity, Meta-cognition"}</p>
-                      </div>
-                      <div className="bg-slate-800/50 rounded-xl p-4 border border-white/10">
-                        <p className="text-gray-400 text-sm">Suppressed</p>
-                        <p className="text-white font-bold text-lg">{resultData.SuppressedSkills || "Critical Thinking"}</p>
-                      </div>
-                      <div className="bg-slate-800/50 rounded-xl p-4 border border-white/10">
-                        <p className="text-gray-400 text-sm">Overall Rank</p>
-                        <p className={`text-white font-bold text-lg ${getRankColor(resultData.R_Score || 1)}`}>
-                          #{resultData.R_Score || 1}
-                        </p>
-                      </div>
+                    </div>
+                  </div>
+                  {/* Skill Scores Grid */}
+                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                    {skillCategories
+                      .filter((skill) => skill.value !== 0)
+                      .map((skill, index) => (
+                        <div
+                          key={index}
+                          className="bg-slate-800/40 rounded-xl p-4 border border-white/10 hover:border-blue-500/30 transition-all duration-300"
+                        >
+                          <div className="flex items-center justify-between mb-3">
+                            <div className="flex items-center gap-3">
+                              <div className="p-2 bg-blue-500/20 rounded-lg">
+                                <skill.icon className="w-5 h-5 text-blue-400" />
+                              </div>
+                              <span className="text-white font-semibold">
+                                {skill.name}
+                              </span>
+                            </div>
+                            <span
+                              className={`text-2xl font-bold ${getScoreColor(skill.value)}`}
+                            >
+                              {skill.value.toFixed(1)}
+                            </span>
+                          </div>
+                          <div className="w-full bg-slate-700/50 rounded-full h-2">
+                            <div
+                              className={`h-2 rounded-full ${getScoreBarColor(skill.value)} transition-all duration-500`}
+                              style={{
+                                width: `${calculateScorePercentage(skill.value)}%`,
+                              }}
+                            ></div>
+                          </div>
+                        </div>
+                      ))}
+                  </div>
+
+                  {/* Question-wise Analysis */}
+                  <div className="bg-gradient-to-br from-slate-800/60 to-slate-900/60 rounded-2xl p-6 border border-white/10">
+                    <h3 className="text-2xl font-bold text-white mb-6">
+                      Question-wise Analysis
+                    </h3>
+
+                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                      {questions.map((q, index) => (
+                        <div
+                          key={index}
+                          className="bg-slate-800/40 rounded-xl p-6 border border-white/10 hover:border-purple-500/30 transition-all duration-300"
+                        >
+                          <div className="flex items-start justify-between mb-4">
+                            <div className="flex items-center gap-3">
+                              <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-blue-500 to-purple-500 flex items-center justify-center">
+                                <span className="text-white font-bold">
+                                  Q{q.number}
+                                </span>
+                              </div>
+                              <div>
+                                <h4 className="text-white font-bold">
+                                  Question {q.number}
+                                </h4>
+                                <p className="text-gray-400 text-sm">
+                                  Your Answer:{" "}
+                                  <span className="text-white font-mono">
+                                    {q.answer}
+                                  </span>
+                                </p>
+                              </div>
+                            </div>
+                            <span className="px-3 py-1 bg-gradient-to-r from-blue-500/20 to-purple-500/20 text-blue-300 rounded-full text-sm font-semibold">
+                              {q.tag}
+                            </span>
+                          </div>
+
+                          <div className="grid grid-cols-2 gap-4 mt-4">
+                            <div className="space-y-2">
+                              <p className="text-gray-400 text-sm">
+                                Dominant Skill
+                              </p>
+                              <p className="text-white font-semibold">
+                                {q.domain}
+                              </p>
+                            </div>
+                            <div className="space-y-2">
+                              <p className="text-gray-400 text-sm">
+                                Latent Skill
+                              </p>
+                              <p className="text-white font-semibold">
+                                {q.lateral}
+                              </p>
+                            </div>
+                            <div className="space-y-2">
+                              <p className="text-gray-400 text-sm">
+                                Supportive Skill
+                              </p>
+                              <p className="text-white font-semibold">
+                                {q.support}
+                              </p>
+                            </div>
+                            <div className="space-y-2">
+                              <p className="text-gray-400 text-sm">
+                                Diagnosis Tag
+                              </p>
+                              <p className="text-white font-semibold">
+                                {q.tag}
+                              </p>
+                            </div>
+                          </div>
+                        </div>
+                      ))}
                     </div>
                   </div>
 
@@ -698,195 +787,18 @@ export default function StudentDashboard() {
                     <div className="flex items-start gap-4">
                       <Lightbulb className="w-8 h-8 text-amber-400 mt-1" />
                       <div>
-                        <h3 className="text-xl font-bold text-white mb-2">Remark & Feedback</h3>
+                        <h3 className="text-xl font-bold text-white mb-2">
+                          Remark & Feedback
+                        </h3>
                         <p className="text-gray-200 leading-relaxed">
-                          {resultData.Remark || "You have a fantastic tech-savvy mind and a high-speed approach to solving difficult tasks; which is a massive skill! My challenge for you is to now anchor that speed in your own deep reasoning; as understanding the 'why' will make you unstoppable."}
+                          {resultData.Remark ||
+                            "You have a fantastic tech-savvy mind and a high-speed approach to solving difficult tasks; which is a massive skill! My challenge for you is to now anchor that speed in your own deep reasoning; as understanding the 'why' will make you unstoppable."}
                         </p>
                       </div>
                     </div>
                   </div>
-
-                  {/* Skill Scores Grid */}
-                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                    {skillCategories.map((skill, index) => (
-                      <div key={index} className="bg-slate-800/40 rounded-xl p-4 border border-white/10 hover:border-blue-500/30 transition-all duration-300">
-                        <div className="flex items-center justify-between mb-3">
-                          <div className="flex items-center gap-3">
-                            <div className="p-2 bg-blue-500/20 rounded-lg">
-                              <skill.icon className="w-5 h-5 text-blue-400" />
-                            </div>
-                            <span className="text-white font-semibold">{skill.name}</span>
-                          </div>
-                          <span className={`text-2xl font-bold ${getScoreColor(skill.value)}`}>
-                            {skill.value.toFixed(1)}
-                          </span>
-                        </div>
-                        <div className="w-full bg-slate-700/50 rounded-full h-2">
-                          <div 
-                            className={`h-2 rounded-full ${getScoreBarColor(skill.value)} transition-all duration-500`}
-                            style={{ width: `${calculateScorePercentage(skill.value)}%` }}
-                          ></div>
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-
-                  {/* Question-wise Analysis */}
-                  <div className="bg-gradient-to-br from-slate-800/60 to-slate-900/60 rounded-2xl p-6 border border-white/10">
-                    <h3 className="text-2xl font-bold text-white mb-6">Question-wise Analysis</h3>
-                    
-                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                      {questions.map((q, index) => (
-                        <div key={index} className="bg-slate-800/40 rounded-xl p-6 border border-white/10 hover:border-purple-500/30 transition-all duration-300">
-                          <div className="flex items-start justify-between mb-4">
-                            <div className="flex items-center gap-3">
-                              <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-blue-500 to-purple-500 flex items-center justify-center">
-                                <span className="text-white font-bold">Q{q.number}</span>
-                              </div>
-                              <div>
-                                <h4 className="text-white font-bold">Question {q.number}</h4>
-                                <p className="text-gray-400 text-sm">Your Answer: <span className="text-white font-mono">{q.answer}</span></p>
-                              </div>
-                            </div>
-                            <span className="px-3 py-1 bg-gradient-to-r from-blue-500/20 to-purple-500/20 text-blue-300 rounded-full text-sm font-semibold">
-                              {q.tag}
-                            </span>
-                          </div>
-                          
-                          <div className="grid grid-cols-2 gap-4 mt-4">
-                            <div className="space-y-2">
-                              <p className="text-gray-400 text-sm">Primary Domain</p>
-                              <p className="text-white font-semibold">{q.domain}</p>
-                            </div>
-                            <div className="space-y-2">
-                              <p className="text-gray-400 text-sm">Lateral Thinking</p>
-                              <p className="text-white font-semibold">{q.lateral}</p>
-                            </div>
-                            <div className="space-y-2">
-                              <p className="text-gray-400 text-sm">Support Skills</p>
-                              <p className="text-white font-semibold">{q.support}</p>
-                            </div>
-                            <div className="space-y-2">
-                              <p className="text-gray-400 text-sm">Problem Tag</p>
-                              <p className="text-white font-semibold">{q.tag}</p>
-                            </div>
-                          </div>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
                 </div>
               </>
-            )}
-
-            {activeTab === "profile" && (
-              <div className="space-y-8">
-                {/* Profile Header */}
-                <div className="bg-gradient-to-br from-blue-600/20 to-purple-600/20 backdrop-blur-sm rounded-2xl p-8 border border-blue-500/30">
-                  <div className="flex flex-col md:flex-row items-center gap-6">
-                    <div className="relative">
-                      {studentData.imageUrl ? (
-                        <img
-                          src={studentData.imageUrl}
-                          alt={studentData.fullName}
-                          className="w-32 h-32 rounded-full border-4 border-blue-500 shadow-lg object-cover"
-                        />
-                      ) : (
-                        <div className="w-32 h-32 rounded-full border-4 border-blue-500 shadow-lg bg-gradient-to-br from-blue-600 to-purple-600 flex items-center justify-center">
-                          <span className="text-4xl font-bold text-white">
-                            {studentData.fullName.charAt(0)}
-                          </span>
-                        </div>
-                      )}
-                    </div>
-                    <div className="text-center md:text-left">
-                      <h2 className="text-3xl font-bold text-white mb-2">{studentData.fullName}</h2>
-                      <div className="flex flex-wrap items-center justify-center md:justify-start gap-4">
-                        <div className="flex items-center gap-2 text-blue-300">
-                          <GraduationCap className="w-5 h-5" />
-                          <span>Class {studentData.class} - {studentData.section}</span>
-                        </div>
-                        <div className="flex items-center gap-2 text-gray-300">
-                          <School className="w-5 h-5" />
-                          <span>{studentData.school}</span>
-                        </div>
-                        {resultData?.R_Score && (
-                          <div className="flex items-center gap-2 text-yellow-300">
-                            <Star className="w-5 h-5" />
-                            <span className="font-semibold">Rank #{resultData.R_Score}</span>
-                          </div>
-                        )}
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                {/* Personal Information */}
-                <div className="grid md:grid-cols-2 gap-6">
-                  <div className="bg-gradient-to-br from-slate-800/60 to-slate-900/60 rounded-2xl p-6 border border-white/10">
-                    <h3 className="text-xl font-bold text-white mb-4">Personal Information</h3>
-                    <div className="space-y-4">
-                      <div className="flex justify-between items-center p-3 bg-slate-800/40 rounded-lg">
-                        <span className="text-gray-400">Full Name</span>
-                        <span className="text-white font-semibold">{studentData.fullName}</span>
-                      </div>
-                      <div className="flex justify-between items-center p-3 bg-slate-800/40 rounded-lg">
-                        <span className="text-gray-400">Date of Birth</span>
-                        <span className="text-white font-semibold">{formatDOB(studentData.dob || resultData?.DOB)}</span>
-                      </div>
-                      <div className="flex justify-between items-center p-3 bg-slate-800/40 rounded-lg">
-                        <span className="text-gray-400">Age</span>
-                        <span className="text-white font-semibold">{calculateAge(studentData.dob || resultData?.DOB)} years</span>
-                      </div>
-                      <div className="flex justify-between items-center p-3 bg-slate-800/40 rounded-lg">
-                        <span className="text-gray-400">Email</span>
-                        <span className="text-white font-semibold">{studentData.email || resultData?.Email || "-"}</span>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div className="bg-gradient-to-br from-slate-800/60 to-slate-900/60 rounded-2xl p-6 border border-white/10">
-                    <h3 className="text-xl font-bold text-white mb-4">Academic Information</h3>
-                    <div className="space-y-4">
-                      <div className="flex justify-between items-center p-3 bg-slate-800/40 rounded-lg">
-                        <span className="text-gray-400">Class</span>
-                        <span className="text-white font-semibold">{studentData.class || resultData?.["Class "] || "N/A"}</span>
-                      </div>
-                      <div className="flex justify-between items-center p-3 bg-slate-800/40 rounded-lg">
-                        <span className="text-gray-400">Section</span>
-                        <span className="text-white font-semibold">{studentData.section || resultData?.["Section "] || "N/A"}</span>
-                      </div>
-                      <div className="flex justify-between items-center p-3 bg-slate-800/40 rounded-lg">
-                        <span className="text-gray-400">Roll Number</span>
-                        <span className="text-white font-semibold">{studentData.rollNumber || resultData?.["Roll No"] || "N/A"}</span>
-                      </div>
-                      <div className="flex justify-between items-center p-3 bg-slate-800/40 rounded-lg">
-                        <span className="text-gray-400">School</span>
-                        <span className="text-white font-semibold text-right">{studentData.school || resultData?.["School "] || "N/A"}</span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                {/* System Information */}
-                <div className="bg-gradient-to-br from-slate-800/60 to-slate-900/60 rounded-2xl p-6 border border-white/10">
-                  <h3 className="text-xl font-bold text-white mb-4">System Information</h3>
-                  <div className="grid md:grid-cols-3 gap-4">
-                    <div className="p-4 bg-slate-800/40 rounded-lg">
-                      <p className="text-gray-400 text-sm mb-1">Student ID</p>
-                      <p className="text-white font-mono text-sm">{studentData._id}</p>
-                    </div>
-                    <div className="p-4 bg-slate-800/40 rounded-lg">
-                      <p className="text-gray-400 text-sm mb-1">Account Created</p>
-                      <p className="text-white font-semibold">{formatRegistrationDate(studentData.createdAt)}</p>
-                    </div>
-                    <div className="p-4 bg-slate-800/40 rounded-lg">
-                      <p className="text-gray-400 text-sm mb-1">Last Updated</p>
-                      <p className="text-white font-semibold">{formatRegistrationDate(studentData.updatedAt)}</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
             )}
           </div>
         </div>
@@ -895,8 +807,12 @@ export default function StudentDashboard() {
       {/* Add custom animation */}
       <style jsx>{`
         @keyframes spin-slow {
-          from { transform: rotate(0deg); }
-          to { transform: rotate(360deg); }
+          from {
+            transform: rotate(0deg);
+          }
+          to {
+            transform: rotate(360deg);
+          }
         }
         .animate-spin-slow {
           animation: spin-slow 20s linear infinite;

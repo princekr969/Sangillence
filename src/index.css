@@ -183,7 +183,21 @@
   }
 }
 
+@keyframes slideIn {
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+
 /* Animation Classes */
+.animate-slide-in {
+  animation: slideIn 0.6s ease-out forwards;
+}
+
 .animate-fade-in {
   animation: fadeIn 1s ease-out;
 }

@@ -58,7 +58,7 @@ function Announcement() {
   } else if (!isRegistered) {
     buttonText = "Join WhatsApp Channel";
     linkTo = WHATSAPP_LINK;
-    secondaryText = "Thank You for Participating in SOBO'25";
+    secondaryText = "Thank You for participating in SOBO'25";
     linkIcon = MessageCircle;
   } else {
     buttonText = "Get Ready";
@@ -151,7 +151,7 @@ function Announcement() {
                       }}
                     />
                   ) : (
-                    "The Exam Has Ended"
+                    secondaryText
                   )}
                 </p>
               </div>
