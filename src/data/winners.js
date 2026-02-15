@@ -1,0 +1,92 @@
+export const winners = {
+  humanSovereign: {
+    A: [
+      { name: "Adarsh Kumar", class: "5", school: "PM Shri Kendriya Vidyalaya No 1 AFS Chakeri", score: 25.2, image: "public/winners/default.jpg" },
+      { name: "Aarya Dashora", class: "5", school: "PM Shri KV 5 Gwalior", score: 20.57, image: "/winners/Aarya_Dashora.jpg" },
+      { name: "Mohd Arshad", class: "4", school: "PM Shri Kendriya Vidyalaya No 1 AFS Chakeri", score: 19.76, image: "public/winners/default.jpg" }
+    ],
+    B: [
+      { name: "Vivan Tak", class: "6", school: "PM Shri KVS No 1", score: 19.46, image: "public/winners/Vivan_Tak.jpg" },
+      { name: "Zoha Mahmood", class: "7", school: "PM Shri KV No 1 AFS Chakeri Kanpur", score: 18.72, image: "public/winners/default.jpg" },
+      { name: "Mukul Pawar", class: "7", school: "PM Shri KV No 1 AFS Chakeri Kanpur", score: 18.378, image: "public/winners/Mukul_Pawar.jpg" }
+    ],
+    C: [
+      { name: "Puransh Tiwari", class: "10", school: "PM Shri KV No 1 AFS Chakeri Kanpur", score: 30.96, image: "public/winners/default.jpg" },
+      { name: "Anvesha Mishra", class: "9", school: "PM Shri KV No 1 AFS Chakeri Kanpur", score: 19.38, image: "public/winners/ANVESHA MISHRA.jpg" },
+      { name: "Ishanvi Sharma", class: "9", school: "PM Shri KV No 1 AFS Chakeri Kanpur", score: 19.22, image: "public/winners/Ishanvi_Sharma.jpg" }
+    ]
+  },
+
+  aiOrchestrator: {
+    A: [
+      { name: "Parth Verma", class: "3", school: "KV No 1", score: 6.3, image: "public/winners/Parth_verma.jpg" },
+      { name: "Riya Bajpai", class: "5", school: "PM Shri KV Cantt Kanpur", score: 5.69, image: "public/winners/Riya Bajpai.jpg" },
+      { name: "Prince Rahar", class: "5", school: "PM Shri Kendriya Vidyalaya No 1 AFS Chakeri", score: 6.1, image: "public/winners/default.jpg" }
+    ],
+    B: [
+      { name: "Saanvi Mishra", class: "7", school: "PM Shri Kendriya Vidyalaya No 2 AFS Gwalior", score: 11.3, image: "public/winners/default.jpg" },
+      { name: "Kavyansh", class: "6", school: "PM Shri KVS No 5", score: 5.8, image: "public/winners/default.jpg" },
+      { name: "Raj Lodhi", class: "6", school: "PM Shri KVS No 1 Gwalior", score: 5.13, image: "public/winners/Raj lodhi.jpg" }
+    ],
+    C: [
+      { name: "Gaurav Singh", class: "10", school: "PM Shri KV No 5 Gwalior", score: 10.95, image: "public/winners/Gaurav Singh.jpg" },
+      { name: "Anshika", class: "9", school: "PM Shri Kendriya Vidyalaya No 1 AFS Chakeri", score: 10.3, image: "public/winners/default.jpg" },
+      { name: "Shaurya Singh", class: "10", school: "PM Shri Kendriya Vidyalaya AFS Chakeri No 1", score: 9.22, image: "public/winners/Shaurya singh.jpg" }
+    ]
+  },
+
+  logical: [
+    { name: "Parneet Singh", class: "10", school: "Army Public School Gwalior", score: 5.4, image: "public/winners/default.jpg" }
+  ],
+
+  analytical: [
+    { name: "Puransh Tiwari", class: "10", school: "PM Shri Kendriya Vidyalaya No 1 AFS Chakeri", score: 7.9, image: "public/winners/default.jpg" },
+    { name: "Arnav Vishwakarma", class: "5", school: "PM Shri Kendriya Vidyalaya No 1 AFS Chakeri", score: 7.9, image: "public/winners/default.jpg" }
+  ],
+
+  memory: [
+    { name: "Amyra Singh", class: "4", school: "PM Shri Kendriya Vidyalaya No 1 AFS Chakeri", score: 4.8, image: "public/winners/default.jpg" },
+    { name: "Shanaya Singh", class: "3", school: "PM Shri Kendriya Vidyalaya No 1 AFS Chakeri", score: 4.8, image: "public/winners/default.jpg" }
+  ],
+
+  criticalThinking: [
+    { name: "Jalaj Yadav", class: "7", school: "PM Shri Kendriya Vidyalaya AFS Chakeri Kanpur", score: 4.8, image: "public/winners/default.jpg" },
+    { name: "Kavyansh Sharma", class: "6", school: "PM Shri KVS No 5 Gwalior", score: 4.8, image: "public/winners/default.jpg" },
+    { name: "Niyati Dubey", class: "9", school: "PM Shri Kendriya Vidyalaya No 1 Gwalior", score: 4.8, image: "public/winners/default.jpg" },
+    { name: "Sonakshi Jado", class: "10", school: "Army Public School Gwalior", score: 4.8, image: "public/winners/default.jpg" },
+    { name: "Aarav", class: "4", school: "PM Shri KV No 5 Gwalior", score: 4.8, image: "public/winners/default.jpg" },
+    { name: "Puransh Tiwari", class: "10", school: "PM Shri Kendriya Vidyalaya No 1 AFS Chakeri", score: 4.8, image: "public/winners/default.jpg" },
+    { name: "Aadhya Sharma", class: "5", school: "PM Shri KV No 5 Gwalior", score: 4.8, image: "public/winners/default.jpg" }
+  ],
+
+  observation: [
+    { name: "Shaurya Singh", class: "10", school: "PM Shri Kendriya Vidyalaya AFS Chakeri No 1", score: 4.45, image: "public/winners/Shaurya singh.jpg" },
+    { name: "Vishesh Bajpai", class: "9", school: "PM Shri Kendriya Vidyalaya No 1 AFS Chakeri Kanpur", score: 4.45, image: "public/winners/Vishesh_Bajpai.jpg" }
+  ],
+
+  research: [
+    { name: "Aarya Dashora", class: "5", school: "KV No 5", score: 3.3, image: "public/winners/Aarya_Dashora.jpg" }
+  ],
+
+  ootb: [
+    { name: "Mukul Pawar", class: "7", school: "KVS No 1 Kanpur Chakeri", score: 4.76, image: "public/winners/Mukul_Pawar.jpg" },
+    { name: "Anvesha Mishra", class: "9", school: "PM Shri KV No 1 Chakeri", score: 4.76, image: "public/winners/ANVESHA MISHRA.jpg" }
+  ],
+
+  metaCognition: [
+    { name: "Shaurya Singh", class: "10", school: "PM Shri Kendriya Vidyalaya AFS Chakeri No 1", score: 10, image: "public/winners/Shaurya singh.jpg" }
+  ],
+
+  creativity: [
+    { name: "Ishanvi Sharma", class: "9", school: "PM Shri Kendriya Vidyalaya No 1 AFS Chakeri Kanpur", score: 10, image: "public/winners/Ishanvi_Sharma.jpg" },
+    { name: "Mukul Pawar", class: "7", school: "KVS No 1 Kanpur Chakeri", score: 10, image: "public/winners/Mukul_Pawar.jpg" },
+    { name: "Anvesha Mishra", class: "9", school: "PM Shri KV No 1 Chakeri", score: 10, image: "public/winners/ANVESHA MISHRA.jpg" },
+    { name: "Arnav Vishwakarma", class: "5", school: "PM Shri Kendriya Vidyalaya No 1 Ichchanath Surat", score: 10, image: "public/winners/Arnav Vishwakarma.jpg" }
+  ],
+
+  gScore: [
+    { name: "Saanvi Mishra", class: "7", school: "PM Shri Kendriya Vidyalaya No 2 AFS Gwalior", score: 37, image: "public/winners/default.jpg" }
+  ],
+};
+
+export const specialAwards = { bestHumanSovereign: "Army Public School, Gwalior", bestAIOrchestral: "PM Shri KV1 AFS Chakeri Kanpur" };
