@@ -29,7 +29,6 @@ export const studentResult = async (req, res) => {
     
     console.log("Searching with criteria:", {
       Name: student.fullName.trim(),
-      School: student.school,
       Class: Number(student.class),
       Section: student.section.trim().toUpperCase(),
       DOB: dobString,
@@ -37,7 +36,6 @@ export const studentResult = async (req, res) => {
 
     let result = await soboResult.findOne({
       Name: student.fullName.trim(),
-      School: student.school.toUpperCase(), 
       Class: Number(student.class),   
       Section: student.section.trim().toUpperCase(),
       DOB: dobString,

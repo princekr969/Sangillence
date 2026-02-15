@@ -137,7 +137,7 @@ function Announcement() {
 
               <div className="text-center md:text-left">
                 <h3 className="text-white text-lg md:text-xl font-bold">
-                  {isLive ? "SUBMISSION DEADLINE IN" : "The Exam Has Ended"}
+                  {isLive ? "SUBMISSION DEADLINE IN" : "Exam has Ended"}
                 </h3>
                 <p className="text-blue-100 text-sm md:text-base">
                   {/* Using dangerouslySetInnerHTML to render the bold markdown for the WhatsApp CTA */}
@@ -156,26 +156,26 @@ function Announcement() {
                 </p>
               </div>
             </div>
-            <div className="flex-shrink-0 flex items-center gap-3 bg-gradient-to-r from-amber-900/40 via-yellow-900/40 to-amber-900/40 px-5 py-3 rounded-xl border border-amber-500/30 shadow-lg">
-              
-              <div className="text-left">
-                <h4 className="text-amber-100 text-sm md:text-base font-semibold">
-                  The result will be announced by <span className="font-bold text-amber-300">15th February 2026 at 4PM IST</span>
-                </h4>
-               
-              </div>
-              </div>
             {/* <div className=" flex-shrink-0 flex items-center gap-3 bg-gradient-to-r from-amber-900/40 via-yellow-900/40 to-amber-900/40 rounded-xl border border-amber-500/30 shadow-lg">
   <div className="flex items-center justify-between w-full gap-4">
     
     <button
-      onClick={() => window.location.href = '/student-login'}
+      onClick={() => window.location.href = '/olympiad'}
       className="font-family-givonic-Bold cursor-pointer group relative bg-gradient-to-r from-amber-500 to-orange-600 hover:from-amber-600 hover:to-orange-700 hover:scale-103 text-white px-5 py-3 rounded-lg text-lg font-semibold transition-all shadow-lg hover:shadow-xl flex items-center gap-2"
     >
       Check Result
     </button>
   </div>
 </div> */}
+ <div className="flex-shrink-0 flex items-center gap-3 bg-gradient-to-r from-amber-900/40 via-yellow-900/40 to-amber-900/40 px-5 py-3 rounded-xl border border-amber-500/30 shadow-lg">
+              
+              <div className="text-left">
+                <h4 className="text-amber-100 text-sm md:text-base font-semibold">
+                  <span className="font-bold text-amber-300">Due to Technical Glitch Result will be announced Tomorrow</span>
+                </h4>
+               
+              </div>
+              </div>
 
             {/* Center - Timer (unchanged) */}
             {/* <div className="flex gap-2 md:gap-3">

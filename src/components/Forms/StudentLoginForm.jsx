@@ -165,19 +165,26 @@ function StudentLoginForm() {
                 ></div>
               </div>
 
-              <div className="relative z-10">
+              <div className="relative z-10 flex justify-start items-center text-center gap-2 sm:gap-4 mb-6">
+                <img 
+                    src="https://res.cloudinary.com/dstbd40ud/image/upload/v1766321457/Untitled_design_5_zq2tz9.png" 
+                    alt="Sangillence" 
+                    className="h-12 sm:h-18 mb-2 drop-shadow-[0_0_15px_rgba(5,0,0,0.8)]"
+                />
+                <div>
                 <h1 className={`font-bold text-white mb-1 sm:mb-2 ${
                   isMobile ? "text-xl" : "text-2xl sm:text-3xl"
                 }`}>
-                  SOBO Access
+                  SOBO RESULTS
                 </h1>
                 <p className={`text-slate-300 ${
                   isMobile ? "text-xs" : "text-sm sm:text-base"
                 }`}>
                   {schoolConfig
                     ? `Enter your details for ${isMobile ? schoolConfig.name : `the portal for ${schoolConfig.name}`}`
-                    : "Select your school to get started"}
+                    : "Enter your details to check your results"}
                 </p>
+                </div>
               </div>
 
               {/* Decorative elements */}

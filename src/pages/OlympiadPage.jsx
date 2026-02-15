@@ -215,4 +215,3 @@ function OlympiadPage() {
 }
 
 export default OlympiadPage;
-

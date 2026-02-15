@@ -31,40 +31,140 @@ import {
 } from "lucide-react";
 import heroSectionBg from "../../assets/svgs/herosectionbg.svg";
 import axios from "axios";
-import Report from "../components/Landing/Report";
 
-const SkillBar = ({ skill, value, isVisible, delay }) => {
-  const [animatedValue, setAnimatedValue] = useState(0);
-  const Icon = skill.icon;
+const handleDownloadCertificate = (student, result, certificate_type="Participation") => {
+  const firstPosition = ["ADARSH KUMAR KUSHWAHA","VIVAN TAK","PURANSH TIWARI",];
+  const secondPosition = ["AARYA DASHORA", "ZOHA MAHMOOD", "ANVESHA MISHRA"];
+  const thirdPosition = ["MOHD ARSHAD", "MUKUL PAWAR", "ISHANVI SHARMA"];
+  const studentName = student?.fullName;
 
-  useEffect(() => {
-    if (isVisible) {
-      const timer = setTimeout(() => {
-        setAnimatedValue(value);
-      }, delay);
-      return () => clearTimeout(timer);
+  const rank = firstPosition.includes(studentName)
+    ? "First"
+    : secondPosition.includes(studentName)
+      ? "Second"
+      : thirdPosition.includes(studentName)
+        ? "Third"
+        : "Not Awarded";
+  console.log("Resss", result)
+  const category = result ? result.StuArch: "N/A";
+  const imageUrl = `${window.location.origin}/certificate/Certificate_of_${certificate_type}.png`;
+
+  const certificateHTML = `
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Certificate of Excellence</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Pinyon+Script&family=Montserrat:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background: #111;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
     }
-  }, [isVisible, value, delay]);
-
-  return (
-    <div className="flex items-center space-x-4 mb-6">
-      <div className="flex items-center justify-center w-10 h-10 bg-blue-500/20 rounded-lg">
-        <Icon className="w-5 h-5 text-blue-400" />
-      </div>
-      <div className="flex-1">
-        <div className="flex justify-between items-center mb-2">
-          <span className="font-medium text-white">{skill.name}</span>
-          <span className="text-blue-300 font-semibold">{value}%</span>
-        </div>
-        <div className="w-full bg-slate-700 rounded-full h-2.5">
-          <div
-            className="h-2.5 rounded-full bg-gradient-to-r from-blue-500 to-blue-700 transition-all duration-1500 ease-out"
-            style={{ width: `${animatedValue}%` }}
-          />
-        </div>
+    .certificate {
+      width: 1100px;
+      height: 750px;
+      position: relative;
+      background: url("${imageUrl}") no-repeat center center;
+      background-size: cover;
+      font-family: 'Montserrat', sans-serif;
+      color: #1d1f27;
+    }
+    .content {
+      position: absolute;
+      width: 100%;
+      top: 250px; /* moved up to accommodate logo */
+      text-align: center;
+      padding: 0 100px;
+      box-sizing: border-box;
+    }
+    .logo-container {
+      margin-bottom: 20px;
+    }
+    .logo-img {
+      height: 80px;
+      width: auto;
+      display: inline-block;
+    }
+    h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: 54px;
+      margin: 0;
+      letter-spacing: 2px;
+    }
+    h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 28px;
+      letter-spacing: 6px;
+      margin: 0 0 30px 0;
+    }
+    .subtitle {
+      font-weight: 500;
+      letter-spacing: 2px;
+      margin-bottom: 20px;
+    }
+    .name {
+      font-family: 'Playfair Display', serif;
+      font-size: 45px;
+      margin: 20px 0 10px;
+    }
+    .line {
+      width: 60%;
+      height: 1px;
+      background: #aaa;
+      margin: 0 auto 25px;
+    }
+    .description {
+      font-size: 18px;
+      line-height: 1.6;
+      width: 75%;
+      margin: auto;
+    }
+    @media print {
+      body { background: none; }
+    }
+  </style>
+</head>
+<body>
+  <div class="certificate">
+    <div class="content">
+      <div class="name">${studentName}</div>
+      <div class="line"></div>
+      <div class="description">
+        for securing the <strong>${rank} Position</strong> in the <strong>${category}</strong> Category of the Sangillence Open Book Olympiad 2025, representing Class ${student?.class || "N/A"} (${pool}) of <strong>${student?.school || "School"}</strong>. This achievement demonstrates exceptional cognitive skills and sets a benchmark for excellence in new-age assessments.
       </div>
     </div>
-  );
+  </div>
+</body>
+</html>
+  `;
+
+  const blob = new Blob([certificateHTML], { type: "text/html" });
+  const url = URL.createObjectURL(blob);
+  const link = document.createElement("a");
+  link.href = url;
+  link.download = `Certificate_${studentName.replace(/\s+/g, "_")}.html`;
+  document.body.appendChild(link);
+  link.click();
+  // Open in new tab
+  const newWindow = window.open(url, "_blank");
+  if (!newWindow) {
+    // Popup blocked – fallback: download
+    const link = document.createElement("a");
+    link.href = url;
+    link.download = `Certificate_${studentName.replace(/\s+/g, "_")}.html`;
+    link.click();
+  }
+
+  // Clean up the blob URL after a delay (to allow new tab to load)
+  document.body.removeChild(link);
+  setTimeout(() => URL.revokeObjectURL(url), 1000);
 };
 
 export default function StudentDashboard() {
@@ -508,33 +608,37 @@ export default function StudentDashboard() {
                         Quick Actions
                       </p>
                       <div className="space-y-3">
-                        {resultData ? (
-                          <button
-                            onClick={() => setActiveTab("results")}
-                            className="w-full bg-gradient-to-r from-purple-600 to-pink-600 text-white px-4 py-3 rounded-lg text-center hover:scale-105 transition-all duration-300 font-semibold"
-                          >
-                            View Detailed Results
-                          </button>
-                        ) : (
-                          <a
-                            href={`/student-dashboard/${studentId}/assessment`}
-                            className="block w-full bg-gradient-to-r from-blue-600 to-purple-600 text-white px-4 py-3 rounded-lg text-center hover:scale-105 transition-all duration-300 font-semibold"
-                          >
-                            Take Assessment
-                          </a>
-                        )}
-                        <a
-                          href={`/student-dashboard/${studentId}/practice`}
-                          className="block w-full bg-gradient-to-r from-teal-600 to-blue-600 text-white px-4 py-3 rounded-lg text-center hover:scale-105 transition-all duration-300 font-semibold"
+                        <button
+                          onClick={() => setActiveTab("results")}
+                          className="w-full bg-gradient-to-r from-purple-600 to-pink-600 text-white px-4 py-3 rounded-lg text-center hover:scale-105 transition-all duration-300 font-semibold"
                         >
-                          Practice Tests
-                        </a>
-                        <a
-                          href={`/student-dashboard/${studentId}/materials`}
-                          className="block w-full bg-gradient-to-r from-amber-600 to-orange-600 text-white px-4 py-3 rounded-lg text-center hover:scale-105 transition-all duration-300 font-semibold"
+                          View Detailed Results
+                        </button>
+                        {/* Certificate Download Button */}
+                        <button
+                          type="button"
+                          onClick={() =>
+                            handleDownloadCertificate(
+                              studentData,
+                              resultData,
+                            )
+                          }
+                          className="w-full bg-gradient-to-r from-amber-600 to-yellow-600 text-white px-4 py-3 rounded-lg text-center hover:scale-105 transition-all duration-300 font-semibold"
                         >
-                          Study Materials
-                        </a>
+                          Download Result
+                        </button>
+                        <button
+                          type="button"
+                          onClick={() =>
+                            handleDownloadCertificate(
+                              studentData,
+                              getPoolFromClass(studentData.class),
+                            )
+                          }
+                          className="w-full bg-gradient-to-r from-amber-600 to-yellow-600 text-white px-4 py-3 rounded-lg text-center hover:scale-105 transition-all duration-300 font-semibold"
+                        >
+                          Download Certificate
+                        </button>
                       </div>
                     </div>
                   </div>
@@ -560,8 +664,6 @@ export default function StudentDashboard() {
             {activeTab === "results" && resultData && (
               <>
                 <div className="space-y-8">
-                  
-
                   <div className="bg-gradient-to-br from-blue-600/20 to-purple-600/20 backdrop-blur-sm rounded-2xl p-8 border border-blue-500/30">
                     {/* Title */}
                     <h3 className="text-2xl font-bold text-white mb-6 text-center md:text-left">
@@ -569,25 +671,25 @@ export default function StudentDashboard() {
                     </h3>
 
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                  
-                        <div className="relative flex flex-col items-center justify-center gap-4">
-                          <div className="w-48 h-48 rounded-full border-8 border-blue-500/30 flex items-center justify-center">
-                            <div className="w-40 h-40 rounded-full border-8 border-transparent border-t-blue-500 border-r-purple-500 border-b-pink-500 border-l-teal-500 flex items-center justify-center ">
-                              <div className="flex items-center justify-center">
-                                <div className="text-center">
-                                  <div className="text-4xl font-bold text-white">
-                                    {resultData["Actual Score"] || "N/A"}
-                                  </div>
-                                   <div className="text-gray-300">Actual Score</div>
+                      <div className="relative flex flex-col items-center justify-center gap-4">
+                        <div className="w-48 h-48 rounded-full border-8 border-blue-500/30 flex items-center justify-center">
+                          <div className="w-40 h-40 rounded-full border-8 border-transparent border-t-blue-500 border-r-purple-500 border-b-pink-500 border-l-teal-500 flex items-center justify-center ">
+                            <div className="flex items-center justify-center">
+                              <div className="text-center">
+                                <div className="text-4xl font-bold text-white">
+                                  {resultData["Actual Score"] || "N/A"}
+                                </div>
+                                <div className="text-gray-300">
+                                  Actual Score
                                 </div>
                               </div>
                             </div>
-                            
                           </div>
-                          <p className="text-white font-family-givonic-bold text-xl">
+                        </div>
+                        <p className="text-white font-family-givonic-bold text-xl">
                           OVERALL SCORE
                         </p>
-                        </div>
+                      </div>
 
                       <div className="space-y-4">
                         <div className="bg-slate-800/50 rounded-xl p-4 border border-white/10 flex items-center gap-3">
@@ -608,7 +710,9 @@ export default function StudentDashboard() {
                             <Target className="w-5 h-5 text-blue-400" />
                           </div>
                           <div>
-                            <p className="text-gray-400 text-xs">Intelligence Score</p>
+                            <p className="text-gray-400 text-xs">
+                              Intelligence Score
+                            </p>
                             <p className="text-white text-2xl font-bold">
                               {resultData.g_Score || "N/A"}
                             </p>
@@ -653,21 +757,24 @@ export default function StudentDashboard() {
                             </p>
                             <p className="text-white font-bold text-lg">
                               {resultData.Plag__Score || "0"}
-                    
                             </p>
                           </div>
                         </div>
-                        {(resultData.AAS_Score>0) && (<div className="bg-slate-800/50 rounded-xl p-4 border border-white/10 flex items-center gap-3">
-                          <div className="p-2 bg-pink-500/20 rounded-lg">
-                            <BarChart className="w-5 h-5 text-pink-400" />
+                        {resultData.AAS_Score > 0 && (
+                          <div className="bg-slate-800/50 rounded-xl p-4 border border-white/10 flex items-center gap-3">
+                            <div className="p-2 bg-pink-500/20 rounded-lg">
+                              <BarChart className="w-5 h-5 text-pink-400" />
+                            </div>
+                            <div>
+                              <p className="text-gray-400 text-xs">
+                                AI Augmentation Score
+                              </p>
+                              <p className="text-white text-2xl font-bold">
+                                {resultData.AAS_Score?.toFixed(1) || "N/A"}
+                              </p>
+                            </div>
                           </div>
-                          <div>
-                            <p className="text-gray-400 text-xs">AI Augmentation Score</p>
-                            <p className="text-white text-2xl font-bold">
-                              {resultData.AAS_Score?.toFixed(1) || "N/A"}
-                            </p>
-                          </div>
-                        </div>)}
+                        )}
                       </div>
                     </div>
                   </div>
