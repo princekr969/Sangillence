@@ -171,7 +171,7 @@ function Announcement() {
               
               <div className="text-left">
                 <h4 className="text-amber-100 text-sm md:text-base font-semibold">
-                  <span className="font-bold text-amber-300">Due to Technical Glitch Result will be announced Tomorrow</span>
+                  <span className="font-bold text-amber-300">Due to Technical Glitch Result will be Announced Tomorrow</span>
                 </h4>
                
               </div>
