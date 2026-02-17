@@ -1,12 +1,12 @@
 import express from "express";
 import Student from "../models/student.js";
 import { verifyStudent } from "../middleware/verifyStudent.js";
-import { loginStudentController,  studentResult} from "../controllers/student.controller.js";
+import { loginStudentController,  studentResult, getResultId} from "../controllers/student.controller.js";
 
 const router = express.Router();
 
 router.get("/result/:id", studentResult);
-
+router.post("/get-result-id", getResultId);
 router.get("/", async (req, res) => {
   try {
     const students = await Student.find();

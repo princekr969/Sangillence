@@ -12,54 +12,82 @@ export const loginStudentController = (req, res) => {
   });
 }
 
-export const studentResult = async (req, res) => {
+export const getResultId = async (req, res) => {
   try {
-    const student = await Student.findById(req.params.id);
-    console.log("Student:", student);
-    
-    if (!student) {
-      return res.status(404).json({
+    const { fullName, class: studentClass, section, dob } = req.body;
+    console.log("wfwd", req.body);
+
+    if (!fullName || !studentClass || !section || !dob) {
+      return res.status(400).json({
         success: false,
-        message: "Student not found",
+        message: "fullName, class, section, and dob are required to verify the student.",
       });
     }
 
-    const dob = new Date(student.dob);
-    const dobString = `${String(dob.getMonth() + 1).padStart(2, '0')}/${String(dob.getDate()).padStart(2, '0')}/${dob.getFullYear()}`;
-    
+       const [day, month, year] = dob.split("/");
+  const parsedDob = new Date(Number(year), Number(month) - 1, Number(day)); // JS months are 0-indexed
+  const startOfDay = new Date(parsedDob);
+    const dobString = `${String(startOfDay.getMonth() + 1).padStart(2, '0')}/${String(startOfDay.getDate()).padStart(2, '0')}/${startOfDay.getFullYear()}`;
+
+    const classNumber = studentClass.trim().replace("Class ", "");
     console.log("Searching with criteria:", {
-      Name: student.fullName.trim(),
-      Class: Number(student.class),
-      Section: student.section.trim().toUpperCase(),
+      Name: fullName.trim(),
+      Class: Number(classNumber),
+      Section: section.trim().toUpperCase(),
       DOB: dobString,
     });
 
+
     let result = await soboResult.findOne({
-      Name: student.fullName.trim(),
-      Class: Number(student.class),   
-      Section: student.section.trim().toUpperCase(),
+      Name: fullName.trim(),
+      Class: Number(classNumber),   
+      Section: section.trim().toUpperCase(),
       DOB: dobString,
     });
 
     console.log("Found Result:", result);
-    
     if (!result) {
       return res.status(404).json({
         success: false,
         message: "Result not found for this student",
         searchCriteria: {
-          Name: student.fullName.trim(),
-          Class: student.class,
-          Section: student.section,
+          Name: fullName.trim(),
+          Class: studentClass,
+          Section: section.trim().toUpperCase(),
           DOB: dobString,
-          School: student.school
         }
       });
     }
 
     return res.status(200).json({
       success: true,
-      student: student,
+      result: result,
+    });
+
+  }catch (err) {
+    console.error("Error in getResultId:", err);
+    return res.status(500).json({
+      success: false,
+      message: "Failed to get result ID",
+      error: err.message,
+    });
+  }
+}
+
+export const studentResult = async (req, res) => {
+  try {
+    const result = await soboResult.findById(req.params.id);
+    console.log("Found Result:", result);
+    
+    if (!result) {
+      return res.status(404).json({
+        success: false,
+        message: "Result not found for this student",
+      });
+    }
+
+    return res.status(200).json({
+      success: true,
       result: result,
     });
 

@@ -2,7 +2,6 @@ import Student from "../models/student.js";
 
 export const verifyStudent = async (req, res, next) => {
   try {
-    console.log("ddfd", req.body)
     const { fullName, class: studentClass, section, dob } = req.body;
 
     // Validate required fields
