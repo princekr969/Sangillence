@@ -3,14 +3,12 @@ import { CareersHeader, CareersHero, CareersRequirements, CareersRoles, CareersE
 
 function CareersPage() {
   useEffect(() => {
-    // Smooth scrolling for anchor links
     const handleAnchorClick = (e) => {
       const anchor = e.target.closest('a[href^="#"]');
       if (!anchor) return;
       
       const targetId = anchor.getAttribute('href');
       if (targetId === '#') return;
-      
       e.preventDefault();
       const targetElement = document.querySelector(targetId);
       if (targetElement) {
