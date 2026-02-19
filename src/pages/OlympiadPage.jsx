@@ -22,8 +22,8 @@ function OlympiadPage() {
       {/* Hero Section */}
       <div className="relative overflow-hidden">
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-blue-600/20 via-transparent to-transparent"></div>
-        <div id="olympiad-results" className="container mx-auto px-4 py-8 relative scroll-mt-20">
-          <div className="text-center mb-6">
+        <div className="container mx-auto px-4 py-16 relative">
+          <div className="text-center mb-12">
             {/* <div className="inline-block mb-4">
               <span className="text-7xl animate-pulse">🏆</span>
             </div> */}
@@ -35,9 +35,8 @@ function OlympiadPage() {
             </p>
           </div>
 
-          {/* Tab Navigation - Sticky for easy switching while scrolling */}
-          <div className="sticky top-0 z-20 -mx-4 px-4 py-3 mb-8 bg-gradient-to-b from-slate-950/95 via-blue-950/95 to-slate-950/95 backdrop-blur-md border-b border-slate-700/50 shadow-lg shadow-slate-900/50">
-            <div className="flex flex-wrap justify-center gap-2 sm:gap-3">
+          {/* Tab Navigation */}
+          <div className="flex flex-wrap justify-center gap-3 mb-12">
             <TabButton
               active={activeTab === "message"}
               onClick={() => setActiveTab("message")}
@@ -63,7 +62,6 @@ function OlympiadPage() {
               onClick={() => setActiveTab("special")}
               label="Special Awards"
             />
-            </div>
           </div>
 
           {/* Content Sections */}
@@ -171,11 +169,7 @@ function OlympiadPage() {
 
       <style>{`
         @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&family=Inter:wght@400;500;600;700&display=swap');
-
-        html {
-          scroll-behavior: smooth;
-        }
-
+        
         body {
           font-family: 'Inter', sans-serif;
         }
