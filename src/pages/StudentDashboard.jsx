@@ -60,7 +60,7 @@ export default function StudentDashboard() {
 
       try {
         const response = await axios.get(
-          `http://15.206.82.61/api/students/result/${resultId}`,
+          `https://naivedyamcdc.com/api/students/result/${resultId}`,
         );
 
         if (response.data.success) {
