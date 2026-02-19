@@ -1,6 +1,6 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { Layout1 } from "./layouts";
-import { LoadingPage, HomePage, OlympiadPage, AboutPage, ContactUs, MentorshipTestPage, PhotoCapture, SoboPage, SoboExamPage, MentorShipPage, CareersPage } from "./pages";
+import { LoadingPage, HomePage, OlympiadPage, AboutPage, ContactUs, MentorshipTestPage, PhotoCapture, SoboPage, SoboExamPage, MentorShipPage, CareersPage, StudentDashboard } from "./pages";
 import { StudentLoginForm, JeePredictionForm } from './components';
 import FormContainer from './components/Forms/FormContainer';
 import SuccessPage from './components/Forms/SuccessPage';
@@ -11,10 +11,10 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
-
         <Route path="/" index element={<LoadingPage />} />
         <Route path="home" index element={<HomePage />} />
         <Route path="/" element={<Layout1 />}>
+
           <Route path="olympiad" element={<OlympiadPage />} />
           <Route path="about" element={<AboutPage/>} />
           <Route path="contactUs" element={<ContactUs />} />
@@ -31,6 +31,8 @@ function App() {
           <Route path="jee-trajectory-predictor" element={<MentorshipTestPage />} />
 
         <Route path="/new/student" element={<JeePredictionForm />} />
+        <Route path="/student-login" element={<StudentLoginForm />} />
+        <Route path="/student-dashboard/:resultId" element={<StudentDashboard />} />
         {/* <Route path="/olympiad/test" element={<MainContainer />} /> */}
         {/* <Route path="/registration-success" element={<SuccessPage />} /> */}
       </Routes>

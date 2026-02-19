@@ -29,19 +29,6 @@ export const verifyStudent = async (req, res, next) => {
     dob: startOfDay,
     dob1: endOfDay,
   });
-  // Query the database
-
-  const studentId = "68f5bb73716e5342752489df"; // example ID
-
-  Student.findById(studentId)
-  .then(student => {
-    if (!student) {
-      console.log("Student not found");
-    } else {
-      console.log(student);
-    }
-  })
-  .catch(err => console.error(err));
 
   const existingStudent = await Student.findOne({
     fullName: fullName.trim(),

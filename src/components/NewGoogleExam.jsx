@@ -4,14 +4,12 @@ const FreshStudentsFormPage = () => {
   const [showIframe, setShowIframe] = useState(false);
 
   const handleOpenForm = () => {
-    // Try to open in a new tab first
     const newWindow = window.open(
       'https://docs.google.com/forms/d/e/1FAIpQLSebmXGvXrtWkGDVjY74QUSy_GJLtxPtsL5i5FWYwZt4Oz-X5Q/viewform?usp=sf_link',
       '_blank',
       'noopener,noreferrer'
     );
     
-    // If popup was blocked, show iframe as fallback
     if (!newWindow || newWindow.closed || typeof newWindow.closed === 'undefined') {
       setShowIframe(true);
     }

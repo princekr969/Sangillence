@@ -24,9 +24,9 @@ function OlympiadPage() {
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-blue-600/20 via-transparent to-transparent"></div>
         <div className="container mx-auto px-4 py-16 relative">
           <div className="text-center mb-12">
-            <div className="inline-block mb-4">
+            {/* <div className="inline-block mb-4">
               <span className="text-7xl animate-pulse">🏆</span>
-            </div>
+            </div> */}
             <h1 className="text-5xl md:text-6xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 via-orange-400 to-yellow-600 mb-4 font-['Orbitron']">
               Sangillence Champions 2025
             </h1>
@@ -36,38 +36,81 @@ function OlympiadPage() {
           </div>
 
           {/* Tab Navigation */}
-          <div className="flex flex-wrap justify-center gap-3 mb-12">
+          <div className="flex flex-wrap justify-center gap-3 mb-12 bg-transparent">
+            <TabButton
+              active={activeTab === "message"}
+              onClick={() => setActiveTab("message")}
+              label="Message & Video"
+            />
             <TabButton
               active={activeTab === "human"}
               onClick={() => setActiveTab("human")}
-              icon="👑"
               label="Human Sovereign"
             />
             <TabButton
               active={activeTab === "ai"}
               onClick={() => setActiveTab("ai")}
-              icon="🤖"
               label="AI Orchestrator"
             />
             <TabButton
               active={activeTab === "domains"}
               onClick={() => setActiveTab("domains")}
-              icon="🎯"
               label="Individual Domains"
             />
             <TabButton
               active={activeTab === "special"}
               onClick={() => setActiveTab("special")}
-              icon="⭐"
               label="Special Awards"
             />
           </div>
 
           {/* Content Sections */}
           <div className="max-w-7xl mx-auto">
+            {activeTab === "message" && (
+              <div className="bg-slate-900/50 backdrop-blur-sm rounded-2xl p-6 md:p-8 border border-slate-700/50 shadow-2xl">
+                <h2 className="text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-500 mb-4 text-center font-['Orbitron']">
+                  A Message from Team Sangillence
+                </h2>
+                <div className="text-slate-200 text-center max-w-3xl mx-auto text-lg space-y-4">
+                  <p className="text-sm uppercase tracking-[0.25em] text-cyan-300">
+                    A Message from Our Mentor
+                  </p>
+                  <p>
+                    Congratulations to all the participants and champions of Sangillence 2025.
+                  </p>
+                  <p>
+                    This journey was never merely about competition; it was about exploring the evolving partnership
+                    between human intelligence and artificial intelligence. Through your effort, curiosity, and
+                    disciplined thinking, each of you has contributed to shaping this emerging future.
+                  </p>
+                  <p>
+                    I am deeply proud of the dedication, integrity, and resilient spirit you have demonstrated
+                    throughout this experience. Continue to think independently, collaborate intelligently, and strive
+                    for excellence.
+                  </p>
+                  <p className="mt-4 text-base font-semibold text-cyan-200">
+                    — Prof. Anurag Srivastava
+                  </p>
+                </div>
+
+                <div className="mt-10 max-w-3xl mx-auto">
+                  <div className="relative w-full aspect-video rounded-xl overflow-hidden border border-slate-700/70 shadow-2xl shadow-blue-500/30">
+                    <iframe
+                      className="w-full h-full"
+                      src="https://www.youtube.com/embed/PRPwKhMxTZs"
+                      title="Sangillence Message"
+                      frameBorder="0"
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                      allowFullScreen
+                    ></iframe>
+                  </div>
+                </div>
+              </div>
+            )}
+
             {activeTab === "human" && (
               <SectionBlock
-                title="👑 Human Sovereign Champions"
+                title="👑 Human Sovereign Champions : Overall Score"
                 data={winners.humanSovereign}
                 poolWise={true}
               />
@@ -75,7 +118,7 @@ function OlympiadPage() {
 
             {activeTab === "ai" && (
               <SectionBlock
-                title="🤖 AI Orchestrator Champions"
+                title="🤖 AI Orchestrator Champions :AAS Score"
                 data={winners.aiOrchestrator}
                 poolWise={true}
               />
@@ -83,15 +126,15 @@ function OlympiadPage() {
 
             {activeTab === "domains" && (
               <div className="grid gap-8">
-                <SimpleSection title="🧠 Logical Reasoning" data={winners.logical} />
-                <SimpleSection title="📊 Analytical" data={winners.analytical} />
-                <SimpleSection title="🧩 Memory" data={winners.memory} />
-                <SimpleSection title="🎯 Critical Thinking" data={winners.criticalThinking} />
-                <SimpleSection title="👁️ Observation" data={winners.observation} />
-                <SimpleSection title="🔬 Research" data={winners.research} />
-                <SimpleSection title="💡 Out Of The Box Thinking" data={winners.ootb} />
-                <SimpleSection title="🧬 Meta-Cognition" data={winners.metaCognition} />
-                <SimpleSection title="🎨 Creativity" data={winners.creativity} />
+                <SimpleSection title="🧠 Logical Reasoning (Skill Score)" data={winners.logical} />
+                <SimpleSection title="📊 Analytical (Skill Score)" data={winners.analytical} />
+                <SimpleSection title="🧩 Memory (Skill Score)" data={winners.memory} />
+                <SimpleSection title="🎯 Critical Thinking (Skill Score)" data={winners.criticalThinking} />
+                <SimpleSection title="👁️ Observation (Skill Score)" data={winners.observation} />
+                <SimpleSection title="🔬 Research (Skill Score)" data={winners.research} />
+                <SimpleSection title="💡 Out Of The Box Thinking (Skill Score)" data={winners.ootb} />
+                <SimpleSection title="🧬 Meta-Cognition (Skill Score)" data={winners.metaCognition} />
+                <SimpleSection title="🎨 Creativity (Skill Score)" data={winners.creativity} />
                 <SimpleSection title="🏅 G-Score Champion" data={winners.gScore} />
               </div>
             )}
@@ -107,13 +150,13 @@ function OlympiadPage() {
                 <div className="grid md:grid-cols-2 gap-6 max-w-4xl mx-auto">
                   <AwardCard
                     icon="🏫"
-                    title="Best Human Sovereign"
+                    title="Best Human Sovereign : Overall Score"
                     winner={specialAwards.bestHumanSovereign}
                     color="from-blue-500 to-cyan-500"
                   />
                   <AwardCard
                     icon="🤖"
-                    title="Best AI Orchestrator"
+                    title="Best AI Orchestrator : AAS Score"
                     winner={specialAwards.bestAIOrchestral}
                     color="from-purple-500 to-pink-500"
                   />
@@ -165,7 +208,7 @@ function TabButton({ active, onClick, icon, label }) {
         px-6 py-3 rounded-xl font-semibold transition-all duration-300 flex items-center gap-2
         ${active
           ? "bg-gradient-to-r from-blue-600 to-cyan-600 text-white shadow-lg shadow-blue-500/50 scale-105"
-          : "bg-slate-800/50 text-slate-300 hover:bg-slate-700/50 border border-slate-700"
+          : "bg-transparent text-slate-300 hover:bg-slate-800/30 border border-slate-600/50"
         }
       `}
     >
@@ -245,7 +288,7 @@ function WinnerCard({ student, index }) {
       className="
         relative bg-gradient-to-br from-slate-800/80 to-slate-900/80 backdrop-blur-sm
         rounded-xl p-6 border border-slate-600/30
-        hover:scale-105 hover:shadow-2xl transition-all duration-300
+        hover:shadow-2xl transition-all duration-300
         group overflow-hidden
       "
     >

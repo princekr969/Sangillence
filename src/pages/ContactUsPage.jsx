@@ -7,7 +7,6 @@ import { MapPin, Phone, Mail} from 'lucide-react';
 function ContactItem({ icon: Icon, title, text }) {
   return (
     <div className="relative group">
-      {/* Background with geometric accent */}
       <div className="absolute -inset-2 bg-gradient-to-r from-blue-600/10 via-transparent to-amber-500/10 rounded-lg opacity-0"></div>
       
       <div className="relative flex items-start space-x-4 p-4 rounded-lg bg-gradient-to-r from-slate-50/50 to-slate-100/30 backdrop-blur-sm border border-slate-200/50">
@@ -34,7 +33,6 @@ const ContactUs = () => (
         {/* Base dark background */}
         <div className="absolute inset-0 bg-gradient-to-br from-slate-800 via-slate-900 to-indigo-900"></div>
         
-        {/* Geometric overlays */}
         <div className="absolute inset-0">
           {/* Large angular shapes */}
           <div className="absolute top-0 left-0 w-full h-full">

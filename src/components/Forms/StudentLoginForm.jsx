@@ -55,6 +55,7 @@ function StudentLoginForm() {
     { value: "school_e", label: "PM SHRI KENDRIYA VIDYALAYA NUMBER-1 AFS CHAKERI, KANPUR" },
     { value: "school_f", label: "PM SHRI KENDRIYA VIDYALAYA NUMBER-1, SURAT" },
     { value: "school_g", label: "ARMY PUBLIC SCHOOL, GWALIOR" },
+    { value: "school_h", label: "OTHER" },
   ];
 
   const schoolConfig = useMemo(() => {
@@ -99,7 +100,6 @@ function StudentLoginForm() {
         newErrors.fullName = "Student name is required";
       if (!formData.dob)
         newErrors.dob = "Date of birth is required";
-      if (!formData.rollNo.trim()) newErrors.rollNo = "Roll number is required";
       if (!formData.class) newErrors.class = "Class is required";
       if (!formData.section) newErrors.section = "Section is required";
     }
@@ -113,20 +113,28 @@ function StudentLoginForm() {
 
     setIsLoading(true);
 
-    // Convert fullName to uppercase before sending to backend
     const submitData = {
       ...formData,
       fullName: formData.fullName.toUpperCase().trim()
     };
 
     try {
-      const response = await axios.post(`https://sayaah.in/api/students/login`, submitData);
-      console.log("Login successful:", response.data);
-      if(response.data.success){
-        navigate(`/photoCapture/${response.data.data.student._id}`)
+      const response = await axios.post('https://naivedyamcdc.com/api/students/get-result-id', {
+        fullName: submitData.fullName,
+        class: submitData.class,
+        section: submitData.section,
+        dob: submitData.dob
+      });
+
+      if (response.data.success) {
+      
+        navigate(`/student-dashboard/${response.data.result._id}`);
+      }else{
+        console.log("Login failed:", response.data.message || "Login failed. Please check your details and try again.");
       }
     } catch (error) {
-      console.error("Login failed:", error);
+      console.error("Login failed:", error.response?.data?.message || error.message || "An error occurred during login. Please try again.");
+      setErrors({ form: error.response?.data?.message || "An error occurred during login. Please try again with correct detail." });
     } finally {
       setIsLoading(false);
     }
@@ -156,19 +164,26 @@ function StudentLoginForm() {
                 ></div>
               </div>
 
-              <div className="relative z-10">
+              <div className="relative z-10 flex justify-start items-center text-center gap-2 sm:gap-4 mb-6">
+                <img 
+                    src="https://res.cloudinary.com/dstbd40ud/image/upload/v1766321457/Untitled_design_5_zq2tz9.png" 
+                    alt="Sangillence" 
+                    className="h-12 sm:h-18 mb-2 drop-shadow-[0_0_15px_rgba(5,0,0,0.8)]"
+                />
+                <div>
                 <h1 className={`font-bold text-white mb-1 sm:mb-2 ${
                   isMobile ? "text-xl" : "text-2xl sm:text-3xl"
                 }`}>
-                  SOBO Access
+                  SOBO RESULTS
                 </h1>
                 <p className={`text-slate-300 ${
                   isMobile ? "text-xs" : "text-sm sm:text-base"
                 }`}>
                   {schoolConfig
                     ? `Enter your details for ${isMobile ? schoolConfig.name : `the portal for ${schoolConfig.name}`}`
-                    : "Select your school to get started"}
+                    : "Enter your details to check your results"}
                 </p>
+                </div>
               </div>
 
               {/* Decorative elements */}
@@ -213,8 +228,8 @@ function StudentLoginForm() {
                     )}
                   </div>
 
-                  {formData.school && (
-                    <>
+                  
+                    
                       {/* Student Name */}
                       <div>
                         <label
@@ -280,7 +295,7 @@ function StudentLoginForm() {
                       </div>
 
                       {/* Roll No */}
-                      <div>
+                      {/* <div>
                         <label
                           htmlFor="rollNo"
                           className="block text-sm font-semibold text-slate-700 mb-1 sm:mb-2"
@@ -306,7 +321,7 @@ function StudentLoginForm() {
                             {errors.rollNo}
                           </p>
                         )}
-                      </div>
+                      </div> */}
 
                       {/* Class and Section in row on mobile */}
                       <div className={`grid gap-3 sm:gap-4 ${
@@ -382,8 +397,11 @@ function StudentLoginForm() {
                           )}
                         </div>
                       </div>
-                    </>
-                  )}
+                      {errors.form && (
+                            <p className="mt-1 text-xs sm:text-sm text-red-600">
+                              {errors.form}
+                            </p>
+                          )}
                 </div>
 
                 {/* Submit Button with mobile optimization */}
@@ -448,27 +466,7 @@ function StudentLoginForm() {
                   </button>
                 </div>
 
-                {formData.school && (
-                  <div className="mt-3 sm:mt-4 text-center text-xs sm:text-sm text-slate-600">
-                    Not your school?{" "}
-                    <button
-                      type="button"
-                      onClick={() =>
-                        setFormData({
-                          school: "",
-                          fullName: "",
-                          dob: "",
-                          rollNo: "",
-                          class: "",
-                          section: "",
-                        })
-                      }
-                      className="text-blue-600 hover:underline font-semibold"
-                    >
-                      Change school
-                    </button>
-                  </div>
-                )}
+                
               </form>
             </div>
           </div>
