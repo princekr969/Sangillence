@@ -36,7 +36,7 @@ function OlympiadPage() {
           </div>
 
           {/* Tab Navigation */}
-          <div className="flex flex-wrap justify-center gap-3 mb-12">
+          <div className="flex flex-wrap justify-center gap-3 mb-12 bg-transparent">
             <TabButton
               active={activeTab === "message"}
               onClick={() => setActiveTab("message")}
@@ -208,7 +208,7 @@ function TabButton({ active, onClick, icon, label }) {
         px-6 py-3 rounded-xl font-semibold transition-all duration-300 flex items-center gap-2
         ${active
           ? "bg-gradient-to-r from-blue-600 to-cyan-600 text-white shadow-lg shadow-blue-500/50 scale-105"
-          : "bg-slate-800/50 text-slate-300 hover:bg-slate-700/50 border border-slate-700"
+          : "bg-transparent text-slate-300 hover:bg-slate-800/30 border border-slate-600/50"
         }
       `}
     >
