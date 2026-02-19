@@ -1,9 +1,9 @@
 export const winners = {
   humanSovereign: {
     A: [
-      { name: "Adarsh Kumar", class: "5", school: "PM Shri Kendriya Vidyalaya No 1 AFS Chakeri", score: 25.2, image: "public/winners/default.jpg" },
-      { name: "Aarya Dashora", class: "5", school: "PM Shri KV 5 Gwalior", score: 20.57, image: "/winners/Aarya_Dashora.jpg" },
-      { name: "Mohd Arshad", class: "4", school: "PM Shri Kendriya Vidyalaya No 1 AFS Chakeri", score: 19.76, image: "public/winners/default.jpg" }
+      { name: "Charvik Tamminana", class: "4", school: "ARMY PUBLIC SCHOOL", score: 25.2, image: "public/winners/default.jpg" },
+      { name: "Arnav Vishwakarma", class: "5", school: "PM SHREE KV 1 SURAT", score: 20.57, image: "public\winners\Arnav Vishwakarma.jpg" },
+      { name: "Priyanshi", class: "3", school: "ARMY PUBLIC SCHOOL, Gwalior", score: 19.76, image: "public/winners/default.jpg" }
     ],
     B: [
       { name: "Vivan Tak", class: "6", school: "PM Shri KVS No 1", score: 19.46, image: "public/winners/Vivan_Tak.jpg" },
@@ -19,13 +19,13 @@ export const winners = {
 
   aiOrchestrator: {
     A: [
-      { name: "Parth Verma", class: "3", school: "KV No 1", score: 6.3, image: "public/winners/Parth_verma.jpg" },
-      { name: "Riya Bajpai", class: "5", school: "PM Shri KV Cantt Kanpur", score: 5.69, image: "public/winners/Riya Bajpai.jpg" },
-      { name: "Prince Rahar", class: "5", school: "PM Shri Kendriya Vidyalaya No 1 AFS Chakeri", score: 6.1, image: "public/winners/default.jpg" }
+      { name: "Adarsh Kumar Kushwaha", class: "3", school: "PM SHREE KV 1 KANPUR CHAKERI", score: 6.3, image: "public\winners\default.jpg" },
+      { name: "Aarya Dashora", class: "5", school: "PM SHREE KV 5 GWALIOR", score: 5.69, image: "public\winners\Aarya_Dashora.jpg" },
+      { name: "MOHD Arshad", class: "5", school: "PM SHREE KV 1 KANPUR CHAKERI", score: 6.1, image: "public\winners\default.jpg" }
     ],
     B: [
       { name: "Saanvi Mishra", class: "7", school: "PM Shri Kendriya Vidyalaya No 2 AFS Gwalior", score: 11.3, image: "public/winners/default.jpg" },
-      { name: "Kavyansh", class: "6", school: "PM Shri KVS No 5", score: 5.8, image: "public/winners/default.jpg" },
+      { name: "Kavyansh Sharma", class: "6", school: "PM Shri KVS No 5", score: 5.8, image: "public/winners/default.jpg" },
       { name: "Raj Lodhi", class: "6", school: "PM Shri KVS No 1 Gwalior", score: 5.13, image: "public/winners/Raj lodhi.jpg" }
     ],
     C: [
