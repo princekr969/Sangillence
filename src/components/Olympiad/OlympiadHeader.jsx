@@ -4,7 +4,7 @@ export default function OlympiadHeader() {
   return (
     <div className="relative overflow-hidden">
       {/* Hero Section background */}
-      <div className="relative z-5 md:h-[calc(55vh-76px)] min-h-[420px] bg-[#233562]">
+      <div className="relative z-5 md:min-h-[calc(60vh-76px)] min-h-[520px] bg-[#233562] pb-12">
         <div className="absolute inset-0">
           {/* Base dark background */}
           <div className="absolute inset-0 bg-gradient-to-br from-slate-800 via-slate-900 to-indigo-900"></div>
@@ -128,11 +128,11 @@ export default function OlympiadHeader() {
                 SANGILLENCE OPEN BOOK OLYMPIAD
               </h3>
 
-              <p className="animate-slide-up-5 font-family-givonic-regular text-center text-xs md:text-lg text-blue-100 mb-8 md:mb-12">
+              <p className="animate-slide-up-5 font-family-givonic-regular text-center text-xs md:text-lg text-blue-100 mb-6 md:mb-8">
                 Congratulations to all participants! Check your results now.
               </p>
 
-              <div className="text-center flex flex-wrap items-center justify-center gap-3">
+              <div className="text-center flex flex-wrap items-center justify-center gap-3 pb-4">
                 <a
                   href="#olympiad-results"
                   className="inline-block animate-pulse-glow max-w-max max-md:text-center bg-gradient-to-r from-amber-500 to-orange-500 text-slate-900 px-3 py-2 md:px-5 md:py-2.5 rounded-full text-base font-bold hover:scale-105 transition-all duration-300 shadow-2xl hover:shadow-orange-500/40"
