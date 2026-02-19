@@ -1,11 +1,10 @@
 import { Link } from 'react-router-dom';
-import { ArrowRight } from 'lucide-react';
 
 export default function OlympiadHeader() {
   return (
     <div className="relative overflow-hidden">
       {/* Hero Section background */}
-      <div className="relative z-5 md:h-[calc(80vh-76px)] bg-[#233562]">
+      <div className="relative z-5 md:h-[calc(55vh-76px)] min-h-[420px] bg-[#233562]">
         <div className="absolute inset-0">
           {/* Base dark background */}
           <div className="absolute inset-0 bg-gradient-to-br from-slate-800 via-slate-900 to-indigo-900"></div>
@@ -133,15 +132,20 @@ export default function OlympiadHeader() {
                 Congratulations to all participants! Check your results now.
               </p>
 
-              <div className="text-center">
+              <div className="text-center flex flex-wrap items-center justify-center gap-3">
                 <a
-                  href="/student-login"
-                  className="inline-block animate-pulse-glow max-w-max max-md:text-center bg-gradient-to-r from-blue-600 to-purple-600 text-white px-2 py-1 md:px-4 md:py-2 rounded-full text-lg font-semibold hover:scale-105 transition-all duration-300 shadow-2xl hover:shadow-purple-500/25"
+                  href="#olympiad-results"
+                  className="inline-block animate-pulse-glow max-w-max max-md:text-center bg-gradient-to-r from-amber-500 to-orange-500 text-slate-900 px-3 py-2 md:px-5 md:py-2.5 rounded-full text-base font-bold hover:scale-105 transition-all duration-300 shadow-2xl hover:shadow-orange-500/40"
                 >
                   <span className="flex items-center text-sm md:text-lg gap-2 md:gap-3">
-                    View Results
-                    <ArrowRight className="w-6 h-6 group-hover:translate-x-1 transition-transform" />
+                    Click here to find if you are a champion
                   </span>
+                </a>
+                <a
+                  href="/student-login"
+                  className="inline-block max-w-max bg-slate-700/60 hover:bg-slate-600/80 text-white px-3 py-2 md:px-4 md:py-2 rounded-full text-sm font-medium border border-slate-600 transition-all duration-300"
+                >
+                  View My Results
                 </a>
               </div>
             </div>

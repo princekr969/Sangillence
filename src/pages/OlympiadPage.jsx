@@ -22,8 +22,8 @@ function OlympiadPage() {
       {/* Hero Section */}
       <div className="relative overflow-hidden">
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-blue-600/20 via-transparent to-transparent"></div>
-        <div className="container mx-auto px-4 py-16 relative">
-          <div className="text-center mb-12">
+        <div id="olympiad-results" className="container mx-auto px-4 py-8 relative scroll-mt-20">
+          <div className="text-center mb-6">
             {/* <div className="inline-block mb-4">
               <span className="text-7xl animate-pulse">🏆</span>
             </div> */}
@@ -35,12 +35,17 @@ function OlympiadPage() {
             </p>
           </div>
 
-          {/* Tab Navigation */}
-          <div className="flex flex-wrap justify-center gap-3 mb-12">
+          {/* Tab Navigation - Sticky for easy switching while scrolling */}
+          <div className="sticky top-0 z-20 -mx-4 px-4 py-3 mb-8 bg-gradient-to-b from-slate-950/95 via-blue-950/95 to-slate-950/95 backdrop-blur-md border-b border-slate-700/50 shadow-lg shadow-slate-900/50">
+            <div className="flex flex-wrap justify-center gap-2 sm:gap-3">
+            <TabButton
+              active={activeTab === "message"}
+              onClick={() => setActiveTab("message")}
+              label="Message & Video"
+            />
             <TabButton
               active={activeTab === "human"}
               onClick={() => setActiveTab("human")}
-              
               label="Human Sovereign"
             />
             <TabButton
@@ -58,13 +63,56 @@ function OlympiadPage() {
               onClick={() => setActiveTab("special")}
               label="Special Awards"
             />
+            </div>
           </div>
 
           {/* Content Sections */}
           <div className="max-w-7xl mx-auto">
+            {activeTab === "message" && (
+              <div className="bg-slate-900/50 backdrop-blur-sm rounded-2xl p-6 md:p-8 border border-slate-700/50 shadow-2xl">
+                <h2 className="text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-500 mb-4 text-center font-['Orbitron']">
+                  A Message from Team Sangillence
+                </h2>
+                <div className="text-slate-200 text-center max-w-3xl mx-auto text-lg space-y-4">
+                  <p className="text-sm uppercase tracking-[0.25em] text-cyan-300">
+                    A Message from Our Mentor
+                  </p>
+                  <p>
+                    Congratulations to all the participants and champions of Sangillence 2025.
+                  </p>
+                  <p>
+                    This journey was never merely about competition; it was about exploring the evolving partnership
+                    between human intelligence and artificial intelligence. Through your effort, curiosity, and
+                    disciplined thinking, each of you has contributed to shaping this emerging future.
+                  </p>
+                  <p>
+                    I am deeply proud of the dedication, integrity, and resilient spirit you have demonstrated
+                    throughout this experience. Continue to think independently, collaborate intelligently, and strive
+                    for excellence.
+                  </p>
+                  <p className="mt-4 text-base font-semibold text-cyan-200">
+                    — Prof. Anurag Srivastava
+                  </p>
+                </div>
+
+                <div className="mt-10 max-w-3xl mx-auto">
+                  <div className="relative w-full aspect-video rounded-xl overflow-hidden border border-slate-700/70 shadow-2xl shadow-blue-500/30">
+                    <iframe
+                      className="w-full h-full"
+                      src="https://www.youtube.com/embed/PRPwKhMxTZs"
+                      title="Sangillence Message"
+                      frameBorder="0"
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                      allowFullScreen
+                    ></iframe>
+                  </div>
+                </div>
+              </div>
+            )}
+
             {activeTab === "human" && (
               <SectionBlock
-                title="👑 Human Sovereign Champions"
+                title="👑 Human Sovereign Champions : Overall Score"
                 data={winners.humanSovereign}
                 poolWise={true}
               />
@@ -72,7 +120,7 @@ function OlympiadPage() {
 
             {activeTab === "ai" && (
               <SectionBlock
-                title="🤖 AI Orchestrator Champions"
+                title="🤖 AI Orchestrator Champions :AAS Score"
                 data={winners.aiOrchestrator}
                 poolWise={true}
               />
@@ -80,15 +128,15 @@ function OlympiadPage() {
 
             {activeTab === "domains" && (
               <div className="grid gap-8">
-                <SimpleSection title="🧠 Logical Reasoning" data={winners.logical} />
-                <SimpleSection title="📊 Analytical" data={winners.analytical} />
-                <SimpleSection title="🧩 Memory" data={winners.memory} />
-                <SimpleSection title="🎯 Critical Thinking" data={winners.criticalThinking} />
-                <SimpleSection title="👁️ Observation" data={winners.observation} />
-                <SimpleSection title="🔬 Research" data={winners.research} />
-                <SimpleSection title="💡 Out Of The Box Thinking" data={winners.ootb} />
-                <SimpleSection title="🧬 Meta-Cognition" data={winners.metaCognition} />
-                <SimpleSection title="🎨 Creativity" data={winners.creativity} />
+                <SimpleSection title="🧠 Logical Reasoning (Skill Score)" data={winners.logical} />
+                <SimpleSection title="📊 Analytical (Skill Score)" data={winners.analytical} />
+                <SimpleSection title="🧩 Memory (Skill Score)" data={winners.memory} />
+                <SimpleSection title="🎯 Critical Thinking (Skill Score)" data={winners.criticalThinking} />
+                <SimpleSection title="👁️ Observation (Skill Score)" data={winners.observation} />
+                <SimpleSection title="🔬 Research (Skill Score)" data={winners.research} />
+                <SimpleSection title="💡 Out Of The Box Thinking (Skill Score)" data={winners.ootb} />
+                <SimpleSection title="🧬 Meta-Cognition (Skill Score)" data={winners.metaCognition} />
+                <SimpleSection title="🎨 Creativity (Skill Score)" data={winners.creativity} />
                 <SimpleSection title="🏅 G-Score Champion" data={winners.gScore} />
               </div>
             )}
@@ -104,13 +152,13 @@ function OlympiadPage() {
                 <div className="grid md:grid-cols-2 gap-6 max-w-4xl mx-auto">
                   <AwardCard
                     icon="🏫"
-                    title="Best Human Sovereign"
+                    title="Best Human Sovereign : Overall Score"
                     winner={specialAwards.bestHumanSovereign}
                     color="from-blue-500 to-cyan-500"
                   />
                   <AwardCard
                     icon="🤖"
-                    title="Best AI Orchestrator"
+                    title="Best AI Orchestrator : AAS Score"
                     winner={specialAwards.bestAIOrchestral}
                     color="from-purple-500 to-pink-500"
                   />
@@ -123,7 +171,11 @@ function OlympiadPage() {
 
       <style>{`
         @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&family=Inter:wght@400;500;600;700&display=swap');
-        
+
+        html {
+          scroll-behavior: smooth;
+        }
+
         body {
           font-family: 'Inter', sans-serif;
         }
