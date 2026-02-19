@@ -31,8 +31,8 @@ function App() {
           <Route path="jee-trajectory-predictor" element={<MentorshipTestPage />} />
 
         <Route path="/new/student" element={<JeePredictionForm />} />
-        {/* <Route path="/student-login" element={<StudentLoginForm />} /> */}
-        {/* <Route path="/student-dashboard/:studentId" element={<StudentDashboard />} /> */}
+        <Route path="/student-login" element={<StudentLoginForm />} />
+        <Route path="/student-dashboard/:resultId" element={<StudentDashboard />} />
         {/* <Route path="/olympiad/test" element={<MainContainer />} /> */}
         {/* <Route path="/registration-success" element={<SuccessPage />} /> */}
       </Routes>

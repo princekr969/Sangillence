@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { ArrowRight, Clock, MessageCircle, Award, Trophy } from "lucide-react"; // Added MessageCircle
+import { ArrowRight, Clock, MessageCircle, Award, Trophy, BookOpenCheck } from "lucide-react"; // Added MessageCircle
 
 function Announcement() {
   const [timeLeft, setTimeLeft] = useState({
@@ -58,7 +58,7 @@ function Announcement() {
   } else if (!isRegistered) {
     buttonText = "Join WhatsApp Channel";
     linkTo = WHATSAPP_LINK;
-    secondaryText = "Thank You for participating in SOBO'25";
+    secondaryText = "Click the link to check your performance";
     linkIcon = MessageCircle;
   } else {
     buttonText = "Get Ready";
@@ -127,7 +127,7 @@ function Announcement() {
             <div className="flex items-center gap-3">
               <div className="relative">
                 <div className="w-10 h-10 md:w-12 md:h-12 bg-white/20 rounded-full flex items-center justify-center">
-                  <Clock className="w-5 h-5 md:w-6 md:h-6 text-white" />
+                  <BookOpenCheck className="w-5 h-5 md:w-6 md:h-6 text-white" />
                 </div>
                 <div
                   className="absolute inset-0 w-10 h-10 md:w-12 md:h-12 border-2 border-white/30 rounded-full animate-spin"
@@ -137,7 +137,7 @@ function Announcement() {
 
               <div className="text-center md:text-left">
                 <h3 className="text-white text-lg md:text-xl font-bold">
-                  {isLive ? "SUBMISSION DEADLINE IN" : "Exam has Ended"}
+                  {isLive ? "SUBMISSION DEADLINE IN" : "✨ Your Results Are Now Ready! ✨"}
                 </h3>
                 <p className="text-blue-100 text-sm md:text-base">
                   {/* Using dangerouslySetInnerHTML to render the bold markdown for the WhatsApp CTA */}
@@ -156,7 +156,7 @@ function Announcement() {
                 </p>
               </div>
             </div>
-            {/* <div className=" flex-shrink-0 flex items-center gap-3 bg-gradient-to-r from-amber-900/40 via-yellow-900/40 to-amber-900/40 rounded-xl border border-amber-500/30 shadow-lg">
+            <div className=" flex-shrink-0 flex items-center gap-3 bg-gradient-to-r from-amber-900/40 via-yellow-900/40 to-amber-900/40 rounded-xl border border-amber-500/30 shadow-lg">
   <div className="flex items-center justify-between w-full gap-4">
     
     <button
@@ -166,16 +166,16 @@ function Announcement() {
       Check Result
     </button>
   </div>
-</div> */}
- <div className="flex-shrink-0 flex items-center gap-3 bg-gradient-to-r from-amber-900/40 via-yellow-900/40 to-amber-900/40 px-5 py-3 rounded-xl border border-amber-500/30 shadow-lg">
+</div>
+ {/* <div className="flex-shrink-0 flex items-center gap-3 bg-gradient-to-r from-amber-900/40 via-yellow-900/40 to-amber-900/40 px-5 py-3 rounded-xl border border-amber-500/30 shadow-lg">
               
               <div className="text-left">
                 <h4 className="text-amber-100 text-sm md:text-base font-semibold">
-                  <span className="font-bold text-amber-300">Due to Technical Glitch Result will be Announced Tomorrow</span>
+                  The result will be announced by <span className="font-bold text-amber-300">Due to Tenhnical Gli</span>
                 </h4>
                
               </div>
-              </div>
+              </div> */}
 
             {/* Center - Timer (unchanged) */}
             {/* <div className="flex gap-2 md:gap-3">

@@ -19,7 +19,6 @@ function formatDateToYYYYMMDD(value) {
 }
 
 function StudentLoginForm() {
-  const [student, setStudent] = useState(null);
   const navigate = useNavigate()
   const [formData, setFormData] = useState({
     school: "",
@@ -56,6 +55,7 @@ function StudentLoginForm() {
     { value: "school_e", label: "PM SHRI KENDRIYA VIDYALAYA NUMBER-1 AFS CHAKERI, KANPUR" },
     { value: "school_f", label: "PM SHRI KENDRIYA VIDYALAYA NUMBER-1, SURAT" },
     { value: "school_g", label: "ARMY PUBLIC SCHOOL, GWALIOR" },
+    { value: "school_h", label: "OTHER" },
   ];
 
   const schoolConfig = useMemo(() => {
@@ -119,7 +119,7 @@ function StudentLoginForm() {
     };
 
     try {
-      const response = await axios.post('http://localhost:5001/api/students/login', {
+      const response = await axios.post('http://15.206.82.61/api/students/get-result-id', {
         fullName: submitData.fullName,
         class: submitData.class,
         section: submitData.section,
@@ -127,9 +127,8 @@ function StudentLoginForm() {
       });
 
       if (response.data.success) {
-        const { student } = response.data.data;
-        setStudent(student);
-        navigate(`/student-dashboard/${student._id}`);
+      
+        navigate(`/student-dashboard/${response.data.result._id}`);
       }else{
         console.log("Login failed:", response.data.message || "Login failed. Please check your details and try again.");
       }

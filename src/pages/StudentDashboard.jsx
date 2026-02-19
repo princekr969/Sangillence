@@ -2,12 +2,7 @@ import { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import {
   User,
-  Mail,
-  Calendar,
-  BookOpen,
   Trophy,
-  Clock,
-  FileText,
   LogOut,
   School,
   GraduationCap,
@@ -15,182 +10,60 @@ import {
   BarChart,
   Target,
   Lightbulb,
-  Zap,
   Award,
-  TrendingUp,
-  Shield,
   Eye,
   Cpu,
   Sparkles,
   ChevronLeft,
   BookCopy,
-  Home,
-  Bookmark,
-  Settings,
-  Star,
+  
 } from "lucide-react";
 import heroSectionBg from "../../assets/svgs/herosectionbg.svg";
 import axios from "axios";
+import downloadResult from "../utils/resultUtils.js";
+import handleDownloadCertificate from "../utils/certificateUtils.js";
 
-const handleDownloadCertificate = (student, result, certificate_type="Participation") => {
-  const firstPosition = ["ADARSH KUMAR KUSHWAHA","VIVAN TAK","PURANSH TIWARI",];
-  const secondPosition = ["AARYA DASHORA", "ZOHA MAHMOOD", "ANVESHA MISHRA"];
-  const thirdPosition = ["MOHD ARSHAD", "MUKUL PAWAR", "ISHANVI SHARMA"];
-  const studentName = student?.fullName;
 
-  const rank = firstPosition.includes(studentName)
-    ? "First"
-    : secondPosition.includes(studentName)
-      ? "Second"
-      : thirdPosition.includes(studentName)
-        ? "Third"
-        : "Not Awarded";
-  console.log("Resss", result)
-  const category = result ? result.StuArch: "N/A";
-  const imageUrl = `${window.location.origin}/certificate/Certificate_of_${certificate_type}.png`;
-
-  const certificateHTML = `
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Certificate of Excellence</title>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Pinyon+Script&family=Montserrat:wght@400;500;600&display=swap" rel="stylesheet">
-  <style>
-    body {
-      margin: 0;
-      padding: 0;
-      background: #111;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-    }
-    .certificate {
-      width: 1100px;
-      height: 750px;
-      position: relative;
-      background: url("${imageUrl}") no-repeat center center;
-      background-size: cover;
-      font-family: 'Montserrat', sans-serif;
-      color: #1d1f27;
-    }
-    .content {
-      position: absolute;
-      width: 100%;
-      top: 250px; /* moved up to accommodate logo */
-      text-align: center;
-      padding: 0 100px;
-      box-sizing: border-box;
-    }
-    .logo-container {
-      margin-bottom: 20px;
-    }
-    .logo-img {
-      height: 80px;
-      width: auto;
-      display: inline-block;
-    }
-    h1 {
-      font-family: 'Playfair Display', serif;
-      font-size: 54px;
-      margin: 0;
-      letter-spacing: 2px;
-    }
-    h2 {
-      font-family: 'Playfair Display', serif;
-      font-size: 28px;
-      letter-spacing: 6px;
-      margin: 0 0 30px 0;
-    }
-    .subtitle {
-      font-weight: 500;
-      letter-spacing: 2px;
-      margin-bottom: 20px;
-    }
-    .name {
-      font-family: 'Playfair Display', serif;
-      font-size: 45px;
-      margin: 20px 0 10px;
-    }
-    .line {
-      width: 60%;
-      height: 1px;
-      background: #aaa;
-      margin: 0 auto 25px;
-    }
-    .description {
-      font-size: 18px;
-      line-height: 1.6;
-      width: 75%;
-      margin: auto;
-    }
-    @media print {
-      body { background: none; }
-    }
-  </style>
-</head>
-<body>
-  <div class="certificate">
-    <div class="content">
-      <div class="name">${studentName}</div>
-      <div class="line"></div>
-      <div class="description">
-        for securing the <strong>${rank} Position</strong> in the <strong>${category}</strong> Category of the Sangillence Open Book Olympiad 2025, representing Class ${student?.class || "N/A"} (${pool}) of <strong>${student?.school || "School"}</strong>. This achievement demonstrates exceptional cognitive skills and sets a benchmark for excellence in new-age assessments.
-      </div>
-    </div>
-  </div>
-</body>
-</html>
-  `;
-
-  const blob = new Blob([certificateHTML], { type: "text/html" });
-  const url = URL.createObjectURL(blob);
-  const link = document.createElement("a");
-  link.href = url;
-  link.download = `Certificate_${studentName.replace(/\s+/g, "_")}.html`;
-  document.body.appendChild(link);
-  link.click();
-  // Open in new tab
-  const newWindow = window.open(url, "_blank");
-  if (!newWindow) {
-    // Popup blocked – fallback: download
-    const link = document.createElement("a");
-    link.href = url;
-    link.download = `Certificate_${studentName.replace(/\s+/g, "_")}.html`;
+const downloadImage = async (url, filename) => {
+  try {
+    const response = await fetch(url);
+    const blob = await response.blob();
+    const blobUrl = window.URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    link.href = blobUrl;
+    link.download = filename || 'certificate.png';
+    document.body.appendChild(link);
     link.click();
+    document.body.removeChild(link);
+    window.URL.revokeObjectURL(blobUrl);
+  } catch (error) {
+    console.error('Download failed:', error);
   }
-
-  // Clean up the blob URL after a delay (to allow new tab to load)
-  document.body.removeChild(link);
-  setTimeout(() => URL.revokeObjectURL(url), 1000);
 };
 
+
 export default function StudentDashboard() {
-  const [studentData, setStudentData] = useState(null);
   const [resultData, setResultData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [activeTab, setActiveTab] = useState("dashboard"); // "dashboard", "results", "profile"
   const navigate = useNavigate();
-  const { studentId } = useParams();
+  const { resultId } = useParams();
 
   useEffect(() => {
     const fetchStudentData = async () => {
-      if (!studentId) {
+
+      if (!resultId) {
         navigate("/student-login");
         return;
       }
 
       try {
         const response = await axios.get(
-          `http://localhost:5001/api/students/result/${studentId}`,
+          `http://15.206.82.61/api/students/result/${resultId}`,
         );
-        console.log("API Response:", response.data);
 
         if (response.data.success) {
-          setStudentData(response.data.student);
           setResultData(response.data.result);
         } else {
           setError("Student not found");
@@ -206,7 +79,7 @@ export default function StudentDashboard() {
     };
 
     fetchStudentData();
-  }, [studentId, navigate]);
+  }, [resultId, navigate]);
 
   const handleLogout = () => {
     if (activeTab !== "dashboard") {
@@ -330,7 +203,7 @@ export default function StudentDashboard() {
     );
   }
 
-  if (error || !studentData) {
+  if (error || !resultData) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-slate-900 to-indigo-900">
         <div className="text-center">
@@ -377,7 +250,7 @@ export default function StudentDashboard() {
             <div className="relative z-10 flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
               <div>
                 <h1 className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-yellow-400 to-orange-400 bg-clip-text text-transparent">
-                  Welcome back, {studentData.fullName.split(" ")[0]}!
+                  Welcome back, {resultData?.Name?.split(" ")[0] || "Student"}
                 </h1>
                 <p className="text-blue-200 mt-2">
                   {resultData
@@ -441,11 +314,11 @@ export default function StudentDashboard() {
                   <div className="md:col-span-1 bg-gradient-to-br from-slate-800/80 to-slate-900/80 backdrop-blur-sm rounded-2xl p-6 border border-white/10">
                     <div className="flex flex-col items-center">
                       <div className="relative mb-4">
-                        {studentData.imageUrl ? (
+                        {resultData.imageUrl ? (
                           <div className="relative">
                             <img
-                              src={studentData.imageUrl}
-                              alt={studentData.fullName}
+                              src={resultData.imageUrl}
+                              alt={resultData["Name "] || "Student"}
                               className="w-32 h-32 rounded-full border-4 border-blue-500 shadow-lg object-cover"
                               onError={(e) => {
                                 // If image fails to load, show initial
@@ -459,7 +332,7 @@ export default function StudentDashboard() {
                         ) : (
                           <div className="w-32 h-32 rounded-full border-4 border-blue-500 shadow-lg bg-gradient-to-br from-blue-600 to-purple-600 flex items-center justify-center">
                             <span className="text-4xl font-bold text-white">
-                              {studentData.fullName.charAt(0)}
+                              {resultData?.Name?.charAt(0) || "N"}
                             </span>
                           </div>
                         )}
@@ -470,16 +343,16 @@ export default function StudentDashboard() {
                       </div>
 
                       <h2 className="text-2xl font-bold text-white mb-2 text-center">
-                        {studentData.fullName}
+                        {resultData?.Name || "N/A"}
                       </h2>
                       <div className="flex items-center gap-2 text-blue-300 mb-1">
                         <GraduationCap className="w-4 h-4" />
                         <span>
                           Class{" "}
-                          {studentData.class || resultData?.["Class "] || "N/A"}{" "}
+                          {resultData?.Class || "N/A"}{" "}
                           -{" "}
-                          {studentData.section ||
-                            resultData?.["Section "] ||
+                          {
+                            resultData?.Section ||
                             "N/A"}
                         </span>
                       </div>
@@ -487,15 +360,13 @@ export default function StudentDashboard() {
                       <div className="flex items-center gap-2 text-gray-400 text-sm mb-4">
                         <School className="w-4 h-4" />
                         <span>
-                          {studentData.school ||
-                            resultData?.["School "] ||
-                            "N/A"}
+                          {resultData?.School || "N/A"}
                         </span>
                       </div>
                       <div className="">
                         <span className="px-2 py-1 bg-green-500/20 text-green-300 rounded-full text-xs font-semibold">
                           {getPoolFromClass(
-                            studentData.class || resultData?.Class,
+                            resultData?.Class || "N/A",
                           )}
                         </span>
                       </div>
@@ -506,7 +377,7 @@ export default function StudentDashboard() {
                           <div>
                             <p className="text-blue-300 text-xs">Student ID</p>
                             <p className="text-white font-mono">
-                              {studentData._id.substring(0, 8)}...
+                              {resultData?._id.substring(0, 8)}...
                             </p>
                           </div>
                         </div>
@@ -515,7 +386,7 @@ export default function StudentDashboard() {
                           <div className="bg-purple-500/10 rounded-lg p-3 border border-purple-500/20">
                             <p className="text-purple-300 text-xs">Age</p>
                             <p className="text-white font-semibold">
-                              {calculateAge(studentData.dob || resultData?.DOB)}{" "}
+                              {calculateAge(resultData?.DOB)}{" "}
                               years
                             </p>
                           </div>
@@ -524,7 +395,7 @@ export default function StudentDashboard() {
                               Date of Birth
                             </p>
                             <p className="text-white font-semibold text-sm">
-                              {formatDOB(studentData.dob || resultData?.DOB)}
+                              {formatDOB(resultData?.DOB)}
                             </p>
                           </div>
                         </div>
@@ -618,27 +489,44 @@ export default function StudentDashboard() {
                         <button
                           type="button"
                           onClick={() =>
-                            handleDownloadCertificate(
-                              studentData,
-                              resultData,
-                            )
+                            downloadResult(resultData)
                           }
-                          className="w-full bg-gradient-to-r from-amber-600 to-yellow-600 text-white px-4 py-3 rounded-lg text-center hover:scale-105 transition-all duration-300 font-semibold"
+                          className="w-full bg-gradient-to-r from-teal-600 to-blue-600 text-white px-4 py-3 rounded-lg text-center hover:scale-105 transition-all duration-300 font-semibold"
                         >
                           Download Result
                         </button>
+                        <p className="text-gray-300 text-sm mb-4">
+                          Certificates
+                      </p>
                         <button
                           type="button"
                           onClick={() =>
                             handleDownloadCertificate(
-                              studentData,
-                              getPoolFromClass(studentData.class),
+                              resultData,
+                              getPoolFromClass(resultData.Class),
                             )
                           }
                           className="w-full bg-gradient-to-r from-amber-600 to-yellow-600 text-white px-4 py-3 rounded-lg text-center hover:scale-105 transition-all duration-300 font-semibold"
                         >
-                          Download Certificate
+                          Download Certificate 1
                         </button>
+
+                        <div className="space-y-2">
+                          {resultData.certificate.map((url, index) => {
+                            // Extract a filename from the URL (optional)
+                            const filename = `certificate_${index + 2}.png`;
+                            return (
+                              <button
+                                key={index}
+                                type="button"
+                                onClick={() => downloadImage(url, filename)}
+                                className="w-full bg-gradient-to-r from-amber-600 to-yellow-600 text-white px-4 py-3 rounded-lg text-center hover:scale-105 transition-all duration-300 font-semibold"
+                              >
+                                Download Certificate {index + 2}
+                              </button>
+                            );
+                          })}
+                        </div>
                       </div>
                     </div>
                   </div>
