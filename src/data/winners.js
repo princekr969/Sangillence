@@ -7,7 +7,7 @@ export const winners = {
     ],
     B: [
       { name: "Vivan Tak", class: "6", school: "PM Shri KVS No 1", score: 19.46, image: "/winners/Vivan_Tak.jpg" },
-      { name: "Zoha Mahmood", class: "7", school: "PM Shri KV No 1 AFS Chakeri Kanpur", score: 18.72, image: "/winners/Zoha_Mahmood.jpg" },
+      { name: "Zoha Mahmood", class: "7", school: "PM Shri KV No 1 AFS Chakeri Kanpur", score: 18.72, image: "/winners/Zoha_mahmood.jpg" },
       { name: "Mukul Pawar", class: "7", school: "PM Shri KV No 1 AFS Chakeri Kanpur", score: 18.378, image: "/winners/Mukul_Pawar.jpg" }
     ],
     C: [
@@ -21,7 +21,7 @@ export const winners = {
     A: [
       { name: "Parth Verma", class: "3", school: "KV No 1", score: 6.3, image: "/winners/Parth_verma.jpg" },
       { name: "Riya Bajpai", class: "5", school: "PM Shri KV Cantt Kanpur", score: 5.69, image: "/winners/Riya Bajpai.jpg" },
-      { name: "Prince Rahar", class: "5", school: "PM Shri Kendriya Vidyalaya No 1 AFS Chakeri", score: 6.1, image: "/winners/Prince_Rahar.jpg" }
+      { name: "Prince Rahar", class: "5", school: "PM Shri Kendriya Vidyalaya No 1 AFS Chakeri", score: 6.1, image: "/winners/Prince_rahar.jpg" }
     ],
     B: [
       { name: "Saanvi Mishra", class: "7", school: "PM Shri Kendriya Vidyalaya No 2 AFS Gwalior", score: 11.3, image: "/winners/Saanvi_Mishra.jpg" },
@@ -53,7 +53,7 @@ export const winners = {
     { name: "Jalaj Yadav", class: "7", school: "PM Shri Kendriya Vidyalaya AFS Chakeri Kanpur", score: 4.8, image: "/winners/Jalaj_Yadav.jpg" },
     { name: "Kavyansh Sharma", class: "6", school: "PM Shri KVS No 5 Gwalior", score: 4.8, image: "/winners/Kavyansh_Sharma.jpg" },
     { name: "Niyati Dubey", class: "9", school: "PM Shri Kendriya Vidyalaya No 1 Gwalior", score: 4.8, image: "/winners/Niyati_Dubey.jpg" },
-    { name: "Sonakshi Jadon", class: "10", school: "Army Public School Gwalior", score: 4.8, image: "/winners/Sonakshi_JadoN.jpg" },
+    { name: "Sonakshi Jadon", class: "10", school: "Army Public School Gwalior", score: 4.8, image: "/winners/Sonakshi_Jadon.jpg" },
     { name: "Aarav", class: "4", school: "PM Shri KV No 5 Gwalior", score: 4.8, image: "/winners/Aarav.jpg" },
     { name: "Puransh Tiwari", class: "10", school: "PM Shri Kendriya Vidyalaya No 1 AFS Chakeri", score: 4.8, image: "/winners/Puransh_Tiwari.jpg" },
     { name: "Aadhya Sharma", class: "5", school: "PM Shri KV No 5 Gwalior", score: 4.8, image: "/winners/Aadhya_Sharma.jpg" }
