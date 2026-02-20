@@ -1,9 +1,9 @@
 export const winners = {
   humanSovereign: {
     A: [
-      { name: "Charvik Tamminana", class: "4", school: "ARMY PUBLIC SCHOOL", score: 25.2, image: "public/winners/default.jpg" },
-      { name: "Arnav Vishwakarma", class: "5", school: "PM SHREE KV 1 SURAT", score: 20.57, image: "public\winners\Arnav Vishwakarma.jpg" },
-      { name: "Priyanshi", class: "3", school: "ARMY PUBLIC SCHOOL, Gwalior", score: 19.76, image: "public/winners/default.jpg" }
+      { name: "Charvik Tamminana", class: "4", school: "Army Public School", score: 25.2, image: "/winners/Charvik_Tamminana.jpg" },
+      { name: "Arnav Vishwakarma", class: "5", school: "PM SHREE KV 1 SURAT", score: 20.57, image: "/winners/Arnav_Vishwakarma.jpg" },
+      { name: "Priyanshi", class: "3", school: "Army Public School Gwalior", score: 19.76, image: "/winners/Priyanshi.jpg" }
     ],
     B: [
       { name: "Vivan Tak", class: "6", school: "PM Shri KVS No 1", score: 19.46, image: "/winners/Vivan_Tak.jpg" },
@@ -19,9 +19,9 @@ export const winners = {
 
   aiOrchestrator: {
     A: [
-      { name: "Adarsh Kumar Kushwaha", class: "3", school: "PM SHREE KV 1 KANPUR CHAKERI", score: 6.3, image: "public\winners\default.jpg" },
-      { name: "Aarya Dashora", class: "5", school: "PM SHREE KV 5 GWALIOR", score: 5.69, image: "public\winners\Aarya_Dashora.jpg" },
-      { name: "MOHD Arshad", class: "5", school: "PM SHREE KV 1 KANPUR CHAKERI", score: 6.1, image: "public\winners\default.jpg" }
+      { name: "Adarsh Kumar Kushwaha", class: "5", school: "PM Shri Kendriya Vidyalaya No 1 AFS Chakeri", score: 6.3, image: "/winners/Adarsh_Kumar_Kushwaha.jpg" },
+      { name: "Aarya Dashora", class: "5", school: "PM Shri KV 5 Gwalior", score: 5.69, image: "/winners/Aarya_Dashora.jpg" },
+      { name: "Mohd Arshad", class: "4", school: "PM Shri Kendriya Vidyalaya No 1 AFS Chakeri", score: 5.1, image: "/winners/Mohd_arshad.jpg" }
     ],
     B: [
       { name: "Saanvi Mishra", class: "7", school: "PM Shri Kendriya Vidyalaya No 2 AFS Gwalior", score: 11.3, image: "public/winners/default.jpg" },

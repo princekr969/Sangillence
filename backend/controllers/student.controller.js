@@ -15,7 +15,6 @@ export const loginStudentController = (req, res) => {
 export const getResultId = async (req, res) => {
   try {
     const { fullName, class: studentClass, section, dob } = req.body;
-    console.log("wfwd", req.body);
 
     if (!fullName || !studentClass || !section || !dob) {
       return res.status(400).json({
@@ -32,18 +31,15 @@ export const getResultId = async (req, res) => {
     const classNumber = studentClass.trim().replace("Class ", "");
     console.log("Searching with criteria:", {
       Name: fullName.trim(),
-      Class: Number(classNumber),
-      Section: section.trim().toUpperCase(),
       DOB: dobString,
     });
 
 
     let result = await soboResult.findOne({
       Name: fullName.trim(),
-      Class: Number(classNumber),   
-      Section: section.trim().toUpperCase(),
       DOB: dobString,
     });
+
 
     console.log("Found Result:", result);
     if (!result) {
@@ -52,8 +48,6 @@ export const getResultId = async (req, res) => {
         message: "Result not found for this student",
         searchCriteria: {
           Name: fullName.trim(),
-          Class: studentClass,
-          Section: section.trim().toUpperCase(),
           DOB: dobString,
         }
       });
