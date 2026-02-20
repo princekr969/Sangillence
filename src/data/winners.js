@@ -21,7 +21,7 @@ export const winners = {
     A: [
       { name: "Adarsh Kumar Kushwaha", class: "5", school: "PM Shri Kendriya Vidyalaya No 1 AFS Chakeri", score: 6.3, image: "/winners/Adarsh_Kumar_Kushwaha.jpg" },
       { name: "Aarya Dashora", class: "5", school: "PM Shri KV 5 Gwalior", score: 5.69, image: "/winners/Aarya_Dashora.jpg" },
-      { name: "Mohd Arshad", class: "4", school: "PM Shri Kendriya Vidyalaya No 1 AFS Chakeri", score: 6.1, image: "/winners/Mohd_arshad.jpg" }
+      { name: "Mohd Arshad", class: "4", school: "PM Shri Kendriya Vidyalaya No 1 AFS Chakeri", score: 5.1, image: "/winners/Mohd_arshad.jpg" }
     ],
     B: [
       { name: "Saanvi Mishra", class: "7", school: "PM Shri Kendriya Vidyalaya No 2 AFS Gwalior", score: 11.3, image: "/winners/Saanvi_Mishra.jpg" },
