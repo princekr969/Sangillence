@@ -259,7 +259,7 @@ function generateReportHTML(data) {
               <div class="card-icon red">📋</div>
               <div>
                 <div class="card-label">Plagiarism %</div>
-                <div class="card-value">${data.Plag__Score || '0'}%</div>
+                <div class="card-value">${data.Plag__Score != null ? (data.Plag__Score * 100).toFixed(1) : '0'}%</div>
               </div>
             </div>
             ${showAAS ? `

@@ -440,7 +440,7 @@ export default function StudentDashboard() {
                               Plagiarism %
                             </p>
                             <p className="text-white text-xl font-bold">
-                              {resultData.Plag__Score || "0"}
+                              {resultData.Plag__Score != null ? (resultData.Plag__Score * 100).toFixed(1) : "0"}
                             </p>
                           </div>
                           <div className="bg-green-500/10 rounded p-3 col-span-2">
@@ -565,7 +565,7 @@ export default function StudentDashboard() {
                             <div className="flex items-center justify-center">
                               <div className="text-center">
                                 <div className="text-4xl font-bold text-white">
-                                  {resultData["Actual Score"] || "N/A"}
+                                  {resultData["Actual Score"] || "0"}
                                 </div>
                                 <div className="text-gray-300">
                                   Actual Score
@@ -644,7 +644,7 @@ export default function StudentDashboard() {
                               Plagiarism %
                             </p>
                             <p className="text-white font-bold text-lg">
-                              {resultData.Plag__Score || "0"}
+                              {resultData.Plag__Score != null ? (resultData.Plag__Score * 100).toFixed(1) : "0"}
                             </p>
                           </div>
                         </div>
