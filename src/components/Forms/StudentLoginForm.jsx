@@ -119,7 +119,7 @@ function StudentLoginForm() {
     };
 
     try {
-      const response = await axios.post('http://localhost:5001/api/students/get-result-id', {
+      const response = await axios.post('https://naivedyamcdc.com/api/students/get-result-id', {
         fullName: submitData.fullName,
         class: submitData.class,
         section: submitData.section,

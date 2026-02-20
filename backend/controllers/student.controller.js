@@ -31,16 +31,12 @@ export const getResultId = async (req, res) => {
     const classNumber = studentClass.trim().replace("Class ", "");
     console.log("Searching with criteria:", {
       Name: fullName.trim(),
-      Class: Number(classNumber),
-      Section: section.trim().toUpperCase(),
       DOB: dobString,
     });
 
 
     let result = await soboResult.findOne({
       Name: fullName.trim(),
-      Class: Number(classNumber),   
-      Section: section.trim().toUpperCase(),
       DOB: dobString,
     });
 
@@ -52,8 +48,6 @@ export const getResultId = async (req, res) => {
         message: "Result not found for this student",
         searchCriteria: {
           Name: fullName.trim(),
-          Class: studentClass,
-          Section: section.trim().toUpperCase(),
           DOB: dobString,
         }
       });
