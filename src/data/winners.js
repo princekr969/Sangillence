@@ -1,9 +1,9 @@
 export const winners = {
   humanSovereign: {
     A: [
-      { name: "Adarsh Kumar Kushwaha", class: "5", school: "PM Shri Kendriya Vidyalaya No 1 AFS Chakeri", score: 25.2, image: "/winners/Adarsh_Kumar_Kushwaha.jpg" },
-      { name: "Aarya Dashora", class: "5", school: "PM Shri KV 5 Gwalior", score: 20.57, image: "/winners/Aarya_Dashora.jpg" },
-      { name: "Mohd Arshad", class: "4", school: "PM Shri Kendriya Vidyalaya No 1 AFS Chakeri", score: 19.76, image: "/winners/Mohd_arshad.jpg" }
+      { name: "Charvik Tamminana", class: "4", school: "Army Public School", score: 25.2, image: "/winners/Charvik_Tamminana.jpg" },
+      { name: "Arnav Vishwakarma", class: "5", school: "PM SHREE KV 1 SURAT", score: 20.57, image: "/winners/Arnav_Vishwakarma.jpg" },
+      { name: "Priyanshi", class: "3", school: "Army Public School Gwalior", score: 19.76, image: "/winners/Priyanshi.jpg" }
     ],
     B: [
       { name: "Vivan Tak", class: "6", school: "PM Shri KVS No 1", score: 19.46, image: "/winners/Vivan_Tak.jpg" },
@@ -19,9 +19,9 @@ export const winners = {
 
   aiOrchestrator: {
     A: [
-      { name: "Parth Verma", class: "3", school: "KV No 1", score: 6.3, image: "/winners/Parth_verma.jpg" },
-      { name: "Riya Bajpai", class: "5", school: "PM Shri KV Cantt Kanpur", score: 5.69, image: "/winners/Riya Bajpai.jpg" },
-      { name: "Prince Rahar", class: "5", school: "PM Shri Kendriya Vidyalaya No 1 AFS Chakeri", score: 6.1, image: "/winners/Prince_rahar.jpg" }
+      { name: "Adarsh Kumar Kushwaha", class: "5", school: "PM Shri Kendriya Vidyalaya No 1 AFS Chakeri", score: 6.3, image: "/winners/Adarsh_Kumar_Kushwaha.jpg" },
+      { name: "Aarya Dashora", class: "5", school: "PM Shri KV 5 Gwalior", score: 5.69, image: "/winners/Aarya_Dashora.jpg" },
+      { name: "Mohd Arshad", class: "4", school: "PM Shri Kendriya Vidyalaya No 1 AFS Chakeri", score: 6.1, image: "/winners/Mohd_arshad.jpg" }
     ],
     B: [
       { name: "Saanvi Mishra", class: "7", school: "PM Shri Kendriya Vidyalaya No 2 AFS Gwalior", score: 11.3, image: "/winners/Saanvi_Mishra.jpg" },

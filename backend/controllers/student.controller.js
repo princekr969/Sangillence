@@ -15,7 +15,6 @@ export const loginStudentController = (req, res) => {
 export const getResultId = async (req, res) => {
   try {
     const { fullName, class: studentClass, section, dob } = req.body;
-    console.log("wfwd", req.body);
 
     if (!fullName || !studentClass || !section || !dob) {
       return res.status(400).json({
@@ -44,6 +43,7 @@ export const getResultId = async (req, res) => {
       Section: section.trim().toUpperCase(),
       DOB: dobString,
     });
+
 
     console.log("Found Result:", result);
     if (!result) {
