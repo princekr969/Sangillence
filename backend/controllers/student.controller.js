@@ -39,6 +39,7 @@ export const getResultId = async (req, res) => {
       DOB: dobString,
     });
 
+
     console.log("Found Result:", result);
     if (!result) {
       return res.status(404).json({
