@@ -24,9 +24,9 @@ export const winners = {
       { name: "Mohd Arshad", class: "4", school: "PM Shri Kendriya Vidyalaya No 1 AFS Chakeri", score: 5.1, image: "/winners/Mohd_arshad.jpg" }
     ],
     B: [
-      { name: "Saanvi Mishra", class: "7", school: "PM Shri Kendriya Vidyalaya No 2 AFS Gwalior", score: 11.3, image: "/winners/Saanvi_Mishra.jpg" },
-      { name: "Kavyansh Sharma", class: "6", school: "PM Shri KVS No 5", score: 5.8, image: "/winners/Kavyansh_Sharma.jpg" },
-      { name: "Raj Lodhi", class: "6", school: "PM Shri KVS No 1 Gwalior", score: 5.13, image: "/winners/Raj lodhi.jpg" }
+      { name: "Saanvi Mishra", class: "7", school: "PM Shri Kendriya Vidyalaya No 2 AFS Gwalior", score: 11.3, image: "public/winners/default.jpg" },
+      { name: "Kavyansh Sharma", class: "6", school: "PM Shri KVS No 5", score: 5.8, image: "public/winners/default.jpg" },
+      { name: "Raj Lodhi", class: "6", school: "PM Shri KVS No 1 Gwalior", score: 5.13, image: "public/winners/Raj lodhi.jpg" }
     ],
     C: [
       { name: "Gaurav Singh", class: "10", school: "PM Shri KV No 5 Gwalior", score: 10.95, image: "/winners/Gaurav Singh.jpg" },
