@@ -261,3 +261,63 @@
     animation-duration: 0.6s;
   }
 }
+
+/* Explora */
+@keyframes exploraLogoExpand {
+  0% {
+    transform: scale(0.55);
+    opacity: 0;
+    filter: blur(6px);
+  }
+  55% {
+    opacity: 1;
+    filter: blur(0px);
+  }
+  78% {
+    transform: scale(1.22);
+  }
+  100% {
+    transform: scale(1.12);
+    opacity: 1;
+  }
+}
+
+@keyframes exploraLogoBreathe {
+  0% {
+    transform: scale(1.10);
+  }
+  100% {
+    transform: scale(1.16);
+  }
+}
+
+.explora-logo-expand {
+  animation:
+    exploraLogoExpand 1400ms cubic-bezier(0.16, 1, 0.3, 1) both,
+    exploraLogoBreathe 3200ms ease-in-out 1400ms infinite alternate;
+  will-change: transform, opacity, filter;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .explora-logo-expand {
+    animation: none;
+  }
+}
+
+.explora-page {
+  position: relative;
+}
+
+/* On Explora, keep navbar above the video (no push-down gap). */
+.explora-navbar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 60;
+}
+
+/* Override Navbar's built-in bottom margin on this page */
+.explora-page .explora-navbar > nav {
+  margin-bottom: 0 !important;
+}
