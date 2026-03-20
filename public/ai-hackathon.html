@@ -1,0 +1,814 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AI Synergy Hackathon 2026 | ABV-IIITM Gwalior | 27–28 March</title>
+  <meta name="description"
+    content="Join AI Synergy Hackathon 2026 — a Two Days in ABV IIITM GWALIOR in-person AI innovation marathon for college students in Gwalior, MP. 6 AI tracks, industry mentors, and prizes. Register for ₹500 (food included)." />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Exo+2:ital,wght@0,300;0,400;0,600;0,700;1,400&display=swap"
+    rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #020b1a;
+      --bgm: #041529;
+      --bgc: rgba(4, 21, 41, .65);
+      --cyan: #00e5ff;
+      --blue: #2979ff;
+      --purple: #d500f9;
+      --gold: #c9a84c;
+      --w: #f0f6ff;
+      --m: #7a9cc0;
+      --red: #ff5252;
+      --D: 'Orbitron', monospace;
+      --B: 'Exo 2', sans-serif;
+      --r: 10px;
+      --gc: 0 0 16px rgba(0, 229, 255, .5), 0 0 40px rgba(0, 229, 255, .18);
+      --gg: 0 0 14px rgba(201, 168, 76, .45);
+      --gp: 0 0 18px rgba(213, 0, 249, .4);
+    }
+
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      overflow-x: hidden;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--w);
+      font-family: var(--B);
+      overflow-x: hidden;
+      overflow-y: auto;
+      line-height: 1.6;
+    }
+
+    #cv {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    /* Background video */
+    .ai-hack-bg-video {
+      position: fixed;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      z-index: 0;
+      pointer-events: none;
+      filter: brightness(0.55) contrast(1.05) saturate(1.05);
+    }
+
+    .ai-hack-bg-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+      background: rgba(2, 11, 26, .45);
+    }
+
+    /* NAV */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: .85rem 2rem;
+      background: rgba(2, 11, 26, .88);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid rgba(0, 229, 255, .1);
+    }
+
+    .nb {
+      font-family: var(--D);
+      font-size: .8rem;
+      font-weight: 700;
+      color: var(--cyan);
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      display: flex;
+      align-items: center;
+      gap: .6rem;
+      text-decoration: none;
+    }
+
+    .nb .dot {
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      border: 1.5px solid var(--cyan);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: .6rem;
+      font-weight: 900;
+      box-shadow: var(--gc);
+    }
+
+    .nl {
+      display: flex;
+      gap: 1.8rem;
+      list-style: none;
+    }
+
+    .nl a {
+      color: var(--m);
+      text-decoration: none;
+      font-family: var(--D);
+      font-size: .62rem;
+      letter-spacing: .15em;
+      text-transform: uppercase;
+      transition: color .2s;
+    }
+
+    .nl a:hover {
+      color: var(--cyan);
+    }
+
+    .nc {
+      padding: .48rem 1.3rem;
+      border: 1.5px solid var(--cyan);
+      color: var(--cyan);
+      background: transparent;
+      font-family: var(--D);
+      font-size: .62rem;
+      letter-spacing: .15em;
+      text-transform: uppercase;
+      border-radius: var(--r);
+      cursor: pointer;
+      box-shadow: var(--gc);
+      transition: background .2s, color .2s;
+      text-decoration: none;
+      display: inline-block;
+    }
+
+    .nc:hover {
+      background: var(--cyan);
+      color: var(--bg);
+    }
+
+    .hb {
+      display: none;
+      flex-direction: column;
+      gap: 4px;
+      cursor: pointer;
+      background: none;
+      border: none;
+      padding: 4px;
+    }
+
+    .hb span {
+      display: block;
+      width: 22px;
+      height: 2px;
+      background: var(--cyan);
+      border-radius: 2px;
+    }
+
+    /* Hide iframe's own navbar/footer since the React app keeps Navbar/Footer intact */
+    nav {
+      display: none !important;
+    }
+
+    footer {
+      display: none !important;
+    }
+
+    .hero {
+      padding-top: 5rem;
+    }
+
+    /* HERO */
+    .hero {
+      position: relative;
+      z-index: 1;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 7rem 1.5rem 5rem;
+      /* Make hero background transparent so the video is more visible */
+      background: transparent;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: url("data:image/svg+xml,%3Csvg width='60' height='60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M30 0L60 30L30 60L0 30Z' fill='none' stroke='rgba(0,229,255,0.01)' stroke-width='1'/%3E%3C/svg%3E");
+      z-index: 0;
+      opacity: 0.35;
+    }
+
+    .hi {
+      position: relative;
+      z-index: 1;
+      max-width: 860px;
+    }
+
+    /* IIITM logo first, then summit banner below */
+    .hero-top-logos {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: .85rem;
+      margin-bottom: 1.2rem;
+    }
+
+    .hero-college-logo {
+      width: 104px;
+      height: auto;
+      flex: 0 0 auto;
+    }
+
+    .hero-summit-logo {
+      width: min(620px, 85vw);
+      height: auto;
+      flex: 0 0 auto;
+    }
+
+    .pb {
+      display: inline-flex;
+      align-items: center;
+      gap: .6rem;
+      padding: .62rem 1.35rem;
+      border: 1px solid rgba(201, 168, 76, .35);
+      border-radius: 40px;
+      font-size: .95rem;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: var(--gold);
+      font-family: var(--D);
+      margin-bottom: 1.4rem;
+    }
+
+    /* For this page we want text only in the top pill */
+    .pb::before {
+      content: '';
+    }
+
+    .eo {
+      font-family: var(--D);
+      font-size: .68rem;
+      letter-spacing: .25em;
+      text-transform: uppercase;
+      color: var(--cyan);
+      margin-bottom: .5rem;
+    }
+
+    .ht {
+      font-family: var(--D);
+      font-size: clamp(2.8rem, 9vw, 6.5rem);
+      font-weight: 900;
+      line-height: 1;
+      letter-spacing: .04em;
+      margin-bottom: .08em;
+    }
+
+    .ht .ca {
+      color: var(--cyan);
+    }
+
+    .ht .cw {
+      color: var(--w);
+    }
+
+    .hs {
+      font-family: var(--D);
+      font-size: clamp(1rem, 3.5vw, 2rem);
+      font-weight: 700;
+      color: var(--w);
+      letter-spacing: .22em;
+      text-transform: uppercase;
+      margin-bottom: .35em;
+      opacity: .85;
+    }
+
+    .hy {
+      font-family: var(--D);
+      font-size: clamp(2rem, 7vw, 4.5rem);
+      font-weight: 900;
+      color: var(--w);
+      line-height: 1;
+      margin-bottom: .7rem;
+    }
+
+    .gr-row {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      justify-content: center;
+      margin: .7rem 0 1.1rem;
+    }
+
+    .gr {
+      flex: 1;
+      max-width: 110px;
+      height: 1px;
+      background: var(--gold);
+      box-shadow: var(--gg);
+    }
+
+    .dt {
+      font-family: var(--D);
+      font-size: clamp(.78rem, 2vw, 1rem);
+      color: var(--w);
+      letter-spacing: .18em;
+    }
+
+    .hd {
+      font-size: .95rem;
+      color: var(--m);
+      max-width: 550px;
+      margin: 0 auto 2.4rem;
+      line-height: 1.75;
+    }
+
+    .hd strong {
+      color: var(--w);
+    }
+
+    .cr {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      padding: .82rem 2.1rem;
+      font-family: var(--D);
+      font-size: .7rem;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      border-radius: var(--r);
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-block;
+      transition: all .25s;
+    }
+
+    .bp {
+      background: transparent;
+      border: 1.5px solid var(--cyan);
+      color: var(--cyan);
+      box-shadow: var(--gc);
+    }
+
+    .bp:hover {
+      background: var(--cyan);
+      color: var(--bg);
+    }
+
+    .bs {
+      background: rgba(201, 168, 76, .1);
+      border: 1.5px solid var(--gold);
+      color: var(--gold);
+    }
+
+    .bs:hover {
+      background: rgba(201, 168, 76, .25);
+    }
+
+    .sa {
+      position: absolute;
+      bottom: 2rem;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: .3rem;
+      font-family: var(--D);
+      font-size: .58rem;
+      letter-spacing: .15em;
+      color: var(--m);
+      text-transform: uppercase;
+      animation: bounce 2s infinite;
+    }
+
+    @keyframes bounce {
+
+      0%,
+      100% {
+        transform: translateX(-50%) translateY(0);
+      }
+
+      50% {
+        transform: translateX(-50%) translateY(6px);
+      }
+    }
+
+    /* Fade-in (light scroll effect) */
+    .fi {
+      opacity: 0;
+      transform: translateY(14px);
+      transition: opacity .45s ease, transform .45s ease;
+    }
+
+    .fi.v {
+      opacity: 1;
+      transform: none;
+    }
+
+    .d1 {
+      transition-delay: .1s;
+    }
+
+    .d2 {
+      transition-delay: .2s;
+    }
+
+    .d3 {
+      transition-delay: .3s;
+    }
+
+    .d4 {
+      transition-delay: .4s;
+    }
+
+    /* STAT STRIP */
+    .ss {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      background: rgba(4, 21, 41, .82);
+      backdrop-filter: blur(12px);
+      border-top: 1px solid rgba(0, 229, 255, .12);
+      border-bottom: 1px solid rgba(0, 229, 255, .12);
+    }
+
+    .si {
+      flex: 1;
+      min-width: 120px;
+      padding: 1.5rem .8rem;
+      text-align: center;
+      border-right: 1px solid rgba(0, 229, 255, .08);
+    }
+
+    .si:last-child {
+      border-right: none;
+    }
+
+    .sn {
+      font-family: var(--D);
+      font-size: 1.8rem;
+      font-weight: 900;
+      color: var(--cyan);
+      display: block;
+    }
+
+    .sl {
+      font-size: .68rem;
+      color: var(--m);
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      margin-top: .18rem;
+      display: block;
+    }
+
+    .gd {
+      width: 100%;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--cyan), transparent);
+      opacity: .2;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* Simple section */
+    .sec {
+      position: relative;
+      z-index: 1;
+      padding: 5rem 1.5rem;
+    }
+
+    .si2 {
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .stg {
+      font-family: var(--D);
+      font-size: .63rem;
+      letter-spacing: .3em;
+      text-transform: uppercase;
+      color: var(--cyan);
+      margin-bottom: .55rem;
+    }
+
+    .st {
+      font-family: var(--D);
+      font-size: clamp(1.35rem, 3.5vw, 2.2rem);
+      font-weight: 700;
+      color: var(--w);
+      margin-bottom: .7rem;
+      line-height: 1.2;
+    }
+
+    .sl2 {
+      font-size: .92rem;
+      color: var(--m);
+      max-width: 620px;
+      line-height: 1.75;
+      margin-bottom: 2.2rem;
+    }
+
+    /* Footer */
+    footer {
+      position: relative;
+      z-index: 1;
+      padding: 2.8rem 1.5rem;
+      text-align: center;
+      border-top: 1px solid rgba(255, 255, 255, .05);
+      font-size: .72rem;
+      color: var(--m);
+      font-family: var(--D);
+      letter-spacing: .08em;
+    }
+
+    footer a {
+      color: var(--cyan);
+      text-decoration: none;
+    }
+
+    .fl {
+      display: flex;
+      gap: 1.8rem;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-bottom: 1.4rem;
+    }
+
+    .fl a {
+      color: var(--m);
+      font-size: .62rem;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+    }
+
+    .fl a:hover {
+      color: var(--cyan);
+    }
+
+    .hash {
+      color: var(--purple);
+      margin-top: .5rem;
+      display: block;
+    }
+
+    /* Responsive */
+    @media(max-width:640px) {
+      .hb {
+        display: flex;
+      }
+
+      .nl {
+        display: none;
+      }
+
+      .nl.open {
+        display: flex;
+        flex-direction: column;
+        gap: .9rem;
+        position: fixed;
+        top: 60px;
+        left: 0;
+        right: 0;
+        background: rgba(2, 11, 26, .97);
+        padding: 1.1rem 1.6rem;
+        border-bottom: 1px solid rgba(0, 229, 255, .12);
+      }
+    }
+
+    @media(max-width:880px) {
+
+      .ag,
+      .vb,
+      .rg {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <canvas id="cv"></canvas>
+  <video class="ai-hack-bg-video" src="/ai_hack.mp4" autoplay muted loop playsinline preload="auto"></video>
+  <div class="ai-hack-bg-overlay"></div>
+
+  <!-- NAV -->
+  <nav>
+    <a href="#" class="nb">
+      <div class="dot">AI</div><span>AI Synergy 2026</span>
+    </a>
+    <ul class="nl" id="nl">
+      <li><a href="#about">About</a></li>
+      <li><a href="#tracks">Tracks</a></li>
+      <li><a href="#agenda">Agenda</a></li>
+      <li><a href="#prizes">Prizes</a></li>
+      <li><a href="#rules">Rules</a></li>
+      <li><a href="#faq">FAQ</a></li>
+    </ul>
+    <a href="/https:/docs.google.com/forms/d/e/1FAIpQLSesJF9j9Pf5cs70QntUSEyJjExaoSmNT0bx1srPFwkNBQSx9w/viewform?usp=dialog" class="nc">Register — ₹500 (Food Included)</a>
+    <button class="hb" onclick="document.getElementById('nl').classList.toggle('open')" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <!-- HERO -->
+  <header class="hero">
+    <div class="hi">
+      <div class="hero-top-logos">
+        <img class="hero-college-logo" src="/assets/svgs/collegelogo.svg" alt="College Logo" draggable="false" />
+        <img class="hero-summit-logo" src="/assets/svgs/gwalior_ai_summit.png" alt="Gwalior AI Summit"
+          draggable="false" />
+      </div>
+      <div class="pb fi">ABV IIITM GWALIOR</div>
+      <div class="eo fi d1">Organized by Sangillence</div>
+      <h1 class="ht fi d1"><span class="ca">AI </span><span class="cw">SYNERGY</span></h1>
+      <div class="hs fi d2">HACKATHON</div>
+      <div class="hy fi d2">2026</div>
+      <div class="gr-row fi d3">
+        <div class="gr"></div>
+        <div class="dt">27 – 28 MARCH 2026 &nbsp;·&nbsp; GWALIOR, MP</div>
+        <div class="gr"></div>
+      </div>
+      <p class="hd fi d3">A <strong>Two Days in ABV IIITM GWALIOR</strong> in-person innovation marathon for college
+        students at ABV-IIITM Gwalior. Work with industry mentors. <strong>No coding required.</strong></p>
+      <div class="cr fi d4">
+        <a href="#register" class="btn bp">Register Now — ₹500 (Food Included)</a>
+        <a href="#tracks" class="btn bs">View Challenges</a>
+      </div>
+    </div>
+    <div class="sa">
+      <svg width="18" height="10" viewBox="0 0 18 10">
+        <path d="M1 1l8 8 8-8" stroke="#00e5ff" stroke-width="2" fill="none" stroke-linecap="round" />
+      </svg>
+      Scroll
+    </div>
+  </header>
+
+  <!-- STAT STRIP -->
+  <div class="ss">
+    <div class="si"><span class="sn">Two Days</span><span class="sl">ABV IIITM GWALIOR</span></div>
+    <div class="si"><span class="sn">6</span><span class="sl">AI Tracks</span></div>
+    <div class="si"><span class="sn">₹500</span><span class="sl">Food Included</span></div>
+    <div class="si"><span class="sn">3</span><span class="sl">Stages</span></div>
+    <div class="si"><span class="sn">ABV-IIITM</span><span class="sl">Gwalior</span></div>
+  </div>
+  <div class="gd"></div>
+
+  <!-- ABOUT -->
+  <section class="sec" id="about">
+    <div class="si2">
+      <p class="stg fi">About the Event</p>
+      <h2 class="st fi">"We don't test what you know. We measure how you think with AI."</h2>
+      <p class="sl2 fi">AI Synergy is Gwalior's premier student AI hackathon — a Two Days in ABV IIITM GWALIOR in-person
+        marathon.</p>
+    </div>
+  </section>
+  <div class="gd"></div>
+
+  <!-- TRACKS -->
+  <section class="sec" id="tracks">
+    <div class="si2">
+      <p class="stg fi">Challenge Tracks</p>
+      <h2 class="st fi">6 Real-World AI Problem Statements</h2>
+      <p class="sl2 fi">Teams choose one track. All problems are set in real Indian contexts.</p>
+    </div>
+  </section>
+  <div class="gd"></div>
+
+  <!-- PRIZES -->
+  <section class="sec" id="prizes">
+    <div class="si2">
+      <p class="stg fi">Recognition</p>
+      <h2 class="st fi">Exciting Opportunities &amp; Rewards</h2>
+      <p class="sl2 fi">Get a chance to meet leading AI experts and HRs across the country, win exciting goodies and prizes, and unlock internship opportunities.</p>
+    </div>
+  </section>
+  <div class="gd"></div>
+
+  <!-- RULES -->
+  <section class="sec" id="rules">
+    <div class="si2">
+      <p class="stg fi">Participation Rules</p>
+      <h2 class="st fi">Eligibility &amp; Submission Requirements</h2>
+      <p class="sl2 fi">Teams of 2–4 members. Working live demo or video demo.</p>
+    </div>
+  </section>
+  <div class="gd"></div>
+
+  <!-- REGISTER -->
+  <div class="sec" id="register">
+    <div class="si2" style="text-align:center;">
+      <h2 class="st fi" style="font-size:clamp(1.6rem,4vw,2.6rem);">Secure Your Spot at AI Synergy 2026</h2>
+      <p class="sl2 fi" style="margin-bottom:0;">₹500 per Participant · Food included (Two Days in ABV IIITM GWALIOR)
+      </p>
+    </div>
+  </div>
+
+  <!-- FAQ -->
+  <section class="sec" id="faq">
+    <div class="si2">
+      <p class="stg fi">Common Questions</p>
+      <h2 class="st fi">FAQ</h2>
+      <p class="sl2 fi">Add full FAQ content here (accordion) later.</p>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="fl">
+      <a href="#about">About</a><a href="#tracks">Tracks</a><a href="#register">Register</a><a href="#faq">FAQ</a>
+    </div>
+    <p>© 2026 AI Synergy Hackathon · Organized by <strong>Sangillence</strong></p>
+    <span class="hash">#AISynergyGwalior2026</span>
+  </footer>
+
+  <!-- PARTICLE ANIMATION + SCROLL FADE -->
+  <script>
+    (function () {
+      const c = document.getElementById('cv'), ctx = c.getContext('2d');
+      let W, H, nodes = [];
+      const N = 85, DIST = 145, COLS = ['#00e5ff', '#2979ff', '#d500f9', '#c9a84c'];
+      function resize() { W = c.width = window.innerWidth; H = c.height = window.innerHeight; }
+      function init() {
+        nodes = [];
+        for (let i = 0; i < N; i++) {
+          nodes.push({
+            x: Math.random() * W, y: Math.random() * H,
+            vx: (Math.random() - .5) * .38, vy: (Math.random() - .5) * .38,
+            r: Math.random() * 1.7 + .6,
+            col: COLS[Math.floor(Math.random() * COLS.length)]
+          });
+        }
+      }
+      function draw() {
+        ctx.clearRect(0, 0, W, H);
+        for (let i = 0; i < nodes.length; i++) {
+          for (let j = i + 1; j < nodes.length; j++) {
+            const dx = nodes[i].x - nodes[j].x, dy = nodes[i].y - nodes[j].y;
+            const d = Math.sqrt(dx * dx + dy * dy);
+            if (d < DIST) {
+              ctx.beginPath();
+              ctx.moveTo(nodes[i].x, nodes[i].y);
+              ctx.lineTo(nodes[j].x, nodes[j].y);
+              ctx.strokeStyle = 'rgba(0,229,255,' + (.12 * (1 - d / DIST)) + ')';
+              ctx.lineWidth = .5;
+              ctx.stroke();
+            }
+          }
+        }
+        nodes.forEach(n => {
+          ctx.beginPath();
+          ctx.arc(n.x, n.y, n.r, 0, Math.PI * 2);
+          ctx.fillStyle = n.col;
+          ctx.globalAlpha = .62;
+          ctx.fill();
+          ctx.globalAlpha = 1;
+        });
+      }
+      function tick() {
+        nodes.forEach(n => {
+          n.x += n.vx; n.y += n.vy;
+          if (n.x < 0 || n.x > W) n.vx *= -1;
+          if (n.y < 0 || n.y > H) n.vy *= -1;
+        });
+        draw();
+        requestAnimationFrame(tick);
+      }
+      resize(); init(); tick();
+      window.addEventListener('resize', () => { resize(); init(); });
+
+      const obs = new IntersectionObserver(e => {
+        e.forEach(x => { if (x.isIntersecting) x.target.classList.add('v'); });
+      }, { threshold: .07 });
+      document.querySelectorAll('.fi').forEach(el => obs.observe(el));
+    })();
+  </script>
+</body>
+
+</html>

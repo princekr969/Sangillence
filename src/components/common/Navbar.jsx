@@ -25,15 +25,21 @@ const Navbar = () => {
 
           {/* Desktop Navigation */}
           <nav className="hidden  md:flex space-x-2 text-gray-700 font-medium">
-            <NavLink to="/home" className={({isActive}) => `${isActive? "text-white bg-[#1e3366]":"bg-transparent text-gray-700"} hover:text-white hover:bg-[#1e3366] rounded-4xl px-3 py-2 transition-colors`}>
-                  Home
+              <NavLink to="/ai-hackathon" className={({isActive}) => `${isActive? "text-white bg-[#1e3366]":"bg-transparent text-gray-700"} hover:text-white hover:bg-[#1e3366] rounded-4xl px-3 py-2 transition-colors`}>
+               AI SUMMIT
               </NavLink>
-              <NavLink to="/mentorship" className={({isActive}) => `${isActive? "text-white bg-[#1e3366]":"bg-transparent text-gray-700"} rounded-4xl px-3 py-2 hover:text-white hover:bg-[#1e3366] transition-colors`}>
+              <NavLink to="/explora" className={({isActive}) => `${isActive? "text-white bg-[#1e3366]":"bg-transparent text-gray-700"} hover:text-white hover:bg-[#1e3366] rounded-4xl px-3 py-2 transition-colors`}>
+                EXPLORA
+              </NavLink>
+              <NavLink to="/sobo" className={({isActive}) => `${isActive? "text-white bg-[#1e3366]":"bg-transparent text-gray-700"} hover:text-white hover:bg-[#1e3366] rounded-4xl px-3 py-2 transition-colors`}>
+                  SOBO
+              </NavLink>
+              {/* <NavLink to="/mentorship" className={({isActive}) => `${isActive? "text-white bg-[#1e3366]":"bg-transparent text-gray-700"} rounded-4xl px-3 py-2 hover:text-white hover:bg-[#1e3366] transition-colors`}>
                   Mentorship
               </NavLink>
               <NavLink to="/olympiad" className={({isActive}) => `${isActive? "text-white bg-[#1e3366]":"bg-transparent text-gray-700"} rounded-4xl px-3 py-2 hover:text-white hover:bg-[#1e3366] transition-colors`}>
                   Olympiad
-              </NavLink>
+              </NavLink> */}
               <NavLink to="/contactUs" className={({isActive}) => `${isActive? "text-white bg-[#1e3366]":"bg-transparent text-gray-700"} rounded-4xl px-3 py-2 hover:text-white hover:bg-[#1e3366] transition-colors`}>
                   Contact
               </NavLink>
@@ -61,6 +67,9 @@ const Navbar = () => {
             <nav className="flex flex-col space-y-1 p-4">
               <NavLink to="/home" className={({isActive}) => `${isActive?'bg-[#0a2972]':'bg-transparent'} hover:bg-[#0a2972] text-slate-50 rounded-2xl px-4 py-2 font-medium transition-colors`}>
               Home
+              </NavLink>
+              <NavLink to="/sobo" className={({isActive}) => `${isActive?'bg-[#0a2972]':'bg-transparent'} hover:bg-[#0a2972] text-slate-50 rounded-2xl px-4 py-2 font-medium transition-colors`}>
+              SOBO
               </NavLink>
               <NavLink to="/mentorship" className={({isActive}) => `${isActive?'bg-[#0a2972]':'bg-transparent'} hover:bg-[#0a2972] text-slate-50 rounded-2xl px-4 py-2 font-medium transition-colors`}>
               Mentorship

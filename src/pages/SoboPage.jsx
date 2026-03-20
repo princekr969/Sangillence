@@ -208,7 +208,7 @@ function SoboPage() {
 
         {schoolConfig && (
           <div className="text-center text-sm text-gray-600">
-            Not your school? <Link to="/sobo" className="underline">Change school</Link>
+            Not your school? <Link to="/sobo/access" className="underline">Change school</Link>
           </div>
         )}
       </form>

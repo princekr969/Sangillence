@@ -1,36 +1,15 @@
-import {
-  Hero,
-  About,
-  Benefits,
-  Skills,
-  Results,
-  Awards,
-  Timeline,
-  Footer,
-  CTA,
-  Navbar,
-  Testimonial,
-  ScrollToTop,
-  
-} from '../components/index.js';
+import { useLocation } from "react-router-dom";
+import { Navbar } from "../components";
 
 function HomePage() {
+  const { pathname } = useLocation();
+  const showTopBar = pathname === "/";
 
   return (
-    <> 
-      <div className="relative z-0 cursor-default">
-        <Navbar/>
-        <Hero />
-        <About />
-        <Awards />
-        <Skills />
-        <Results />
-        <Timeline />
-        <Testimonial/>
-        <Footer />
-        <ScrollToTop />
-      </div>
-    </>
+    <div className="min-h-screen bg-white">
+      {showTopBar && <Navbar />}
+      {/* Empty home/landing page — ready for new design */}
+    </div>
   );
 }
 

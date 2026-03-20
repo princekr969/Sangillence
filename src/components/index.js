@@ -22,6 +22,8 @@ import CareersExpectations from "./Careers/CareersExpectations";
 import CareersApply from "./Careers/CareersApply";
 import CareersSocialGood from "./Careers/CareersSocialGood";
 import JeePredictionForm from "./Forms/JeePredictionForm";
+import AiHackathon from "./Hackathon/AiHackathon";
+import ExploraAnimation from "./explora/Animation";
 
 export {
     Navbar,
@@ -47,5 +49,7 @@ export {
     CareersExpectations,
     CareersApply,
     CareersSocialGood,
-    JeePredictionForm
+    JeePredictionForm,
+    AiHackathon,
+    ExploraAnimation
 }
