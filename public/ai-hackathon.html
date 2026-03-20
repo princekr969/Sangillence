@@ -222,6 +222,10 @@
       position: relative;
       z-index: 1;
       max-width: 860px;
+      /* Ensure hero elements stack vertically in a single column */
+      display: flex;
+      flex-direction: column;
+      align-items: center;
     }
 
     /* IIITM logo first, then summit banner below */
@@ -232,6 +236,31 @@
       justify-content: center;
       gap: .85rem;
       margin-bottom: 1.2rem;
+    }
+
+    /* Registration deadline badge (placed inside hero, not at page top). */
+    .deadline-bar{
+      display: block;
+      padding: .62rem 1.25rem;
+      border-radius: 9999px;
+      border: 1.5px solid rgba(0,229,255,.35);
+      background: rgba(2,11,26,.35);
+      backdrop-filter: blur(12px);
+      color: var(--cyan);
+      font-family: var(--D);
+      font-size: .9rem;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      position: relative;
+      z-index: 2;
+      margin: 0 0 1.1rem 0;
+      box-shadow: var(--gc);
+    }
+    @media(max-width:640px){
+      .deadline-bar{
+        font-size: .72rem;
+        padding: .5rem .95rem;
+      }
     }
 
     .hero-college-logo {
@@ -247,7 +276,7 @@
     }
 
     .pb {
-      display: inline-flex;
+      display: flex;
       align-items: center;
       gap: .6rem;
       padding: .62rem 1.35rem;
@@ -651,6 +680,7 @@
           alt="Gwalior AI Summit" draggable="false" />
       </div>
       <div class="pb fi">ABV IIITM GWALIOR</div>
+      <div class="deadline-bar fi d1">Registration deadline: 24th March</div>
       <div class="eo fi d1">Organized by Sangillence</div>
       <h1 class="ht fi d1"><span class="ca">AI </span><span class="cw">SYNERGY</span></h1>
       <div class="hs fi d2">HACKATHON</div>
@@ -663,12 +693,7 @@
       <p class="hd fi d3">A <strong>Two Days in ABV IIITM GWALIOR</strong> in-person innovation marathon for college
         students at ABV-IIITM Gwalior. Work with industry mentors. <strong>No coding required.</strong></p>
       <div class="cr fi d4">
-        <a
-          href="https://forms.gle/eRyoRoDNwtvP5MCQ9"
-          class="btn bp"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
+        <a href="https://forms.gle/eRyoRoDNwtvP5MCQ9" class="btn bp" target="_blank" rel="noopener noreferrer">
           Register Now — ₹500 (Food Included)
         </a>
         <a href="#tracks" class="btn bs">View Challenges</a>
@@ -755,7 +780,8 @@
   <!-- FOOTER -->
   <footer>
     <div class="fl">
-      <a href="#about">About</a><a href="#tracks">Tracks</a><a href="https://forms.gle/eRyoRoDNwtvP5MCQ9" target="_blank" rel="noopener noreferrer">Register</a><a href="#faq">FAQ</a>
+      <a href="#about">About</a><a href="#tracks">Tracks</a><a href="https://forms.gle/eRyoRoDNwtvP5MCQ9"
+        target="_blank" rel="noopener noreferrer">Register</a><a href="#faq">FAQ</a>
     </div>
     <p>© 2026 AI Synergy Hackathon · Organized by <strong>Sangillence</strong></p>
     <span class="hash">#AISynergyGwalior2026</span>
