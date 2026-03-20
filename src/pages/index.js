@@ -8,6 +8,7 @@ import PhotoCapture from "./PhotoCapturePage";
 import SoboPage from "./SoboPage";
 import SoboExamPage from "./SoboExamPage";
 import SoboLandingPage from "./SoboLandingPage";
+import AiHackathonPage from "./AiHackathonPage";
 import MentorShipPage from "./Mentorship.page";
 import MentorshipTestPage from "./Mentorship_test/Mentorship_test.page";
 import CareersPage from "./CareersPage";
@@ -24,6 +25,7 @@ export {
     SoboLandingPage,
     SoboPage,
     SoboExamPage,
+    AiHackathonPage,
     MentorShipPage,
     MentorshipTestPage,
     CareersPage,

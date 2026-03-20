@@ -1,5 +1,5 @@
 import { Navbar, Footer } from "../components";
-import { ExploraAnimation } from "../components/explora";
+import { ExploraAnimation } from "../components";
 
 function Explora() {
   return (

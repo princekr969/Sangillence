@@ -1,6 +1,6 @@
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { Layout1 } from "./layouts";
-import { HomePage, Explora, OlympiadPage, AboutPage, ContactUs, MentorshipTestPage, PhotoCapture, SoboLandingPage, SoboPage, SoboExamPage, MentorShipPage, CareersPage, StudentDashboard } from "./pages";
+import { HomePage, Explora, OlympiadPage, AboutPage, ContactUs, MentorshipTestPage, PhotoCapture, SoboLandingPage, SoboPage, SoboExamPage, MentorShipPage, CareersPage, StudentDashboard, AiHackathonPage } from "./pages";
 import { StudentLoginForm, JeePredictionForm } from './components';
 import FormContainer from './components/Forms/FormContainer';
 import SuccessPage from './components/Forms/SuccessPage';
@@ -12,8 +12,8 @@ function App() {
     <BrowserRouter>
       <Routes>
         {/* Main landing / home page - redirect to Explora */}
-        <Route path="/" element={<Navigate to="/explora" replace />} />
-        <Route path="home" element={<Navigate to="/explora" replace />} />
+        <Route path="/" element={<Navigate to="/ai-hackathon" replace />} />
+        <Route path="/home" element={<Navigate to="/ai-hackathon" replace />} />
 
         {/* Explora main page */}
         <Route path="/explora" element={<Explora />} />
@@ -35,6 +35,7 @@ function App() {
           {/* <Route path='photoCapture/:studentId' element={<PhotoCapture/>}/>  */}
         </Route>
           <Route path='/*' element={<HomePage/>}/>
+          <Route path="ai-hackathon" element={<AiHackathonPage />} />
           <Route path="jee-trajectory-predictor" element={<MentorshipTestPage />} />
 
         <Route path="/new/student" element={<JeePredictionForm />} />

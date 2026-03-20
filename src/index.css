@@ -321,3 +321,13 @@
 .explora-page .explora-navbar > nav {
   margin-bottom: 0 !important;
 }
+
+/* AI Hackathon iframe sizing */
+.ai-hackathon-iframe {
+  width: 100%;
+  height: 100svh;
+  border: 0;
+  display: block;
+  background: #020b1a;
+  overflow-x: hidden;
+}
