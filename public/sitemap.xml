@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <!-- Your Main/JEE Page -->
   <url>
     <loc>https://sangillence.com/</loc>
-    <lastmod>2026-01-07</lastmod>
-    <priority>1.00</priority>
+    <lastmod>2026-03-22</lastmod>
+    <priority>1.0</priority>
   </url>
-  
+  <!-- Your Hackathon Page -->
   <url>
-    <loc>https://sangillence.com/jee-trajectory-predictor</loc>
-    <lastmod>2026-01-07</lastmod>
-    <priority>0.80</priority>
+    <loc>https://sangillence.com/ai-hackathon</loc>
+    <lastmod>2026-03-22</lastmod>
+    <priority>0.9</priority>
   </url>
 </urlset>
