@@ -11,7 +11,7 @@ function OlympiadPage() {
   const [activeTab, setActiveTab] = useState("human");
 
   useEffect(() => {
-    document.title = "Olympiad Champions | Gwalior AI Summit 2026";
+    document.title = "Sangillence | Olympiad Champions 2026";
     const metaDesc = document.querySelector('meta[name="description"]');
     if (metaDesc) {
       metaDesc.setAttribute("content", "Celebrating the winners of the Sangillence Open Book Olympiad and looking forward to the Gwalior AI Summit & Hackathon 2026.");
