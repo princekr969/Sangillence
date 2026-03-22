@@ -11,6 +11,14 @@ function OlympiadPage() {
   const [activeTab, setActiveTab] = useState("human");
 
   useEffect(() => {
+    document.title = "Olympiad Champions | AI Synergy Hackathon 2026";
+    const metaDesc = document.querySelector('meta[name="description"]');
+    if (metaDesc) {
+      metaDesc.setAttribute("content", "Celebrating the winners of the Sangillence Open Book Olympiad and looking forward to the AI Synergy Hackathon 2026 Gwalior.");
+    }
+  }, []);
+
+  useEffect(() => {
     window.scrollTo(0, 0);
   }, [pathname]);
 
