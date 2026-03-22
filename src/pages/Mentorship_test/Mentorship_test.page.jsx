@@ -11,10 +11,10 @@ export default function MentorshipTestPage() {
   const [step, setStep] = useState('studentInfo');
 
   useEffect(() => {
-    document.title = "JEE Predictor | AI Synergy Hackathon 2026 Gwalior";
+    document.title = "JEE Predictor | Gwalior AI Summit 2026 | AI Synergy Hackathon";
     const metaDesc = document.querySelector('meta[name="description"]');
     if (metaDesc) {
-      metaDesc.setAttribute("content", "Analyze your JEE 2026 trajectory and join the AI Synergy Hackathon in Gwalior. Free AI-powered psychometric audit for aspirants.");
+      metaDesc.setAttribute("content", "Analyze your JEE 2026 trajectory and join the Gwalior AI Summit & Hackathon in Gwalior. Free AI-powered psychometric audit for aspirants.");
     }
   }, []);
 

@@ -12,10 +12,10 @@ import {
 
 function SoboLandingPage() {
   useEffect(() => {
-    document.title = "Sobo Results | AI Synergy Hackathon 2026";
+    document.title = "Sobo Results | Gwalior AI Summit 2026";
     const metaDesc = document.querySelector('meta[name="description"]');
     if (metaDesc) {
-      metaDesc.setAttribute("content", "View the results for Sobo and join the AI Synergy Hackathon 2026 in Gwalior. Building the future of AI together.");
+      metaDesc.setAttribute("content", "View the results for Sobo and join the Gwalior AI Summit & Hackathon 2026 in Gwalior. Building the future of AI together.");
     }
   }, []);
 

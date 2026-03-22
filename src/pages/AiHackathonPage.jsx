@@ -3,10 +3,10 @@ import { AiHackathon, Navbar, Footer } from "../components";
 
 function AiHackathonPage() {
   useEffect(() => {
-    document.title = "AI Synergy Hackathon 2026 | Gwalior's Premier AI Event";
+    document.title = "Gwalior AI Summit 2026 | AI Synergy Hackathon";
     const metaDesc = document.querySelector('meta[name="description"]');
     if (metaDesc) {
-      metaDesc.setAttribute("content", "Join the AI Synergy Hackathon 2026 in Gwalior. Build innovative AI solutions, compete for top prizes, and network with tech leaders.");
+      metaDesc.setAttribute("content", "Join the Gwalior AI Summit and AI Synergy Hackathon 2026 in Gwalior. Build innovative AI solutions and network with tech leaders.");
     }
   }, []);
 

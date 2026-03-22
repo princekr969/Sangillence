@@ -142,8 +142,8 @@ const AboutBenefitCarousel = () => {
                 key={index}
                 onClick={() => goToSlide(index)}
                 className={`w-2 h-2 rounded-full transition-all duration-300 ${index === currentSlide
-                    ? 'bg-amber-700 w-8'
-                    : 'bg-gray-300 hover:bg-gray-400'
+                  ? 'bg-amber-700 w-8'
+                  : 'bg-gray-300 hover:bg-gray-400'
                   }`}
               />
             ))}
@@ -156,10 +156,10 @@ const AboutBenefitCarousel = () => {
 
 function AboutPage() {
   useEffect(() => {
-    document.title = "About | AI Synergy Hackathon 2026 Gwalior";
+    document.title = "About | Gwalior AI Summit 2026 | AI Synergy Hackathon";
     const metaDesc = document.querySelector('meta[name="description"]');
     if (metaDesc) {
-      metaDesc.setAttribute("content", "Learn more about Sangillence and the AI Synergy Hackathon 2026. Empowering minds with Artificial Intelligence in Gwalior.");
+      metaDesc.setAttribute("content", "Learn more about Sangillence and the Gwalior AI Summit & Hackathon 2026. Empowering minds with Artificial Intelligence in Gwalior.");
     }
   }, []);
 
