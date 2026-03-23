@@ -12,7 +12,7 @@ import {
 
 function SoboLandingPage() {
   useEffect(() => {
-    document.title = "Sangillence | Sobo Results 2026";
+    document.title = "Sangillence";
     const metaDesc = document.querySelector('meta[name="description"]');
     if (metaDesc) {
       metaDesc.setAttribute("content", "View the results for Sobo and join the Gwalior AI Summit & Hackathon 2026 in Gwalior. Building the future of AI together.");

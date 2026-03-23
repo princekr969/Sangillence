@@ -156,7 +156,7 @@ const AboutBenefitCarousel = () => {
 
 function AboutPage() {
   useEffect(() => {
-    document.title = "Sangillence | About | Gwalior AI Summit 2026";
+    document.title = "Sangillence";
     const metaDesc = document.querySelector('meta[name="description"]');
     if (metaDesc) {
       metaDesc.setAttribute("content", "Learn more about Sangillence and the Gwalior AI Summit & Hackathon 2026. Empowering minds with Artificial Intelligence in Gwalior.");

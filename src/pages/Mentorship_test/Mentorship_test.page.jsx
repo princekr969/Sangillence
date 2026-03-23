@@ -11,7 +11,7 @@ export default function MentorshipTestPage() {
   const [step, setStep] = useState('studentInfo');
 
   useEffect(() => {
-    document.title = "Sangillence | JEE Predictor | Gwalior AI Summit 2026";
+    document.title = "Sangillence";
     const metaDesc = document.querySelector('meta[name="description"]');
     if (metaDesc) {
       metaDesc.setAttribute("content", "Analyze your JEE 2026 trajectory and join the Gwalior AI Summit & Hackathon in Gwalior. Free AI-powered psychometric audit for aspirants.");

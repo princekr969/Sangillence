@@ -3,7 +3,7 @@ import { AiHackathon, Navbar, Footer } from "../components";
 
 function AiHackathonPage() {
   useEffect(() => {
-    document.title = "Sangillence | Gwalior AI Summit 2026 | AI Synergy Hackathon";
+    document.title = "Sangillence";
     const metaDesc = document.querySelector('meta[name="description"]');
     if (metaDesc) {
       metaDesc.setAttribute("content", "Join the Gwalior AI Summit and AI Synergy Hackathon 2026 in Gwalior. Build innovative AI solutions and network with tech leaders.");
