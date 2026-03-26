@@ -13,6 +13,9 @@ import MentorShipPage from "./Mentorship.page";
 import MentorshipTestPage from "./Mentorship_test/Mentorship_test.page";
 import CareersPage from "./CareersPage";
 import StudentDashboard from "./StudentDashboard";
+import EnrollPaymentPage from "./EnrollPaymentPage";
+import SignUp from "./SignUp";
+import SignIn from "./SignIn";
 
 export {
     HomePage,
@@ -29,5 +32,8 @@ export {
     MentorShipPage,
     MentorshipTestPage,
     CareersPage,
-    StudentDashboard
+    StudentDashboard,
+    EnrollPaymentPage,
+    SignUp,
+    SignIn
 }
