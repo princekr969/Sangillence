@@ -1,6 +1,6 @@
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { Layout1 } from "./layouts";
-import { HomePage, Explora, OlympiadPage, AboutPage, ContactUs, MentorshipTestPage, PhotoCapture, SoboLandingPage, SoboPage, SoboExamPage, MentorShipPage, CareersPage, StudentDashboard, AiHackathonPage } from "./pages";
+import { HomePage, Explora, OlympiadPage, AboutPage, ContactUs, MentorshipTestPage, PhotoCapture, SoboLandingPage, SoboPage, SoboExamPage, MentorShipPage, CareersPage, StudentDashboard, EnrollPaymentPage, AiHackathonPage, SignUp, SignIn } from "./pages";
 import { StudentLoginForm, JeePredictionForm } from './components';
 import FormContainer from './components/Forms/FormContainer';
 import SuccessPage from './components/Forms/SuccessPage';
@@ -38,9 +38,10 @@ function App() {
           <Route path="ai-hackathon" element={<AiHackathonPage />} />
           <Route path="jee-trajectory-predictor" element={<MentorshipTestPage />} />
 
-        <Route path="/new/student" element={<JeePredictionForm />} />
-        <Route path="/student-login" element={<StudentLoginForm />} />
+        <Route path="/new/student" element={<SignUp />} />
+        <Route path="/student-login" element={<SignIn />} />
         <Route path="/student-dashboard/:resultId" element={<StudentDashboard />} />
+        <Route path="/student-dashboard/:resultId/enroll" element={<EnrollPaymentPage />} />
         {/* <Route path="/olympiad/test" element={<MainContainer />} /> */}
         {/* <Route path="/registration-success" element={<SuccessPage />} /> */}
       </Routes>

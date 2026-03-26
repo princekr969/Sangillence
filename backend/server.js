@@ -7,6 +7,7 @@ import studentRegistrationRoutes from "./routes/studentRegistration.js";
 import studentRoutes from "./routes/studentRoutes.js";
 import studentPhotoUploadRoutes from "./routes/uploadStudentPhoto.js";
 import connectDB from "./config/db.js";
+import userRouter from "./routes/userRoute.js";
 
 // Load environment variables
 dotenv.config();
@@ -65,6 +66,7 @@ app.use("/api/student", studentPhotoUploadRoutes);
 
 // all routes for student. get/add/login
 app.use("/api/students", studentRoutes);
+app.use("/api/user", userRouter);
 
 // Error handling middleware
 app.use((err, req, res, next) => {

@@ -1,5 +1,7 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useNavigate, useParams } from "react-router-dom";
+import { useAuth } from "../context/AuthContext";
+import Navbar from "../components/common/Navbar";
 import {
   User,
   Trophy,
@@ -16,13 +18,15 @@ import {
   Sparkles,
   ChevronLeft,
   BookCopy,
-  
+  Pencil,
+  Upload,
+  X,
+  Check,
 } from "lucide-react";
 import heroSectionBg from "../../assets/svgs/herosectionbg.svg";
 import axios from "axios";
 import downloadResult from "../utils/resultUtils.js";
 import handleDownloadCertificate from "../utils/certificateUtils.js";
-
 
 const downloadImage = async (url, filename) => {
   try {
@@ -41,18 +45,54 @@ const downloadImage = async (url, filename) => {
   }
 };
 
-
 export default function StudentDashboard() {
+  const { user, login, logout, loading: authLoading } = useAuth();
   const [resultData, setResultData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [activeTab, setActiveTab] = useState("dashboard"); // "dashboard", "results", "profile"
+  const [activeTab, setActiveTab] = useState("dashboard");
   const navigate = useNavigate();
   const { resultId } = useParams();
 
+  // Edit State
+  const [isEditing, setIsEditing] = useState(false);
+  const [editForm, setEditForm] = useState({});
+  const fileInputRef = useRef(null);
+  const [uploading, setUploading] = useState(false);
+
   useEffect(() => {
     const fetchStudentData = async () => {
+      // Handle "me" route - authenticated user dashboard
+      if (resultId === 'me') {
+        if (authLoading) return; // Wait for auth check to complete
+        
+        if (!user) {
+            navigate("/student-login");
+            return;
+        }
 
+        // Map auth user data to dashboard structure
+        setResultData({
+            Name: user.name,
+            email: user.email,
+            _id: user.studentId || user._id || "N/A",
+            imageUrl: user.image || user.profilePicture || "", 
+            Class: user.class || "",
+            School: user.school || "",
+            Section: user.section || "",
+            DOB: user.dob || "",
+            Gender: user.gender || "Not Selected",
+            hasResults: false, // Default for new users
+            certificate: [], 
+            // Default scores to 0/empty to prevent errors
+            CV_Score: 0, A_Score: 0, L_Score: 0, M_Score: 0, OB_Score: 0, CT_Score: 0, R_Score: 0, OOTB_Score: 0, MC_Score: 0,
+            g_Score: 0, Plag__Score: 0, Actual_Score: 0, TopSkills: "To be determined", StuArch: "User",
+        });
+        setLoading(false);
+        return; 
+      }
+
+      // Handle legacy/direct result ID route
       if (!resultId) {
         navigate("/student-login");
         return;
@@ -64,14 +104,15 @@ export default function StudentDashboard() {
         );
 
         if (response.data.success) {
-          setResultData(response.data.result);
+           // Tag this data as having results for UI logic
+          setResultData({ ...response.data.result, hasResults: true });
         } else {
-          setError("Student not found");
+          setError("User not found");
         }
       } catch (error) {
-        console.error("Student detail Error:", error);
+        console.error("User detail Error:", error);
         setError(
-          error.response?.data?.message || "Failed to fetch student data",
+          error.response?.data?.message || "Failed to fetch user data",
         );
       } finally {
         setLoading(false);
@@ -79,19 +120,112 @@ export default function StudentDashboard() {
     };
 
     fetchStudentData();
-  }, [resultId, navigate]);
+  }, [resultId, navigate, user, authLoading]);
+
+  // Sync edit form when data loads
+  useEffect(() => {
+    if (resultData) {
+        setEditForm({
+            name: resultData.Name || "",
+            class: resultData.Class || "",
+            section: resultData.Section || "",
+            school: resultData.School || "",
+            dob: resultData.DOB ? (resultData.DOB.includes('T') ? resultData.DOB.split('T')[0] : resultData.DOB) : "",
+            gender: resultData.Gender || "Not Selected",
+            imageUrl: resultData.imageUrl || ""
+        });
+    }
+  }, [resultData]);
+
+  const handleEditToggle = () => {
+    setIsEditing(!isEditing);
+    // Reset form on cancel
+    if (isEditing && resultData) {
+        setEditForm({
+            name: resultData.Name || "",
+            class: resultData.Class || "",
+            section: resultData.Section || "",
+            school: resultData.School || "",
+            dob: resultData.DOB ? (resultData.DOB.includes('T') ? resultData.DOB.split('T')[0] : resultData.DOB) : "",
+            gender: resultData.Gender || "Not Selected",
+            imageUrl: resultData.imageUrl || ""
+        });
+    }
+  };
+
+  const handleInputChange = (e) => {
+    setEditForm({ ...editForm, [e.target.name]: e.target.value });
+  };
+
+  const handleFileChange = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+        // Create local preview URL
+        setEditForm({ ...editForm, imageFile: file, imageUrl: URL.createObjectURL(file) });
+    }
+  };
+
+  const handleSaveProfile = async () => {
+    if (resultId !== 'me') return;
+    setUploading(true);
+    try {
+        const formData = new FormData();
+        formData.append("userId", user?._id); 
+        formData.append("name", editForm.name);
+        formData.append("dob", editForm.dob);
+        formData.append("class", editForm.class);
+        formData.append("section", editForm.section);
+        formData.append("school", editForm.school);
+        formData.append("gender", editForm.gender); // Ensure required fields
+        formData.append("phone", user.phone || "0000000000"); // Ensure required fields
+        
+        // Add default address if missing to satisfy backend validation if strict
+        if (!user.address) {
+            formData.append("address", JSON.stringify({ line1: "", line2: "" }));
+        } else {
+             formData.append("address", JSON.stringify(user.address));
+        }
+
+        if (editForm.imageFile) {
+            formData.append("image", editForm.imageFile); // Matches backend 'image' field expected by multer
+        }
+
+        const token = localStorage.getItem('token');
+        const response = await axios.post("http://localhost:5000/api/user/update-profile", formData, {
+            headers: {
+                token: token
+            }
+        });
+        
+        if (response.data.success) {
+            setIsEditing(false);
+            // Reload page to re-fetch updated profile
+            window.location.reload(); 
+        } else {
+            alert(response.data.message || "Update failed");
+        }
+
+    } catch (e) {
+        console.error(e);
+        alert("Update failed: " + (e.response?.data?.message || e.message));
+    } finally {
+        setUploading(false);
+    }
+  };
 
   const handleLogout = () => {
     if (activeTab !== "dashboard") {
       setActiveTab("dashboard");
     } else {
-      navigate("/student-login");
+      if (logout) logout();
+      navigate("/");
     }
   };
 
   const formatDOB = (dobString) => {
-    if (!dobString) return "Not provided";
+    if (!dobString || dobString === "Not Selected") return "Not provided";
     const dob = new Date(dobString);
+    if (isNaN(dob.getTime())) return dobString;
     return dob.toLocaleDateString("en-US", {
       year: "numeric",
       month: "long",
@@ -100,103 +234,66 @@ export default function StudentDashboard() {
   };
 
   const calculateAge = (dobString) => {
-    if (!dobString) return "N/A";
+    if (!dobString || dobString === "Not Selected") return "N/A";
     const dob = new Date(dobString);
+    if (isNaN(dob.getTime())) return "N/A";
     const today = new Date();
-    let age = today.getFullYear() - dob.getFullYear();
-    const monthDiff = today.getMonth() - dob.getMonth();
-    if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < dob.getDate())) {
-      age--;
+    let birthDate = dob;
+    let age = today.getFullYear() - birthDate.getFullYear();
+    const month = today.getMonth() - birthDate.getMonth();
+    if (month < 0 || (month === 0 && today.getDate() < birthDate.getDate())) {
+        age--;
     }
     return age;
   };
 
-  // Calculate score percentage for visual representation
-  const calculateScorePercentage = (score, maxScore = 10) => {
-    return Math.min(Math.max((score / maxScore) * 100, 0), 100);
-  };
-
-  // Get score color based on value
-  const getScoreColor = (score, maxScore = 10) => {
-    const percentage = (score / maxScore) * 100;
-    if (percentage >= 70) return "text-green-400";
-    if (percentage >= 40) return "text-yellow-400";
-    return "text-red-400";
-  };
-
-  // Get background color for score bars
-  const getScoreBarColor = (score, maxScore = 10) => {
-    const percentage = (score / maxScore) * 100;
-    if (percentage >= 70)
-      return "bg-gradient-to-r from-green-500 to-emerald-500";
-    if (percentage >= 40)
-      return "bg-gradient-to-r from-yellow-500 to-amber-500";
-    return "bg-gradient-to-r from-red-500 to-pink-500";
-  };
-
-  // Process question data
-  const processQuestionData = () => {
-    if (!resultData) return [];
-
-    const questions = [];
-    for (let i = 1; i <= 10; i++) {
-      const qData = {
-        number: i,
-        answer: resultData[`Q${i}_Ans`] || "-",
-        domain: resultData[`Q${i}_Dom`] || "-",
-        lateral: resultData[`Q${i}_Lat`] || "-",
-        support: resultData[`Q${i}_Sup`] || "-",
-        tag: resultData[`Q${i}_Tag`] || "-",
-      };
-      questions.push(qData);
+  const handleEnrollClick = () => {
+    // Only allow enrollment for authenticated "me" dashboard
+    if (resultId !== "me") {
+      navigate("/student-login");
+      return;
     }
-    return questions;
+    // If already enrolled, don't send to payment again
+    if (user?.enrolled) {
+      return;
+    }
+    navigate(`/student-dashboard/${resultId}/enroll`);
   };
 
-  // Get skill categories
-  const getSkillCategories = () => {
-    if (!resultData) return [];
+  // Helper to Render Calendar
+  const renderCalendar = () => {
+    const daysInMonth = 30; // Simplified for demo
+    const completedTasks = [2, 5, 8, 12, 15, 18, 22, 25, 28]; // Dummy task completion days
+    const days = [];
 
-    return [
-      {
-        name: "Creativity",
-        value: (resultData.CV_Score * 10) / 11.11 || 0,
-        icon: Sparkles,
-      },
-      {
-        name: "Analytical Thinking",
-        value: resultData.A_Score || 0,
-        icon: Brain,
-      },
-      { name: "Logical Thinking", value: resultData.L_Score || 0, icon: Cpu },
-      { name: "Memory", value: resultData.M_Score || 0, icon: Brain },
-      { name: "Observational", value: resultData.OB_Score || 0, icon: Eye },
-      { name: "Critical Thinking", value: resultData.CT_Score || 0, icon: Eye },
-      { name: "Research", value: resultData.R_Score || 0, icon: Eye },
-      {
-        name: "Out-of-the-Box Thinking",
-        value: resultData.OOTB_Score || 0,
-        icon: Lightbulb,
-      },
-      { name: "Meta-cognition", value: resultData.MC_Score || 0, icon: Target },
-    ];
-  };
-
-  const getPoolFromClass = (cls) => {
-    const classNum = parseInt(cls, 10);
-    if (classNum >= 3 && classNum <= 5) return "Pool A";
-    if (classNum >= 6 && classNum <= 8) return "Pool B";
-    if (classNum >= 9 && classNum <= 10) return "Pool C";
-    return "Unknown Pool";
+    for (let i = 1; i <= daysInMonth; i++) {
+        const isCompleted = completedTasks.includes(i);
+        days.push(
+            <div key={i} className={`
+                relative aspect-square flex items-center justify-center rounded-2xl text-sm font-family-givonic-bold transition-all duration-300 group
+                ${isCompleted 
+                    ? 'bg-gradient-to-br from-emerald-400 to-green-600 text-white shadow-lg shadow-emerald-500/30 scale-105 border border-emerald-400/20 z-10' 
+                    : 'bg-slate-800/40 text-slate-500 border border-white/5 hover:bg-slate-700/50 hover:border-white/20 hover:text-slate-300 hover:scale-105'}
+            `}>
+                {i}
+                {isCompleted && (
+                    <div className="absolute top-1.5 right-1.5 w-1.5 h-1.5 bg-white rounded-full opacity-60 shadow-sm animate-pulse"></div>
+                )}
+            </div>
+        );
+    }
+    return days;
   };
 
   if (loading) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-slate-900 to-indigo-900">
-        <div className="text-center">
-          <div className="animate-spin rounded-full h-16 w-16 border-t-2 border-b-2 border-blue-500 mx-auto mb-4"></div>
-          <div className="animate-pulse text-white text-xl">
-            Loading student data...
+      <div className="min-h-screen flex items-center justify-center bg-slate-900 relative overflow-hidden">
+        {/* Background elements */}
+        <div className="absolute inset-0 bg-gradient-to-br from-slate-900 via-[#1e3366] to-slate-900 opacity-50"></div>
+        <div className="text-center relative z-10">
+          <div className="animate-spin rounded-full h-16 w-16 border-4 border-indigo-500 border-t-transparent mx-auto mb-6 shadow-lg shadow-indigo-500/20"></div>
+          <div className="animate-pulse text-blue-200 text-xl font-family-givonic-bold tracking-wide">
+            Loading your dashboard...
           </div>
         </div>
       </div>
@@ -205,614 +302,283 @@ export default function StudentDashboard() {
 
   if (error || !resultData) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-slate-900 to-indigo-900">
-        <div className="text-center">
-          <div className="text-red-400 text-2xl mb-4">
-            Error: {error || "No student data found"}
+      <div className="min-h-screen flex items-center justify-center bg-slate-900 relative overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-br from-slate-900 via-[#1e3366] to-slate-900 opacity-50"></div>
+        <div className="text-center relative z-10 max-w-md mx-auto p-8 rounded-3xl bg-slate-800/50 backdrop-blur-md border border-white/10 shadow-2xl">
+          <div className="w-20 h-20 bg-red-500/10 rounded-full flex items-center justify-center mx-auto mb-6">
+            <LogOut className="w-10 h-10 text-red-400" />
+          </div>
+          <h2 className="text-2xl font-family-givonic-bold text-white mb-2">Access Error</h2>
+          <div className="text-slate-300 mb-8 font-family-givonic-light">
+            {error || "We couldn't find your user data. Please try logging in again."}
           </div>
           <button
             onClick={() => navigate("/student-login", { replace: true })}
-            className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-semibold transition-colors"
+            className="w-full bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white px-6 py-3 rounded-xl font-family-givonic-bold transition-all shadow-lg shadow-blue-600/20 hover:shadow-blue-600/40 transform hover:-translate-y-1"
           >
-            Back to Login
+            Return to Login
           </button>
         </div>
       </div>
     );
   }
 
-  const questions = processQuestionData();
-  const skillCategories = getSkillCategories();
-
   return (
-    <div className="relative overflow-hidden min-h-screen px-4 sm:px-6 md:px-16 py-8">
-      {/* Background */}
+    <div className="relative overflow-hidden min-h-screen font-family-givonic-regular text-slate-100">
+      {/* Fixed Background Image */}
       <div
-        className="absolute inset-0 bg-cover bg-center bg-no-repeat z-0"
+        className="fixed inset-0 bg-cover bg-center bg-no-repeat z-0 opacity-40"
         style={{ backgroundImage: `url(${heroSectionBg})` }}
       ></div>
+      
+      {/* Gradient Overlay for better readability */}
+      <div className="fixed inset-0 bg-gradient-to-br from-black/95 via-[#0f172a]/95 to-black/95 z-0 pointer-events-none"></div>
 
-      {/* Main Dashboard Container */}
-      <div className="relative z-10">
-        {/* Header Section */}
-        <div className="mb-6">
-          <div className="relative overflow-hidden bg-gradient-to-r from-slate-800 via-blue-900 to-indigo-900 rounded-2xl shadow-2xl p-6">
-            <div className="absolute inset-0 opacity-20">
-              <div
-                className="absolute inset-0"
-                style={{
-                  backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.1'%3E%3Ccircle cx='30' cy='30' r='2'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
-                  backgroundSize: "30px 30px",
-                }}
-              ></div>
-            </div>
-
-            <div className="relative z-10 flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
-              <div>
-                <h1 className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-yellow-400 to-orange-400 bg-clip-text text-transparent">
-                  Welcome back, {resultData?.Name?.split(" ")[0] || "Student"}
-                </h1>
-                <p className="text-blue-200 mt-2">
-                  {resultData
-                    ? "SOBO Assessment Results Ready"
-                    : "Complete your assessment to view results"}
-                </p>
-              </div>
-              <button
-                onClick={handleLogout}
-                className="flex items-center gap-2 bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-lg transition-all duration-300 self-start md:self-auto"
-              >
-                {activeTab !== "dashboard" ? (
-                  <ChevronLeft className="w-5 h-5" />
-                ) : (
-                  <LogOut className="w-5 h-5" />
-                )}
-                <span>{activeTab == "dashboard" ? "Logout" : "Back"}</span>
-              </button>
-            </div>
-          </div>
-        </div>
-
-        {/* Main Content */}
-        <div className="relative shadow-xl bg-gradient-to-br from-slate-800/90 via-slate-900/90 to-indigo-900/90 rounded-3xl p-6 md:p-10 border border-white/10">
-          {/* Background Effects */}
-          <div className="absolute inset-0 rounded-3xl overflow-hidden">
-            <div className="absolute inset-0 bg-gradient-to-br from-slate-800 via-slate-900 to-indigo-900"></div>
-
-            {/* Geometric overlays */}
-            <div className="absolute inset-0">
-              <div
-                className="absolute top-0 left-0 w-1/2 h-1/2 bg-gradient-to-br from-blue-600/30 to-transparent"
-                style={{ clipPath: "polygon(0 0, 70% 0, 30% 100%, 0 100%)" }}
-              ></div>
-              <div
-                className="absolute top-0 right-0 w-1/2 h-1/2 bg-gradient-to-bl from-amber-500/20 to-transparent"
-                style={{
-                  clipPath: "polygon(30% 0, 100% 0, 100% 100%, 70% 100%)",
-                }}
-              ></div>
-              <div
-                className="absolute bottom-0 left-0 w-1/2 h-1/2 bg-gradient-to-tr from-teal-500/20 to-transparent"
-                style={{ clipPath: "polygon(0 0, 60% 0, 0 80%)" }}
-              ></div>
-              <div
-                className="absolute bottom-0 right-0 w-1/2 h-1/2 bg-gradient-to-tl from-purple-600/25 to-transparent"
-                style={{
-                  clipPath: "polygon(40% 0, 100% 0, 100% 100%, 0 100%)",
-                }}
-              ></div>
-            </div>
-          </div>
-
-          {/* Content */}
-          <div className="relative z-10">
-            {activeTab === "dashboard" && (
-              <>
-                {/* Profile Section */}
-                <div className="grid md:grid-cols-3 gap-6 mb-8">
-                  {/* Profile Card */}
-                  <div className="md:col-span-1 bg-gradient-to-br from-slate-800/80 to-slate-900/80 backdrop-blur-sm rounded-2xl p-6 border border-white/10">
-                    <div className="flex flex-col items-center">
-                      <div className="relative mb-4">
-                        {resultData.imageUrl ? (
-                          <div className="relative">
-                            <img
-                              src={resultData.imageUrl}
-                              alt={resultData["Name "] || "Student"}
-                              className="w-32 h-32 rounded-full border-4 border-blue-500 shadow-lg object-cover"
-                              onError={(e) => {
-                                // If image fails to load, show initial
-                                e.target.style.display = "none";
-                                const initialDiv = e.target.nextElementSibling;
-                                if (initialDiv)
-                                  initialDiv.style.display = "flex";
-                              }}
-                            />
-                          </div>
-                        ) : (
-                          <div className="w-32 h-32 rounded-full border-4 border-blue-500 shadow-lg bg-gradient-to-br from-blue-600 to-purple-600 flex items-center justify-center">
-                            <span className="text-4xl font-bold text-white">
-                              {resultData?.Name?.charAt(0) || "N"}
-                            </span>
-                          </div>
-                        )}
-
-                        <div className="absolute -bottom-2 -right-2 bg-green-500 w-8 h-8 rounded-full border-4 border-slate-900 flex items-center justify-center">
-                          <User className="w-4 h-4 text-white" />
-                        </div>
-                      </div>
-
-                      <h2 className="text-2xl font-bold text-white mb-2 text-center">
-                        {resultData?.Name || "N/A"}
-                      </h2>
-                      <div className="flex items-center gap-2 text-blue-300 mb-1">
-                        <GraduationCap className="w-4 h-4" />
-                        <span>
-                          Class{" "}
-                          {resultData?.Class || "N/A"}{" "}
-                          -{" "}
-                          {
-                            resultData?.Section ||
-                            "N/A"}
-                        </span>
-                      </div>
-
-                      <div className="flex items-center gap-2 text-gray-400 text-sm mb-4">
-                        <School className="w-4 h-4" />
-                        <span>
-                          {resultData?.School || "N/A"}
-                        </span>
-                      </div>
-                      <div className="">
-                        <span className="px-2 py-1 bg-green-500/20 text-green-300 rounded-full text-xs font-semibold">
-                          {getPoolFromClass(
-                            resultData?.Class || "N/A",
-                          )}
-                        </span>
-                      </div>
-
-                      <div className="w-full space-y-3 mt-4">
-                        <div className="flex items-center gap-3 p-3 bg-blue-500/10 rounded-lg border border-blue-500/20">
-                          <User className="w-5 h-5 text-blue-400" />
-                          <div>
-                            <p className="text-blue-300 text-xs">Student ID</p>
-                            <p className="text-white font-mono">
-                              {resultData?._id.substring(0, 8)}...
-                            </p>
-                          </div>
-                        </div>
-
-                        <div className="grid grid-cols-2 gap-3">
-                          <div className="bg-purple-500/10 rounded-lg p-3 border border-purple-500/20">
-                            <p className="text-purple-300 text-xs">Age</p>
-                            <p className="text-white font-semibold">
-                              {calculateAge(resultData?.DOB)}{" "}
-                              years
-                            </p>
-                          </div>
-                          <div className="bg-teal-500/10 rounded-lg p-3 border border-teal-500/20">
-                            <p className="text-teal-300 text-xs">
-                              Date of Birth
-                            </p>
-                            <p className="text-white font-semibold text-sm">
-                              {formatDOB(resultData?.DOB)}
-                            </p>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-
-                  {/*  Perfomance Card */}
-                  <div className="md:col-span-2 grid sm:grid-cols-2 gap-4">
-                    {resultData && (
-                      <div className="bg-gradient-to-br from-green-600/20 to-emerald-800/20 backdrop-blur-sm rounded-2xl p-6 border border-green-500/30">
-                        {/* Header with Archetype */}
-                        <div className="flex items-start justify-between mb-4">
-                          <div>
-                            <p className="text-green-300 text-sm mb-1">
-                              Assessment Results
-                            </p>
-                            <h3 className="text-2xl font-bold text-white">
-                              {resultData.StuArch || "AI Parasite"}
-                            </h3>
-                            <p className="text-gray-300 text-sm mt-1">
-                              Archetype
-                            </p>
-                          </div>
-                          <Trophy className="w-10 h-10 text-green-400" />
-                        </div>
-
-                        {/* Score cards */}
-                        <div className="grid grid-cols-2 gap-4 mt-4">
-                          <div className="bg-green-500/10 rounded p-3">
-                            <p className="text-green-300 text-xs">
-                              {" "}
-                              Intelligence Score{" "}
-                            </p>
-                            <p className="text-white text-xl font-bold">
-                              {resultData.g_Score || "N/A"}
-                            </p>
-                          </div>
-
-                          <div className="bg-green-500/10 rounded p-3 ">
-                            <p className="text-green-300 text-xs">
-                              Plagiarism %
-                            </p>
-                            <p className="text-white text-xl font-bold">
-                              {resultData.Plag__Score != null ? (resultData.Plag__Score * 100).toFixed(1) : "0"}
-                            </p>
-                          </div>
-                          <div className="bg-green-500/10 rounded p-3 col-span-2">
-                            <p className="text-green-300 text-xs">
-                              Actual Score
-                            </p>
-                            <p className="text-white text-xl font-bold">
-                              {resultData["Actual Score"] ||
-                                resultData.Actual_Score ||
-                                "N/A"}
-                            </p>
-                          </div>
-                          <div className="bg-green-500/10 rounded p-3 col-span-2">
-                            <p className="text-green-300 text-xs">Top Skills</p>
-                            <p className="text-white text-xl font-bold">
-                              {resultData.TopSkills ||
-                                "Creativity, Meta-cognition"}
-                            </p>
-                          </div>
-                        </div>
-
-                        {/* Button to view full report */}
-                        <div className="mt-4 flex justify-end">
-                          <button
-                            onClick={() => setActiveTab("results")}
-                            className="cursor-pointer text-white text-xs bg-green-600 hover:bg-green-700 px-3 py-1.5 rounded"
-                          >
-                            View Full Report
-                          </button>
-                        </div>
-                      </div>
-                    )}
-                    {/* Quick Actions */}
-                    <div className="bg-gradient-to-br from-teal-600/20 to-teal-800/20 backdrop-blur-sm rounded-2xl p-6 border border-teal-500/30">
-                      <p className="text-teal-300 text-sm mb-4">
-                        Quick Actions
-                      </p>
-                      <div className="space-y-3">
-                        <button
-                          onClick={() => setActiveTab("results")}
-                          className="w-full bg-gradient-to-r from-purple-600 to-pink-600 text-white px-4 py-3 rounded-lg text-center hover:scale-105 transition-all duration-300 font-semibold"
-                        >
-                          View Detailed Results
-                        </button>
-                        {/* Certificate Download Button */}
-                        <button
-                          type="button"
-                          onClick={() =>
-                            downloadResult(resultData)
-                          }
-                          className="w-full bg-gradient-to-r from-teal-600 to-blue-600 text-white px-4 py-3 rounded-lg text-center hover:scale-105 transition-all duration-300 font-semibold"
-                        >
-                          Download Result
-                        </button>
-                        <p className="text-gray-300 text-sm mb-4">
-                          Certificates
-                      </p>
-                        <button
-                          type="button"
-                          onClick={() =>
-                            handleDownloadCertificate(
-                              resultData,
-                              getPoolFromClass(resultData.Class),
-                            )
-                          }
-                          className="w-full bg-gradient-to-r from-amber-600 to-yellow-600 text-white px-4 py-3 rounded-lg text-center hover:scale-105 transition-all duration-300 font-semibold"
-                        >
-                          Download Certificate 1
-                        </button>
-
-                        <div className="space-y-2">
-                          {resultData.certificate.map((url, index) => {
-                            // Extract a filename from the URL (optional)
-                            const filename = `certificate_${index + 2}.png`;
-                            return (
-                              <button
-                                key={index}
-                                type="button"
-                                onClick={() => downloadImage(url, filename)}
-                                className="w-full bg-gradient-to-r from-amber-600 to-yellow-600 text-white px-4 py-3 rounded-lg text-center hover:scale-105 transition-all duration-300 font-semibold"
-                              >
-                                Download Certificate {index + 2}
-                              </button>
-                            );
-                          })}
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                {/* Remark Section */}
-                <div className="bg-gradient-to-br from-amber-600/10 to-orange-600/10 backdrop-blur-sm rounded-2xl p-6 border border-amber-500/30">
-                  <div className="flex items-start gap-4">
-                    <Lightbulb className="w-8 h-8 text-amber-400 mt-1" />
-                    <div>
-                      <h3 className="text-xl font-bold text-white mb-2">
-                        Remark & Feedback
-                      </h3>
-                      <p className="text-gray-200 leading-relaxed">
-                        {resultData.Remark ||
-                          "You have a fantastic tech-savvy mind and a high-speed approach to solving difficult tasks; which is a massive skill! My challenge for you is to now anchor that speed in your own deep reasoning; as understanding the 'why' will make you unstoppable."}
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              </>
-            )}
-
-            {activeTab === "results" && resultData && (
-              <>
-                <div className="space-y-8">
-                  <div className="bg-gradient-to-br from-blue-600/20 to-purple-600/20 backdrop-blur-sm rounded-2xl p-8 border border-blue-500/30">
-                    {/* Title */}
-                    <h3 className="text-2xl font-bold text-white mb-6 text-center md:text-left">
-                      Performance Overview
-                    </h3>
-
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                      <div className="relative flex flex-col items-center justify-center gap-4">
-                        <div className="w-48 h-48 rounded-full border-8 border-blue-500/30 flex items-center justify-center">
-                          <div className="w-40 h-40 rounded-full border-8 border-transparent border-t-blue-500 border-r-purple-500 border-b-pink-500 border-l-teal-500 flex items-center justify-center ">
-                            <div className="flex items-center justify-center">
-                              <div className="text-center">
-                                <div className="text-4xl font-bold text-white">
-                                  {resultData["Actual Score"] || "0"}
-                                </div>
-                                <div className="text-gray-300">
-                                  Actual Score
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                        <p className="text-white font-family-givonic-bold text-xl">
-                          OVERALL SCORE
-                        </p>
-                      </div>
-
-                      <div className="space-y-4">
-                        <div className="bg-slate-800/50 rounded-xl p-4 border border-white/10 flex items-center gap-3">
-                          <div className="p-2 bg-purple-500/20 rounded-lg">
-                            <Award className="w-5 h-5 text-purple-400" />
-                          </div>
-                          <div>
-                            <p className="text-gray-400 text-xs">
-                              Student Archetype
-                            </p>
-                            <p className="text-white font-bold text-lg">
-                              {resultData.StuArch || "AI Parasite"}
-                            </p>
-                          </div>
-                        </div>
-                        <div className="bg-slate-800/50 rounded-xl p-4 border border-white/10 flex items-center gap-3">
-                          <div className="p-2 bg-blue-500/20 rounded-lg">
-                            <Target className="w-5 h-5 text-blue-400" />
-                          </div>
-                          <div>
-                            <p className="text-gray-400 text-xs">
-                              Intelligence Score
-                            </p>
-                            <p className="text-white text-2xl font-bold">
-                              {resultData.g_Score || "N/A"}
-                            </p>
-                          </div>
-                        </div>
-                        <div className="bg-slate-800/50 rounded-xl p-4 border border-white/10 flex items-center gap-3">
-                          <div className="p-2 bg-teal-500/20 rounded-lg">
-                            <Lightbulb className="w-5 h-5 text-teal-400" />
-                          </div>
-                          <div>
-                            <p className="text-gray-400 text-xs">Top Skills</p>
-                            <p className="text-white font-bold text-lg">
-                              {resultData.TopSkills ||
-                                "Creativity, Meta‑cognition"}
-                            </p>
-                          </div>
-                        </div>
-                      </div>
-
-                      <div className="space-y-4">
-                        <div className="bg-slate-800/50 rounded-xl p-4 border border-white/10 flex items-center gap-3">
-                          <div className="p-2 bg-amber-500/20 rounded-lg">
-                            <Brain className="w-5 h-5 text-amber-400" />
-                          </div>
-                          <div>
-                            <p className="text-gray-400 text-xs">
-                              Suppressed Skills
-                            </p>
-                            <p className="text-white font-bold text-lg">
-                              {resultData.SuppressedSkills ||
-                                "Critical Thinking"}
-                            </p>
-                          </div>
-                        </div>
-                        <div className="bg-slate-800/50 rounded-xl p-4 border border-white/10 flex items-center gap-3">
-                          <div className="p-2 bg-amber-500/20 rounded-lg">
-                            <BookCopy className="w-5 h-5 text-red-400" />
-                          </div>
-                          <div>
-                            <p className="text-gray-400 text-xs">
-                              Plagiarism %
-                            </p>
-                            <p className="text-white font-bold text-lg">
-                              {resultData.Plag__Score != null ? (resultData.Plag__Score * 100).toFixed(1) : "0"}
-                            </p>
-                          </div>
-                        </div>
-                        {resultData.AAS_Score > 0 && (
-                          <div className="bg-slate-800/50 rounded-xl p-4 border border-white/10 flex items-center gap-3">
-                            <div className="p-2 bg-pink-500/20 rounded-lg">
-                              <BarChart className="w-5 h-5 text-pink-400" />
-                            </div>
-                            <div>
-                              <p className="text-gray-400 text-xs">
-                                AI Augmentation Score
-                              </p>
-                              <p className="text-white text-2xl font-bold">
-                                {resultData.AAS_Score?.toFixed(1) || "N/A"}
-                              </p>
-                            </div>
-                          </div>
-                        )}
-                      </div>
-                    </div>
-                  </div>
-                  {/* Skill Scores Grid */}
-                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                    {skillCategories
-                      .filter((skill) => skill.value !== 0)
-                      .map((skill, index) => (
-                        <div
-                          key={index}
-                          className="bg-slate-800/40 rounded-xl p-4 border border-white/10 hover:border-blue-500/30 transition-all duration-300"
-                        >
-                          <div className="flex items-center justify-between mb-3">
-                            <div className="flex items-center gap-3">
-                              <div className="p-2 bg-blue-500/20 rounded-lg">
-                                <skill.icon className="w-5 h-5 text-blue-400" />
-                              </div>
-                              <span className="text-white font-semibold">
-                                {skill.name}
-                              </span>
-                            </div>
-                            <span
-                              className={`text-2xl font-bold ${getScoreColor(skill.value)}`}
-                            >
-                              {skill.value.toFixed(1)}
-                            </span>
-                          </div>
-                          <div className="w-full bg-slate-700/50 rounded-full h-2">
-                            <div
-                              className={`h-2 rounded-full ${getScoreBarColor(skill.value)} transition-all duration-500`}
-                              style={{
-                                width: `${calculateScorePercentage(skill.value)}%`,
-                              }}
-                            ></div>
-                          </div>
-                        </div>
-                      ))}
-                  </div>
-
-                  {/* Question-wise Analysis */}
-                  <div className="bg-gradient-to-br from-slate-800/60 to-slate-900/60 rounded-2xl p-6 border border-white/10">
-                    <h3 className="text-2xl font-bold text-white mb-6">
-                      Question-wise Analysis
-                    </h3>
-
-                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                      {questions.map((q, index) => (
-                        <div
-                          key={index}
-                          className="bg-slate-800/40 rounded-xl p-6 border border-white/10 hover:border-purple-500/30 transition-all duration-300"
-                        >
-                          <div className="flex items-start justify-between mb-4">
-                            <div className="flex items-center gap-3">
-                              <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-blue-500 to-purple-500 flex items-center justify-center">
-                                <span className="text-white font-bold">
-                                  Q{q.number}
-                                </span>
-                              </div>
-                              <div>
-                                <h4 className="text-white font-bold">
-                                  Question {q.number}
-                                </h4>
-                                <p className="text-gray-400 text-sm">
-                                  Your Answer:{" "}
-                                  <span className="text-white font-mono">
-                                    {q.answer}
-                                  </span>
-                                </p>
-                              </div>
-                            </div>
-                            <span className="px-3 py-1 bg-gradient-to-r from-blue-500/20 to-purple-500/20 text-blue-300 rounded-full text-sm font-semibold">
-                              {q.tag}
-                            </span>
-                          </div>
-
-                          <div className="grid grid-cols-2 gap-4 mt-4">
-                            <div className="space-y-2">
-                              <p className="text-gray-400 text-sm">
-                                Dominant Skill
-                              </p>
-                              <p className="text-white font-semibold">
-                                {q.domain}
-                              </p>
-                            </div>
-                            <div className="space-y-2">
-                              <p className="text-gray-400 text-sm">
-                                Latent Skill
-                              </p>
-                              <p className="text-white font-semibold">
-                                {q.lateral}
-                              </p>
-                            </div>
-                            <div className="space-y-2">
-                              <p className="text-gray-400 text-sm">
-                                Supportive Skill
-                              </p>
-                              <p className="text-white font-semibold">
-                                {q.support}
-                              </p>
-                            </div>
-                            <div className="space-y-2">
-                              <p className="text-gray-400 text-sm">
-                                Diagnosis Tag
-                              </p>
-                              <p className="text-white font-semibold">
-                                {q.tag}
-                              </p>
-                            </div>
-                          </div>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-
-                  {/* Remark Section */}
-                  <div className="bg-gradient-to-br from-amber-600/10 to-orange-600/10 backdrop-blur-sm rounded-2xl p-6 border border-amber-500/30">
-                    <div className="flex items-start gap-4">
-                      <Lightbulb className="w-8 h-8 text-amber-400 mt-1" />
-                      <div>
-                        <h3 className="text-xl font-bold text-white mb-2">
-                          Remark & Feedback
-                        </h3>
-                        <p className="text-gray-200 leading-relaxed">
-                          {resultData.Remark ||
-                            "You have a fantastic tech-savvy mind and a high-speed approach to solving difficult tasks; which is a massive skill! My challenge for you is to now anchor that speed in your own deep reasoning; as understanding the 'why' will make you unstoppable."}
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </>
-            )}
-          </div>
-        </div>
+      <div className="relative z-50">
+        <Navbar />
       </div>
 
-      {/* Add custom animation */}
-      <style jsx>{`
-        @keyframes spin-slow {
-          from {
-            transform: rotate(0deg);
-          }
-          to {
-            transform: rotate(360deg);
-          }
-        }
-        .animate-spin-slow {
-          animation: spin-slow 20s linear infinite;
-        }
-      `}</style>
+      {/* Main Dashboard Container */}
+      <div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 md:px-16 py-8">
+        {/* Header Section */}
+        <div className="mb-6">
+          <div className="relative overflow-hidden bg-gradient-to-r from-slate-800 via-blue-900 to-indigo-900 backdrop-blur-md rounded-2xl shadow-2xl p-6 border border-white/10">
+            {/* Animated background pattern */}
+            <div className="absolute inset-0 opacity-20 pointer-events-none">
+              <div className="absolute inset-0" style={{
+                backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.1'%3E%3Ccircle cx='30' cy='30' r='2'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
+                backgroundSize: '30px 30px'
+              }}></div>
+            </div>
+            <div className="flex flex-col md:flex-row items-center justify-between gap-4 relative z-10">
+              <div>
+                <h1 className="text-3xl font-family-givonic-bold text-white">
+                  User Dashboard
+                </h1>
+                <p className="text-blue-200 mt-1 font-family-givonic-light">
+                  Manage your profile and track your progress
+                </p>
+              </div>
+              <div className="flex items-center gap-3">
+                {resultId === 'me' && !user?.enrolled && (
+                  <button
+                    onClick={handleEnrollClick}
+                    className="px-4 py-2 rounded-lg bg-emerald-500/90 hover:bg-emerald-400 text-slate-950 font-family-givonic-semiBold shadow-lg shadow-emerald-500/30 transition-all duration-300"
+                  >
+                    Enroll
+                  </button>
+                )}
+                {resultId === 'me' && user?.enrolled && (
+                  <div className="px-4 py-2 rounded-lg bg-emerald-500/10 text-emerald-300 border border-emerald-500/40 text-sm font-family-givonic-semiBold tracking-wide">
+                    Enrolled
+                  </div>
+                )}
+                <button
+                  onClick={handleLogout}
+                  className="flex items-center gap-2 bg-red-600/80 hover:bg-red-700 text-white px-4 py-2 rounded-lg transition-all duration-300 backdrop-blur-sm border border-red-500/30 font-family-givonic-semiBold"
+                >
+                  <LogOut className="w-5 h-5" />
+                  <span>Logout</span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Main Grid Layout */}
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            
+            {/* Left Column: Profile Card */}
+            <div className="lg:col-span-1">
+                <div className="bg-gradient-to-br from-slate-800/90 via-[#1e3366]/80 to-slate-900/90 backdrop-blur-md rounded-3xl p-6 border border-white/10 shadow-xl h-full relative font-family-givonic-regular overflow-hidden group">
+                    {/* Abstract bg visual matching Hero */}
+                    <div className="absolute top-0 right-0 w-full h-full opacity-30 pointer-events-none group-hover:opacity-40 transition-opacity duration-500">
+                        <div className="absolute right-0 top-0 w-64 h-64 bg-indigo-500/20 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2"></div>
+                        <div className="absolute left-0 bottom-0 w-48 h-48 bg-blue-500/10 rounded-full blur-3xl translate-y-1/2 -translate-x-1/2"></div>
+                    </div>
+
+                    {/* Edit Controls */}
+                    {resultId === 'me' && (
+                        <div className="absolute top-4 right-4 z-20">
+                            {!isEditing ? (
+                                <button onClick={handleEditToggle} className="p-2 bg-gradient-to-r from-blue-600 to-indigo-600 rounded-full hover:from-blue-500 hover:to-indigo-500 transition-all shadow-lg border border-white/20 group-hover:scale-110" title="Edit Profile">
+                                    <Pencil className="w-4 h-4 text-white" />
+                                </button>
+                            ) : (
+                                <div className="flex gap-2">
+                                    <button onClick={handleSaveProfile} disabled={uploading} className="p-2 bg-gradient-to-r from-emerald-500 to-green-600 rounded-full hover:from-emerald-400 hover:to-green-500 transition-all shadow-lg border border-white/20" title="Save">
+                                        {uploading ? <div className="animate-spin h-4 w-4 border-2 border-white rounded-full border-t-transparent"></div> : <Check className="w-4 h-4 text-white" />}
+                                    </button>
+                                    <button onClick={handleEditToggle} disabled={uploading} className="p-2 bg-gradient-to-r from-red-500 to-rose-600 rounded-full hover:from-red-400 hover:to-rose-500 transition-all shadow-lg border border-white/20" title="Cancel">
+                                        <X className="w-4 h-4 text-white" />
+                                    </button>
+                                </div>
+                            )}
+                        </div>
+                    )}
+
+                    <div className="flex flex-col items-center relative z-10 pt-4">
+                        {/* Profile Image */}
+                        <input 
+                            type="file" 
+                            ref={fileInputRef} 
+                            onChange={handleFileChange} 
+                            hidden 
+                            accept="image/*"
+                        />
+                        <div className="relative mb-6">
+                           {isEditing ? (
+                                <div className="cursor-pointer group/img relative" onClick={() => fileInputRef.current.click()}>
+                                    {editForm.imageUrl || resultData.imageUrl ? (
+                                        <div className="relative rounded-full p-1 bg-gradient-to-br from-blue-400 via-indigo-500 to-purple-500">
+                                            <img
+                                                src={editForm.imageUrl || resultData.imageUrl}
+                                                alt="Profile"
+                                                className="w-32 h-32 md:w-40 md:h-40 rounded-full border-4 border-slate-900 shadow-2xl object-cover"
+                                            />
+                                        </div>
+                                    ) : (
+                                        <div className="w-32 h-32 md:w-40 md:h-40 rounded-full p-1 bg-gradient-to-br from-blue-400 via-indigo-500 to-purple-500 shadow-xl">
+                                             <div className="w-full h-full rounded-full bg-slate-800 flex items-center justify-center border-4 border-slate-900">
+                                                <span className="text-5xl font-family-givonic-bold text-white uppercase">{resultData?.Name?.charAt(0)}</span>
+                                             </div>
+                                        </div>
+                                    )}
+                                    <div className="absolute inset-0 flex items-center justify-center bg-black/60 rounded-full opacity-0 group-hover/img:opacity-100 transition-opacity z-10 m-1">
+                                        <Upload className="w-8 h-8 text-white drop-shadow-lg" />
+                                    </div>
+                                </div>
+                           ) : (
+                                resultData.imageUrl ? (
+                                    <div className="relative rounded-full p-1 bg-gradient-to-br from-blue-400 via-indigo-500 to-purple-500">
+                                        <img
+                                            src={resultData.imageUrl}
+                                            alt="Profile"
+                                            className="w-32 h-32 md:w-40 md:h-40 rounded-full border-4 border-slate-900 shadow-2xl object-cover"
+                                        />
+                                    </div>
+                                ) : (
+                                    <div className="w-32 h-32 md:w-40 md:h-40 rounded-full p-1 bg-gradient-to-br from-blue-400 via-indigo-500 to-purple-500 shadow-xl">
+                                        <div className="w-full h-full rounded-full bg-slate-800 flex items-center justify-center border-4 border-slate-900">
+                                            <span className="text-5xl font-family-givonic-bold text-white uppercase">{resultData?.Name?.charAt(0)}</span>
+                                        </div>
+                                    </div>
+                                )
+                           )}
+                        </div>
+                        
+                        {/* Profile Details */}
+                        {isEditing ? (
+                            <div className="w-full space-y-4">
+                                <div>
+                                    <label className="text-xs font-family-givonic-bold uppercase tracking-wider text-blue-300 ml-1 mb-1 block">Name</label>
+                                    <input
+                                        type="text"
+                                        name="name"
+                                        value={editForm.name}
+                                        onChange={handleInputChange}
+                                        className="w-full bg-slate-900/50 border border-white/10 rounded-xl px-4 py-2 text-white placeholder-slate-500 focus:border-blue-500 focus:bg-slate-900/80 focus:ring-1 focus:ring-blue-500/50 outline-none transition-all duration-300"
+                                    />
+                                </div>
+                                <div>
+                                    <label className="text-xs font-family-givonic-bold uppercase tracking-wider text-blue-300 ml-1 mb-1 block">Date of Birth</label>
+                                    <input
+                                        type="date"
+                                        name="dob"
+                                        value={editForm.dob}
+                                        onChange={handleInputChange}
+                                        className="w-full bg-slate-900/50 border border-white/10 rounded-xl px-4 py-2 text-white placeholder-slate-500 focus:border-blue-500 focus:bg-slate-900/80 focus:ring-1 focus:ring-blue-500/50 outline-none transition-all duration-300"
+                                    />
+                                </div>
+                                <div>
+                                    <label className="text-xs font-family-givonic-bold uppercase tracking-wider text-blue-300 ml-1 mb-1 block">Gender</label>
+                                    <select
+                                        name="gender"
+                                        value={editForm.gender}
+                                        onChange={handleInputChange}
+                                        className="w-full bg-slate-900/50 border border-white/10 rounded-xl px-4 py-2 text-white placeholder-slate-500 focus:border-blue-500 focus:bg-slate-900/80 focus:ring-1 focus:ring-blue-500/50 outline-none transition-all duration-300 appearance-none cursor-pointer"
+                                    >
+                                        <option value="Not Selected" className="bg-slate-900">Select Gender</option>
+                                        <option value="Male" className="bg-slate-900">Male</option>
+                                        <option value="Female" className="bg-slate-900">Female</option>
+                                        <option value="Other" className="bg-slate-900">Other</option>
+                                    </select>
+                                </div>
+                            </div>
+                        ) : (
+                            <div className="text-center w-full mt-2">
+                                <h2 className="text-2xl md:text-3xl font-family-givonic-bold text-white mb-1 tracking-tight">{resultData.Name || "User Name"}</h2>
+                                <p className="text-blue-200/60 mb-8 font-family-givonic-light tracking-wide">{resultData.email || "user@example.com"}</p>
+                                
+                                <div className="grid grid-cols-2 gap-3 w-full">
+                                    <div className="bg-slate-900/40 p-4 rounded-2xl border border-white/5 backdrop-blur-sm hover:bg-slate-900/60 transition-colors group/stat">
+                                        <p className="text-[10px] text-blue-400 font-family-givonic-bold uppercase tracking-wider mb-1 group-hover/stat:text-blue-300 transition-colors">Age</p>
+                                        <p className="text-xl font-family-givonic-semiBold text-white tracking-widest">{calculateAge(new Date(resultData.DOB)) !== "N/A" && !isNaN(calculateAge(new Date(resultData.DOB))) ? calculateAge(new Date(resultData.DOB)) : "--"}</p>
+                                    </div>
+                                    <div className="bg-slate-900/40 p-4 rounded-2xl border border-white/5 backdrop-blur-sm hover:bg-slate-900/60 transition-colors group/stat">
+                                        <p className="text-[10px] text-blue-400 font-family-givonic-bold uppercase tracking-wider mb-1 group-hover/stat:text-blue-300 transition-colors">Gender</p>
+                                        <p className="text-xl font-family-givonic-semiBold text-white tracking-widest">{resultData.Gender || "--"}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        )}
+                    </div>
+                </div>
+            </div>
+
+            {/* Right Column: Task Calendar */}
+            <div className="lg:col-span-2">
+                <div className="bg-gradient-to-br from-slate-800/90 via-[#1e3366]/80 to-slate-900/90 backdrop-blur-md rounded-3xl p-6 border border-white/10 shadow-xl h-full flex flex-col font-family-givonic-regular relative overflow-hidden group">
+                     {/* Decorative Elements */}
+                     <div className="absolute -top-10 -right-10 w-40 h-40 bg-indigo-500/10 rounded-full blur-3xl pointer-events-none"></div>
+                     <div className="absolute -bottom-10 -left-10 w-40 h-40 bg-blue-500/10 rounded-full blur-3xl pointer-events-none"></div>
+
+                    <div className="flex items-center justify-between mb-8 relative z-10">
+                        <div className="flex items-center gap-4">
+                            <div className="p-3 bg-gradient-to-br from-indigo-500 to-blue-600 rounded-2xl text-white shadow-lg shadow-indigo-500/20">
+                                <BookCopy className="w-6 h-6" />
+                            </div>
+                            <div>
+                                <h2 className="text-2xl font-family-givonic-bold text-white tracking-tight">Task Completion</h2>
+                                <p className="text-sm text-blue-300/60 font-family-givonic-light">Track your daily progress</p>
+                            </div>
+                        </div>
+                        <div className="text-xs font-family-givonic-bold text-blue-200 bg-slate-800/50 px-4 py-2 rounded-full border border-white/5 backdrop-blur-sm shadow-sm">
+                            Current Month
+                        </div>
+                    </div>
+                    
+                    {/* Calendar Grid */}
+                    <div className="flex-grow relative z-10">
+                        <div className="grid grid-cols-7 gap-3 mb-4 text-center text-xs font-family-givonic-bold text-slate-400 uppercase tracking-widest">
+                            <div>Mon</div>
+                            <div>Tue</div>
+                            <div>Wed</div>
+                            <div>Thu</div>
+                            <div>Fri</div>
+                            <div>Sat</div>
+                            <div>Sun</div>
+                        </div>
+                        <div className="grid grid-cols-7 gap-3">
+                            {renderCalendar()}
+                        </div>
+                    </div>
+
+                    <div className="mt-8 pt-4 border-t border-white/5 flex items-center justify-end gap-6 text-sm font-family-givonic-semiBold text-slate-400">
+                        <div className="flex items-center gap-2">
+                            <div className="w-3 h-3 bg-gradient-to-br from-emerald-400 to-green-600 rounded-full shadow-lg shadow-emerald-500/30"></div>
+                            <span>Completed</span>
+                        </div>
+                        <div className="flex items-center gap-2">
+                            <div className="w-3 h-3 bg-slate-800 rounded-full border border-white/10"></div>
+                            <span>Pending</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+      </div>
     </div>
   );
 }
