@@ -1,8 +1,8 @@
 function Animation() {
   return (
-    <section className="relative h-[100svh] w-full overflow-hidden bg-black">
+    <div style={{ position: "absolute", inset: 0, zIndex: 0, overflow: "hidden" }}>
       <video
-        className="absolute inset-0 h-full w-full object-cover"
+        style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover" }}
         src="/explora_video.mp4"
         autoPlay
         muted
@@ -10,21 +10,9 @@ function Animation() {
         playsInline
         preload="auto"
       />
-
-      {/* Dark overlay so the logo stays crisp */}
-      <div className="absolute inset-0 bg-black/45" />
-
-      <div className="relative z-10 flex h-full w-full items-center justify-center">
-        <img
-          src="/explora_logo.png"
-          alt="Explora"
-          className="explora-logo-expand w-[min(78vw,680px)] select-none"
-          draggable={false}
-        />
-      </div>
-    </section>
+      {/* dark overlay so text stays readable */}
+      <div style={{ position: "absolute", inset: 0, background: "rgba(5,9,26,0.62)" }} />
+    </div>
   );
 }
-
 export default Animation;
-

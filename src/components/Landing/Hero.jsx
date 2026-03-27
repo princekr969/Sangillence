@@ -16,39 +16,7 @@ export default function Hero() {
       
       {/* Registration Announcement Strip */}
       <div className="relative z-20 mb-6">
-        <div className="relative overflow-hidden bg-gradient-to-r from-slate-800 via-blue-900 to-indigo-900 rounded-2xl shadow-2xl">
-          {/* Animated background pattern */}
-          <div className="absolute inset-0 opacity-20">
-            <div className="absolute inset-0" style={{
-              backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.1'%3E%3Ccircle cx='30' cy='30' r='2'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
-              backgroundSize: '30px 30px'
-            }}></div>
-          </div>
-          
-          <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-slate-400/20 via-blue-400/20 to-indigo-400/20 blur-sm"></div>
-          
-          
-          <Announcement/>
-          
-          {/* Floating particles */}
-          <div className="absolute inset-0 overflow-hidden pointer-events-none">
-            {[...Array(8)].map((_, i) => (
-              <div
-                key={i}
-                className="absolute w-1 h-1 bg-white/40 rounded-full animate-pulse"
-                style={{
-                  left: `${Math.random() * 100}%`,
-                  top: `${Math.random() * 100}%`,
-                  animationDelay: `${Math.random() * 2}s`,
-                  animationDuration: `${1.5 + Math.random() * 2}s`
-                }}
-              ></div>
-            ))}
-          </div>
-          
-          {/* Shimmer effect */}
-          <div className="absolute inset-0 -top-full bg-gradient-to-b from-transparent via-white/10 to-transparent animate-shimmer"></div>
-        </div>
+        <Announcement/>
       </div>
       
       <div

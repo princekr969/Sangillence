@@ -22,7 +22,7 @@
     "@tailwindcss/vite": "^4.0.9",
     "axios": "^1.12.2",
     "chart.js": "^4.5.0",
-    "framer-motion": "^12.23.12",
+    "framer-motion": "^12.38.0",
     "html2canvas": "^1.4.1",
     "html2pdf.js": "^0.14.0",
     "jspdf": "^3.0.4",

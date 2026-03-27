@@ -11,6 +11,14 @@ function OlympiadPage() {
   const [activeTab, setActiveTab] = useState("human");
 
   useEffect(() => {
+    document.title = "Sangillence";
+    const metaDesc = document.querySelector('meta[name="description"]');
+    if (metaDesc) {
+      metaDesc.setAttribute("content", "Celebrating the winners of the Sangillence Open Book Olympiad and looking forward to the Gwalior AI Summit & Hackathon 2026.");
+    }
+  }, []);
+
+  useEffect(() => {
     window.scrollTo(0, 0);
   }, [pathname]);
 

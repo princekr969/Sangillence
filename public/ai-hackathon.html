@@ -4,9 +4,20 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>AI Synergy Hackathon 2026 | ABV-IIITM Gwalior | 27–28 March</title>
+  <link rel="icon" type="image/png" href="/assets/sangillenceLogo.png" />
+  <title>Sangillence</title>
   <meta name="description"
-    content="Join AI Synergy Hackathon 2026 — a Two Days in ABV IIITM GWALIOR in-person AI innovation marathon for college students in Gwalior, MP. 6 AI tracks, industry mentors, and prizes. Register for ₹500 (food included)." />
+    content="Join the Gwalior AI Summit and AI Synergy Hackathon 2026 in Gwalior. Build innovative AI solutions, compete for top prizes, and network with tech leaders." />
+  <meta name="keywords"
+    content="Gwalior AI Summit, AI Synergy Hackathon, Gwalior Hackathon 2026, AI Hackathon India, Artificial Intelligence Event Gwalior, Tech Synergy 2026, Sangillence Hackathon" />
+
+  <!-- Social Media Previews (Open Graph) -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="AI Synergy Hackathon 2026 - Gwalior" />
+  <meta property="og:description"
+    content="Build the future of AI. Join the biggest AI hackathon in Gwalior this 2026. Cash prizes, mentorship, and more." />
+  <meta property="og:image"
+    content="https://res.cloudinary.com/dstbd40ud/image/upload/v1774023095/Gwalior_ai_summit_nwwyf7.png" />
   <link
     href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Exo+2:ital,wght@0,300;0,400;0,600;0,700;1,400&display=swap"
     rel="stylesheet" />
@@ -181,13 +192,13 @@
       border-radius: 2px;
     }
 
-    /* Hide iframe's own navbar/footer since the React app keeps Navbar/Footer intact */
+    /* Hide iframe's own navbar since the React app keeps Navbar intact */
     nav {
       display: none !important;
     }
 
     footer {
-      display: none !important;
+      display: block;
     }
 
     .hero {
@@ -222,6 +233,10 @@
       position: relative;
       z-index: 1;
       max-width: 860px;
+      /* Ensure hero elements stack vertically in a single column */
+      display: flex;
+      flex-direction: column;
+      align-items: center;
     }
 
     /* IIITM logo first, then summit banner below */
@@ -232,6 +247,32 @@
       justify-content: center;
       gap: .85rem;
       margin-bottom: 1.2rem;
+    }
+
+    /* Registration deadline badge (placed inside hero, not at page top). */
+    .deadline-bar {
+      display: block;
+      padding: .62rem 1.25rem;
+      border-radius: 9999px;
+      border: 1.5px solid rgba(0, 229, 255, .35);
+      background: rgba(2, 11, 26, .35);
+      backdrop-filter: blur(12px);
+      color: var(--cyan);
+      font-family: var(--D);
+      font-size: .9rem;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      position: relative;
+      z-index: 2;
+      margin: 0 0 1.1rem 0;
+      box-shadow: var(--gc);
+    }
+
+    @media(max-width:640px) {
+      .deadline-bar {
+        font-size: .72rem;
+        padding: .5rem .95rem;
+      }
     }
 
     .hero-college-logo {
@@ -247,7 +288,7 @@
     }
 
     .pb {
-      display: inline-flex;
+      display: flex;
       align-items: center;
       gap: .6rem;
       padding: .62rem 1.35rem;
@@ -387,6 +428,18 @@
 
     .bs:hover {
       background: rgba(201, 168, 76, .25);
+    }
+
+    .bt {
+      background: rgba(213, 0, 249, .08);
+      border: 1.5px solid var(--purple);
+      color: var(--purple);
+      box-shadow: var(--gp);
+    }
+
+    .bt:hover {
+      background: rgba(213, 0, 249, .22);
+      color: var(--w);
     }
 
     .sa {
@@ -578,6 +631,199 @@
       display: block;
     }
 
+    /* Generic content grids/cards */
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+      gap: 1rem;
+      margin-top: 1.3rem;
+    }
+
+    .info-card {
+      background: rgba(4, 21, 41, .75);
+      border: 1px solid rgba(0, 229, 255, .14);
+      border-left: 3px solid rgba(0, 229, 255, .65);
+      border-radius: var(--r);
+      padding: 1.05rem 1.1rem;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, .18);
+    }
+
+    .info-card .icon {
+      font-size: 1.5rem;
+      margin-bottom: .4rem;
+      display: inline-block;
+    }
+
+    .info-card .title {
+      font-family: var(--D);
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      color: var(--cyan);
+      font-weight: 800;
+      font-size: .78rem;
+      margin-bottom: .25rem;
+    }
+
+    .info-card .desc {
+      color: var(--m);
+      font-size: .9rem;
+      line-height: 1.7;
+    }
+
+    /* FAQ accordion */
+    .faq-grid {
+      margin-top: 1.2rem;
+      display: grid;
+      gap: .8rem;
+    }
+
+    .fqi {
+      padding: 1.05rem 1.1rem;
+      background: rgba(4, 21, 41, .65);
+      border: 1px solid rgba(0, 229, 255, .12);
+      border-radius: var(--r);
+    }
+
+    .fqq {
+      font-family: var(--D);
+      font-size: .76rem;
+      font-weight: 700;
+      color: var(--w);
+      letter-spacing: .05em;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+      user-select: none;
+    }
+
+    .fqi .fqq::after {
+      content: '+';
+      color: var(--cyan);
+      font-size: 1.15rem;
+      flex-shrink: 0;
+    }
+
+    .fqi.open .fqq::after {
+      content: '−';
+    }
+
+    .fqa {
+      font-size: .9rem;
+      color: var(--m);
+      line-height: 1.8;
+      margin-top: .65rem;
+      display: none;
+    }
+
+    .fqi.open .fqa {
+      display: block;
+    }
+
+    /* Tracks/rewards cards */
+    .track-grid,
+    .reward-grid,
+    .rule-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 1rem;
+      margin-top: 1.3rem;
+    }
+
+    .small-card {
+      background: rgba(4, 21, 41, .75);
+      border: 1px solid rgba(0, 229, 255, .14);
+      border-radius: var(--r);
+      padding: 1.05rem 1.1rem;
+    }
+
+    .small-card .kicker {
+      font-family: var(--D);
+      color: var(--cyan);
+      font-size: .72rem;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      margin-bottom: .35rem;
+    }
+
+    .small-card .big {
+      font-family: var(--D);
+      font-size: 1.05rem;
+      color: var(--w);
+      font-weight: 850;
+      margin-bottom: .4rem;
+    }
+
+    .small-card ul {
+      padding-left: 1.2rem;
+      margin: .3rem 0 0;
+    }
+
+    .small-card li {
+      color: var(--m);
+      line-height: 1.7;
+      margin: .25rem 0;
+    }
+
+    .small-card .desc {
+      color: var(--m);
+      line-height: 1.7;
+      margin-top: .35rem;
+    }
+
+    /* Timeline */
+    .timeline-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+      margin-top: 1.3rem;
+    }
+
+    .day-card {
+      background: rgba(4, 21, 41, .75);
+      border: 1px solid rgba(0, 229, 255, .14);
+      border-radius: var(--r);
+      padding: 1.05rem 1.1rem;
+    }
+
+    .day-card h3 {
+      font-family: var(--D);
+      color: var(--cyan);
+      text-transform: uppercase;
+      letter-spacing: .12em;
+      font-size: .82rem;
+      margin-bottom: .9rem;
+    }
+
+    .slot {
+      display: flex;
+      gap: .8rem;
+      align-items: flex-start;
+      padding: .55rem 0;
+      border-top: 1px solid rgba(255, 255, 255, .05);
+    }
+
+    .slot:first-child {
+      border-top: 0;
+      padding-top: 0;
+    }
+
+    .slot .time {
+      color: var(--gold);
+      font-family: var(--D);
+      font-weight: 900;
+      letter-spacing: .06em;
+      font-size: .78rem;
+      min-width: 120px;
+    }
+
+    .slot .label {
+      color: var(--m);
+      line-height: 1.7;
+      font-size: .9rem;
+    }
+
     /* Responsive */
     @media(max-width:640px) {
       .hb {
@@ -610,6 +856,13 @@
         grid-template-columns: 1fr;
       }
     }
+
+    /* ── Custom scrollbar ── */
+    ::-webkit-scrollbar { width: 4px; height: 4px; }
+    ::-webkit-scrollbar-track { background: var(--bg); }
+    ::-webkit-scrollbar-thumb { background: var(--cyan); border-radius: 2px; }
+    ::-webkit-scrollbar-thumb:hover { background: var(--blue); }
+    * { scrollbar-width: thin; scrollbar-color: var(--cyan) var(--bg); }
   </style>
 </head>
 
@@ -631,7 +884,9 @@
       <li><a href="#rules">Rules</a></li>
       <li><a href="#faq">FAQ</a></li>
     </ul>
-    <a href="/https:/docs.google.com/forms/d/e/1FAIpQLSesJF9j9Pf5cs70QntUSEyJjExaoSmNT0bx1srPFwkNBQSx9w/viewform?usp=dialog" class="nc">Register — ₹500 (Food Included)</a>
+    <a href="https://forms.gle/eRyoRoDNwtvP5MCQ9" class="nc" target="_blank" rel="noopener noreferrer">
+      Register — ₹500 (Food Included)
+    </a>
     <button class="hb" onclick="document.getElementById('nl').classList.toggle('open')" aria-label="Menu">
       <span></span><span></span><span></span>
     </button>
@@ -641,25 +896,39 @@
   <header class="hero">
     <div class="hi">
       <div class="hero-top-logos">
-        <img class="hero-college-logo" src="https://res.cloudinary.com/dstbd40ud/image/upload/v1774023121/collegelogo_odr3xn.svg" alt="College Logo" draggable="false" />
-        <img class="hero-summit-logo" src="https://res.cloudinary.com/dstbd40ud/image/upload/v1774023095/Gwalior_ai_summit_nwwyf7.png" alt="Gwalior AI Summit"
-          draggable="false" />
+        <img class="hero-college-logo"
+          src="https://res.cloudinary.com/dstbd40ud/image/upload/v1774023121/collegelogo_odr3xn.svg"
+          alt="ABV-IIITM Gwalior Logo" draggable="false" />
+        <img class="hero-summit-logo"
+          src="https://res.cloudinary.com/dstbd40ud/image/upload/v1774023095/Gwalior_ai_summit_nwwyf7.png"
+          alt="AI Synergy Hackathon Gwalior 2026 Banner" draggable="false" />
       </div>
-      <div class="pb fi">ABV IIITM GWALIOR</div>
-      <div class="eo fi d1">Organized by Sangillence</div>
-      <h1 class="ht fi d1"><span class="ca">AI </span><span class="cw">SYNERGY</span></h1>
-      <div class="hs fi d2">HACKATHON</div>
-      <div class="hy fi d2">2026</div>
+      <div class="pb fi">ABV IIITM GWALIOR | GWALIOR AI SUMMIT</div>
+      <div class="deadline-bar fi d1">Registration deadline: 25th March</div>
+      <div class="eo fi d1">Organized by: Department of Engineering Sciences, ABV-IIITM Gwalior</div>
+      <h1 class="ht fi d1" style="font-size: clamp(2.3rem, 7.5vw, 4.8rem);">
+        <span class="ca">AI SYNERGY HACKATHON </span><br />
+        <span class="cw">GWALIOR 2026</span>
+      </h1>
       <div class="gr-row fi d3">
         <div class="gr"></div>
         <div class="dt">27 – 28 MARCH 2026 &nbsp;·&nbsp; GWALIOR, MP</div>
         <div class="gr"></div>
       </div>
-      <p class="hd fi d3">A <strong>Two Days in ABV IIITM GWALIOR</strong> in-person innovation marathon for college
-        students at ABV-IIITM Gwalior. Work with industry mentors. <strong>No coding required.</strong></p>
+      <p class="hd fi d3">The premier <strong>Artificial Intelligence Hackathon</strong> in Gwalior. Join us for a
+        <strong>Two-Day</strong> in-person innovation marathon at <strong>ABV-IIITM Gwalior</strong>. Build solutions
+        for a <strong>Prize Pool</strong>, gain mentorship, and complete your <strong>Registration</strong> today.
+        <strong>No coding required.</strong>
+      </p>
       <div class="cr fi d4">
-        <a href="#register" class="btn bp">Register Now — ₹500 (Food Included)</a>
+        <a href="https://forms.gle/eRyoRoDNwtvP5MCQ9" class="btn bp" target="_blank" rel="noopener noreferrer">
+          Register Now
+        </a>
         <a href="#tracks" class="btn bs">View Challenges</a>
+        <a href="https://res.cloudinary.com/dstbd40ud/raw/upload/v1774088391/AI_Synergy_2026_Brochure_Final_z2kddy.docx"
+          class="btn bt" target="_blank" rel="noopener noreferrer">
+          Download Brochure
+        </a>
       </div>
     </div>
     <div class="sa">
@@ -673,8 +942,8 @@
   <!-- STAT STRIP -->
   <div class="ss">
     <div class="si"><span class="sn">Two Days</span><span class="sl">ABV IIITM GWALIOR</span></div>
-    <div class="si"><span class="sn">6</span><span class="sl">AI Tracks</span></div>
-    <div class="si"><span class="sn">₹500</span><span class="sl">Food Included</span></div>
+    <div class="si"><span class="sn">1</span><span class="sl">AI Problem Statements</span></div>
+    <div class="si"><span class="sn">₹500 </span><span class="sl">per Team Member(Food Included)</span></div>
     <div class="si"><span class="sn">3</span><span class="sl">Stages</span></div>
     <div class="si"><span class="sn">ABV-IIITM</span><span class="sl">Gwalior</span></div>
   </div>
@@ -685,8 +954,38 @@
     <div class="si2">
       <p class="stg fi">About the Event</p>
       <h2 class="st fi">"We don't test what you know. We measure how you think with AI."</h2>
-      <p class="sl2 fi">AI Synergy is Gwalior's premier student AI hackathon — a Two Days in ABV IIITM GWALIOR in-person
-        marathon.</p>
+      <p class="sl2 fi">
+        The Gwalior AI Summit 2026 provides an excellent platform for students, researchers, and innovators to
+        showcase their ideas and advancements in the field of Artificial Intelligence.
+        <br /><br />
+        Our summit aims to promote innovation, interdisciplinary collaboration, and the practical application of AI
+        technologies. Participants will have the opportunity to present their AI models, research work, and posters
+        across emerging domains. The event encourages creative thinking, networking, and the development of impactful
+        AI-driven solutions to real-world challenges.
+      </p>
+
+      <div class="card-grid">
+        <div class="info-card fi d1">
+          <div class="icon"></div>
+          <div class="title">27–28 March 2026</div>
+          <div class="desc">Two Days, In-Person</div>
+        </div>
+        <div class="info-card fi d2">
+          <div class="icon"></div>
+          <div class="title">ABV-IIITM Campus, Gwalior MP</div>
+          <div class="desc">On-Campus Venue</div>
+        </div>
+        <div class="info-card fi d3">
+          <div class="icon"></div>
+          <div class="title">Team Size: 1–4 Members</div>
+          <div class="desc">All Disciplines Welcome</div>
+        </div>
+        <div class="info-card fi d4">
+          <div class="icon"></div>
+          <div class="title">₹500 per Participant</div>
+          <div class="desc">Food Included Both Days</div>
+        </div>
+      </div>
     </div>
   </section>
   <div class="gd"></div>
@@ -694,9 +993,155 @@
   <!-- TRACKS -->
   <section class="sec" id="tracks">
     <div class="si2">
-      <p class="stg fi">Challenge Tracks</p>
-      <h2 class="st fi">6 Real-World AI Problem Statements</h2>
-      <p class="sl2 fi">Teams choose one track. All problems are set in real Indian contexts.</p>
+      <p class="sl2 fi">
+        We invite presentations and research work across the following emerging domains:
+      </p>
+
+      <div class="card-grid" style="margin-top:2rem;">
+        <div class="info-card fi d1">
+          <div class="title">AI for All</div>
+        </div>
+        <div class="info-card fi d2">
+          <div class="title">AI in Agriculture</div>
+        </div>
+        <div class="info-card fi d3">
+          <div class="title">AI in Healthcare</div>
+        </div>
+        <div class="info-card fi d4">
+          <div class="title">AI in Tourism</div>
+        </div>
+        <div class="info-card fi d1">
+          <div class="title">AI for Energy &amp; Environment</div>
+        </div>
+        <div class="info-card fi d2">
+          <div class="title">AI in Sports</div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <div class="gd"></div>
+
+  <!-- IMPORTANT DATES -->
+  <section class="sec" id="dates">
+    <div class="si2">
+      <p class="stg fi">Registration Timeline</p>
+      <h2 class="st fi">Important Dates</h2>
+      <div class="card-grid" style="margin-top:2rem;">
+        <div class="info-card fi d1">
+          <div class="title">15 March, 2026</div>
+          <div class="desc">Registration Starts On</div>
+        </div>
+        <div class="info-card fi d2">
+          <div class="title">25 March, 2026</div>
+          <div class="desc">Last Date of Registration</div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <div class="gd"></div>
+
+  <!-- AGENDA -->
+  <section class="sec" id="agenda">
+    <div class="si2">
+      <p class="stg fi">Schedule / Timeline</p>
+      <h2 class="st fi">Day 1 &amp; Day 2 Flow</h2>
+      <p class="sl2 fi">Will be updated soon</p>
+
+      <!-- <div class="timeline-grid">
+        <div class="day-card fi d1">
+          <h3>Day 1 — 27 March 2026</h3>
+          <div class="slot"><div class="time">08:30 AM</div><div class="label">Registration &amp; Check-In</div></div>
+          <div class="slot"><div class="time">10:00 AM</div><div class="label">Opening Ceremony</div></div>
+          <div class="slot"><div class="time">11:00 AM</div><div class="label">Hacking Begins — all 6 tracks open</div></div>
+          <div class="slot"><div class="time">12:30 PM</div><div class="label">Team Check-In (Mandatory)</div></div>
+          <div class="slot"><div class="time">01:30 PM</div><div class="label">Lunch + mentor desk open</div></div>
+          <div class="slot"><div class="time">03:00 PM</div><div class="label">Workshop 1 — Prompt Engineering &amp; LLM APIs</div></div>
+          <div class="slot"><div class="time">05:00 PM</div><div class="label">Mentor Office Hours — Slot 1</div></div>
+          <div class="slot"><div class="time">08:00 PM</div><div class="label">Dinner</div></div>
+          <div class="slot"><div class="time">10:00 PM</div><div class="label">Workshop 2 — Deploying AI Solutions Rapidly</div></div>
+          <div class="slot"><div class="time">11:59 PM</div><div class="label">Progress Check-In</div></div>
+        </div>
+
+        <div class="day-card fi d2">
+          <h3>Day 2 — 28 March 2026</h3>
+          <div class="slot"><div class="time">07:30 AM</div><div class="label">Breakfast — overnight hack continues</div></div>
+          <div class="slot"><div class="time">09:00 AM</div><div class="label">Final Mentor Round</div></div>
+          <div class="slot"><div class="time">10:30 AM</div><div class="label">⛔ Submission portal closes</div></div>
+          <div class="slot"><div class="time">11:00 AM</div><div class="label">Judge Review — Rounds 1 &amp; 2</div></div>
+          <div class="slot"><div class="time">01:00 PM</div><div class="label">Finalist Announcement</div></div>
+          <div class="slot"><div class="time">02:00 PM</div><div class="label">Live Demo Round — finalists</div></div>
+          <div class="slot"><div class="time">04:30 PM</div><div class="label">Deliberation + Community Choice Vote</div></div>
+          <div class="slot"><div class="time">05:30 PM</div><div class="label">Closing Ceremony &amp; Awards</div></div>
+          <div class="slot"><div class="time">06:30 PM</div><div class="label">Group Photo, Networking &amp; Close</div></div>
+        </div>
+      </div> -->
+    </div>
+  </section>
+  <div class="gd"></div>
+
+  <!-- JUDGES & MENTORS -->
+  <section class="sec" id="judges">
+    <div class="si2">
+      <p class="stg fi">Judges &amp; Mentors</p>
+      <h2 class="st fi">To be announced</h2>
+      <div class="card-grid">
+        <div class="info-card fi d1">
+          <div class="icon"></div>
+          <div class="title">Judging Panel</div>
+          <div class="desc">Experts evaluating problem diagnosis, reasoning quality, and prototype clarity.</div>
+        </div>
+        <div class="info-card fi d2">
+          <div class="icon"></div>
+          <div class="title">Mentor Office Hours</div>
+          <div class="desc">To be announced — structured guidance throughout the two days.</div>
+        </div>
+        <div class="info-card fi d3">
+          <div class="icon"></div>
+          <div class="title">Industry Experts</div>
+          <div class="desc">Researchers and practitioners available during sessions and checkpoints.</div>
+        </div>
+        <div class="info-card fi d1">
+          <div class="icon"></div>
+          <div class="title">Final Pitch Support</div>
+          <div class="desc">Brief coaching for finalists to present their solution clearly.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <div class="gd"></div>
+
+  <!-- SPONSORS -->
+  <section class="sec" id="sponsors">
+    <div class="si2">
+      <p class="stg fi">Sponsors</p>
+      <h2 class="st fi">Platinum · Gold · Partners</h2>
+      <p class="sl2 fi" style="max-width:820px;margin-bottom:0;">
+        Sponsor tiers and partner logos will be updated as confirmations come in. Thanks to our partners for making AI
+        Synergy possible.
+      </p>
+
+      <!-- <div class="card-grid">
+        <div class="info-card fi d1">
+          <div class="icon">🏆</div>
+          <div class="title">Platinum</div>
+          <div class="desc">Featured branding + mentor support</div>
+        </div>
+        <div class="info-card fi d2">
+          <div class="icon">✨</div>
+          <div class="title">Gold</div>
+          <div class="desc">Workshop / resource pack association</div>
+        </div>
+        <div class="info-card fi d3">
+          <div class="icon">🤝</div>
+          <div class="title">Partners</div>
+          <div class="desc">Goodies, hiring referrals &amp; challenge support</div>
+        </div>
+        <div class="info-card fi d1">
+          <div class="icon">📣</div>
+          <div class="title">Community</div>
+          <div class="desc">Amplification and help matching teams</div>
+        </div>
+      </div> -->
     </div>
   </section>
   <div class="gd"></div>
@@ -705,8 +1150,39 @@
   <section class="sec" id="prizes">
     <div class="si2">
       <p class="stg fi">Recognition</p>
-      <h2 class="st fi">Exciting Opportunities &amp; Rewards</h2>
-      <p class="sl2 fi">Get a chance to meet leading AI experts and HRs across the country, win exciting goodies and prizes, and unlock internship opportunities.</p>
+      <h2 class="st fi">What you walk away with</h2>
+
+      <div class="reward-grid">
+        <!-- <div class="small-card fi d1">
+          <div class="kicker"> Cash Prizes</div>
+          <div class="big">Top teams get cash prizes + trophies + Certificates of Excellence</div>
+        </div> -->
+        <div class="small-card fi d2">
+          <div class="kicker"> AI Readiness Certificate</div>
+          <div class="big">Personalised ARI score, 8-dimension cognitive radar &amp; archetype classification</div>
+        </div>
+        <div class="small-card fi d3">
+          <div class="kicker">Internship &amp; Hiring Referrals</div>
+          <div class="big">Fast-track referrals to sponsor companies and partner organisations</div>
+        </div>
+        <div class="small-card fi d1">
+          <div class="kicker"> Meet Industry Experts</div>
+          <div class="big">Direct access to AI practitioners, researchers &amp; HRs during mentor office hours</div>
+        </div>
+        <div class="small-card fi d2">
+          <div class="kicker">Goodies &amp; Swag</div>
+          <div class="big">Sponsor swag kits for top teams and finalists</div>
+        </div>
+        <div class="small-card fi d3">
+          <div class="kicker"> EXPLORA Early Access</div>
+          <div class="big">Free access to Sangillence's upcoming AI learning platform for all participants</div>
+        </div>
+      </div>
+
+      <p class="sl2 fi" style="margin-top:1.2rem;margin-bottom:0;">
+        Prize amounts will be announced upon sponsor confirmation. All certificates and EXPLORA access are guaranteed,
+        regardless of sponsorship status.
+      </p>
     </div>
   </section>
   <div class="gd"></div>
@@ -715,8 +1191,64 @@
   <section class="sec" id="rules">
     <div class="si2">
       <p class="stg fi">Participation Rules</p>
-      <h2 class="st fi">Eligibility &amp; Submission Requirements</h2>
-      <p class="sl2 fi">Teams of 2–4 members. Working live demo or video demo.</p>
+      <h2 class="st fi">Eligibility, Submissions &amp; Judging</h2>
+
+      <div class="rule-grid">
+        <div class="small-card fi d1">
+          <div class="kicker">Eligibility</div>
+          <div class="big">Who can participate</div>
+          <ul>
+            <li>Open to all currently enrolled UG and PG college students in India</li>
+            <li>Students from any discipline — engineering, science, management, design, humanities</li>
+            <li>No prior coding or AI/ML experience required</li>
+            <li>Age 18+ at the time of the event</li>
+          </ul>
+        </div>
+
+        <div class="small-card fi d2">
+          <div class="kicker">Team Rules</div>
+          <div class="big">How teams work</div>
+          <ul>
+            <li>Teams of 1 to 4 members. Solo participation is allowed, but team collaboration is highly encouraged!
+            </li>
+            <li>Cross-college teams are allowed and encouraged</li>
+            <li>Each participant can be part of only one team</li>
+            <li>Teams cannot merge, split, or change members after hacking begins</li>
+          </ul>
+        </div>
+
+        <div class="small-card fi d3">
+          <div class="kicker">Submission Requirements</div>
+          <div class="big">What every team must submit</div>
+          <ul>
+            <li>Working live demo OR a video demo (maximum 3 minutes)</li>
+            <li>GitHub repository with a README</li>
+            <li>Presentation deck — maximum 8 slides</li>
+            <li>Written project description on the submission portal</li>
+          </ul>
+        </div>
+
+        <div class="small-card fi d1">
+          <div class="kicker">What Counts as a Prototype</div>
+          <div class="big">Prototype = proof of thinking</div>
+          <div class="desc">
+            A prototype is not necessarily code. It can be a Claude/ChatGPT workflow, a no-code AI integration, a live
+            API demonstration,
+            or a Figma mockup backed by AI logic.
+          </div>
+        </div>
+
+        <div class="small-card fi d2">
+          <div class="kicker">Judging is Process-Driven</div>
+          <div class="big">Reasoning over answers</div>
+          <div class="desc">
+            Judges evaluate how you arrived at your answer — not just what you answer. A team that correctly identifies
+            the root problem
+            and reasons through constraints honestly will score higher than a team with a technically impressive
+            prototype that misunderstands the problem.
+          </div>
+        </div>
+      </div>
     </div>
   </section>
   <div class="gd"></div>
@@ -725,8 +1257,63 @@
   <div class="sec" id="register">
     <div class="si2" style="text-align:center;">
       <h2 class="st fi" style="font-size:clamp(1.6rem,4vw,2.6rem);">Secure Your Spot at AI Synergy 2026</h2>
-      <p class="sl2 fi" style="margin-bottom:0;">₹500 per Participant · Food included (Two Days in ABV IIITM GWALIOR)
+      <p class="sl2 fi" style="margin-bottom:0;">
+        ₹500 per Participant · Non-Refundable · Food Included Both Days
       </p>
+
+      <div class="card-grid" style="margin-top:1.2rem;max-width:980px;margin-left:auto;margin-right:auto;">
+        <div class="info-card fi d1">
+          <div class="icon"></div>
+          <div class="title">Meals Included</div>
+          <div class="desc">Lunch and highte included for both days</div>
+        </div>
+        <!-- <div class="info-card fi d2">
+          <div class="icon"></div>
+          <div class="title">Resource Pack</div>
+          <div class="desc">API keys, datasets &amp; cloud credits provided at check-in</div>
+        </div> -->
+        <div class="info-card fi d3">
+          <div class="icon"></div>
+          <div class="title">Mentor Access</div>
+          <div class="desc">Mentor access throughout the Two Days</div>
+        </div>
+        <div class="info-card fi d1">
+          <div class="icon"></div>
+          <div class="title">AI Readiness Certificate</div>
+          <div class="desc">Certificate for every participant</div>
+        </div>
+        <div class="info-card fi d2" style="border-left-color: var(--purple);">
+          <div class="icon"></div>
+          <div class="title">Stay Info</div>
+          <div class="desc">Overnight accommodation is available on a paid basis upon campus arrival.</div>
+        </div>
+      </div>
+
+      <p class="sl2 fi" style="margin:.9rem auto 0;max-width:720px;opacity:.95;">
+        Registration closes: <strong>22 March 2026</strong>.
+        <br />
+        Each participant registers individually. Team formation happens after individual registration via our Discord
+        community.
+      </p>
+
+      <p class="sl2 fi" style="margin:.7rem auto 0;max-width:720px;opacity:.95;">
+        For queries: <a href="mailto:sangilllence@gmail.com"
+          style="color:var(--cyan);text-decoration:underline;">sangilllence@gmail.com</a> ·
+        +91 78809 94372.
+        <br />
+        <a href="privacy-policy.html" style="color:var(--gold);text-decoration:underline;">Privacy Policy</a> ·
+        <a href="terms-conditions.html" style="color:var(--gold);text-decoration:underline;">Terms &amp; Conditions</a>
+        ·
+        <a href="refund-policy.html" style="color:var(--gold);text-decoration:underline;">Refund Policy</a> ·
+        <a href="non-refundable-fees.html" style="color:var(--gold);text-decoration:underline;">Non-refundable fees
+          policy</a>
+      </p>
+
+      <div class="cr fi" style="justify-content:center;margin-top:1.2rem;">
+        <a href="https://forms.gle/eRyoRoDNwtvP5MCQ9" class="btn bp" target="_blank" rel="noopener noreferrer">
+          Register Now — Google Form Link
+        </a>
+      </div>
     </div>
   </div>
 
@@ -735,14 +1322,159 @@
     <div class="si2">
       <p class="stg fi">Common Questions</p>
       <h2 class="st fi">FAQ</h2>
-      <p class="sl2 fi">Add full FAQ content here (accordion) later.</p>
+      <div class="faq-grid">
+        <div class="fqi fi d1">
+          <div class="fqq" onclick="this.parentElement.classList.toggle('open')">Q: Do I need coding experience to
+            participate?</div>
+          <div class="fqa">A: No. We welcome students from all backgrounds — CS, design, business, medicine, humanities.
+            A prototype can be a ChatGPT workflow, a Figma mockup, or a no-code AI tool. Curiosity matters more than
+            code.</div>
+        </div>
+
+        <div class="fqi fi d2">
+          <div class="fqq" onclick="this.parentElement.classList.toggle('open')">Q: Is this only for engineering
+            students?</div>
+          <div class="fqa">A: Absolutely not. AI solutions need designers, domain thinkers, and communicators as much as
+            coders. Any discipline is welcome.</div>
+        </div>
+
+        <div class="fqi fi d3">
+          <div class="fqq" onclick="this.parentElement.classList.toggle('open')">Q: Can my team be from different
+            colleges?</div>
+          <div class="fqa">A: Yes. Cross-college teams are encouraged. There is no restriction on which college your
+            team members attend.</div>
+        </div>
+
+        <div class="fqi fi d1">
+          <div class="fqq" onclick="this.parentElement.classList.toggle('open')">Q: Can I participate solo?</div>
+          <div class="fqa">A: Yes, solo participation is allowed. However, we highly encourage forming a team of 1–4
+            members for the best experience. If you don't have a team, check the 'I need a team' option during
+            registration and we will match you via our community group.</div>
+        </div>
+
+        <div class="fqi fi d2">
+          <div class="fqq" onclick="this.parentElement.classList.toggle('open')">Q: What is the ₹500 fee for?</div>
+          <div class="fqa">A: It covers your meals for both days (breakfast, lunch, dinner), access to the resource pack
+            (API keys, datasets, starter kits), and the full event experience. It is non-refundable.</div>
+        </div>
+
+        <div class="fqi fi d3">
+          <div class="fqq" onclick="this.parentElement.classList.toggle('open')">Q: Can I get a refund if I cannot
+            attend?</div>
+          <div class="fqa">A: The ₹500 fee is non-refundable. However, you may transfer your registration to another
+            eligible student by writing to us at least 7 days before the event.</div>
+        </div>
+
+        <div class="fqi fi d1">
+          <div class="fqq" onclick="this.parentElement.classList.toggle('open')">Q: What is the AI Readiness
+            Certificate?</div>
+          <div class="fqa">A: Every participant who completes Stage 1 receives a personalised certificate showing their
+            ARI Score, an 8-dimension cognitive radar, a Human-AI Delta value, and an archetype classification such as
+            Sovereign Augmentor or Critical Validator. It is a specific, shareable credential — not a generic
+            participation certificate.</div>
+        </div>
+
+        <div class="fqi fi d2">
+          <div class="fqq" onclick="this.parentElement.classList.toggle('open')">Q: Are AI tools allowed during the
+            hackathon?</div>
+          <div class="fqa">A: Yes — and expected. The test is your judgment about when to use AI, how to use it, and
+            when to override or question it — not whether you can use it.</div>
+        </div>
+
+        <div class="fqi fi d3">
+          <div class="fqq" onclick="this.parentElement.classList.toggle('open')">Q: What must my submission include?
+          </div>
+          <div class="fqa">A: A working live demo or 3-minute video demo, a GitHub repository with README, a
+            presentation deck of maximum 8 slides, and a written description on the submission portal.</div>
+        </div>
+
+        <div class="fqi fi d1">
+          <div class="fqq" onclick="this.parentElement.classList.toggle('open')">Q: Is accommodation provided?</div>
+          <div class="fqa">A: Overnight accommodation can be provided on a paid basis at the campus on arrival. Please
+            contact the organizers for more details.</div>
+        </div>
+
+        <div class="fqi fi d2">
+          <div class="fqq" onclick="this.parentElement.classList.toggle('open')">Q: When are problem statements
+            released?</div>
+          <div class="fqa">A: Problem statements are released to registered teams on-spot on the day of the hackathon.
+            Teams receive the
+            full problem context at the start of Stage 2 on Day 1.</div>
+        </div>
+
+        <div class="fqi fi d3">
+          <div class="fqq" onclick="this.parentElement.classList.toggle('open')">Q: Who should I contact for queries?
+          </div>
+          <div class="fqa">A: Write to us at <a href="mailto:sangilllence@gmail.com"
+              style="color:var(--cyan);text-decoration:underline;">sangilllence@gmail.com</a> or WhatsApp us at +91
+            78809 94372. We respond within 24–48 hours on working days.</div>
+        </div>
+      </div>
     </div>
   </section>
+
+  <!-- SOCIALS + OFFICIAL HASHTAG -->
+  <!-- <section class="sec" id="social">
+    <div class="si2">
+      <p class="stg fi">Stay Connected</p>
+      <h2 class="st fi">Follow &amp; Participate</h2>
+      <p class="sl2 fi" style="margin-bottom:.2rem;max-width:720px;">
+        Official hashtag: <strong style="color:var(--purple);letter-spacing:.04em;">#AISynergyGwalior2026</strong>
+      </p>
+
+      <div class="card-grid">
+        <div class="info-card fi d1">
+          <div class="icon"></div>
+          <div class="title">Instagram</div>
+          <div class="desc">
+            <a href="https://www.instagram.com/sangillence/" target="_blank" rel="noopener noreferrer"
+              style="color:var(--cyan);text-decoration:underline;">
+              @sangillence
+            </a>
+          </div>
+        </div>
+        <div class="info-card fi d2">
+          <div class="icon"></div>
+          <div class="title">LinkedIn</div>
+          <div class="desc">
+            <a href="https://www.linkedin.com/company/106711182/admin/dashboard/" target="_blank"
+              rel="noopener noreferrer" style="color:var(--cyan);text-decoration:underline;">
+              Sangillence on LinkedIn
+            </a>
+          </div>
+        </div>
+        <div class="info-card fi d3">
+          <div class="icon"></div>
+          <div class="title">WhatsApp Community</div>
+          <div class="desc">
+            <a href="https://www.whatsapp.com/channel/0029VbAfanC23n3f8Zn3eD3O" target="_blank"
+              rel="noopener noreferrer" style="color:var(--cyan);text-decoration:underline;">
+              Join the community
+            </a>
+          </div>
+        </div>
+        <div class="info-card fi d1">
+          <div class="icon"></div>
+          <div class="title">YouTube</div>
+          <div class="desc">
+            <a href="https://www.youtube.com/@Sangillence" target="_blank" rel="noopener noreferrer"
+              style="color:var(--cyan);text-decoration:underline;">
+              Sangillence channel
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section> -->
 
   <!-- FOOTER -->
   <footer>
     <div class="fl">
-      <a href="#about">About</a><a href="#tracks">Tracks</a><a href="#register">Register</a><a href="#faq">FAQ</a>
+      <a href="#about">About</a><a href="#tracks">Tracks</a><a href="https://forms.gle/eRyoRoDNwtvP5MCQ9"
+        target="_blank" rel="noopener noreferrer">Register</a><a
+        href="https://res.cloudinary.com/dstbd40ud/raw/upload/v1774088391/AI_Synergy_2026_Brochure_Final_z2kddy.docx"
+        target="_blank" rel="noopener noreferrer">Brochure</a><a href="non-refundable-fees.html">Non-Refundable
+        Fees</a><a href="#faq">FAQ</a>
     </div>
     <p>© 2026 AI Synergy Hackathon · Organized by <strong>Sangillence</strong></p>
     <span class="hash">#AISynergyGwalior2026</span>
