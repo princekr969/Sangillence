@@ -1,5 +1,5 @@
-import React, { useEffect } from "react";
-import { AiHackathon, Navbar, Footer } from "../components";
+import { useEffect } from "react";
+import { AiHackathon, Navbar } from "../components";
 
 function AiHackathonPage() {
   useEffect(() => {
@@ -11,13 +11,17 @@ function AiHackathonPage() {
   }, []);
 
   return (
-    <div className="min-h-screen overflow-x-hidden bg-[#020b1a]">
+    <div style={{
+      display: "flex",
+      flexDirection: "column",
+      height: "100svh",
+      overflow: "hidden",
+      background: "#020b1a"
+    }}>
       <Navbar />
       <AiHackathon />
-      <Footer />
     </div>
   );
 }
 
 export default AiHackathonPage;
-

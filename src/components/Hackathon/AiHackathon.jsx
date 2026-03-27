@@ -9,4 +9,3 @@ function AiHackathon() {
 }
 
 export default AiHackathon;
-

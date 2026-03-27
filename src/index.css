@@ -325,9 +325,14 @@
 /* AI Hackathon iframe sizing */
 .ai-hackathon-iframe {
   width: 100%;
-  height: 100svh;
+  flex: 1;
+  min-height: 0;
   border: 0;
   display: block;
   background: #020b1a;
-  overflow-x: hidden;
+}
+
+/* Hide outer page scrollbar */
+.ai-hackathon-page {
+  overflow: hidden;
 }

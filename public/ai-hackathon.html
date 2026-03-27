@@ -192,13 +192,13 @@
       border-radius: 2px;
     }
 
-    /* Hide iframe's own navbar/footer since the React app keeps Navbar/Footer intact */
+    /* Hide iframe's own navbar since the React app keeps Navbar intact */
     nav {
       display: none !important;
     }
 
     footer {
-      display: none !important;
+      display: block;
     }
 
     .hero {
@@ -856,6 +856,13 @@
         grid-template-columns: 1fr;
       }
     }
+
+    /* ── Custom scrollbar ── */
+    ::-webkit-scrollbar { width: 4px; height: 4px; }
+    ::-webkit-scrollbar-track { background: var(--bg); }
+    ::-webkit-scrollbar-thumb { background: var(--cyan); border-radius: 2px; }
+    ::-webkit-scrollbar-thumb:hover { background: var(--blue); }
+    * { scrollbar-width: thin; scrollbar-color: var(--cyan) var(--bg); }
   </style>
 </head>
 
