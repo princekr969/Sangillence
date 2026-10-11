@@ -288,6 +288,8 @@
     }
     .card-cta { display: flex; flex-direction: column; justify-content: center; align-items: flex-start; }
     .card-cta .btn { margin-top: 1rem; padding: .7rem 1.3rem; }
+    .case-note { color: var(--m); max-width: 760px; margin: 2rem auto 0; text-align: center; font-size: .95rem; }
+    .case-note a, .faq details a { color: var(--cyan); text-decoration: underline; text-underline-offset: 3px; }
 
     .a1 { --ac: var(--c1); --accent: var(--c1); }
     .a2 { --ac: var(--c2); --accent: var(--c2); }
@@ -554,9 +556,11 @@
           <div class="card a6 fi d3"><div class="ico"><svg><use href="#i-landmark" /></svg></div><h3>Governance</h3><p>Public services, transparency and citizen-first systems.</p></div>
           <div class="card card-cta fi d4">
             <h3>Pick one. Go deep.</h3><p>Every theme comes with real cases — your job is to find the problem worth solving.</p>
+            <a class="btn btn-ghost" href="https://drive.google.com/file/d/1LlUlEnO4v1yAGGdiqTv5TgZc4PVdND0L/view?usp=sharing" target="_blank" rel="noopener noreferrer">Round 1 Case Studies</a>
             <a class="btn btn-ghost js-register" href="https://unstop.com/o/rq0yhZ9?lb=usePZj8g&utm_medium=Share&utm_source=online_coding_challenge&utm_campaign=Aihac61595" target="_blank" rel="noopener noreferrer">Register</a>
           </div>
         </div>
+        <p class="case-note fi"><strong>Round 1 rule:</strong> You may work on an alternative case, but it must be found in or deduced from the <a href="https://drive.google.com/file/d/1LlUlEnO4v1yAGGdiqTv5TgZc4PVdND0L/view?usp=sharing" target="_blank" rel="noopener noreferrer">given case studies</a>. Topics unrelated to them will not be considered.</p>
       </div>
     </section>
     <div class="rainbow-rule"></div>
@@ -569,7 +573,7 @@
           <h2 class="title fi d1">Event <span class="g">Timeline</span></h2>
         </div>
         <div class="timeline">
-          <div class="step a1 fi d1"><div class="node">R1</div><div><span class="date">ONLINE · 8–14 OCT</span><h3>AI Synergy Case Challenge</h3><p>Elimination round: pick a case, investigate it, identify a meaningful problem and propose a feasible AI solution. Top teams are shortlisted.</p></div></div>
+          <div class="step a1 fi d1"><div class="node">R1</div><div><span class="date">ONLINE · 8–15 OCT</span><h3>AI Synergy Case Challenge</h3><p>Elimination round: pick a case from the given case studies (or an alternative deduced from them), investigate it, identify a meaningful problem and propose a feasible AI solution. Top teams are shortlisted.</p></div></div>
           <div class="step a6 fi d2"><div class="node">R2</div><div><span class="date">ON CAMPUS · 29–30 OCT</span><h3>36-Hour Hackathon</h3><p>Build, adapt &amp; demonstrate at ABV-IIITM Gwalior. 29 Oct, 9 AM → 30 Oct, 9 PM IST.</p></div></div>
         </div>
       </div>
@@ -655,6 +659,7 @@
         <div class="faq">
           <details class="fi"><summary>What is AI Synergy Hackathon 2026?</summary><p>A case-first Human–AI problem-solving hackathon, part of the Gwalior AI Summit. Teams investigate a situation, decide what problem is worth solving, collaborate critically with AI and, if shortlisted, build and adapt their solution on campus.</p></details>
           <details class="fi"><summary>Do we get a fixed problem statement?</summary><p>No. Challenges are built around cases and themes. Teams investigate and justify their own problem selection.</p></details>
+          <details class="fi"><summary>Can we choose our own case in Round 1?</summary><p>Only if it comes from the <a href="https://drive.google.com/file/d/1LlUlEnO4v1yAGGdiqTv5TgZc4PVdND0L/view?usp=sharing" target="_blank" rel="noopener noreferrer">Round 1 case studies</a>. An alternative case is allowed when it can be found in or deduced from the given case studies. Topics unrelated to them will not be considered.</p></details>
           <details class="fi"><summary>Can we use ChatGPT, Gemini, Claude or other AI tools?</summary><p>Yes. Evaluation focuses on how intelligently and responsibly you use AI — not on the model brand, number of prompts or subscription price.</p></details>
           <details class="fi"><summary>Is a complete application required in Round 1?</summary><p>No. Round 1 focuses on investigation, problem selection, evidence, Human–AI reasoning and a solution plan. A prototype can strengthen feasibility but isn't required.</p></details>
           <details class="fi"><summary>Do I need coding or AI experience?</summary><p>No prior AI experience is required. Students from every discipline are welcome — curiosity and clear reasoning matter most.</p></details>
@@ -668,7 +673,7 @@
     <section class="sec" id="register" style="padding-top:2rem">
       <div class="wrap">
         <div class="final fi">
-          <span class="tag">Registration Closes 11 October 2026</span>
+          <span class="tag">Registration Closes 13 October 2026 (Extended)</span>
           <h2 class="title">Ready to Build <span class="g">What Matters?</span></h2>
           <div class="chips">
             <span class="chip">Teams of 2–4</span><span class="chip">UG &amp; PG students</span><span class="chip">Cross-college welcome</span><span class="chip">No AI experience needed</span>
@@ -775,10 +780,10 @@
 
       // Registration countdown; stays hidden once the deadline passes.
       var cd = document.getElementById('countdown');
-      var deadline = new Date('2026-10-11T23:59:59+05:30').getTime();
+      var deadline = new Date('2026-10-13T23:59:59+05:30').getTime();
       var days = Math.ceil((deadline - Date.now()) / 86400000);
       if (cd && days > 0) {
-        cd.innerHTML = 'Registration closes in <b>' + days + (days === 1 ? ' day' : ' days') + '</b> · 11 October 2026';
+        cd.innerHTML = 'Registration closes in <b>' + days + (days === 1 ? ' day' : ' days') + '</b> · 13 October 2026 (extended)';
         cd.hidden = false;
       }
 
